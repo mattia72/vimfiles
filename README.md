@@ -33,7 +33,6 @@ This is a collection of my vim setting files.
 ```
 It contains the settings of various plugin files also.
 
-
 ### my-faq.txt 
 My faq in vimhelp format. In vim `:help my-faq`
 
