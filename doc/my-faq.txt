@@ -1,0 +1,609 @@
+*my-faq.txt* My own Vim faq for Vim version 7.3       Last change: 2011 jan. 11
+                         
+                         VIM REFERENCE MANUAL by Mata
+==============================================================================
+CONTENTS                                                      *my-faq-contents*
+
+1. Motion.......................................................|my-faq-motion|
+2. Operators.................................................|my-faq-operators|
+3. Text objects................................................|my-faq-objects|
+4. Selection.................................................|my-faq-selection|
+5. Search and replace...................................|my-faq-search-replace|
+   5.1 In multiple files..........................|my-faq-multi-search-replace|
+6. Macros........................................................|my-faq-macro|
+7. Global command......................................|my-faq-global-commands|
+   7.1 Delete lines.......................................|my-faq-delete-lines|
+   7.2 Join lines...........................................|my-faq-join-lines|
+   7.3 Put, move, copy (transfer)........................|my-faq-pu-mv-t-lines|
+   7.4 Tricky...................................................|my-faq-tricky|
+8. Clipboard.................................................|my-faq-clipboard|
+9. Bookmarks.................................................|my-faq-bookmarks|
+10. Hotkeys....................................................|my-faq-hotkeys|
+   10.1 Command mode hotkeys......................|my-faq-command-mode-hotkeys|
+   10.2 Insert mode hotkeys........................|my-faq-insert-mode-hotkeys|
+   10.3 Visual mode hotkeys........................|my-faq-visual-mode-hotkeys|
+11. Folding....................................................|my-faq-folding|
+12. Source code
+    editing........................................|my-faq-source-code-editing|
+13. Extras......................................................|my-faq-extras|
+    13.1 To HTML...............................................|my-faq-to-html|
+13. Plugins....................................................|my-faq-plugins|
+
+==============================================================================
+1. Motion                                                       *my-faq-motion*
+
+Vertically:
+  k : line upward 
+  j : line downward 
+  + : line downward, on the first non-blank character
+  - : line upward, on the first non-blank character
+Horizontally:  
+  h : previous character
+  l : next character
+  e : Move forward to the end of a word. 
+  w : Move forward to the beginning of a word. 
+  3w : Move forward three words. 
+  b : Move backward to the beginning of a word. 
+  3b : Move backward three words. 
+  $ : Move to the end of the line. 
+  0 : Move to the beginning of the line. 
+  ^ : Move to the first non-blank character of the line. 
+  ) : Jump forward one sentence. 
+  ( : Jump backward one sentence. 
+  } : Jump forward one paragraph. 
+  { : Jump backward one paragraph. 
+  H : Jump to the top of the screen. 
+  M : Jump to the middle of the screen. 
+  L : Jump to the bottom of the screen. 
+  10<PageUp> or 
+  10<CTRL-B> : Move 10 pages up. 
+  5<PageDown> or
+  5<CTRL-F> : Move 5 pages down. 
+  G : Jump to end of file. 
+  1G : Jump to beginning of file (same as gg). 
+  50G : Jump to line 50. 
+  [N]f{char}	to the Nth occurrence of {char} to the right
+  [N]F{char}	to the Nth occurrence of {char} to the left
+  * : found next occurrence of word under the cursor 
+  # : found previous occurrence of word under the cursor
+
+==============================================================================
+2. Operators                                                 *my-faq-operators*
+
+  ~	switch case					
+  d	delete						
+  c	change 
+  y	yank						
+  >	shift right 
+  <	shift left 
+  !	filter through external command 
+  =	filter through 'equalprg' option command 
+  gq	format lines to 'textwidth' length 
+  :	start Ex command for highlighted lines 
+  r	replace a char and return to prev mode
+  s	delete a char and start insert mode
+  C	delete highlighted text and start insert 
+  S	delete highlighted text and start insert
+  R	-"-
+  x	delete						
+  D	delete 
+  X	delete 
+  Y	yank 
+  p	put						
+  J	join 
+  U	make uppercase					
+  u	make lowercase					
+  ^]	find tag					
+  I	block insert					
+  A	block append					
+
+Example:
+<c-v> jjj I{text}<esc>    insert {text} to each row before visual block
+
+==============================================================================
+3. Text objects			          	 	       *my-faq-objects*
+                                                              
+These can be used after an operator or in Visual mode to select an
+object.
+
+  an  inner   meaning~
+------------------------------------------------------------------------------
+  a"  i"   double quoted string
+  a'  i'   single quoted string
+  a(  i(   same as ab ib
+  a)  i)   same as ab ib
+  a<  i<   "a <>" from '<' to the matching '>'
+  a>  i>   same as a< i<
+  aB  iB   "a Block" from "[{" to "]}" (with brackets)
+  aW  iW   "a WORD" (with white space)
+  a[  i[   "a []" from '[' to the matching ']'
+  a]  i]   same as a[ i[
+  a`  i`   string in backticks
+  ab  ib   "a block" from "[(" to "])" (with braces)
+  ap  ip   "a paragraph" (with white space)
+  as  is   "a sentence" (with white space)
+  at  it   "a (html)tag block" (with white space)
+  aw  iw   "a word" (with white space)
+  a{  i{   same as aB iB
+  a}  i}   same as aB iB
+
+==============================================================================
+4. Selection                                                 *my-faq-selection*
+                                                            
+Selected text will be deleted and insert mode starts.
+  gV	      Avoid the automatic reselection of the Visual area
+  	      after a Select mode mapping or menu has finished.
+  gh	      Start Select mode, characterwise.  This is like "v",
+  gH	      Start Select mode, linewise.  This is like "V",
+  g CTRL-H    Start Select mode, blockwise.  This is like CTRL-V,
+Selection can be modified by <Shift>-<movement> keys.
+more :help |Select-mode|
+
+==============================================================================
+5. Search and replace                                   *my-faq-search-replace*
+
+  /{pattern}            search pattern
+  cgn                   change highlited occurence under cursor
+  n.                    do it again on the next match
+
+  *                     found next occurrence of word under the cursor 
+  #                     found previous occurrence of word under the cursor
+
+  :%s/foo/bar/g         Find each occurrence of 'foo', and replace it with 'bar'. 
+  :%s/foo/bar/gc        'foo' to 'bar', but ask for confirmation first. 
+  :%s/\<foo\>/bar/gc    whole words exactly matching 'foo' to 'bar'; ask for confirmation. 
+  :%s/foo/bar/gci       'foo' (case insensitive) to 'bar'; ask for confirmation. 
+  :%s/foo/bar/gcI       'foo' (case sensitive) to 'bar'; ask for confirmation. 
+  :%s/^.\{-}foo/bar/     1st occurence of 'foo' to 'bar'; non-greedy matching \{-} 
+
+Examples: 
+  :s/a\|b/xxx\0xxx/g		 modifies "a" or "b" to "xxxaxxx" or "xxxbxxx"
+  :s/\([abc]\)\([efg]\)/\2\1/g	 modifies "af fa bg" to "fa fa gb"
+  :s/abcde/abc^Mde/		 modifies "abcde"    to "abc", "de" (two lines)
+                                 NOTE: you need to type CTRL-V <CR> to get a ^M here
+  :s/$/\^M/			 modifies "abcde"    to "abcde^M"
+  :s/\w\+/\u\0/g		 modifies "bla bla"  to "Bla Bla" 
+  :s/\w\+/\L\0/g		 modifies "BLA BLA"  to "bla bla"
+  :%s/\(\<v_[rp]\d\{6\}\)_\(\d\{4\}\)\>/\1[\2]/g
+                                 v_r000123_0001 to v_r000123[0001]
+                                  
+more :help |change.txt|
+
+Search range:
+The % in :%s applies the substitute to every line in the buffer, rather than just the current line. 
+
+  :5,12s/foo/bar/g      'foo' to 'bar' for all lines between line 5 and line 12 
+  :'a,'bs/foo/bar/g     'foo' to 'bar' for all lines between marks a and b. 
+  :.,$s/foo/bar/g       'foo' to 'bar' for all lines between the current line (.) and the last line ($). 
+  :.,+2s/foo/bar/g      'foo' to 'bar' for the current line (.) and the two next lines (+2). 
+(Note that :%s is equivalent to :1,$s.) 
+
+When searching:
+    \/ is / (use backslash + forward slash to search for forward slash) 
+    \n is newline, \r is CR (carriage return = Ctrl-M = ^M) 
+When replacing:
+    \r is newline, \n is a null byte (0x00). 
+    \& is ampersand (& is the search pattern). 
+
+You can use other delimiters with substitute: >
+  :s#http://www.example.com/index.html#http://example.com/# 
+
+Save typing by using \zs and \ze to set the start and end of a pattern. For example, instead of: >
+  :s/Copyright 2007 All Rights Reserved/Copyright 2008 All Rights Reserved/ 
+You could try: >
+  :s/Copyright \zs2007\ze All Rights Reserved/2008/ 
+Using registers: 
+  :%s/foo/<c-r>a/g      Substitute each 'foo' by the content of register 'a'. 
+  :%s/<c-r>*/bar/g      Substitute the visual selection (saved in the '*' register) by 'bar'. 
+  :%s/foo/\=@a/g        Substitute each 'foo' by the content of register 'a'. 
+                        \=@a is a reference to register 'a'. The content of register 'a' 
+                        will not be shown. This is useful if register 'a' contains many lines of text. 
+  :%s/<c-r>//bar/g      Substitute the last search pattern (<c-r>/) by 'bar'. 
+                        Hint: If the substitute pattern is omitted, the last 
+                        search pattern is used. See 'r' flag. 
+  :%s/<c-r><c-w>/bar/g  Substitute the word under cursor (<c-r><c-w>) by 'bar'. 
+
+Insert VIM function:
+  :%s/__date__/\=strftime("%c")/       Insert datestring, calling a VIM function
+  :s@\n@\="\r".expand("$HOME")."\r"@
+  :%s/^\s*\d\+\./\=submatch(0)+1."."/  Increment chapter numbers on the beginning of the lines.
+
+------------------------------------------------------------------------------
+5.1 Search replace in multiple files              *my-faq-multi-search-replace*
+
+  :g/{pattern}                  find all occurrence in the file
+  :vimgrep /{pattern}/ {file}   puts the output to the quickfix window (:copen)
+                                {file} could be %, for the current file.
+  :vimgrep /word_1\|word_2/ %   finds all occurrence of word_1 or word_2
+  
+Find and replace in multiple files >
+  :args path/**/*.[ch]
+  :argdo %s/word_1/word_2/ge | update
+or >
+  :argdo %s/word_1/word_2/gec | update
+|args| loads all *.c or *.h files recursive in a buffer, can be slow on many files. 
+|argdo| replaces all word_1 to word_2 in all buffers, matching |args|  
+The "e" flag is used for the ":s" command to avoid an error for files where
+"word_1" isn't used.  "update" writes the file only if changes were made.
+The "c" flag is for confirmation.
+
+Find and replace in multiple files with quickfix window >
+  :vimgrep /word_1\|word_2/ path/**/file.[ext]   
+  :cfirst | while 1 | cnext | endwhile
+  :bufdo %s/word_1/word_2/gec
+
+==============================================================================
+6. Macros                                                       *my-faq-macros*
+
+  q<macro-key>     Record a macro (press q again to quit recording)
+  @<macro-key>     Run a macro (@ runs again and again)
+  :g/{pattern}/normal @<macro-key> 
+                   Runs macro on lines matching pattern
+
+==============================================================================
+7. Global command                                      *my-faq-global-commands*
+
+  :g/fred/#                 Display with line numbers 
+  :g/fred\|joe/p            Print lines contains fred or joe
+  :g/\<fred\>/              Display all lines fred but not freddy
+
+more on http://www.rayninfo.co.uk/vimtips.html 
+
+------------------------------------------------------------------------------
+7.1 Delete lines                                          *my-faq-delete-lines*
+
+  :g/{pattern}/d   Matching pattern
+  :g/^$/d          Delete empty lines
+  :v/./d           Delete empty lines (v operates on lines, that do not match)
+  :g/^\s*$/d       That contains only spaces
+  :v/\S/d          That contains only spaces (v operates on lines, that do not match)
+  :g!/^fred/d      Delete lines not containing string
+  :v/^fred/d       Delete lines not containing string
+  :g/joe/,/fred/d           Not line based (very powerfull)
+  :g/fred/.-10,.d           Delete string & 10 previous lines
+  :g/{/ ,/}/- s/\n\+/\r/g   Delete empty lines but only between {...}
+  :v/\S/d                   Delete empty lines (and blank lines ie whitespace)
+  :%norm jdd                Delete every second line
+  :%s/^\(.*\)\n\1$/\1/      Delete duplicate lines
+
+------------------------------------------------------------------------------
+7.2 Join lines                                              *my-faq-join-lines*
+                                                         
+  :g/fred/,/joe/j           Join lines between patterns
+  :g/^$/,/./-j              Compress empty lines (- means one line before match)
+  :v/./,/./-j               Compress empty lines (v operates on lines, that do not match)
+
+------------------------------------------------------------------------------
+7.3 Put, move, copy (transfer)                           *my-faq-pu-mv-t-lines*
+
+  :g/^/pu_                  Double space file (put "_ black hole register in the next line) 
+  :g/^/m0                   Reverse file (m = move)
+  :g/^/m$                   No effect!
+  :'a,'bg/^/m'b             Reverse a section a to b
+  :g/^/t.                   Duplicate every line
+  :g/fred/t$                Copy (transfer) lines matching fred to EOF
+  :g/fred/t'a               Copy (transfer) lines matching fred to marker a (cannot use .) 
+  :g/^Chapter/t.|s/./-/g    Automatically underline selecting headings 
+
+------------------------------------------------------------------------------
+7.4 Tricky                                                      *my-faq-tricky*
+        
+  :g/^/ if line('.')%2|s/^/fred/  Perform a substitute on every second line
+  :'a,'bg/fred/co/joe/            Match all lines containing "fred" between markers 
+                                  a,b and copy after line containing "joe"
+  :'a,'bg/str1/s/str1/str3/|mo/str2/  As above but also do a substitution
+  :.,$g/^\d/exe "norm! \<c-a>"  Incrementing numbers (type <c-a> as 5 characters)
+  :'a,'bg/\d\+/norm! ^A         Increment numbers
+  :%s/^\s*\d\+\./\=submatch(0)+1."."/ Increment numbers on the begin of the lines.
+
+Storing glob results (note must use APPEND)
+  :g/fred/y A                   Append all lines fred to register a
+  :g/fred/y A | :let @*=@a      Put into paste buffer
+
+==============================================================================
+8. Clipboard                                                 *my-faq-clipboard*
+
+  "+yy          Copy line to clipboard
+  "*yy          Copy line to clipboard
+  "ayy          Copy line to register a
+  "Ayy          Append line to register a
+  "+dd          Cut line to clipboard
+  "*dd          Cut line to clipboard
+  "+p           Paste from clipboard
+  "ap           Paste from register a
+
+==============================================================================
+9. Bookmarks                                                 *my-faq-bookmarks*
+
+  m{a-zA-Z}	Mark current position with mark {a-zA-Z}
+  `{a-z}	Go to mark {a-z} within current file
+  '{a-z}        Jump to the beginning of the line of mark {a-z}	
+  ''            Return to the line where the cursor was before the latest jump.  (Two single quotes.) 
+  ``            Return to the cursor position before the latest jump (undo the jump). 
+  %             Jump to corresponding item, e.g. from an open brace to its matching closing brace. 
+
+==============================================================================
+10 Hotkeys                                                      *my-faq-hotkeys*
+------------------------------------------------------------------------------
+10.1 Command mode hotkeys                          *my-faq-command-mode-hotkeys*
+
+  C-c		      Like <esc>, but do not use an abbreviation
+  C-r {1-9a-z%#:.-="} Insert the contents of a register 
+  C-r+C-w             Insert word under cursor
+  C-d                 Lists available commands or files
+  C-f   	      Switch from commandline mode to the commandline window
+
+------------------------------------------------------------------------------
+10.2 Insert mode hotkeys                            *my-faq-insert-mode-hotkeys*
+
+  C-o{command}   Execute {command} and return to Insert mode
+  C-n	         Insert next match of identifier before the cursor
+  C-p	         Insert previous match of identifier before the cursor
+
+Completion
+  <c-n><c-p>     Word completion in insert mode
+  <c-x><c-l>     Line completion in insert mode
+
+------------------------------------------------------------------------------
+10.3 Visual mode hotkeys                            *my-faq-visual-mode-hotkeys*
+
+  v		Start Visual mode per character.
+  V		Start Visual mode linewise.
+  <c-v>		Start Visual mode blockwise.  
+  
+  remove the 'B' and '<' flags from 'cpoptions' else these doesn't work 
+  `>		Go to the end of the Visual area
+  a<cr><esc>	Break the line after the Visual area
+  `<		Jump to the start of the Visual area
+  i<cr><esc>	Break the line before the Visual area
+  !!date<cr>	Filter the Visual text through date
+  kJJ		Join the lines back together
+
+more:  |blockwise-examples|
+
+==============================================================================
+11. Folding                                                    *my-faq-folding*
+
+  zf{motion}	Operator: Define a fold manually
+  :{range}fold	Define a fold for {range} lines
+  zd		Delete one fold under the cursor
+  zD		Delete all folds under the cursor
+
+  zo		Open one fold under the cursor
+  zO		Open all folds under the cursor
+  zc		Close one fold under the cursor
+  zC		Close all folds under the cursor
+
+  zm		Fold more: decrease 'foldlevel'
+  zM		Close all folds: make 'foldlevel' zero
+  zr		Reduce folding: increase 'foldlevel'
+  zR		Open all folds: make 'foldlevel' max.
+
+  zn		Fold none: reset 'foldenable'
+  zN		Fold normal set 'foldenable'
+  zi		Invert 'foldenable'
+
+The 'foldmethod'=manual folds are lost when you abandon the file.  To save the folds use
+the |:mkview| command.  The view can be restored later with |:loadview|.
+
+==============================================================================
+12. Source code editing                            *my-faq-source-code-editing*
+
+Format text
+  == 	        Format current line
+  =% 	        Format code block
+  =vi}          Format code block
+
+File handling
+  |gf|            Open file under the cursor
+  <c-o>         Go back to the previous file
+
+Find definitions
+  |gD|            go to definition of word under the cursor in current file
+  |gd|	          go to definition of word under the cursor in current function
+
+==============================================================================
+13. Extras                                                      *my-faq-extras*
+
+Undo/Redo
+  u             Undo
+  <c-r>         Redo
+
+Command line window
+  q/ 	        Open the commandline window with history of searches
+  q: 	        Open the commandline window with history of commands
+
+Numbers
+  <c-a>         Increment number under cursor. Hex and octal too.
+  <c-x>         Decrement number under cursor. Hex and octal too.
+
+vimdiff (or vim -d) compares two files :) >
+  :vert diffsplit {other-file}
+
+Upper/Lower Case 
+  ~{motion}		'tildeop' option: switch case of {motion} text.
+  g~{motion}		Switch case of {motion} text. 
+  g~~			Switch case of current line. 
+  gU{motion}		Make {motion} text uppercase. 
+  gu{motion}		Make {motion} text lowercase. 
+
+External commands
+  :!wc %               How many words are in the edited file
+  !{motion}{filter}	Filter {motion} text lines through the external program {filter}.
+  :21,25 ! rot13        Encode with rot13 the selected text
+
+  :r textfile/!command  Insert textfile or external program output 
+  
+Redirect command output to a file
+  :redir > file.txt     Redirect the output of the next commands to the file.txt
+  :redir @a             Redirect the output of the next commands to register a.
+  :{cmd}                some command with output. eg. :g/{pattern}/
+  :redir END            Redirection end.
+  
+------------------------------------------------------------------------------
+13.1 To HTML                                                   *my-faq-to-html*
+
+Convert text to HTML >
+  :TOhtml
+Convert this file to HTML and upload to my wiki: >
+  :1s#\( [a-z0-9.]\+\)\{3}$#\=" ".strftime("%Y %b %d")# 
+  :color default
+  :TOhtml 
+  :color molokai
+  :%s/\(<span class="Identifier">\)\(my-faq-[a-z\-].*\)<\/span>/<a href="#\2" style="color: blue;">\2<\/a>/g
+  :%s/\(class="Constant"\)>\(my-faq-[a-z\-]*\)</\1 id="\2">\2</g
+  :g/\(^pre\)\|\(^body\).*/dggdd
+  :%s#\(ftp://[^\[].*\)\(<\/span>\s*$\)#ftp://[user@]machine:port/path\2#
+  :w ftp://b2_5206424@ftp.byethost2.com/htdocs/data/pages/vim/faq.txt
+
+NOTE: use e.g 9yy to yank these commands, then execute: @" .
+      
+
+==============================================================================
+14. Plugins                                                    *my-faq-plugins*
+
+
+  CopyPath >
+    copy file: <leader>cf
+    copy path: <leader>cp
+<
+  L9
+    vim-scrip library
+
+  badwolf
+    colorscheme 
+
+  histwin.vim (disabled)
+    shows the undo tree
+
+  impactjs-colorscheme
+    colorscheme
+
+  neocomplete.vim
+     |neocomplete| is the next generation auto completion framework
+
+  neosnippet
+
+  neosnippet-snippets
+
+  nerdcommenter >
+    <leader>c<space>  # toggle comments
+<
+  nerdtree >
+    <leader>nt or 
+    <leader>ft (file tree)
+<
+  surround.vim |surround.txt|
+    Old text                  Command     New text ~
+    "Hello *world!"           ds"         Hello world!
+    [124+4*56]/2              cs])        (123+456)/2
+    "Look ma, I'm *HTML!"     cs"<q>      <q>Look ma, I'm HTML!</q>
+    <q>Look ma, I'm HTML!</q> cst"        "Look ma, I'm *HTML!"
+    if *x>4 {                 ysW(        if ( x>3 ) {
+    Hello w*orld!             ysiw)       Hello (world)!
+    my $str = *whee!;         vllllS'     my $str = 'whee!';
+
+  taglist.vim
+
+  undotree  >
+    <leader>ut # opens undo tree
+<          
+  unite.vim
+   *[unite]s*     buffer explorer with quick bookmarks
+   *[unite]m*     mappings explorer
+   *[unite]/*     search grep
+   *[unite]b*     buffer explorer
+   *[unite]l*     -buffer-name=line line
+   *[unite]y*     yanks history
+   *[unite]rt*    file_mru -default-action=tabopen
+   *[unite]r*     file_mru
+   *[unite]ft*    file -default-action=tabopen
+   *[unite]f*     file
+   *[unite]frt*   file_recursive -default-action=tabopen
+   *[unite]fr*    file_recursive
+   *[unite]<Space>* file_rec buffer file_mru bookmark
+
+  vim-abolish: |abolish.txt| >
+    :%S/box{,es}/bag{,s}/g
+<
+  vim-airline  |airline.txt| 
+    status/tabline that's light as air     
+
+  vim-easymotion >
+    <leader><leader>{movement}
+<
+  vim-easytags |easytags.txt| >
+    Automated tag generation and syntax highlighting in Vim 
+<
+
+  vim-husk |vim-husk.txt| >
+    Mappings that boost vim command line mode.
+<    *C-a* go to the beginning of the line in command mode 
+
+  vim-misc >
+    Miscellaneous auto-load Vim scripts  
+<
+  vim-shell >
+    Improved integration between  Vim and its environment 
+<
+
+  vim-signature >
+
+<
+  vim-sneak >
+    s{char}{char} # Go to the next occurrence of {char}{char}
+<
+  vim-unimpaired  |unimpaired.txt| 
+    *[a*     |:previous|
+    *]a*     |:next|
+    *[A*     |:first|
+    *]A*     |:last|
+    *[b*     |:bprevious|
+    *]b*     |:bnext|
+    *[B*     |:bfirst|
+    *]B*     |:blast|
+    etc.
+
+  vimproc.vim
+
+<
+
+  The following are lazy loaded: 
+# MatchTag 
+# neobundle.vim
+# perl-support.vim
+# vim-coffee-script
+# vim-ps1
+# xml.vim
+
+Abolish: |abolish.txt| Not installed! >
+	:%Abolish -substitute -flags=g box{,es} bag{,s}
+	:%S/box{,es}/bag{,s}/g
+<
+L9
+matchit: |matchit.txt|
+neobundle.vim
+perl-support.vim
+powershell
+rainbow_parentheses.vim
+rainbow_parenthesis: <leader>r :RainbowParenthesesToggle<CR>
+snipMate: |snipMate.txt|
+snipmate.vim
+taglist.vim   
+  ,tl :Tlist<CR> 
+unimpared: |unimpaired.txt|
+vim-airline
+vim-autocomplpop
+ <C-n> opens AutoComplPop window
+vim-easymotion
+vim-fuzzyfinder
+vim-l9Lib
+vim-ps1
+vim-signature
+vim-unimpaired
+vimproc
+xml
+xml.vim
+
+------------------------------------------------------------------------------
+ vim:tw=79:ts=8:ft=help:norl:
