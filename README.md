@@ -1,4 +1,6 @@
 # vimfiles
+This is a collection of my vim setting files.
+
 ## Usage
 1. Clone this repository to your .vim directory
 2. Create a _vimrc file in your home directory with this content: 
@@ -8,13 +10,30 @@
 
 ## Content
 
-rc file | purpose
-------- | --------
-README.md | description of the repo
-autocmds.vimrc | autocommand collection
-colors.vimrc | color settings 
-mappings.vimrc | mappings
-neobundle.vimrc | plugin management
-settings.vimrc | vim settings
-vimrc | vimrc
+### README.md 
+ Description of the repository
+
+### autocmds.vimrc 
+ Autocommand collection
+### colors.vimrc 
+ Color settings 
+### mappings.vimrc 
+ Mappings
+### neobundle.vimrc 
+ Plugin management
+### settings.vimrc 
+ Vim settings
+
+### vimrc 
+ This is the central vimrc file. It calls the other vimrc-s eg: 
+```vim
+  if filereadable(expand("~/.vim/neobundle.vimrc"))
+    source ~/.vim/neobundle.vimrc
+  endif
+```
+It contains the settings of various plugin files also.
+
+
+### my-faq.txt 
+My faq in vimhelp format. In vim `:help my-faq`
 
