@@ -15,12 +15,16 @@ This is a collection of my vim setting files.
 
 ### autocmds.vimrc 
  Autocommand collection
+
 ### colors.vimrc 
  Color settings 
+
 ### mappings.vimrc 
  Mappings
+
 ### neobundle.vimrc 
  Plugin management
+
 ### settings.vimrc 
  Vim settings
 
