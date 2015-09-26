@@ -17,10 +17,41 @@ This is a collection of my vim setting files.
  Autocommand collection
 
 ### colors.vimrc 
- Color settings 
+ Color settings for gui and terminal:
+```vim
+ if has("gui_running")
+   colors my_molokai
+ else
+   colors wombat256
+ endif
+```
 
 ### mappings.vimrc 
- Mappings
+ Mappings. Here are some examples:
+ ```vim
+ " Tab navigation like firefox
+ nnoremap <C-S-tab> :tabprevious<CR>
+ nnoremap <C-tab> :tabnext<CR>
+ noremap <C-S-tab> :tabprevious<CR>
+ noremap <C-tab> :tabnext<CR>
+ inoremap <C-S-tab> <esc>:tabprevious<CR>i
+ inoremap <C-tab> <esc>:tabnext<CR>i
+ nnoremap <C-t> :tabnew<CR>
+ inoremap <C-t> <esc>:tabnew<CR>
+ " Command line
+ cnoremap <C-A> <Home>
+ cnoremap <C-E> <End>
+ cnoremap <C-N> <Down>
+ cnoremap <C-P> <Up>
+ " Move up/down single line with Ctrl+Arrow
+ nnoremap <C-Up> [e
+ nnoremap <C-Down> ]e
+ " Move up/down multiple lines with Ctrl+Arrow
+ vnoremap <C-Up> [egv
+ vnoremap <C-Down> ]egv
+ " Visually select the text that was last edited/pasted
+ nnoremap gV `[v`]
+ ```
 
 ### neobundle.vimrc 
  Plugin management
@@ -35,7 +66,7 @@ This is a collection of my vim setting files.
     source ~/.vim/neobundle.vimrc
   endif
 ```
-It contains the settings of various plugin files also.
+It contains the settings of various plugins also.
 
 ### my-faq.txt 
 My faq in vimhelp format. In vim `:help my-faq`
