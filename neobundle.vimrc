@@ -13,7 +13,19 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'L9'
 
-NeoBundle 'Shougo/vimproc'
+" So Vimproc build calls:
+" mingw32-make -f make_mingw32.mak 
+" MinGW install is needed!!!
+NeoBundle 'Shougo/vimproc.vim', {
+	    \   'build' : {
+	    \     'windows' : 'tools\\update-dll-mingw', 
+	    \     'cygwin' : 'make -f make_cygwin.mak',
+	    \     'mac' : 'make -f make_mac.mak',
+	    \     'linux' : 'make',
+	    \     'unix' : 'gmake',
+	    \   }
+	    \ }
+
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'   "most recent file list for Unit
 NeoBundle 'Shougo/unite-outline'
@@ -58,6 +70,7 @@ NeoBundleLazy 'PProvost/vim-ps1'
 
 " colors
 NeoBundle 'sjl/badwolf'
+NeoBundle 'wombat256'
 NeoBundle 'bronzehedwick/impactjs-colorscheme'
 
 "supertab
