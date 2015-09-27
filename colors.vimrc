@@ -17,7 +17,7 @@
 if has("gui_running")
   colors my_molokai
 else
-  colors wombat256
+  colors wombat256i
 endif
 
 " Show syntax highlighting groups for word under cursor: Ctrl Shift P
