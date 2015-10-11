@@ -3,7 +3,7 @@
 "-------------------------------------------------------------------------------
 
 " set cursor color and blink
-function! SetMyGuiCursor()
+function! g:SetMyGuiCursor()
   set guicursor=
   "hi Cursor gui=reverse guifg=NONE guibg=NONE
   hi Cursor guifg=black guibg=white
@@ -51,6 +51,7 @@ if has("autocmd")
 		autocmd FileType perl NeoBundleSource perl-support 
 		autocmd FileType coffe NeoBundleSource vim-coffe-script
 		autocmd FileType ps1 NeoBundleSource vim-ps1
+		autocmd FileType abinitio NeoBundleSource vim-abinitio
     
     " set cursor color and blink
     autocmd ColorScheme *

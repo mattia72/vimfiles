@@ -76,15 +76,24 @@ hi link EasyMotionShade  Comment
 " Unite
 let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>ut :<C-u>Unite -buffer-name=files   -start-insert file_rec/async:!<cr>
-nnoremap <leader>uf :<C-u>Unite -buffer-name=files   -start-insert file<cr>
-nnoremap <leader>ur :<C-u>Unite -buffer-name=mru     -start-insert file_mru<cr>
+
+" Default action is open in current buffer, Ctrl-t opens in new tab!
+" recursive file search
+nnoremap <leader>ut :<C-u>Unite -buffer-name=files   -start-insert file_rec/async:! <cr>
+" file in current directory
+nnoremap <leader>uf :<C-u>Unite -buffer-name=files   -start-insert file <cr>
+" most recent file list
+nnoremap <leader>ur :<C-u>Unite -buffer-name=mru     -start-insert file_mru <cr>
+" navigate between the current buffer
 nnoremap <leader>uo :<C-u>Unite -buffer-name=outline -start-insert outline<cr>
+" yank history
 nnoremap <leader>uy :<C-u>Unite -buffer-name=yank    history/yank<cr>
+" buffer explorer
 nnoremap <leader>ue :<C-u>Unite -buffer-name=buffer  buffer<cr>
 
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
+
 function! s:unite_settings()
   " Play nice with supertab
   let b:SuperTabDisabled=1

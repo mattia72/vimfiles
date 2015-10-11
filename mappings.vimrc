@@ -104,11 +104,13 @@ vnoremap <C-Down> ]egv
 
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
+" Select all
+nnoremap <C-A> ggVG
 
 " autocomplete parenthesis, (brackets) and braces
-inoremap  (  ()<Left>
-inoremap  [  []<Left>
-inoremap  {  {}<Left>
+"inoremap  (  ()<Left>
+"inoremap  [  []<Left>
+"inoremap  {  {}<Left>
 " surround selected text
 vnoremap  (  s()<Esc>P<Right>%
 vnoremap  [  s[]<Esc>P<Right>%

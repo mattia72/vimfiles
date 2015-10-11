@@ -37,7 +37,6 @@ set smartcase       " ...unless we type a capital
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set textwidth=78 " For all text files set 'textwidth' to 78 characters.
 set virtualedit=all
-set autochdir "auto switch to the current file dir
 set bufhidden=hide "This option specifies what happens when a buffer is no longer displayed in a window:
 set formatoptions=tcqronl
 set switchbuf=useopen,usetab
@@ -56,7 +55,10 @@ set wildmode=full
 "-------------------------------------------------------------------------------
 
 set isfname+=32,38 " add space and '&' to filename chars
+set autochdir "auto switch to the current file dir
 set path+=.  " path to use gf - jump to file.
+"let &cdpath = ',' . substitute(substitute($CDPATH, '[, ]', '\\\0', 'g'), ':', ',', 'g')
+"set cdpath+=.  " path to use gf - jump to file.
 set suffixesadd=.pm,.pl
 
 "-------------------------------------------------------------------------------

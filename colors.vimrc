@@ -21,11 +21,11 @@ else
 endif
 
 " Show syntax highlighting groups for word under cursor: Ctrl Shift P
-"nnoremap <C-S-P> :call <SID>SynStack()<CR>
-"function! <SID>SynStack()
-"if !exists("*synstack")
-"return
-"endif
-"echo noremap(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-"endfunc
+function! <SID>SynStack()
+if !exists("*synstack")
+return
+endif
+echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
+nnoremap <C-S-P> :call <SID>SynStack()<CR>
