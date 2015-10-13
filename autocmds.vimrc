@@ -3,7 +3,7 @@
 "-------------------------------------------------------------------------------
 
 " set cursor color and blink
-function! g:SetMyGuiCursor()
+function! g:MySetGuiCursor()
   set guicursor=
   "hi Cursor gui=reverse guifg=NONE guibg=NONE
   hi Cursor guifg=black guibg=white
@@ -55,7 +55,7 @@ if has("autocmd")
     
     " set cursor color and blink
     autocmd ColorScheme *
-          \ call SetMyGuiCursor()
+          \ call g:MySetGuiCursor()
   augroup END
 endif " has("autocmd")
 

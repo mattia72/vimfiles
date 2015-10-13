@@ -65,19 +65,6 @@ set suffixesadd=.pm,.pl
 " GUI
 "-------------------------------------------------------------------------------
 
-" set cursor color and blink
-function! SetMyGuiCursor()
-  set guicursor=
-  "hi Cursor gui=reverse guifg=NONE guibg=NONE
-  hi Cursor guifg=black guibg=white
-  hi iCursor guifg=black guibg=green
-  "let &guicursor = substitute(&guicursor, 'n-v-c:', '&blinkon0-', '')
-  "let &guicursor = substitute(&guicursor, 'i:', '&ver100-iCursor', '')
-  set guicursor+=i:ver100-iCursor
-  set guicursor+=n-v-c:blinkon0 "no blinking on normal, visual, command mode
-  set guicursor+=i:blinkwait10
-endfunction
-
 if has("win32")
   "own directory before the others...^= not +=
   set runtimepath^=~\.vim
@@ -115,5 +102,4 @@ set scrolloff=5    "Start scrolling when we're 5 lines away from margin
 set sidescrolloff=15
 set sidescroll=1
 set cursorcolumn cursorline "Highlight the screen column of the cursor
-call SetMyGuiCursor() " set cursor color and blink
-
+set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize

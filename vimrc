@@ -57,6 +57,9 @@ nnoremap <leader>rp :RainbowParenthesesToggle<CR>
 let Tlist_Inc_Winwidth = 0
 nnoremap <leader>tl :Tlist<CR>
 
+" Matchit
+runtime macros/matchit.vim
+
 "XML
 let g:xml_syntax_folding = 1
 
