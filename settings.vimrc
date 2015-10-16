@@ -61,6 +61,8 @@ set path+=.  " path to use gf - jump to file.
 "set cdpath+=.  " path to use gf - jump to file.
 set suffixesadd=.pm,.pl
 
+"set shell="C:\\Program\ Files\\Git\\usr\\bin\\bash"
+
 "-------------------------------------------------------------------------------
 " GUI
 "-------------------------------------------------------------------------------
