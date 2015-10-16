@@ -54,8 +54,8 @@ if has("autocmd")
 		autocmd FileType abinitio NeoBundleSource vim-abinitio
     
     " set cursor color and blink
-    autocmd ColorScheme *
-          \ call g:MySetGuiCursor()
+    autocmd ColorScheme * call g:MySetGuiCursor()             
+    autocmd BufWinEnter * call g:MySetGuiCursor()
   augroup END
 endif " has("autocmd")
 
