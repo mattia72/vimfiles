@@ -29,6 +29,7 @@ nnoremap <leader>cf :let @+ = expand("%")<cr>
 " Window operation
 nnoremap <leader>w <C-W>
 " Diff jumps
+nnoremap <leader>ds :vertical diffsplit 
 nnoremap <leader>dp [c
 nnoremap <leader>dn ]c
 " Spell jumps: next previous error
@@ -56,17 +57,23 @@ nnoremap <leader>eo :set tw=0 wrap linebreak
 nnoremap <leader><space> :noh<cr>
 " Folding...
 nnoremap <leader>fs :call <SID>MyFoldSyntax()<cr>
+"work with an xml..
+nnoremap <leader>xm :setfiletype xml<cr> :call <SID>MyFoldSyntax()<CR>ggVG=
+
 function! <SID>MyFoldSyntax()
   set foldmethod=syntax
   set foldcolumn=1
   set foldlevel=1
 endfunction
+
 nnoremap <leader>fm :set foldmethod=manual<cr>
-" foldlevel increase/decrease
-nnoremap <leader>fi :set foldlevel-=1<cr>
-nnoremap <leader>fd :set foldlevel+=1<cr>
-nnoremap <leader>fc :call <SID>MyFoldColumn()<cr>
-function! <SID>MyFoldColumn()
+"
+" foldlevel increase/decrease " so works with number prefix
+nnoremap <leader>fi :<C-u>let &foldlevel-=(v:count)?(v:count):1<cr>
+nnoremap <leader>fd :<C-u>let &foldlevel+=(v:count)?(v:count):1<cr>
+
+nnoremap <leader>fc :call <SID>MyShowFoldIndicatorColumn()<cr>
+function! <SID>MyShowFoldIndicatorColumn()
   if &foldcolumn > 0
     set foldcolumn=0
   else
