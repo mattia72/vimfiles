@@ -54,6 +54,7 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'kshenoy/vim-signature'
 
 NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'Raimondi/delimitMate'  " this plugin will autoclose the 
 
 NeoBundle 'xolox/vim-shell'
 NeoBundle 'xolox/vim-misc'
@@ -67,6 +68,7 @@ NeoBundleLazy 'xml.vim'
 NeoBundleLazy 'vim-scripts/perl-support.vim'
 NeoBundleLazy 'kchmck/vim-coffee-script'
 NeoBundleLazy 'PProvost/vim-ps1'
+
 "DML syntax
 NeoBundleLazy 'vim-abinitio'
 
