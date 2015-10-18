@@ -84,7 +84,7 @@ Horizontally:
   s	delete a char and start insert mode
   C	delete highlighted text and start insert 
   S	delete highlighted text and start insert
-  R	-"-
+  R	-"- 
   x	delete						
   D	delete 
   X	delete 
@@ -98,7 +98,7 @@ Horizontally:
   A	block append					
 
 Example:
-<c-v> jjj I{text}<esc>    insert {text} to each row before visual block
+<c-v>jjj I{text}<esc>    insert {text} to each row before visual block
 
 ==============================================================================
 3. Text objects			          	 	       *my-faq-objects*
@@ -106,26 +106,26 @@ Example:
 These can be used after an operator or in Visual mode to select an
 object.
 
-  an  inner   meaning~
+  a(n)  in    meaning~
 ------------------------------------------------------------------------------
-  a"  i"   double quoted string
-  a'  i'   single quoted string
-  a(  i(   same as ab ib
-  a)  i)   same as ab ib
-  a<  i<   "a <>" from '<' to the matching '>'
-  a>  i>   same as a< i<
-  aB  iB   "a Block" from "[{" to "]}" (with brackets)
-  aW  iW   "a WORD" (with white space)
-  a[  i[   "a []" from '[' to the matching ']'
-  a]  i]   same as a[ i[
-  a`  i`   string in backticks
-  ab  ib   "a block" from "[(" to "])" (with braces)
-  ap  ip   "a paragraph" (with white space)
-  as  is   "a sentence" (with white space)
-  at  it   "a (html)tag block" (with white space)
-  aw  iw   "a word" (with white space)
-  a{  i{   same as aB iB
-  a}  i}   same as aB iB
+  a"    i"    double quoted string
+  a'    i'    single quoted string
+  a(    i(    same as ab ib
+  a)    i)    same as ab ib
+  a<    i<    "a <>" from '<' to the matching '>'
+  a>    i>    same as a< i<
+  aB    iB    "a Block" from "[{" to "]}" (with brackets)
+  aW    iW    "a WORD" (with white space)
+  a[    i[    "a []" from '[' to the matching ']'
+  a]    i]    same as a[ i[
+  a`    i`    string in backticks
+  ab    ib    "a block" from "[(" to "])" (with braces)
+  ap    ip    "a paragraph" (with white space)
+  as    is    "a sentence" (with white space)
+  at    it    "a (html)tag block" (with white space)
+  aw    iw    "a word" (with white space)
+  a{    i{    same as aB iB
+  a}    i}    same as aB iB
 
 ==============================================================================
 4. Selection                                                 *my-faq-selection*
@@ -417,7 +417,8 @@ Numbers
   <c-a>         Increment number under cursor. Hex and octal too.
   <c-x>         Decrement number under cursor. Hex and octal too.
 
-vimdiff (or vim -d) compares two files :) >
+vimdiff (or vim -d) compares two files :) 
+  <leader>ds    same as: >
   :vert diffsplit {other-file}
 
 Upper/Lower Case 
@@ -456,44 +457,30 @@ Convert this file to HTML and upload to my wiki: >
   :%s#\(ftp://[^\[].*\)\(<\/span>\s*$\)#ftp://[user@]machine:port/path\2#
   :w ftp://b2_5206424@ftp.byethost2.com/htdocs/data/pages/vim/faq.txt
 
-NOTE: use e.g 9yy to yank these commands, then execute: @" .
+NOTE: use e.g 9yy to yank these commands, then execute with: @" .
       
 
 ==============================================================================
 14. Plugins                                                    *my-faq-plugins*
 
+Usefull plugins, I'm using recently:
 
-  CopyPath >
-    copy file: <leader>cf
-    copy path: <leader>cp
-<
-  L9
-    vim-scrip library
+  |matchit| 
+    jumps to matching word with % 
 
-  badwolf
-    colorscheme 
+  |neocomplete| 
+    is the next generation auto completion framework
 
-  histwin.vim (disabled)
-    shows the undo tree
+  |neosnippet| + neosnippet-snippets
 
-  impactjs-colorscheme
-    colorscheme
-
-  neocomplete.vim
-     |neocomplete| is the next generation auto completion framework
-
-  neosnippet
-
-  neosnippet-snippets
-
-  nerdcommenter >
-    <leader>c<space>  # toggle comments
-<
-  nerdtree >
+  |nerdcommenter| 
+    <leader>c<space>  : toggle comments
+    
+  |nerdtree| 
     <leader>nt or 
     <leader>ft (file tree)
-<
-  surround.vim |surround.txt|
+
+  |surround|.vim
     Old text                  Command     New text ~
     "Hello *world!"           ds"         Hello world!
     [124+4*56]/2              cs])        (123+456)/2
@@ -503,57 +490,43 @@ NOTE: use e.g 9yy to yank these commands, then execute: @" .
     Hello w*orld!             ysiw)       Hello (world)!
     my $str = *whee!;         vllllS'     my $str = 'whee!';
 
-  taglist.vim
+  |taglist|.vim
 
-  undotree  >
-    <leader>ut # opens undo tree
-<          
-  unite.vim
-   *[unite]s*     buffer explorer with quick bookmarks
-   *[unite]m*     mappings explorer
-   *[unite]/*     search grep
-   *[unite]b*     buffer explorer
-   *[unite]l*     -buffer-name=line line
-   *[unite]y*     yanks history
-   *[unite]rt*    file_mru -default-action=tabopen
-   *[unite]r*     file_mru
-   *[unite]ft*    file -default-action=tabopen
-   *[unite]f*     file
-   *[unite]frt*   file_recursive -default-action=tabopen
-   *[unite]fr*    file_recursive
-   *[unite]<Space>* file_rec buffer file_mru bookmark
+  |undotree|
+    <leader>ut : opens undo tree window
 
-  vim-abolish: |abolish.txt| >
-    :%S/box{,es}/bag{,s}/g
-<
-  vim-airline  |airline.txt| 
-    status/tabline that's light as air     
+  |unite|.vim
+    <leader>uf : file in current directory
+    <leader>ur : most recent file list
+    <leader>uo : navigate in the current buffer
+    <leader>uy : yank history
+    <leader>ue : buffer explorer
+    <leader>ma : browse for defined mappings
+    <leader>me : browse messages (handy for debugging)
 
-  vim-easymotion >
+  vim-|airline| 
+    status/tabline that's light as air :)    
+
+  vim-|easymotion| 
     <leader><leader>{movement}
-<
-  vim-easytags |easytags.txt| >
+    
+  vim-|sneak| 
+    s{char}{char} : Go to the next occurrence of {char}{char}
+
+  vim-|easytags|
     Automated tag generation and syntax highlighting in Vim 
-<
 
-  vim-husk |vim-husk.txt| >
+  vim-|husk| 
     Mappings that boost vim command line mode.
-<    *C-a* go to the beginning of the line in command mode 
+    *C-a* go to the beginning of the line in command mode 
 
-  vim-misc >
+  vim-|misc| 
     Miscellaneous auto-load Vim scripts  
-<
-  vim-shell >
+
+  vim-|shell.txt| 
     Improved integration between  Vim and its environment 
-<
 
-  vim-signature >
-
-<
-  vim-sneak >
-    s{char}{char} # Go to the next occurrence of {char}{char}
-<
-  vim-unimpaired  |unimpaired.txt| 
+  vim-|unimpaired|
     *[a*     |:previous|
     *]a*     |:next|
     *[A*     |:first|
@@ -564,46 +537,19 @@ NOTE: use e.g 9yy to yank these commands, then execute: @" .
     *]B*     |:blast|
     etc.
 
-  vimproc.vim
+  |vimproc|.vim
 
-<
+  |abolish|
+    :%Abolish -substitute -flags=g box{,es} bag{,s}
+    :%S/box{,es}/bag{,s}/g
 
-  The following are lazy loaded: 
-# MatchTag 
-# neobundle.vim
-# perl-support.vim
-# vim-coffee-script
-# vim-ps1
-# xml.vim
 
-Abolish: |abolish.txt| Not installed! >
-	:%Abolish -substitute -flags=g box{,es} bag{,s}
-	:%S/box{,es}/bag{,s}/g
-<
-L9
-matchit: |matchit.txt|
-neobundle.vim
-perl-support.vim
-powershell
-rainbow_parentheses.vim
-rainbow_parenthesis: <leader>r :RainbowParenthesesToggle<CR>
-snipMate: |snipMate.txt|
-snipmate.vim
-taglist.vim   
-  ,tl :Tlist<CR> 
-unimpared: |unimpaired.txt|
-vim-airline
-vim-autocomplpop
- <C-n> opens AutoComplPop window
-vim-easymotion
-vim-fuzzyfinder
-vim-l9Lib
-vim-ps1
-vim-signature
-vim-unimpaired
-vimproc
-xml
-xml.vim
+The following plugins are lazy loaded: 
+    * |MatchTag| : html tag match
+    * |perl-support|
+    * |vim-coffee-script|
+    * |vim-ps1|  : for powershell
+    * |xml.vim|  : xml syntax plugin
 
 ------------------------------------------------------------------------------
  vim:tw=79:ts=8:ft=help:norl:
