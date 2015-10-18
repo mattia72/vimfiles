@@ -16,46 +16,53 @@ function! g:MySetGuiCursor()
 endfunction
 
 " Only do this part when compiled with support for autocommands.
-if has("autocmd")
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-    autocmd!
+if !has("autocmd")
+  finish
+endif
 
-    " Line numbers on the first window
-    autocmd BufWinEnter * setlocal rnu "relativenumber
-    autocmd BufWinEnter * setlocal nu "number
-    autocmd WinEnter * setlocal rnu "relativenumber
-    autocmd WinEnter * setlocal nu "number
-    " linenumbers only in active window
-    autocmd WinLeave * setlocal nornu
-    autocmd WinLeave * setlocal nonu
+" Put these in an autocmd group, so that we can delete them easily.
+augroup vimrcEx
+  autocmd!
 
-    " save/load view
-    autocmd BufWinLeave ?* silent! mkview
-    autocmd BufWinEnter ?* silent! loadview "silent! no error message if there is no file name
+  " Line numbers on the first window
+  autocmd BufWinEnter * setlocal rnu "relativenumber
+  autocmd BufWinEnter * setlocal nu "number
+  autocmd WinEnter * setlocal rnu "relativenumber
+  autocmd WinEnter * setlocal nu "number
+  " linenumbers only in active window
+  autocmd WinLeave * setlocal nornu
+  autocmd WinLeave * setlocal nonu
 
-    " When vimrc is edited, reload it
-    autocmd BufWritePost *vimrc source $MYVIMRC
+  " save/load view
+  autocmd BufWinLeave ?* silent! mkview
+  autocmd BufWinEnter ?* silent! loadview "silent! no error message if there is no file name
 
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    " Also don't do it when the mark is in the first line, that is the default
-    " position when opening a file.
-    autocmd BufReadPost *
-          \ if line("'\"") > 1 && line("'\"") <= line("$") |
-          \   exe "normal! g`\"" |
-          \ endif
+  " When vimrc is edited, reload it
+  autocmd BufWritePost *vimrc source $MYVIMRC
 
-		autocmd FileType xml NeoBundleSource xml.vim
-		autocmd FileType perl NeoBundleSource perl-support 
-		autocmd FileType coffe NeoBundleSource vim-coffe-script
-		autocmd FileType ps1 NeoBundleSource vim-ps1
-		autocmd FileType abinitio NeoBundleSource vim-abinitio
-    
-    " set cursor color and blink
-    autocmd ColorScheme * call g:MySetGuiCursor()             
-    autocmd BufWinEnter * call g:MySetGuiCursor()
-  augroup END
-endif " has("autocmd")
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  " Also don't do it when the mark is in the first line, that is the default
+  " position when opening a file.
+  autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
+
+	autocmd FileType xml NeoBundleSource xml.vim
+	autocmd FileType perl NeoBundleSource perl-support 
+	autocmd FileType coffe NeoBundleSource vim-coffe-script
+	autocmd FileType ps1 NeoBundleSource vim-ps1
+	autocmd FileType abinitio NeoBundleSource vim-abinitio
+
+  " set cursor color and blink
+  autocmd ColorScheme * call g:MySetGuiCursor()             
+  autocmd BufWinEnter * call g:MySetGuiCursor()
+augroup END
+
+
+" if has("autocmd") !!!
+
+" vim:tw=78:ts=4:ft=vim:norl:
 
