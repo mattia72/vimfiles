@@ -17,9 +17,6 @@ inoremap <C-U> <C-G>u<C-U>
 let mapleader = ","
 let g:mapleader = ","
 
-" Most recent file list
-nnoremap <F3> :Unite file_mru<cr>
-
 " Copy full path or file name to clipboard
 nnoremap <leader>cp :let @+ = expand("%:p")<cr>
 nnoremap <leader>cf :let @+ = expand("%")<cr>
