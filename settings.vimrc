@@ -67,7 +67,7 @@ set suffixesadd=.pm,.pl
 " GUI
 "-------------------------------------------------------------------------------
 
-if has("win32")
+if has('win32')
   "own directory before the others...^= not +=
   set runtimepath^=~\.vim
   set runtimepath+=~\.vim\after
@@ -78,18 +78,18 @@ if has('mouse')
   set mouse=a
 endif
 
-if has("gui_running")
+if has('gui_running')
   set winaltkeys=menu " alt jumps to menu
   set lines=40 columns=130 " set window size
 else
   set term=xterm
   set t_Co=256
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
+  let &t_AB='\e[48;5;%dm'
+  let &t_AF='\e[38;5;%dm'
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
-if &t_Co > 2 || has("gui_running")
+if &t_Co > 2 || has('gui_running')
   syntax on
 endif
 
