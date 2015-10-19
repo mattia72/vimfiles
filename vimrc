@@ -1,5 +1,9 @@
-" Maintainer:  Mattia72              Last change: 2015.09.06
-" create ~/_vimrc with the content "source path_to_this_file"
+" File: vimrc
+" Author: Mattia72
+" Description: central vimrc
+" Last Modified: 2015.10.18
+
+" create ~/_vimrc with the content 'source <path_to_this_file>'
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -28,11 +32,8 @@ if filereadable(expand("~/.vim/colors.vimrc"))
 endif
 
 "-------------------------------------------------------------------------------
-" Plugins
+" Plugin settings
 "-------------------------------------------------------------------------------
-
-"snipMate
-let g:snippets_dir="~/.vim/snippets/"
 
 "async easytags...
 let g:easytags_async=1
@@ -48,6 +49,7 @@ nnoremap <leader>ft :NERDTreeToggle<CR>
 nnoremap <leader>nt :NERDTreeToggle<CR>
 
 " Histwin (undo tree)
+nnoremap <leader>hw :Histwin<CR>
 nnoremap <leader>ut :Histwin<CR>
 
 " Rainbow braces highlight
@@ -57,7 +59,7 @@ nnoremap <leader>rp :RainbowParenthesesToggle<CR>
 let Tlist_Inc_Winwidth = 0
 nnoremap <leader>tl :Tlist<CR>
 
-" Matchit
+" Matchit help should be copyed to doc directory
 runtime macros/matchit.vim
 
 "XML
@@ -80,19 +82,23 @@ hi link EasyMotionShade  Comment
 let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
-" Default action is open in current buffer, Ctrl-t opens in new tab!
-" recursive file search
-nnoremap <leader>ut :<C-u>Unite -buffer-name=files   -start-insert file_rec/async:! <cr>
+" Default action is open in current buffer, Ctrl-t opens selected in new tab!
+" recursive file search (requres 'ag' or 'find' (not in windows))
+"nnoremap <leader>ut :<C-u>Unite -buffer-name=files   -start-insert file_rec/async:! <cr>
 " file in current directory
 nnoremap <leader>uf :<C-u>Unite -buffer-name=files   -start-insert file <cr>
 " most recent file list
 nnoremap <leader>ur :<C-u>Unite -buffer-name=mru     -start-insert file_mru <cr>
-" navigate between the current buffer
+" navigate in the current buffer
 nnoremap <leader>uo :<C-u>Unite -buffer-name=outline -start-insert outline<cr>
 " yank history
 nnoremap <leader>uy :<C-u>Unite -buffer-name=yank    history/yank<cr>
 " buffer explorer
 nnoremap <leader>ue :<C-u>Unite -buffer-name=buffer  buffer<cr>
+" browse for defined mappings
+nnoremap <leader>um :<C-u>Unite -buffer-name=mapping  mapping<CR>
+" browse messages
+nnoremap <leader>us :<C-u>Unite output:message<CR>
 
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
@@ -104,5 +110,30 @@ function! s:unite_settings()
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets' behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)"
+ \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)"
+ \: "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+let g:snips_author='Mattia72'
+
+"let g:neosnippet#snippets_directory='~/.vim/snippets'
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
 
 " vim:tw=78:ts=4:ft=vim:norl:
