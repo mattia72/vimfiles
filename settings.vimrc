@@ -1,3 +1,7 @@
+" File: settings.vimrc
+" Author: Mattia72
+" Description: Settings for vim
+" Last Modified: 2015.10.18
 
 "-------------------------------------------------------------------------------
 " Indentation 
@@ -84,8 +88,8 @@ if has('gui_running')
 else
   set term=xterm
   set t_Co=256
-  let &t_AB='\e[48;5;%dm'
-  let &t_AF='\e[38;5;%dm'
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
