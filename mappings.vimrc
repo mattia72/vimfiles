@@ -1,3 +1,7 @@
+" File: mappings.vimrc
+" Author: Mattia72
+" Description: Mapping definitions for vim
+" Last Modified: 2015.10.18
 
 "-------------------------------------------------------------------------------
 " Mappings ...
