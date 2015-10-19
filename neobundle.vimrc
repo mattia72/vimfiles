@@ -1,3 +1,7 @@
+" File: neobundle.vimrc
+" Author: Mattia72
+" Description: Plugin handling section
+" Last Modified: október 18, 2015
 
 " -------------------------------------------------------------------------------
 "  NeoBundle
@@ -13,8 +17,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'L9'
 
-" So Vimproc build calls:
-" mingw32-make -f make_mingw32.mak 
+" So Vimproc build calls: mingw32-make -f make_mingw32.mak 
 " MinGW install is needed!!!
 NeoBundle 'Shougo/vimproc.vim' , {
       \   'build' : {
@@ -27,7 +30,7 @@ NeoBundle 'Shougo/vimproc.vim' , {
       \ }
 
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'   "most recent file list for Unit
+NeoBundle 'Shougo/neomru.vim'     " most recent file list for Unit
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -35,34 +38,32 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 
-NeoBundle 'chrisbra/histwin.vim' "browse undo-tree
+NeoBundle 'chrisbra/histwin.vim'  " browse undo-tree
 
-NeoBundle 'bling/vim-airline'    "status line
+NeoBundle 'bling/vim-airline'     " status line
 
-NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree'   " file tree browser
 NeoBundle 'scrooloose/nerdcommenter'
 
-NeoBundle 'MatchTag' "highlight html tag pairs
-
-NeoBundleDisable 'msanders/snipmate.vim'
+NeoBundle 'MatchTag'              " highlight html tag pairs
 
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/surround.vim'
 
 NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'kshenoy/vim-signature'
+NeoBundle 'kshenoy/vim-signature' " toggle, display and navigate marks
 
 NeoBundle 'kien/rainbow_parentheses.vim'
-NeoBundle 'Raimondi/delimitMate'  " this plugin will autoclose the 
+NeoBundle 'Raimondi/delimitMate'  " this plugin provides automatic closing of quotes
 
 NeoBundle 'xolox/vim-shell'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-easytags'
 NeoBundle 'taglist.vim'
 
-NeoBundle 'bruno/vim-husk'   " command line mappings like ctrl right
-NeoBundle 'justinmk/vim-sneak' " s<char><char> than ; or s to the next
+NeoBundle 'bruno/vim-husk'        " command line mappings like ctrl right
+NeoBundle 'justinmk/vim-sneak'    " s<char><char> than ; or s to the next
 
 NeoBundleLazy 'xml.vim'
 NeoBundleLazy 'vim-scripts/perl-support.vim'
@@ -79,7 +80,7 @@ NeoBundle 'bronzehedwick/impactjs-colorscheme'
 
 call neobundle#end()
 
-filetype plugin indent on     " Required!
+filetype plugin indent on         " Required!
 
 " Installation check.
 NeoBundleCheck
