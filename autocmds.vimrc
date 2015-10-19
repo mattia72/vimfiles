@@ -1,3 +1,8 @@
+" File: autocmds.vimrc
+" Author: Mattia72
+" Description: Autocommands for vim
+" Last Modified: 2015.10.18
+  
 "-------------------------------------------------------------------------------
 " Automatically executed commands
 "-------------------------------------------------------------------------------
@@ -5,11 +10,8 @@
 " set cursor color and blink
 function! g:MySetGuiCursor()
   set guicursor=
-  "hi Cursor gui=reverse guifg=NONE guibg=NONE
   hi Cursor guifg=black guibg=white
   hi iCursor guifg=black guibg=green
-  "let &guicursor = substitute(&guicursor, 'n-v-c:', '&blinkon0-', '')
-  "let &guicursor = substitute(&guicursor, 'i:', '&ver100-iCursor', '')
   set guicursor+=i:ver100-iCursor
   set guicursor+=n-v-c:blinkon0 "no blinking on normal, visual, command mode
   set guicursor+=i:blinkwait10
@@ -23,7 +25,6 @@ endif
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
   autocmd!
-
   " Line numbers on the first window
   autocmd BufWinEnter * setlocal rnu "relativenumber
   autocmd BufWinEnter * setlocal nu "number
@@ -60,7 +61,6 @@ augroup vimrcEx
   autocmd ColorScheme * call g:MySetGuiCursor()             
   autocmd BufWinEnter * call g:MySetGuiCursor()
 augroup END
-
 
 " if has("autocmd") !!!
 
