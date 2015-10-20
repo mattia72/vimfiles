@@ -1,7 +1,9 @@
-" File: vimrc
-" Author: Mattia72
-" Description: central vimrc
-" Last Modified: 2015.10.18
+"""""""""""""""""""""""""""""""""""""""""""""""
+" File:          vimrc
+" Author:        Mattia72 
+" Description:   central vimrc file   
+" Created:       19 okt. 2015
+"""""""""""""""""""""""""""""""""""""""""""""""
 
 " create ~/_vimrc with the content 'source <path_to_this_file>'
 
@@ -111,15 +113,28 @@ function! s:unite_settings()
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 
+if filereadable(expand("~/.vim/neocomplete.vimrc"))
+  source ~/.vim/neocomplete.vimrc
+endif
+
+" NeoSnippets
+let g:snips_author='Mattia72'
+let g:neosnippet#snippets_directory ='~/.vim/snippets,'.
+      \'~/.vim/neobundle/neosnippet-snippets/neosnippets'
+
+" Enable snipMate compatibility feature.
+"let g:neosnippet#enable_snipmate_compatibility = 1
+
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets' behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
- \ "\<Plug>(neosnippet_expand_or_jump)"
- \: pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<TAB>" : "\<Plug>(neosnippet_expand_or_jump)"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
  \ "\<Plug>(neosnippet_expand_or_jump)"
  \: "\<TAB>"
@@ -129,11 +144,5 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
-let g:snips_author='Mattia72'
-
-"let g:neosnippet#snippets_directory='~/.vim/snippets'
-
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
 
 " vim:tw=78:ts=4:ft=vim:norl:
