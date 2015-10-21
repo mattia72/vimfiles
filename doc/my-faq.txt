@@ -1,6 +1,6 @@
-*my-faq.txt* My own Vim faq for Vim version 7.3       Last change: 2011 jan. 11
+*my-faq.txt* My Vim faq for Vim version 7.4            Last change: 19 okt. 2015
                          
-                         VIM REFERENCE MANUAL by Mata
+                       SHORT REFERENCE MANUAL by Mattia
 ==============================================================================
 CONTENTS                                                      *my-faq-contents*
 
@@ -19,9 +19,10 @@ CONTENTS                                                      *my-faq-contents*
 8. Clipboard.................................................|my-faq-clipboard|
 9. Bookmarks.................................................|my-faq-bookmarks|
 10. Hotkeys....................................................|my-faq-hotkeys|
-   10.1 Command mode hotkeys......................|my-faq-command-mode-hotkeys|
-   10.2 Insert mode hotkeys........................|my-faq-insert-mode-hotkeys|
-   10.3 Visual mode hotkeys........................|my-faq-visual-mode-hotkeys|
+   10.1 Normal mode hotkeys........................|my-faq-normal-mode-hotkeys|
+   10.2 Command mode hotkeys......................|my-faq-command-mode-hotkeys|
+   10.3 Insert mode hotkeys........................|my-faq-insert-mode-hotkeys|
+   10.4 Visual mode hotkeys........................|my-faq-visual-mode-hotkeys|
 11. Folding....................................................|my-faq-folding|
 12. Source code
     editing........................................|my-faq-source-code-editing|
@@ -325,7 +326,18 @@ Storing glob results (note must use APPEND)
 ==============================================================================
 10 Hotkeys                                                      *my-faq-hotkeys*
 ------------------------------------------------------------------------------
-10.1 Command mode hotkeys                          *my-faq-command-mode-hotkeys*
+10.1 Normal mode hotkeys                            *my-faq-normal-mode-hotkeys*
+
+  Window handling hotkeys begins with CTRL-W, which is mapped to <leader>w.
+  <leader>wc     Close current window
+  <leader>wo     Close other windows, current will remain only
+  <leader>ws     Split horizontally the current window
+  <leader>wv     Split vertically the current window 
+  
+  Other normal mode hotkeys can be found in |my-faq-plugins| section.
+
+------------------------------------------------------------------------------
+10.2 Command mode hotkeys                          *my-faq-command-mode-hotkeys*
 
   C-c		      Like <esc>, but do not use an abbreviation
   C-r {1-9a-z%#:.-="} Insert the contents of a register 
@@ -334,7 +346,7 @@ Storing glob results (note must use APPEND)
   C-f   	      Switch from commandline mode to the commandline window
 
 ------------------------------------------------------------------------------
-10.2 Insert mode hotkeys                            *my-faq-insert-mode-hotkeys*
+10.3 Insert mode hotkeys                            *my-faq-insert-mode-hotkeys*
 
   C-o{command}   Execute {command} and return to Insert mode
   C-n	         Insert next match of identifier before the cursor
@@ -345,7 +357,7 @@ Completion
   <c-x><c-l>     Line completion in insert mode
 
 ------------------------------------------------------------------------------
-10.3 Visual mode hotkeys                            *my-faq-visual-mode-hotkeys*
+10.4 Visual mode hotkeys                            *my-faq-visual-mode-hotkeys*
 
   v		Start Visual mode per character.
   V		Start Visual mode linewise.
@@ -470,8 +482,10 @@ Usefull plugins, I'm using recently:
 
   |neocomplete| 
     is the next generation auto completion framework
+    <C-n> in insert mode opens the neocomplete window.
 
   |neosnippet| + neosnippet-snippets
+    <C-k> in insert mode expands a defined snippet
 
   |nerdcommenter| 
     <leader>c<space>  : toggle comments
@@ -494,6 +508,7 @@ Usefull plugins, I'm using recently:
 
   |undotree|
     <leader>ut : opens undo tree window
+    <leader>hw : opens undo tree window (HistWin)
 
   |unite|.vim
     <leader>uf : file in current directory
@@ -508,10 +523,12 @@ Usefull plugins, I'm using recently:
     status/tabline that's light as air :)    
 
   vim-|easymotion| 
-    <leader><leader>{movement}
+    <leader><leader>{movement} : Highlights the reachable target points, and
+                                 the next key stroke jumps to the desired.
     
   vim-|sneak| 
     s{char}{char} : Go to the next occurrence of {char}{char}
+    S{char}{char} : Go to the previous occurrence of {char}{char}
 
   vim-|easytags|
     Automated tag generation and syntax highlighting in Vim 
