@@ -98,8 +98,6 @@ inoremap <C-S-tab> <esc>:tabprevious<CR>i
 inoremap <C-tab> <esc>:tabnext<CR>i
 nnoremap <C-t> :tabnew<CR>
 inoremap <C-t> <esc>:tabnew<CR>
-"nnoremap <F3> n
-"nnoremap <S-F3> N
 " Command line
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
@@ -125,4 +123,10 @@ nnoremap <C-A> ggVG
 vnoremap  (  s()<Esc>P<Right>%
 vnoremap  [  s[]<Esc>P<Right>%
 vnoremap  {  s{}<Esc>P<Right>%
+
+" Helptags should be rebuild if doc changed
+nnoremap <leader>ht :Helptags<CR>
+" help word under cursor
+nnoremap <leader>hh K
+
 
