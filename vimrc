@@ -4,8 +4,7 @@
 " Description:   central vimrc file   
 " Created:       19 okt. 2015
 """""""""""""""""""""""""""""""""""""""""""""""
-
-" create ~/_vimrc with the content 'source <path_to_this_file>'
+" Hint: create ~/_vimrc with this content 'source <path_to_this_file>'
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -39,12 +38,12 @@ endif
 
 "async easytags...
 let g:easytags_async=1
+nnoremap <leader>tu :UpdateTags<CR>
 
-" Helptags should be rebuild if doc changed
-nnoremap <leader>ht :Helptags<CR>
-
-" help word under cursor
-nnoremap <leader>hh K
+" This is for taglist
+let Tlist_Inc_Winwidth = 0      
+" switch TagList window on / off
+nnoremap <leader>tl :TlistToggle<CR> 
 
 " NerdTree (file tree)
 nnoremap <leader>ft :NERDTreeToggle<CR>
@@ -57,17 +56,13 @@ nnoremap <leader>ut :Histwin<CR>
 " Rainbow braces highlight
 nnoremap <leader>rp :RainbowParenthesesToggle<CR>
 
-" This is for taglist
-let Tlist_Inc_Winwidth = 0
-nnoremap <leader>tl :Tlist<CR>
-
 " Matchit help should be copyed to doc directory
 runtime macros/matchit.vim
 
 "XML
 let g:xml_syntax_folding = 1
 
-"For Airline
+" Airline
 set encoding=utf8
 set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
 "set guifont=Consolas\ for\ Powerline\ FixedD:h11:cEASTEUROPE
@@ -113,14 +108,15 @@ function! s:unite_settings()
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 
+" NeoComplete settings in separate file...
 if filereadable(expand("~/.vim/neocomplete.vimrc"))
   source ~/.vim/neocomplete.vimrc
 endif
 
 " NeoSnippets
 let g:snips_author='Mattia72'
-let g:neosnippet#snippets_directory ='~/.vim/snippets,'.
-      \'~/.vim/neobundle/neosnippet-snippets/neosnippets'
+let g:neosnippet#snippets_directory ='~/.vim/snippets' 
+      "\.',~/.vim/neobundle/neosnippet-snippets/neosnippets'
 
 " Enable snipMate compatibility feature.
 "let g:neosnippet#enable_snipmate_compatibility = 1
