@@ -1,7 +1,9 @@
-" File: settings.vimrc
-" Author: Mattia72
-" Description: Settings for vim
-" Last Modified: 2015.10.18
+"=============================================================================
+" File:          settings.vimrc
+" Author:        Mattia72 
+" Description:   settings for VIM   
+" Created:       21 okt. 2015
+"=============================================================================
 
 "-------------------------------------------------------------------------------
 " Indentation 
