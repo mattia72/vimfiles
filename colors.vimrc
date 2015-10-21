@@ -1,7 +1,9 @@
-" File: colors.vimrc
-" Author: Mattia72
-" Description: Color shemas and helper functions for syntax plugin development
-" Last Modified: 2015.10.18
+"=============================================================================
+" File:          colors.vimrc
+" Author:        Mattia72 
+" Description:   Color shemas and helper functions for syntax plugin development   
+" Created:       21 okt. 2015
+"=============================================================================
                          
 "-------------------------------------------------------------------------------
 " Colors
