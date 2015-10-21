@@ -1,9 +1,11 @@
-"""""""""""""""""""""""""""""""""""""""""""""""
+"=============================================================================
 " File:          vimrc
 " Author:        Mattia72 
-" Description:   central vimrc file   
-" Created:       19 okt. 2015
-"""""""""""""""""""""""""""""""""""""""""""""""
+" Description:   Central VIMrc file   
+" Created:       21 okt. 2015
+" Project Repo:  https://github.com/Mattia72/vimfiles
+"=============================================================================
+
 " Hint: create ~/_vimrc with this content 'source <path_to_this_file>'
 
 " Use Vim settings, rather then Vi settings (much better!).
@@ -114,7 +116,7 @@ if filereadable(expand("~/.vim/neocomplete.vimrc"))
 endif
 
 " NeoSnippets
-let g:snips_author='Mattia72'
+let g:snippet_author='Mattia72'
 let g:neosnippet#snippets_directory ='~/.vim/snippets' 
       "\.',~/.vim/neobundle/neosnippet-snippets/neosnippets'
 
