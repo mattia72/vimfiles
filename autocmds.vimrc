@@ -1,7 +1,9 @@
-" File: autocmds.vimrc
-" Author: Mattia72
-" Description: Autocommands for vim
-" Last Modified: 2015.10.18
+"=============================================================================
+" File:          autocmds.vimrc
+" Author:        Mattia72 
+" Description:   auto commands for VIM   
+" Created:       21 okt. 2015
+"=============================================================================
   
 "-------------------------------------------------------------------------------
 " Automatically executed commands
