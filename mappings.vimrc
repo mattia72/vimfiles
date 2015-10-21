@@ -1,7 +1,9 @@
-" File: mappings.vimrc
-" Author: Mattia72
-" Description: Mapping definitions for vim
-" Last Modified: 2015.10.18
+"=============================================================================
+" File:          mappings.vimrc
+" Author:        Mattia72 
+" Description:   Key binding definitions for VIM
+" Created:       21 okt. 2015
+"=============================================================================
 
 "-------------------------------------------------------------------------------
 " Mappings ...
