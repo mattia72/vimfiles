@@ -77,6 +77,8 @@ NeoBundleLazy 'vim-abinitio'
 NeoBundle 'sjl/badwolf'
 NeoBundle 'dsolstad/vim-wombat256i'
 NeoBundle 'bronzehedwick/impactjs-colorscheme'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'tomasr/molokai'
 
 call neobundle#end()
 
