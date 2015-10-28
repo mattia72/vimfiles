@@ -50,6 +50,8 @@ nnoremap <leader>srw <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
 nnoremap <leader>sr <ESC>:%s/<C-R><C-W>//g<Left><Left><BackSpace>/
 " search replace selected
 vnoremap <leader>sr y<ESC>:%s/<C-R>0//g<Left><Left><BackSpace>/
+" highlight selected
+vnoremap <leader>sh y<ESC>:match Error /<C-R>0/ 
 "reload syntax
 nnoremap <leader>sy :syn on
 " habit: edit for other editors
