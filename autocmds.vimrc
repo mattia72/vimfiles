@@ -28,13 +28,12 @@ endif
 augroup vimrcEx
   autocmd!
   " Line numbers on the first window
-  autocmd BufWinEnter * setlocal rnu "relativenumber
-  autocmd BufWinEnter * setlocal nu "number
-  autocmd WinEnter * setlocal rnu "relativenumber
-  autocmd WinEnter * setlocal nu "number
+  autocmd WinEnter * setlocal rnu nu "relativenumber number
+  autocmd WinEnter * setlocal cursorcolumn cursorline "Highlight the screen column of the cursor
+  
   " linenumbers only in active window
-  autocmd WinLeave * setlocal nornu
-  autocmd WinLeave * setlocal nonu
+  autocmd WinLeave * setlocal nornu nonu 
+  autocmd WinLeave * setlocal nocursorcolumn nocursorline "Highlight the screen column of the cursor
 
   " save/load view
   autocmd BufWinLeave ?* silent! mkview
@@ -61,7 +60,7 @@ augroup vimrcEx
 
   " set cursor color and blink
   autocmd ColorScheme * call g:MySetGuiCursor()             
-  autocmd BufWinEnter * call g:MySetGuiCursor()
+  autocmd WinEnter * call g:MySetGuiCursor()
 augroup END
 
 " if has("autocmd") !!!
