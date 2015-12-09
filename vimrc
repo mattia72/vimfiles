@@ -110,10 +110,15 @@ function! s:unite_settings()
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 
-" NeoComplete settings in separate file...
-if filereadable(expand("~/.vim/neocomplete.vimrc"))
-  source ~/.vim/neocomplete.vimrc
+if(has('lua'))
+  " NeoComplete settings in separate file...
+  if filereadable(expand("~/.vim/neocomplete.vimrc"))
+    source ~/.vim/neocomplete.vimrc
+  endif
+else
+  let g:neocomplete#enable_at_startup = 0
 endif
+
 
 " NeoSnippets
 let g:snippet_author='Mattia72'
