@@ -35,8 +35,8 @@ NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'Shougo/neocomplete.vim' " a fast complete for lua supported vim
+NeoBundle 'Shougo/neocomplcache.vim' " slow neocomplete without lua
 
 NeoBundle 'chrisbra/histwin.vim'  " browse undo-tree
 
@@ -64,6 +64,8 @@ NeoBundle 'taglist.vim'
 
 NeoBundle 'bruno/vim-husk'        " command line mappings like ctrl right
 NeoBundle 'justinmk/vim-sneak'    " s<char><char> than ; or s to the next
+NeoBundle 'wellle/targets.vim'    " more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
+NeoBundle 'mileszs/ack.vim'       " the better grep
 
 NeoBundleLazy 'xml.vim'
 NeoBundleLazy 'vim-scripts/perl-support.vim'
@@ -86,4 +88,5 @@ filetype plugin indent on         " Required!
 
 " Installation check.
 NeoBundleCheck
+
 

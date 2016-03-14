@@ -70,7 +70,7 @@ set suffixesadd=.pm,.pl
 "set shell="C:\\Program\ Files\\Git\\usr\\bin\\bash"
 
 "-------------------------------------------------------------------------------
-" GUI
+" GUI/Terminal
 "-------------------------------------------------------------------------------
 
 if has('win32')
@@ -87,11 +87,21 @@ endif
 if has('gui_running')
   set winaltkeys=menu " alt jumps to menu
   set lines=40 columns=130 " set window size
+
+  set guicursor=
+  set guicursor+=i:ver100-iCursor
+  set guicursor+=n-v-c:blinkon0 "no blinking on normal, visual, command mode
+  set guicursor+=i:blinkwait10
 else
   set term=xterm
   set t_Co=256
+
   let &t_AB="\e[48;5;%dm"
   let &t_AF="\e[38;5;%dm"
+  let &t_ti.="\e[1 q" " enter termcap mode
+  let &t_SI.="\e[1 q" " start insert mode
+  let &t_EI.="\e[4 q" " end insert mode
+  let &t_te.="\e[0 q" " out of termcap mode
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
@@ -109,5 +119,7 @@ set laststatus=2   " Always show the statusline
 set scrolloff=5    "Start scrolling when we're 5 lines away from margin
 set sidescrolloff=15
 set sidescroll=1
-set cursorcolumn cursorline "Highlight the screen column of the cursor
+set cursorcolumn nocursorline "Highlight only the screen column of the cursor
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
+
+" vim:tw=78:ts=4:ft=vim:norl:

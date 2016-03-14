@@ -42,8 +42,9 @@ nnoremap <leader>sn ]s
 noremap <leader>e :tabnew! ~\.vim\vimrc<cr>
 " jump to tag
 nnoremap <leader>j <C-]>
-" find word under cursor in the current directory
-nnoremap <leader>vg <ESC>:vimgrep <C-R><C-W> *.
+" find all word under cursor in the current directory
+nnoremap <leader>fa <ESC>:vimgrep <C-R><C-W> %<bar>copen<Left><Left><Left><Left><Left><Left>  
+nnoremap <leader>fA <ESC>:vimgrep <C-R><C-W> *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
 " search replace selected whole word
 nnoremap <leader>srw <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
 " search replace selected word
@@ -56,8 +57,6 @@ vnoremap <leader>sh y<ESC>:match Error /<C-R>0/
 nnoremap <leader>sy :syn on
 " habit: edit for other editors
 nnoremap <leader>eo :set tw=0 wrap linebreak
-" find form name in forms xml
-"nnoremap <leader>vf <ESC>:vimgrep <C-R><C-W>  ../**/*.inc ../**/*.ddl ../**/*.mdd
 " Clear search highlight
 nnoremap <leader><space> :noh<cr>
 " Folding...
@@ -114,9 +113,11 @@ vnoremap <C-Down> ]egv
 
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
-" Select all
+" Select all and increment numbers
+nnoremap <C-y> <C-a>
+nnoremap <C-x> <C-x>
 nnoremap <C-A> ggVG
-
+"
 " autocomplete parenthesis, (brackets) and braces
 "inoremap  (  ()<Left>
 "inoremap  [  []<Left>

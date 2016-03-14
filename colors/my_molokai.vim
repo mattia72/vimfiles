@@ -17,7 +17,7 @@ if version > 580
         syntax reset
     endif
 endif
-let g:colors_name="molokai"
+let g:colors_name="my_molokai"
 
 if exists("g:molokai_original")
     let s:molokai_original = g:molokai_original
@@ -39,7 +39,7 @@ hi Function        guifg=#FD971F               gui=bold "#A6E22E
 hi Statement       guifg=#F92672               gui=bold
 hi Conditional     guifg=#F92672               gui=bold
 hi Repeat          guifg=#F92672               gui=bold 
-hi Label           guifg=#F92672               gui=italic "#E6DB74               
+hi Label           guifg=#F92672               gui=italic "#E6DB74
 hi Operator        guifg=#F92672
 hi Keyword         guifg=#F92672               gui=bold
 hi Exception       guifg=#F92672               gui=bold 
@@ -59,7 +59,7 @@ hi Special         guifg=#66D9EF guibg=bg      gui=italic
 hi SpecialChar     guifg=#F92672               gui=bold
 hi Tag             guifg=#FD971F               gui=italic
 hi Delimiter       guifg=#8F8F8F
-hi SpecialComment  guifg=#465457               gui=bold
+hi SpecialComment  guifg=#588F7C               gui=bold
 hi Debug           guifg=#BCA3A3               gui=bold
 
 hi Underlined      guifg=#808080               gui=underline
@@ -82,8 +82,8 @@ hi DiffText                      guibg=#4C4745 gui=italic,bold
 
 hi Directory       guifg=#A6E22E               gui=bold
 hi ErrorMsg        guifg=#F92672 guibg=#232526 gui=bold
-hi FoldColumn      guifg=#465457 guibg=#000000
-hi Folded          guifg=#465457 guibg=#000000
+hi FoldColumn      guifg=#588F7C guibg=#000000
+hi Folded          guifg=#588F7C guibg=#000000
 hi IncSearch       guifg=#C4BE89 guibg=#000000
 
 hi MatchParen      guifg=#000000 guibg=#FD971F gui=bold
@@ -119,15 +119,15 @@ if s:molokai_original == 1
    hi Comment         guifg=#75715E
    hi CursorLine                    guibg=#3E3D32
    hi CursorColumn                  guibg=#3E3D32
-   hi LineNr          guifg=#BCBCBC guibg=#3B3A32
-   hi NonText         guifg=#BCBCBC guibg=#3B3A32
+   hi LineNr          guifg=#848483 guibg=#3B3A32
+   hi NonText         guifg=#848483 guibg=#3B3A32
 else
    hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
-   hi Comment         guifg=#465457
+   hi Comment         guifg=#588F7C
    hi CursorLine                    guibg=#293739
    hi CursorColumn                  guibg=#293739
-   hi LineNr          guifg=#BCBCBC guibg=#232526
-   hi NonText         guifg=#BCBCBC guibg=#232526
+   hi LineNr          guifg=#848483 guibg=#232526
+   hi NonText         guifg=#848483 guibg=#232526
 end
 
 "

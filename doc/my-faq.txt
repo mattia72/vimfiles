@@ -26,9 +26,10 @@ CONTENTS                                                      *my-faq-contents*
 11. Folding....................................................|my-faq-folding|
 12. Source code
     editing........................................|my-faq-source-code-editing|
-13. Extras......................................................|my-faq-extras|
-    13.1 To HTML...............................................|my-faq-to-html|
-13. Plugins....................................................|my-faq-plugins|
+13. Diff..........................................................|my-faq-diff|
+14. Extras......................................................|my-faq-extras|
+    14.1 To HTML...............................................|my-faq-to-html|
+15. Plugins....................................................|my-faq-plugins|
 
 ==============================================================================
 1. Motion                                                       *my-faq-motion*
@@ -293,9 +294,12 @@ more on http://www.rayninfo.co.uk/vimtips.html
   :'a,'bg/fred/co/joe/            Match all lines containing "fred" between markers 
                                   a,b and copy after line containing "joe"
   :'a,'bg/str1/s/str1/str3/|mo/str2/  As above but also do a substitution
+
   :.,$g/^\d/exe "norm! \<c-a>"  Incrementing numbers (type <c-a> as 5 characters)
   :'a,'bg/\d\+/norm! ^A         Increment numbers
-  :%s/^\s*\d\+\./\=submatch(0)+1."."/ Increment numbers on the begin of the lines.
+  :%s/^\s*\d\+\./\=submatch(0)+1."."/ Increment numbers on the begin of the lines
+                                Note: increment and decrement is remapped in 
+                                my vimrc to <c-y>,<c-x>
 
 Storing glob results (note must use APPEND)
   :g/fred/y A                   Append all lines fred to register a
@@ -415,7 +419,21 @@ Find definitions
   |gd|	          go to definition of word under the cursor in current function
 
 ==============================================================================
-13. Extras                                                      *my-faq-extras*
+13. Diff                                                          *my-faq-diff*
+
+vimdiff (or vim -d) compares two files: 
+  <leader>ds    same as: >
+  :vert diffsplit {other-file}
+
+Diff two tab: >
+ :edit file1
+ :diffthis
+ :vnew
+ :edit file2
+ :diffthis.
+
+==============================================================================
+14. Extras                                                      *my-faq-extras*
 
 Undo/Redo
   u             Undo
@@ -428,10 +446,6 @@ Command line window
 Numbers
   <c-a>         Increment number under cursor. Hex and octal too.
   <c-x>         Decrement number under cursor. Hex and octal too.
-
-vimdiff (or vim -d) compares two files :) 
-  <leader>ds    same as: >
-  :vert diffsplit {other-file}
 
 Upper/Lower Case 
   ~{motion}		'tildeop' option: switch case of {motion} text.
@@ -454,7 +468,7 @@ Redirect command output to a file
   :redir END            Redirection end.
   
 ------------------------------------------------------------------------------
-13.1 To HTML                                                   *my-faq-to-html*
+14.1 To HTML                                                   *my-faq-to-html*
 
 Convert text to HTML >
   :TOhtml
@@ -473,7 +487,7 @@ NOTE: use e.g 9yy to yank these commands, then execute with: @" .
       
 
 ==============================================================================
-14. Plugins                                                    *my-faq-plugins*
+15. Plugins                                                    *my-faq-plugins*
 
 Usefull plugins, I'm using recently:
 
