@@ -32,6 +32,7 @@ NeoBundle 'Shougo/vimproc.vim' , {
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'     " most recent file list for Unit
 NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Shougo/neoyank.vim'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 
@@ -81,6 +82,11 @@ NeoBundle 'dsolstad/vim-wombat256i'
 NeoBundle 'bronzehedwick/impactjs-colorscheme'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'tomasr/molokai'
+NeoBundle 'jnurmine/Zenburn'
+
+if !has("gui_running")
+  "NeoBundleDisable vim-airline
+endif
 
 call neobundle#end()
 
@@ -88,5 +94,6 @@ filetype plugin indent on         " Required!
 
 " Installation check.
 NeoBundleCheck
+
 
 

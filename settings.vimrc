@@ -47,6 +47,7 @@ set bufhidden=hide "This option specifies what happens when a buffer is no longe
 set formatoptions=tcqronl
 set switchbuf=useopen,usetab
 set viewdir=$HOME\.vim\view
+set viewoptions=cursor,folds,slash,unix
 set history=50   "keep 50 lines of command line history
 
 "-------------------------------------------------------------------------------
@@ -95,6 +96,10 @@ if has('gui_running')
 else
   set term=xterm
   set t_Co=256
+  "repair backspace: 
+  "Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
+  inoremap <C-Del> <BS>
+  nnoremap <C-Del> <BS>
 
   let &t_AB="\e[48;5;%dm"
   let &t_AF="\e[38;5;%dm"
@@ -121,5 +126,6 @@ set sidescrolloff=15
 set sidescroll=1
 set cursorcolumn nocursorline "Highlight only the screen column of the cursor
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
+set number relativenumber
 
 " vim:tw=78:ts=4:ft=vim:norl:

@@ -1,0 +1,72 @@
+snippet     header
+abbr        file header 
+options     head
+  #!/bin/bash
+  #=============================================================================
+  # File:          ${1:`expand('%:t')`}
+  # Author:        ${2:`g:snippet_author`} 
+  # Description:   ${3:DESCRIPTION}   
+  # Created:       ${4:`strftime("%d %b %Y")`}
+  # Project Repo:  ${5:https://github.com/`g:snippet_author`/}${6:repo_name}
+  #=============================================================================
+
+  ${0}
+
+snippet     #!
+abbr        first line
+options     head
+  #!/bin/bash
+  #set -x #Print commands and their arguments as they are executed.
+  set -u #Treat unset variables as an error when substituting.
+ 
+snippet     help
+abbr        usage 
+options     head
+  show_help()
+  {
+  cat << EOF
+  Usage: ${0##*/} [OPTIONS] 
+
+    This script ${1:description}
+
+    Options:
+      -h           Display this help and exit
+      -n           Noop mode. Performs a trial run with no changes made    
+      -v           Verbose mode. Can be used multiple times for increased verbosity
+
+    Examples:
+    <todo>
+
+  EOF
+  }
+
+snippet     getopts
+abbr        option handling
+options     head
+  ${2}=""
+  verbose=""
+
+  OPTIND=1 
+  while getopts ":hv${1:option}:" opt; do
+    case "$opt" in
+      h) show_help
+        exit 0 ;;
+      v) verbose+="v" 
+        ;;
+     ${1}) ${2:parameter}=$OPTARG 
+        ;;        
+      ?) echo "Error: invalid option - $OPTARG"
+        show_help
+        exit 1 ;;
+    esac
+  done
+  shift "$((OPTIND-1))" # Shift off the options and optional --.
+
+  ${0}
+
+snippet     for
+abbr        enumerate array
+options     head
+  for ${1:elem} in "${${2:array}[@]}"; do
+    ${0:TARGET}
+  done

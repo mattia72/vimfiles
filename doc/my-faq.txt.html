@@ -1,0 +1,423 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1250">
+<title>~\.vim\doc\my-faq.txt.html</title>
+<meta name="Generator" content="Vim/7.3">
+<meta name="plugin-version" content="vim7.3_v6">
+<meta name="syntax" content="help">
+<meta name="settings" content="use_css">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+.Comment { color: #0000ff; }
+.Ignore { color: #ffffff; }
+.Todo { color: #0000ff; background-color: #ffff00; }
+.Type { color: #2e8b57; font-weight: bold; }
+.Special { color: #6a5acd; }
+.Statement { color: #804040; font-weight: bold; }
+.PreProc { color: #a020f0; }
+.Identifier { color: #008080; }
+.Constant { color: #ff00ff; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<span class="Constant">my-faq.txt</span> My own Vim faq for <span class="Identifier">Vim version 7.3</span>       Last change: 2010 nov. 15
+
+                         <span class="Identifier">VIM REFERENCE MANUAL by Mata</span>
+<span class="PreProc">==============================================================================</span>
+<span class="Statement">CONTENTS                                                      </span><span class="Constant">my-faq-contents</span>
+
+1. Motion.......................................................<span class="Identifier">my-faq-motion</span>
+2. Operators.................................................<span class="Identifier">my-faq-operators</span>
+3. Text objects................................................<span class="Identifier">my-faq-objects</span>
+4. Selection.................................................<span class="Identifier">my-faq-selection</span>
+5. Search and replace...................................<span class="Identifier">my-faq-search-replace</span>
+   5.1 In multiple files..........................<span class="Identifier">my-faq-multi-search-replace</span>
+   5.2 Delete lines.......................................<span class="Identifier">my-faq-delete-lines</span>
+6. Macros........................................................<span class="Identifier">my-faq-macro</span>
+7. Clipboard.................................................<span class="Identifier">my-faq-clipboard</span>
+8. Bookmarks.................................................<span class="Identifier">my-faq-bookmarks</span>
+9. Hotkeys.....................................................<span class="Identifier">my-faq-hotkeys</span>
+   9.1 Command mode hotkeys.......................<span class="Identifier">my-faq-command-mode-hotkeys</span>
+   9.2 Insert mode hotkeys.........................<span class="Identifier">my-faq-insert-mode-hotkeys</span>
+   9.3 Visual mode hotkeys.........................<span class="Identifier">my-faq-visual-mode-hotkeys</span>
+10. Folding....................................................<span class="Identifier">my-faq-folding</span>
+11. Extras......................................................<span class="Identifier">my-faq-extras</span>
+    11.1 To HTML...............................................<span class="Identifier">my-faq-to-html</span>
+12. Plugins....................................................<span class="Identifier">my-faq-plugins</span>
+
+<span class="PreProc">==============================================================================</span>
+1. Motion                                                       <span class="Constant">my-faq-motion</span>
+
+  e : Move forward to the end of a word.
+  w : Move forward to the beginning of a word.
+  3w : Move forward three words.
+  b : Move backward to the beginning of a word.
+  3b : Move backward three words.
+  $ : Move to the end of the line.
+  0 : Move to the beginning of the line.
+  ^ : Move to the first non-blank character of the line.
+  ) : Jump forward one sentence.
+  ( : Jump backward one sentence.
+  } : Jump forward one paragraph.
+  { : Jump backward one paragraph.
+  H : Jump to the top of the screen.
+  M : Jump to the middle of the screen.
+  L : Jump to the bottom of the screen.
+  10<span class="Special">&lt;PageUp&gt;</span> or
+  10<span class="Special">&lt;CTRL-B&gt;</span> : Move 10 pages up.
+  5<span class="Special">&lt;PageDown&gt;</span> or
+  5<span class="Special">&lt;CTRL-F&gt;</span> : Move 5 pages down.
+  G : Jump to end of file.
+  1G : Jump to beginning of file (same as gg).
+  50G : Jump to line 50.
+  <span class="Special">[N]</span>f<span class="Special">{char}</span>    to the <span class="Special">N</span>th occurrence of <span class="Special">{char}</span> to the right
+  <span class="Special">[N]</span>F<span class="Special">{char}</span>    to the <span class="Special">N</span>th occurrence of <span class="Special">{char}</span> to the left
+<span class="Statement">  </span>* : found next occurrence of word under the cursor
+  # : found previous occurrence of word under the cursor
+
+<span class="PreProc">==============================================================================</span>
+2. Operators                                                 <span class="Constant">my-faq-operators</span>
+
+  ~     switch case
+  d     delete
+  c     change
+  y     yank
+  &gt;     shift right
+  &lt;     shift left
+  !     filter through external command
+  =     filter through <span class="Type">'equalprg'</span> option command
+  gq    format lines to <span class="Type">'textwidth'</span> length
+  :     start Ex command for highlighted lines
+  r     replace a char and return to prev mode
+  s     delete a char and start insert mode
+  C     delete highlighted text and start insert
+  S     delete highlighted text and start insert
+  R     -&quot;-
+  x     delete
+  D     delete
+  X     delete
+  Y     yank
+  p     put
+  J     join
+  U     make uppercase
+  u     make lowercase
+  ^]    find tag
+  I     block insert
+  A     block append
+
+Example:
+<span class="Special">&lt;c-v&gt;</span> jjj I<span class="Special">{text}&lt;esc&gt;</span>    insert <span class="Special">{text}</span> to each row before visual block
+
+<span class="PreProc">==============================================================================</span>
+3. Text objects                                                <span class="Constant">my-faq-objects</span>
+
+These can be used after an operator or in Visual mode to select an
+object.
+
+  <span class="PreProc">an  inner   meaning</span>
+<span class="PreProc">------------------------------------------------------------------------------</span>
+  a&quot;  i&quot;   double quoted string
+  a'  i'   single quoted string
+  a(  i(   same as ab ib
+  a)  i)   same as ab ib
+  a&lt;  i&lt;   &quot;a &lt;&gt;&quot; from '&lt;' to the matching '&gt;'
+  a&gt;  i&gt;   same as a&lt; i&lt;
+  aB  iB   &quot;a Block&quot; from &quot;[{&quot; to &quot;]}&quot; (with brackets)
+  aW  iW   &quot;a WORD&quot; (with white space)
+  a[  i[   &quot;a []&quot; from '[' to the matching ']'
+  a]  i]   same as a[ i[
+  a`  i`   string in backticks
+  ab  ib   &quot;a block&quot; from &quot;[(&quot; to &quot;])&quot; (with braces)
+  ap  ip   &quot;a paragraph&quot; (with white space)
+  as  is   &quot;a sentence&quot; (with white space)
+  at  it   &quot;a (html)tag block&quot; (with white space)
+  aw  iw   &quot;a word&quot; (with white space)
+  a{  i{   same as aB iB
+  a}  i}   same as aB iB
+
+<span class="PreProc">==============================================================================</span>
+4. Selection                                                 <span class="Constant">my-faq-selection</span>
+
+  gV          Avoid the automatic reselection of the Visual area
+              after a Select mode mapping or menu has finished.
+  gh          Start Select mode, characterwise.  This is like &quot;v&quot;,
+  gH          Start Select mode, linewise.  This is like &quot;V&quot;,
+  g <span class="Special">CTRL-H</span>    Start Select mode, blockwise.  This is like <span class="Special">CTRL-V</span>,
+
+<span class="PreProc">==============================================================================</span>
+5. Search and replace                                   <span class="Constant">my-faq-search-replace</span>
+
+  /<span class="Special">{pattern}</span>            search pattern
+<span class="Statement">  </span>*                     found next occurrence of word under the cursor
+  #                     found previous occurrence of word under the cursor
+
+  :%s/foo/bar/g         Find each occurrence of <span class="Type">'foo'</span>, and replace it with <span class="Type">'bar'</span>.
+  :%s/foo/bar/gc        <span class="Type">'foo'</span> to <span class="Type">'bar'</span>, but ask for confirmation first.
+  :%s/\&lt;foo\&gt;/bar/gc    whole words exactly matching <span class="Type">'foo'</span> to <span class="Type">'bar'</span>; ask for confirmation.
+  :%s/foo/bar/gci       <span class="Type">'foo'</span> (case insensitive) to <span class="Type">'bar'</span>; ask for confirmation.
+  :%s/foo/bar/gcI       <span class="Type">'foo'</span> (case sensitive) to <span class="Type">'bar'</span>; ask for confirmation.
+  :%s/^.\<span class="Special">{-}</span>foo/bar/     1st occurence of <span class="Type">'foo'</span> to <span class="Type">'bar'</span>; non-greedy matching \<span class="Special">{-}</span>
+
+Examples:
+  :s/a\|b/xxx\0xxx/g             modifies &quot;a&quot; or &quot;b&quot; to &quot;xxxaxxx&quot; or &quot;xxxbxxx&quot;
+  :s/\([abc]\)\([efg]\)/\2\1/g   modifies &quot;af fa bg&quot; to &quot;fa fa gb&quot;
+  :s/abcde/abc^Mde/              modifies &quot;abcde&quot;    to &quot;abc&quot;, &quot;de&quot; (two lines)
+                                 <span class="Todo">NOTE:</span> you need to type <span class="Special">CTRL-V</span> <span class="Special">&lt;CR&gt;</span> to get a ^M here
+  :s/$/\^M/                      modifies &quot;abcde&quot;    to &quot;abcde^M&quot;
+  :s/\w\+/\u\0/g                 modifies &quot;bla bla&quot;  to &quot;Bla Bla&quot;
+  :s/\w\+/\L\0/g                 modifies &quot;BLA BLA&quot;  to &quot;bla bla&quot;
+more :help <span class="Identifier">change.txt</span>
+
+Search range:
+The % in :%s applies the substitute to every line in the buffer, rather than just the current line.
+
+  :5,12s/foo/bar/g      <span class="Type">'foo'</span> to <span class="Type">'bar'</span> for all lines between line 5 and line 12
+  :'a,'bs/foo/bar/g     <span class="Type">'foo'</span> to <span class="Type">'bar'</span> for all lines between marks a and b.
+  :.,$s/foo/bar/g       <span class="Type">'foo'</span> to <span class="Type">'bar'</span> for all lines between the current line (.) and the last line ($).
+  :.,+2s/foo/bar/g      <span class="Type">'foo'</span> to <span class="Type">'bar'</span> for the current line (.) and the two next lines (+2).
+(Note that :%s is equivalent to :1,$s.)
+
+When searching:
+    \/ is / (use backslash + forward slash to search for forward slash)
+    \n is newline, \r is CR (carriage return = Ctrl-M = ^M)
+When replacing:
+    \r is newline, \n is a null byte (0x00).
+    \&amp; is ampersand (&amp; is the search pattern).
+
+You can use other delimiters with substitute:
+  :s#<a href="http://www.example.com/index.html#http://example.com/#">http://www.example.com/index.html#http://example.com/#</a>
+
+Save typing by using \zs and \ze to set the start and end of a pattern. For example, instead of:
+  :s/Copyright 2007 All Rights Reserved/Copyright 2008 All Rights Reserved/
+You could try:
+  :s/Copyright \zs2007\ze All Rights Reserved/2008/
+
+  :%s/foo/<span class="Special">&lt;c-r&gt;</span>a/g      Substitute each <span class="Type">'foo'</span> by the content of register 'a'.
+  :%s/<span class="Special">&lt;c-r&gt;</span>*/bar/g      Substitute the visual selection (saved in the '*' register) by <span class="Type">'bar'</span>.
+  :%s/foo/\=@a/g        Substitute each <span class="Type">'foo'</span> by the content of register 'a'.
+                        \=@a is a reference to register 'a'. The content of register 'a'
+                        will not be shown. This is useful if register 'a' contains many lines of text.
+  :%s/<span class="Special">&lt;c-r&gt;</span>//bar/g      Substitute the last search pattern (<span class="Special">&lt;c-r&gt;</span>/) by <span class="Type">'bar'</span>.
+                        Hint: If the substitute pattern is omitted, the last
+                        search pattern is used. See 'r' flag.
+  :%s/<span class="Special">&lt;c-r&gt;&lt;c-w&gt;</span>/bar/g  Substitute the word under cursor (<span class="Special">&lt;c-r&gt;&lt;c-w&gt;</span>) by <span class="Type">'bar'</span>.
+
+Insert VIM function:
+  :%s/__date__/\=strftime(&quot;%c&quot;)/ : insert datestring, calling a VIM function
+  :s@\n@\=&quot;\r&quot; . expand(&quot;$HOME&quot;) . &quot;\r&quot;@
+
+<span class="PreProc">------------------------------------------------------------------------------</span>
+5.1 Search replace in multiple files              <span class="Constant">my-faq-multi-search-replace</span>
+
+  :g/<span class="Special">{pattern}</span>                  find all occurrence in the file
+  :vimgrep /<span class="Special">{pattern}</span>/ <span class="Special">{file}</span>   puts the output to the quickfix window (:copen)
+                                <span class="Special">{file}</span> could be %, for the current file.
+  :vimgrep /word_1\|word_2/ %   finds all occurrence of word_1 or word_2
+
+Find and replace in multiple files<span class="Ignore"> &gt;</span>
+<span class="Comment">  :args path/**/*.[ch]</span>
+<span class="Comment">  :argdo %s/word_1/word_2/ge | update</span>
+or<span class="Ignore"> &gt;</span>
+<span class="Comment">  :argdo %s/word_1/word_2/gec | update</span>
+<span class="Identifier">args</span> loads all *.c or *.h files recursive in a buffer, can be slow on many files.
+<span class="Identifier">argdo</span> replaces all word_1 to word_2 in all buffers, matching <span class="Identifier">args</span>
+The &quot;e&quot; flag is used for the &quot;:s&quot; command to avoid an error for files where
+&quot;word_1&quot; isn't used.  &quot;update&quot; writes the file only if changes were made.
+The &quot;c&quot; flag is for confirmation.
+
+Find and replace in multiple files with quickfix window<span class="Ignore"> &gt;</span>
+<span class="Comment">  :vimgrep /word_1\|word_2/ path/**/file.[ext]   </span>
+<span class="Comment">  :cfirst | while 1 | cnext | endwhile</span>
+<span class="Comment">  :bufdo %s/word_1/word_2/gec</span>
+
+<span class="PreProc">------------------------------------------------------------------------------</span>
+5.2 Delete lines                                          <span class="Constant">my-faq-delete-lines</span>
+
+  :g/<span class="Special">{pattern}</span>/d   Matching pattern
+  :g/^$/d          Delete empty lines
+  :v/./d           Delete empty lines (v operates on lines, that do not match)
+  :g/^\s*$/d       That contains only spaces
+  :v/\S/d          That contains only spaces (v operates on lines, that do not match)
+  :%s/^\(.*\)\n\1$/\1/ Delete duplicate lines
+
+<span class="PreProc">==============================================================================</span>
+6. Macros                                                       <span class="Constant">my-faq-macros</span>
+
+  q&lt;macro key&gt;     Record a macro (press q again to quit recording)
+  @&lt;macro key&gt;     Run a macro (@ runs again and again)
+  :g/<span class="Special">{pattern}</span>/normal @&lt;macro key&gt;
+                   Runs macro on lines matching pattern
+
+<span class="PreProc">==============================================================================</span>
+7. Clipboard                                                 <span class="Constant">my-faq-clipboard</span>
+
+  &quot;+yy          Copy line to clipboard
+  &quot;*yy          Copy line to clipboard
+  &quot;ayy          Copy line to register a
+  &quot;+dd          Cut line to clipboard
+  &quot;*dd          Cut line to clipboard
+  &quot;+p           Paste from clipboard
+  &quot;ap           Paste from register a
+
+<span class="PreProc">==============================================================================</span>
+8. Bookmarks                                                 <span class="Constant">my-faq-bookmarks</span>
+
+  m<span class="Special">{a-zA-Z}</span>     Mark current position with mark <span class="Special">{a-zA-Z}</span>
+  `<span class="Special">{a-z}</span>        Go to mark <span class="Special">{a-z}</span> within current file
+  '<span class="Special">{a-z}</span>        Jump to the beginning of the line of mark <span class="Special">{a-z}</span>
+  ''            Return to the line where the cursor was before the latest jump.  (Two single quotes.)
+  ``            Return to the cursor position before the latest jump (undo the jump).
+  %             Jump to corresponding item, e.g. from an open brace to its matching closing brace.
+
+<span class="PreProc">==============================================================================</span>
+9 Hotkeys                                                      <span class="Constant">my-faq-hotkeys</span>
+<span class="PreProc">------------------------------------------------------------------------------</span>
+9.1 Command mode hotkeys                          <span class="Constant">my-faq-command-mode-hotkeys</span>
+
+  C-c                 Like <span class="Special">&lt;esc&gt;</span>, but do not use an abbreviation
+  C-r <span class="Special">{0-9a-z%#:.-=&quot;}</span> Insert the contents of a register
+  C-r+C-w             Insert word under cursor
+  C-d                 Listázza a lehetséges fájlokat v. parancsokat
+
+<span class="PreProc">------------------------------------------------------------------------------</span>
+9.2 Insert mode hotkeys                            <span class="Constant">my-faq-insert-mode-hotkeys</span>
+
+  C-o<span class="Special">{command}</span>   Execute <span class="Special">{command}</span> and return to Insert mode
+  C-n            Insert next match of identifier before the cursor
+  C-p            Insert previous match of identifier before the cursor
+
+Completion
+  <span class="Special">&lt;c-n&gt;&lt;c-p&gt;</span>            Word completion in insert mode
+  <span class="Special">&lt;c-x&gt;&lt;c-l&gt;</span>            Line completion in insert mode
+
+<span class="PreProc">------------------------------------------------------------------------------</span>
+9.3 Visual mode hotkeys                            <span class="Constant">my-faq-visual-mode-hotkeys</span>
+
+  v             Start Visual mode per character.
+  V             Start Visual mode linewise.
+  <span class="Special">&lt;c-v&gt;</span>         Start Visual mode blockwise.
+
+  remove the 'B' and '&lt;' flags from <span class="Type">'cpoptions'</span> else these doesn't work
+  `&gt;            Go to the end of the Visual area
+  a<span class="Special">&lt;cr&gt;&lt;esc&gt;</span>    Break the line after the Visual area
+  `&lt;            Jump to the start of the Visual area
+  i<span class="Special">&lt;cr&gt;&lt;esc&gt;</span>    Break the line before the Visual area
+  !!date<span class="Special">&lt;cr&gt;</span>    Filter the Visual text through date
+  kJJ           Join the lines back together
+
+more:  <span class="Constant">blockwise-examples</span>
+
+<span class="PreProc">==============================================================================</span>
+10. Folding                                                    <span class="Constant">my-faq-folding</span>
+
+  zf<span class="Special">{motion}</span>    Operator: Define a fold manually
+  :<span class="Special">{range}</span>fold  Define a fold for <span class="Special">{range}</span> lines
+  zd            Delete one fold under the cursor
+  zD            Delete all folds under the cursor
+
+  zo            Open one fold under the cursor
+  zO            Open all folds under the cursor
+  zc            Close one fold under the cursor
+  zC            Close all folds under the cursor
+
+  zm            Fold more: decrease <span class="Type">'foldlevel'</span>
+  zM            Close all folds: make <span class="Type">'foldlevel'</span> zero
+  zr            Reduce folding: increase <span class="Type">'foldlevel'</span>
+  zR            Open all folds: make <span class="Type">'foldlevel'</span> max.
+
+  zn            Fold none: reset <span class="Type">'foldenable'</span>
+  zN            Fold normal set <span class="Type">'foldenable'</span>
+  zi            Invert <span class="Type">'foldenable'</span>
+
+The <span class="Constant">foldmethod</span> =manual folds are lost when you abandon the file.  To save the folds use
+the <span class="Identifier">:mkview</span> command.  The view can be restored later with <span class="Identifier">:loadview</span>.
+
+<span class="PreProc">==============================================================================</span>
+11. Extras                                                      <span class="Constant">my-faq-extras</span>
+
+Undo/Redo
+  u             Undo
+  <span class="Special">&lt;c-r&gt;</span>         Redo
+
+Numbers
+  <span class="Special">&lt;c-a&gt;</span>         Increment number under cursor. Hex and octal too.
+  <span class="Special">&lt;c-x&gt;</span>         Decrement number under cursor. Hex and octal too.
+
+vimdiff (or vim -d) compares two files :)
+  :vert diffsplit <span class="Special">{other-file}</span>
+
+Format text
+  ==            Format current line
+  =%            Format code block
+  =vi}          Format code block
+
+File handling
+  gf            Open file under the cursor
+  <span class="Special">&lt;c-o&gt;</span>        Go back to the previous file
+
+Upper/Lower Case
+  ~<span class="Special">{motion}</span>             <span class="Type">'tildeop'</span> option: switch case of <span class="Special">{motion}</span> text.
+  g~<span class="Special">{motion}</span>            Switch case of <span class="Special">{motion}</span> text.
+  g~~                   Switch case of current line.
+  gU<span class="Special">{motion}</span>            Make <span class="Special">{motion}</span> text uppercase.
+  gu<span class="Special">{motion}</span>            Make <span class="Special">{motion}</span> text lowercase.
+
+External command
+  :!wc %               How many words are in the edited file
+  !<span class="Special">{motion}{filter}</span>     Filter <span class="Special">{motion}</span> text lines through the external program <span class="Special">{filter}</span>.
+  :20,25 ! rot13        Encode with rot13 the selected text
+
+  :r textfile/!command  Insert textfile or external program output
+
+<span class="PreProc">------------------------------------------------------------------------------</span>
+11.1 To HTML                                                   <span class="Constant">my-faq-to-html</span>
+
+Convert text to HTML
+  :TOhtml
+Convert this file to HTML and upload to my wiki:
+  :0s#\( [a-z0-9.]\+\)\<span class="Special">{3}</span>$#\=&quot; &quot;.strftime(&quot;%Y %b %d&quot;)#
+  :color default
+  :TOhtml
+  :%s/\(&lt;span class=&quot;Identifier&quot;&gt;\)\(my-faq-[a-z\-].*\)&lt;\/span&gt;/&lt;a href=&quot;#\2&quot; style=&quot;color: blue;&quot;&gt;\2&lt;\/a&gt;/g
+  :%s/\(class=&quot;Constant&quot;\)&gt;\(my-faq-[a-z\-]*\)&lt;/\1 id=&quot;\2&quot;&gt;\2&lt;/g
+  :g/\(^pre\)\|\(^body\).*/d^Mggdd
+  :%s#\(b2_5206424.*\)\(&lt;/.*&gt;\)#[user@]machine:port/path#
+  :w <span class="Constant">ftp://[user@]machine:port/path</span>
+
+<span class="Todo">NOTE:</span> use e.g &quot;a8yy to yank these commands to register 'a'
+      then execute all command by pressing @a .
+
+<span class="PreProc">==============================================================================</span>
+12. Plugins                                                    <span class="Constant">my-faq-plugins</span>
+
+Surrounding
+  <span class="PreProc">Old text                  Command     New text</span>
+  &quot;Hello *world!&quot;           ds&quot;         Hello world!
+  [123+4*56]/2              cs])        (123+456)/2
+  &quot;Look ma, I'm *HTML!&quot;     cs&quot;<span class="Special">&lt;q&gt;</span>      <span class="Special">&lt;q&gt;</span>Look ma, I'm HTML!&lt;/q&gt;
+  <span class="Special">&lt;q&gt;</span>Look ma, I'm HTML!&lt;/q&gt; cst&quot;        &quot;Look ma, I'm *HTML!&quot;
+  if *x&gt;3 {                 ysW(        if ( x&gt;3 ) {
+  Hello w*orld!             ysiw)       Hello (world)!
+  my $str = *whee!;         vlllls'     my $str = 'whee!';
+try :help <span class="Identifier">surround.txt</span>
+
+Yankring: F11
+
+NerdTree: F2
+
+NerdCommenter
+  ,c<span class="Special">&lt;space&gt;</span>    toggle comments
+
+Bufexplorer:
+  ,b            open bufexplorer
+
+<span class="PreProc">------------------------------------------------------------------------------</span>
+ vim:tw=78:ts=8:ft=help:norl:
+</pre>
+</body>
+</html>

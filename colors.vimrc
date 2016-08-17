@@ -25,7 +25,11 @@
 if has("gui_running")
   colors my_molokai
 else
-  colors my_molokai
+    "set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+    colors my_molokai "ok in dos
 endif
 
 " Show syntax highlighting groups for word under cursor: Ctrl Shift P

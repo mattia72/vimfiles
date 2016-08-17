@@ -14,9 +14,14 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
-if filereadable(expand("~/.vim/neobundle.vimrc"))
-  source ~/.vim/neobundle.vimrc
+if filereadable(expand("~/.vim/dein.vimrc"))
+  source ~/.vim/dein.vimrc
 endif
+
+"obsolete: dein is used instead of neobundle
+"if filereadable(expand("~/.vim/neobundle.vimrc"))
+  "source ~/.vim/neobundle.vimrc
+"endif
 
 if filereadable(expand("~/.vim/settings.vimrc"))
   source ~/.vim/settings.vimrc
@@ -72,6 +77,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " EasyMotion
 hi link EasyMotionTarget ErrorMsg
@@ -81,7 +87,9 @@ hi link EasyMotionShade  Comment
 let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
-" Default action is open in current buffer, Ctrl-t opens selected in new tab!
+" Default action is open in current buffer, 
+" !!!! Ctrl-t opens selected in new tab! !!!
+"
 " recursive file search (requres 'ag' or 'find' (not in windows))
 "nnoremap <leader>ut :<C-u>Unite -buffer-name=files   -start-insert file_rec/async:! <cr>
 " file in current directory
@@ -129,9 +137,9 @@ let g:neosnippet#snippets_directory ='~/.vim/snippets'
 "let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets' behavior.
 imap <expr><TAB>

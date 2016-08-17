@@ -31,8 +31,11 @@ nnoremap <leader>cf :let @+ = expand("%")<cr>
 "nnoremap <leader>s :w!<cr>
 " Window operation
 nnoremap <leader>w <C-W>
-" Diff jumps
+" Diff this with other file
 nnoremap <leader>ds :vertical diffsplit 
+" Diff this with other 
+nnoremap <leader>dt :diffthis<CR>:vnew<CR>
+" Diff jumps
 nnoremap <leader>dp [c
 nnoremap <leader>dn ]c
 " Spell jumps: next previous error
@@ -43,8 +46,11 @@ noremap <leader>e :tabnew! ~\.vim\vimrc<cr>
 " jump to tag
 nnoremap <leader>j <C-]>
 " find all word under cursor in the current directory
-nnoremap <leader>fa <ESC>:vimgrep <C-R><C-W> %<bar>copen<Left><Left><Left><Left><Left><Left>  
-nnoremap <leader>fA <ESC>:vimgrep <C-R><C-W> *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
+nnoremap <leader>fa <ESC>:vimgrep '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left>  
+nnoremap <leader>fA <ESC>:vimgrep '<C-R><C-W>' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
+" find all selected
+vnoremap <leader>fa y<ESC>:vimgrep '<C-R>0' %<bar>copen<Left><Left><Left><Left><Left><Left>  
+vnoremap <leader>fA y<ESC>:vimgrep '<C-R>0' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
 " search replace selected whole word
 nnoremap <leader>srw <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
 " search replace selected word
@@ -63,6 +69,8 @@ nnoremap <leader><space> :noh<cr>
 nnoremap <leader>fs :call <SID>MyFoldSyntax()<cr>
 "work with an xml..
 nnoremap <leader>xm :setfiletype xml<cr> :call <SID>MyFoldSyntax()<CR>ggVG=
+"xml formatting
+nnoremap <leader>xf Go<esc>:r ! xmllint --format %<cr>
 
 function! <SID>MyFoldSyntax()
   set foldmethod=syntax
@@ -131,5 +139,4 @@ vnoremap  {  s{}<Esc>P<Right>%
 nnoremap <leader>ht :Helptags<CR>
 " help word under cursor
 nnoremap <leader>hh K
-
 
