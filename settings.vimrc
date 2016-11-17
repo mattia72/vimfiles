@@ -68,7 +68,8 @@ set path+=.  " path to use gf - jump to file.
 "set cdpath+=.  " path to use gf - jump to file.
 set suffixesadd=.pm,.pl
 
-"set shell="C:\\Program\ Files\\Git\\usr\\bin\\bash"
+"set shell=C:\\msys32\\usr\\bin\\bash
+"let $TMP="c:/tmp"
 
 "-------------------------------------------------------------------------------
 " GUI/Terminal
@@ -114,6 +115,12 @@ if &t_Co > 2 || has('gui_running')
   syntax on
 endif
 
+if has('gui_running')
+  set cursorcolumn nocursorline "Highlight only the screen column of the cursor
+else
+  set nocursorcolumn nocursorline
+endif
+
 let &guioptions = substitute(&guioptions, "t", "", "g") "For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 set guioptions+=bh "horizontal scrollbar
 set nowrap
@@ -124,7 +131,6 @@ set laststatus=2   " Always show the statusline
 set scrolloff=5    "Start scrolling when we're 5 lines away from margin
 set sidescrolloff=15
 set sidescroll=1
-set cursorcolumn nocursorline "Highlight only the screen column of the cursor
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set number relativenumber
 

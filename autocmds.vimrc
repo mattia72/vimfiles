@@ -39,11 +39,11 @@ function! g:MySetRuler()
     autocmd!
     " Line numbers on the first window
     autocmd WinEnter * setlocal rnu nu "relativenumber number
-    autocmd WinEnter * setlocal cursorcolumn cursorline "Highlight the screen column of the cursor
+    autocmd WinEnter * setlocal cursorcolumn "Highlight the screen column of the cursor
 
     " linenumbers only in active window
     autocmd WinLeave * setlocal nornu nonu 
-    autocmd WinLeave * setlocal nocursorcolumn nocursorline "Highlight the screen column of the cursor
+    autocmd WinLeave * setlocal nocursorcolumn "Highlight the screen column of the cursor
   augroup END
   "endif
 endfunction

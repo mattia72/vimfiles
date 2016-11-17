@@ -43,14 +43,19 @@ if dein#load_state(expand('~/.vim/bundle/'))
 
   call dein#add('chrisbra/histwin.vim')  " browse undo-tree)
 
-  call dein#add('bling/vim-airline' , { 'if' : 'has("gui_running")' })      "status line
+  call dein#add('bling/vim-airline' , 
+        \{ 'if' : 'has("gui_running")' })      "status line
 
-  call dein#add('scrooloose/nerdtree')   " file tree browser)
+  " lazy load on command executed
+  call dein#add('scrooloose/nerdtree',
+        \{'on_cmd': 'NERDTreeToggle'})
+
   call dein#add('scrooloose/nerdcommenter')
 
   call dein#add('tpope/vim-unimpaired')
   call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-fugitive')    " git wrapper
 
   call dein#add('Lokaltog/vim-easymotion')
   call dein#add('kshenoy/vim-signature') " toggle, display and navigate marks)
@@ -68,42 +73,49 @@ if dein#load_state(expand('~/.vim/bundle/'))
   "check ok
   call dein#add('taglist.vim')           "TList browser
 
-  call dein#add('vim-utils/vim-husk')        " command line mappings like ctrl right)
+  call dein#add('vim-utils/vim-husk')    " command line mappings like ctrl right)
   call dein#add('justinmk/vim-sneak')    " s<char><char> than ; or s to the next)
   call dein#add('wellle/targets.vim')    " more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
   call dein#add('mileszs/ack.vim')       " the better grep)
 
-  call dein#add('xml.vim', {'on_ft': ['xml', 'xsl']})
-  call dein#add('vim-scripts/perl-support.vim', {'on_ft': ['xml', 'xsl']}) 
-  call dein#add('kchmck/vim-coffee-script', {'on_ft': ['coffe']}) 
-  call dein#add('PProvost/vim-ps1', {'on_ft': ['ps1', 'pm1']}) 
-  call dein#add('MatchTag', {'on_ft': ['html', 'htm']})              " highlight html tag pairs)
+  call dein#add('xml.vim', 
+        \{'on_ft': ['xml']})
+  call dein#add('vim-scripts/perl-support.vim', 
+        \{'on_ft': ['perl']}) 
+  call dein#add('kchmck/vim-coffee-script', 
+        \{'on_ft': ['coffe']}) 
+  call dein#add('PProvost/vim-ps1', 
+        \{'on_ft': ['ps1']}) 
+  call dein#add('MatchTag', 
+        \{'on_ft': ['html']})              " highlight html tag pairs)
 
-  "DML syntax
-  call dein#add('mattia72/vim-abinitio', {'on_ft': ['dml']}) 
+ "DML syntax
+  call dein#add('mattia72/vim-abinitio' , 
+        \{ 'on_ft': ['abinitio' ] }) 
 
-  " colors
-  call dein#add('sjl/badwolf')
-  call dein#add('dsolstad/vim-wombat256i')
-  call dein#add('bronzehedwick/impactjs-colorscheme')
-  call dein#add('altercation/vim-colors-solarized')
-  call dein#add('tomasr/molokai')
-  call dein#add('jnurmine/Zenburn')
-
-  "if !has("gui_running")
-    "deinDisable vim-airline
-  "endif
+ " colors
+  call dein#add('sjl/badwolf',
+        \{'script_type': 'color'}) 
+  call dein#add('dsolstad/vim-wombat256i',
+        \{'script_type': 'color'}) 
+  call dein#add('bronzehedwick/impactjs-colorscheme',
+        \{'script_type': 'color'}) 
+  call dein#add('altercation/vim-colors-solarized',
+        \{'script_type': 'color'}) 
+  call dein#add('tomasr/molokai',
+        \{'script_type': 'color'}) 
+  call dein#add('jnurmine/Zenburn',
+        \{'script_type': 'color'}) 
 
   call dein#end()
-  call dein#save_state()
+  "call dein#save_state()
 endif
 
 filetype plugin indent on         " Required!
+syntax enable                     " Required! 
 
 " Update plugins
 if dein#check_install()
 	call dein#install()
 endif
-
-
 

@@ -114,8 +114,15 @@ function! s:unite_settings()
   " Play nice with supertab
   let b:SuperTabDisabled=1
   " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <TAB>   <Plug>(unite_select_next_line)
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  " Reverse sort order on S
+  nnoremap <buffer><expr> S      unite#mappings#set_current_sorters(
+	    \ empty(unite#mappings#get_current_sorters()) ?
+	    \ ['sorter_reverse'] : [])
+  " Runs "split" action by <C-s>.
+  imap <silent><buffer><expr> <C-s>     unite#do_action('split')
 endfunction
 
 if(has('lua'))

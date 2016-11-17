@@ -100,7 +100,9 @@ nnoremap <leader>bd :bdelete <cr>
 nnoremap <leader>bda :bufdo bdelete <cr>
 " Tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
+nnoremap <leader>tp :tabprevious<CR>
 nnoremap <C-tab> :tabnext<CR>
+nnoremap <leader>tn :tabnext<CR>
 noremap <C-S-tab> :tabprevious<CR>
 noremap <C-tab> :tabnext<CR>
 inoremap <C-S-tab> <esc>:tabprevious<CR>i

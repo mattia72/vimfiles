@@ -9,6 +9,8 @@ options     head
   # Created:       ${4:`strftime("%d %b %Y")`}
   # Project Repo:  ${5:https://github.com/`g:snippet_author`/}${6:repo_name}
   #=============================================================================
+  #set -x #Print commands and their arguments as they are executed.
+  set -u #Treat unset variables as an error when substituting.
 
   ${0}
 
@@ -22,23 +24,27 @@ options     head
 snippet     help
 abbr        usage 
 options     head
+  source "${0%/*}/my-lib.sh"
+
   show_help()
   {
   cat << EOF
-  Usage: ${0##*/} [OPTIONS] 
+
+  ${bldwht}Usage:${txtrst} ${0##*/} [OPTIONS] 
 
     This script ${1:description}
 
-    Options:
+    ${bldwht}Options:${txtrst}
       -h           Display this help and exit
       -n           Noop mode. Performs a trial run with no changes made    
       -v           Verbose mode. Can be used multiple times for increased verbosity
 
-    Examples:
+    ${bldwht}Examples:${txtrst}
     <todo>
 
   EOF
   }
+
 
 snippet     getopts
 abbr        option handling
