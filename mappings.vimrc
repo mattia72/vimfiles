@@ -42,7 +42,7 @@ nnoremap <leader>dn ]c
 nnoremap <leader>sp [s
 nnoremap <leader>sn ]s
 " Fast editing of the vimrc
-noremap <leader>e :tabnew! ~\.vim\vimrc<cr>
+noremap <leader>e :tabnew! ~/.vim/vimrc<cr>
 " jump to tag
 nnoremap <leader>j <C-]>
 " find all word under cursor in the current directory
@@ -54,13 +54,15 @@ vnoremap <leader>fA y<ESC>:vimgrep '<C-R>0' *.*<bar>copen<Left><Left><Left><Left
 " search replace selected whole word
 nnoremap <leader>srw <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
 " search replace selected word
+nnoremap <leader>srl <ESC>:%s/.*<C-R><C-W>.*//g<Left><Left><BackSpace>/
+" search replace selected word
 nnoremap <leader>sr <ESC>:%s/<C-R><C-W>//g<Left><Left><BackSpace>/
 " search replace selected
 vnoremap <leader>sr y<ESC>:%s/<C-R>0//g<Left><Left><BackSpace>/
 " highlight selected
 vnoremap <leader>sh y<ESC>:match Error /<C-R>0/ 
 "reload syntax
-nnoremap <leader>sy :syn on
+nnoremap <leader>sy :syn off<CR>:syn on<CR>
 " habit: edit for other editors
 nnoremap <leader>eo :set tw=0 wrap linebreak
 " Clear search highlight

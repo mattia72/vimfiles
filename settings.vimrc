@@ -58,12 +58,13 @@ set wildmenu
 set wildmode=full
 
 "-------------------------------------------------------------------------------
-" Jump to file
+" Jump or find file
 "-------------------------------------------------------------------------------
 
 set isfname+=32,38 " add space and '&' to filename chars
 set autochdir "auto switch to the current file dir
 set path+=.  " path to use gf - jump to file.
+set path+=**  " path to use by :find anything reqursive
 "let &cdpath = ',' . substitute(substitute($CDPATH, '[, ]', '\\\0', 'g'), ':', ',', 'g')
 "set cdpath+=.  " path to use gf - jump to file.
 set suffixesadd=.pm,.pl

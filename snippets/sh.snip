@@ -22,7 +22,7 @@ options     head
   set -u #Treat unset variables as an error when substituting.
  
 snippet     help
-abbr        usage 
+abbr        usage
 options     head
   source "${0%/*}/my-lib.sh"
 
@@ -51,16 +51,19 @@ abbr        option handling
 options     head
   ${2}=""
   verbose=""
+  noop=0
 
   OPTIND=1 
-  while getopts ":hv${1:option}:" opt; do
+  while getopts ":hvn${1:option}:" opt; do
     case "$opt" in
       h) show_help
         exit 0 ;;
       v) verbose+="v" 
         ;;
+      n) noop=1
+        ;;
      ${1}) ${2:parameter}=$OPTARG 
-        ;;        
+        ;;
       ?) echo "Error: invalid option - $OPTARG"
         show_help
         exit 1 ;;
@@ -76,3 +79,44 @@ options     head
   for ${1:elem} in "${${2:array}[@]}"; do
     ${0:TARGET}
   done
+
+snippet     if(
+abbr        if (( condition )) else
+options     head
+  if ((${1:condition})); then
+    ${0:TARGET}
+  else
+  fi
+
+snippet     if[[
+abbr        if [[ condition ]] else
+options     head
+  if [[${1:condition}]]; then
+    ${0:TARGET}
+  else
+  fi
+
+snippet     if[
+abbr        if [ condition ] else
+options     head
+  if [${1:condition}]; then
+    ${0:TARGET}
+  else
+  fi
+
+snippet     while
+abbr        while loop
+options     head
+  while ${1:condition}; do
+    ${0:TARGET}
+  done
+
+snippet     case
+abbr        case
+options     head
+    case "${1:expression}" in
+     ${2:value}) ${0:TARGET}
+        ;;
+      *) echo "Error: "
+        exit 1 ;;
+    esac

@@ -5,6 +5,8 @@
 
 " -------------------------------------------------------------------------------
 "  dein
+"  :Dein check-update # doesn't work
+"  :Dein update       # works :)
 "-------------------------------------------------------------------------------
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim/
@@ -23,12 +25,15 @@ if dein#load_state(expand('~/.vim/bundle/'))
   " MinGW install is needed!!!
 
   "check ok
-  call dein#add('Shougo/vimproc.vim' , { 'build' : 'tools\\update-dll-mingw.bat' })
-        "\     'windows' : 'tools\\update-dll-mingw', " needs mingw2-make!
-        "\     'cygwin' : 'make -f make_cygwin.mak',
-        "\     'mac' : 'make -f make_mac.mak',
-        "\     'linux' : 'make',
-        "\     'unix' : 'gmake',
+  call dein#add('Shougo/vimproc.vim' , {
+    \ 'build' : {
+    \     'windows' : 'tools\\update-dll-mingw',
+    \     'cygwin' : 'make -f make_cygwin.mak',
+    \     'mac' : 'make',
+    \     'linux' : 'make',
+    \     'unix' : 'gmake'
+    \    }
+    \ })
 
   call dein#add('Shougo/unite.vim')
   "call dein#add('Shougo/vimshell.vim')   " shell in a Vim window?
@@ -55,18 +60,30 @@ if dein#load_state(expand('~/.vim/bundle/'))
   call dein#add('tpope/vim-unimpaired')
   call dein#add('tpope/vim-abolish')
   call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-fugitive')    " git wrapper
+  call dein#add('tpope/vim-fugitive',    
+        \{'on_cmd': 'Git'})                  " git wrapper
+  call dein#add('tpope/vim-obsession')
 
   call dein#add('Lokaltog/vim-easymotion')
-  call dein#add('kshenoy/vim-signature') " toggle, display and navigate marks)
+  call dein#add('kshenoy/vim-signature')     " toggle, display and navigate marks)
+
+  call dein#add('dhruvasagar/vim-table-mode', 
+        \{ 'on_cmd' : 'Tableize' })          " creating tables 
+  call dein#add('godlygeek/tabular',     
+        \{ 'on_cmd' : 'Tabularize' })        " creating tables
+
+  call dein#add('zirrostig/vim-schlepp')     " block move 
 
   call dein#add('kien/rainbow_parentheses.vim')
   call dein#add('Konfekt/FastFold')      " it updates folding only if necessary
   call dein#add('kopischke/vim-stay')    " automated view creation 
   call dein#add('Raimondi/delimitMate')  " this plugin provides automatic closing of quotes)
+  call dein#add('tommcdo/vim-exchange')  " exchange text by operator cx
 
   call dein#add('xolox/vim-shell')       "Maximze, Fullscreen (F11)...
   call dein#add('xolox/vim-misc')
+  call dein#add('xolox/vim-reload')
+  "
   "error: after save + quit vim process remains in processlist
   "call dein#add('xolox/vim-easytags')    "Automated tag generation and syntax highlighting in Vim
 

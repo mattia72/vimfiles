@@ -494,6 +494,12 @@ Usefull plugins, I'm using recently:
   |matchit| 
     jumps to matching word with % 
 
+  |exchange| 
+    exchange texts by operator cx or {visual}X
+
+  |targets|
+    more text objects. ci) works outer the (...) block too.
+
   |neocomplete| 
     is the next generation auto completion framework
     <C-n> in insert mode opens the neocomplete window.
