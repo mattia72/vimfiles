@@ -19,7 +19,7 @@ if dein#load_state(expand('~/.vim/bundle/'))
   call dein#add('Shougo/dein.vim', {'rtp': ''})
 
   call dein#add('haya14busa/dein-command.vim')
-  call dein#add('L9')
+  call dein#add('vim-scripts/L9')
 
   " So Vimproc build calls: mingw32-make -f make_mingw32.mak 
   " MinGW install is needed!!!
@@ -88,14 +88,14 @@ if dein#load_state(expand('~/.vim/bundle/'))
   "call dein#add('xolox/vim-easytags')    "Automated tag generation and syntax highlighting in Vim
 
   "check ok
-  call dein#add('taglist.vim')           "TList browser
+  call dein#add('vim-scripts/taglist.vim')           "TList browser
 
   call dein#add('vim-utils/vim-husk')    " command line mappings like ctrl right)
   call dein#add('justinmk/vim-sneak')    " s<char><char> than ; or s to the next)
   call dein#add('wellle/targets.vim')    " more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
   call dein#add('mileszs/ack.vim')       " the better grep)
 
-  call dein#add('xml.vim', 
+  call dein#add('vim-scripts/xml.vim', 
         \{'on_ft': ['xml']})
   call dein#add('vim-scripts/perl-support.vim', 
         \{'on_ft': ['perl']}) 
@@ -103,7 +103,7 @@ if dein#load_state(expand('~/.vim/bundle/'))
         \{'on_ft': ['coffe']}) 
   call dein#add('PProvost/vim-ps1', 
         \{'on_ft': ['ps1']}) 
-  call dein#add('MatchTag', 
+  call dein#add('vim-scripts/MatchTag', 
         \{'on_ft': ['html']})              " highlight html tag pairs)
 
  "DML syntax
