@@ -1,9 +1,12 @@
 # vimfiles
 This is a collection of my vim setting files.
 
-## Vim download
-With lua support
-https://tuxproject.de/projects/vim/
+## Requirements 
+Neocomplete requires Vim 7.3.885+ compiled with if_lua. If  `:echo has("lua")` returns 1, then you're done; 
+Otherwise download Vim with lua support from 
+https://tuxproject.de/projects/vim/ or from other sources listed here: https://github.com/Shougo/neocomplete.vim
+Vim build may not include the Lua DLL. In that case, download [lua52.dll](http://joedf.ahkscript.org/LuaBuilds/) and put the file in the same directory as gvim.exe.
+
 
 ## Usage
 1. Clone this repository to your .vim directory
