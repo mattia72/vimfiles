@@ -178,6 +178,7 @@ nnoremap <leader>uo :<C-u>Unite -buffer-name=outline -start-insert outline<cr>
 nnoremap <leader>uy :<C-u>Unite -buffer-name=yank    history/yank<cr>
 " buffer explorer
 nnoremap <leader>ue :<C-u>Unite -buffer-name=buffer  buffer<cr>
+nnoremap <leader>ub :<C-u>Unite -buffer-name=buffer  buffer<cr>
 " browse for defined mappings
 nnoremap <leader>um :<C-u>Unite -buffer-name=mapping  mapping<CR>
 " browse messages
