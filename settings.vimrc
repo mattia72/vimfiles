@@ -96,7 +96,9 @@ if has('gui_running')
   set guicursor+=n-v-c:blinkon0 "no blinking on normal, visual, command mode
   set guicursor+=i:blinkwait10
 else
-  set term=xterm
+  if !has('nvim') 
+    set term=xterm
+  endif
   set t_Co=256
   "repair backspace: 
   "Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
