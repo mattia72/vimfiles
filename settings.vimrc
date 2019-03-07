@@ -87,7 +87,7 @@ if has('mouse')
   set mouse=a
 endif
 
-if has('gui_running')
+if has('gui_running') || has('nvim')
   set winaltkeys=menu " alt jumps to menu
   set lines=40 columns=130 " set window size
 
@@ -118,7 +118,7 @@ if &t_Co > 2 || has('gui_running')
   syntax on
 endif
 
-if has('gui_running')
+if has('gui_running') || has("nvim")
   set cursorcolumn nocursorline "Highlight only the screen column of the cursor
 else
   set nocursorcolumn nocursorline

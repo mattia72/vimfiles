@@ -36,11 +36,11 @@ if dein#load_state(expand('~/.vim/bundle/'))
 "    \    }
 "    \ })
 
-  if has('python3') 
-    call dein#add('Shougo/denite.nvim')
-  else
-    call dein#add('Shougo/unite.vim')
-  endif
+  call dein#add('Shougo/denite.nvim',
+        \{ 'if' : 'has("nvim")' })       
+  call dein#add('Shougo/unite.vim',
+        \{ 'if' : '!has("nvim")' })     " status line
+
   "call dein#add('Shougo/vimshell.vim')       " shell in a Vim window?
   call dein#add('Shougo/neomru.vim')          " most recent file list for Unit
   call dein#add('Shougo/unite-outline')
@@ -53,8 +53,8 @@ if dein#load_state(expand('~/.vim/bundle/'))
 
   call dein#add('chrisbra/histwin.vim')       " browse undo-tree
 
-  call dein#add('bling/vim-airline' , 
-        \{ 'if' : 'has("gui_running")' })     " status line
+  call dein#add('bling/vim-airline', 
+         \{ 'if' : 'has("gui_running") || has("nvim")' })     " status line
 
   " lazy load on command executed
   call dein#add('scrooloose/nerdtree',
@@ -182,11 +182,15 @@ let g:xml_syntax_folding = 1
 
 " Airline
 set encoding=utf8
-if !has('nvim')
+if has('nvim')
+  "GuiFont! Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
+  "GuiFont DejaVu\ Sans \Mono:s12
+  "GuiFont Consolas\ for\ Powerline\ FixedD:h11:cEASTEUROPE
+else
   set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
+  "set guifont=DejaVu\ Sans \Mono:s12
+  "set guifont=Consolas\ for\ Powerline\ FixedD:h11:cEASTEUROPE
 endif
-"set guifont=DejaVu\ Sans \Mono:s12
-"set guifont=Consolas\ for\ Powerline\ FixedD:h11:cEASTEUROPE
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -195,18 +199,18 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_b = '%{ObsessionStatus()}'
 
 " old airline unicode symbols (new symbols uses new patched fonts!)
-"let g:airline_left_alt_sep = '»'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_left_sep = '⮀'
-"let g:airline_right_alt_sep = '«'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_right_sep = '⮂'
-let g:airline_symbols.linenr = '⭡'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_symbols.maxlinenr = '☰'
-let g:airline_symbols.readonly = '⭤'
+""let g:airline_left_alt_sep = '»'
+"let g:airline_left_alt_sep = '⮁'
+"let g:airline_left_sep = '⮀'
+""let g:airline_right_alt_sep = '«'
+"let g:airline_right_alt_sep = '⮃'
+"let g:airline_right_sep = '⮂'
+"let g:airline_symbols.linenr = '⭡'
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.whitespace = 'Ξ'
+"let g:airline_symbols.maxlinenr = '☰'
+"let g:airline_symbols.readonly = '⭤'
 
 " EasyMotion
 hi link EasyMotionTarget ErrorMsg
@@ -264,7 +268,7 @@ vnoremap Dl <Plug>SchleppDupRight
 " Unite
 let g:unite_source_history_yank_enable = 1
 
-if !has('python3')
+if !( has('python3') || has('nvim') )
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
 " Default action is open in current buffer,

@@ -36,11 +36,11 @@ if filereadable(expand("~/.vim/mappings.vimrc"))
   source ~/.vim/mappings.vimrc
 endif
 
-if !has('nvim') && filereadable(expand("~/.vim/colors.vimrc"))
+if filereadable(expand("~/.vim/colors.vimrc"))
   source ~/.vim/colors.vimrc
 endif
 
-if !has('nvim') && filereadable(expand("~/.vim/additions.vimrc"))
+if filereadable(expand("~/.vim/additions.vimrc"))
   source ~/.vim/additions.vimrc
 endif
 
