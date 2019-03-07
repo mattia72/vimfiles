@@ -53,8 +53,10 @@ if dein#load_state(expand('~/.vim/bundle/'))
 
   call dein#add('chrisbra/histwin.vim')       " browse undo-tree
 
-  call dein#add('bling/vim-airline', 
-         \{ 'if' : 'has("gui_running") || has("nvim")' })     " status line
+  "call dein#add('bling/vim-airline', 
+  "\{ 'if' : 'has("gui_running") || has("nvim")' })     " status line
+
+  call dein#add('itchyny/lightline.vim')
 
   " lazy load on command executed
   call dein#add('scrooloose/nerdtree',
@@ -198,19 +200,21 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_b = '%{ObsessionStatus()}'
 
-" old airline unicode symbols (new symbols uses new patched fonts!)
-""let g:airline_left_alt_sep = '»'
-"let g:airline_left_alt_sep = '⮁'
-"let g:airline_left_sep = '⮀'
-""let g:airline_right_alt_sep = '«'
-"let g:airline_right_alt_sep = '⮃'
-"let g:airline_right_sep = '⮂'
-"let g:airline_symbols.linenr = '⭡'
-"let g:airline_symbols.branch = '⭠'
-"let g:airline_symbols.paste = 'ρ'
-"let g:airline_symbols.whitespace = 'Ξ'
-"let g:airline_symbols.maxlinenr = '☰'
-"let g:airline_symbols.readonly = '⭤'
+if !has('nvim')
+  " old airline unicode symbols (new symbols uses new patched fonts!)
+  ""let g:airline_left_alt_sep = '»'
+  let g:airline_left_alt_sep = '⮁'
+  let g:airline_left_sep = '⮀'
+  ""let g:airline_right_alt_sep = '«'
+  let g:airline_right_alt_sep = '⮃'
+  let g:airline_right_sep = '⮂'
+  let g:airline_symbols.linenr = '⭡'
+  let g:airline_symbols.branch = '⭠'
+  let g:airline_symbols.paste = 'ρ'
+  let g:airline_symbols.whitespace = 'Ξ'
+  let g:airline_symbols.maxlinenr = '☰'
+  let g:airline_symbols.readonly = '⭤'
+endif
 
 " EasyMotion
 hi link EasyMotionTarget ErrorMsg

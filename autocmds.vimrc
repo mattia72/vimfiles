@@ -72,13 +72,7 @@ autocmd BufReadPost *
       \   exe "normal! g`\"" |
       \ endif
 
-"autocmd FileType xml NeoBundleSource xml.vim
-"autocmd FileType perl NeoBundleSource perl-support 
-"autocmd FileType coffe NeoBundleSource vim-coffe-script
-"autocmd FileType ps1 NeoBundleSource vim-ps1
-"autocmd FileType abinitio NeoBundleSource vim-abinitio
-
-if has('gui_running')
+if has('gui_running') || has('nvim')
   " set cursor color and blink
   autocmd ColorScheme * call g:MySetGuiCursorColor()
   autocmd WinEnter * call g:MySetGuiCursorColor()

@@ -22,16 +22,20 @@
 "colors impactjs-colorscheme
 "colors wombat256i
 
-if has("gui_running") || has("nvim")
-  colors my_molokai
-else
-    "set term=xterm
-    "set t_Co=256
-    "let &t_AB="\e[48;5;%dm"
-    "let &t_AF="\e[38;5;%dm"
-    "colors my_molokai "ok in dos
-    colors default "ok in dos
-endif
+
+autocmd GUIEnter * colors my_molokai
+autocmd VimEnter * colors my_molokai
+
+"if has("gui_running") " in nvim it should be placed into GuiEnter 
+  "colors my_molokai
+"else
+    ""set term=xterm
+    ""set t_Co=256
+    ""let &t_AB="\e[48;5;%dm"
+    ""let &t_AF="\e[38;5;%dm"
+    ""colors my_molokai "ok in dos
+    "colors default "ok in dos
+"endif
 
 " Show syntax highlighting groups for word under cursor: Ctrl Shift P
 function! <SID>SynStack()
