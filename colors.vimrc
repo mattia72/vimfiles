@@ -22,7 +22,7 @@
 "colors impactjs-colorscheme
 "colors wombat256i
 
-if has("gui_running")
+if has("gui_running") || has("nvim")
   colors my_molokai
 else
     "set term=xterm

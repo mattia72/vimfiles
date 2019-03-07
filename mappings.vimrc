@@ -100,6 +100,8 @@ nnoremap <leader>lq :cfirst <bar> while 1 <bar> cnext <bar> endwhile <cr>
 nnoremap <leader>bd :bdelete <cr>
 " close all buffer
 nnoremap <leader>bda :bufdo bdelete <cr>
+" next buffer
+nnoremap <leader>bn :bnext <cr>
 " Tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <leader>tp :tabprevious<CR>

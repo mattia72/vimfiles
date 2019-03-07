@@ -88,7 +88,7 @@ if has('mouse')
   set mouse=a
 endif
 
-if has('gui_running')
+if has('gui_running') || has('nvim')
   set winaltkeys=menu " alt jumps to menu
   set lines=40 columns=130 " set window size
 
@@ -97,7 +97,9 @@ if has('gui_running')
   set guicursor+=n-v-c:blinkon0 "no blinking on normal, visual, command mode
   set guicursor+=i:blinkwait10
 else
-  set term=xterm
+  if !has('nvim') 
+    set term=xterm
+  endif
   set t_Co=256
   "repair backspace: 
   "Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
@@ -117,7 +119,7 @@ if &t_Co > 2 || has('gui_running')
   syntax on
 endif
 
-if has('gui_running')
+if has('gui_running') || has("nvim")
   set cursorcolumn nocursorline "Highlight only the screen column of the cursor
 else
   set nocursorcolumn nocursorline
