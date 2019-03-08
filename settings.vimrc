@@ -101,7 +101,7 @@ else
     set term=xterm
   endif
   set t_Co=256
-  "repair backspace: 
+  "repar backspace: 
   "Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
   inoremap <C-Del> <BS>
   nnoremap <C-Del> <BS>

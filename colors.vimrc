@@ -24,6 +24,7 @@
 
 
 autocmd GUIEnter * colors my_molokai
+autocmd GUIEnter * Guifont! Ubuntu Mono for Powerline:h12:cEASTEUROPE
 autocmd VimEnter * colors my_molokai
 
 "if has("gui_running") " in nvim it should be placed into GuiEnter 

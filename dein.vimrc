@@ -8,15 +8,15 @@
 "  :Dein check-update # doesn't work
 "  :Dein update       # works :)
 "-------------------------------------------------------------------------------
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim/
-endif
+"if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim
+"endif
 
 if dein#load_state(expand('~/.vim/bundle/'))
   call dein#begin(expand('~/.vim/bundle/'))
 
   " Let dein manage dein?
-  call dein#add('Shougo/dein.vim', {'rtp': ''})
+  call dein#add('~/.vim/bundle/repos/github.com/Shougo/dein.vim')
 
   call dein#add('haya14busa/dein-command.vim')
   call dein#add('vim-scripts/L9')
@@ -37,7 +37,7 @@ if dein#load_state(expand('~/.vim/bundle/'))
 "    \ })
 
   call dein#add('Shougo/denite.nvim',
-        \{ 'if' : 'has("nvim")' })       
+        \{ 'if' : 'has("nvim")' })
   call dein#add('Shougo/unite.vim',
         \{ 'if' : '!has("nvim")' })     " status line
 
@@ -139,7 +139,7 @@ endif
 filetype plugin indent on         " Required!
 syntax enable                     " Required! 
 
-if has('vim_starting')
+"if has('vim_starting')
   " I want to install vimproc before installing any other plugins
   if dein#check_install(['vimproc.vim'])
     call dein#install(['vimproc.vim'])
@@ -147,7 +147,7 @@ if has('vim_starting')
   if dein#check_install()
     call dein#install()
   endif
-endif
+"endif
 
 "-------------------------------------------------------------------------------
 " Plugin settings
@@ -184,37 +184,43 @@ let g:xml_syntax_folding = 1
 
 " Airline
 set encoding=utf8
-if has('nvim')
-  "GuiFont! Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
-  "GuiFont DejaVu\ Sans \Mono:s12
-  "GuiFont Consolas\ for\ Powerline\ FixedD:h11:cEASTEUROPE
-else
-  set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
-  "set guifont=DejaVu\ Sans \Mono:s12
-  "set guifont=Consolas\ for\ Powerline\ FixedD:h11:cEASTEUROPE
-endif
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_section_b = '%{ObsessionStatus()}'
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-if !has('nvim')
-  " old airline unicode symbols (new symbols uses new patched fonts!)
-  ""let g:airline_left_alt_sep = '»'
-  let g:airline_left_alt_sep = '⮁'
-  let g:airline_left_sep = '⮀'
-  ""let g:airline_right_alt_sep = '«'
-  let g:airline_right_alt_sep = '⮃'
-  let g:airline_right_sep = '⮂'
-  let g:airline_symbols.linenr = '⭡'
-  let g:airline_symbols.branch = '⭠'
-  let g:airline_symbols.paste = 'ρ'
-  let g:airline_symbols.whitespace = 'Ξ'
-  let g:airline_symbols.maxlinenr = '☰'
-  let g:airline_symbols.readonly = '⭤'
-endif
+function! SetAirLine()
+
+  if has('nvim')
+    "Guifont Ubuntu Mono for Powerline:h12:cEASTEUROPE
+    "GuiFont DejaVu\ Sans \Mono:s12
+    "GuiFont Consolas\ for\ Powerline\ FixedD:h11:cEASTEUROPE
+  else
+    set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
+    "set guifont=DejaVu\ Sans \Mono:s12
+    "set guifont=Consolas\ for\ Powerline\ FixedD:h11:cEASTEUROPE
+  endif
+
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_section_b = '%{ObsessionStatus()}'
+
+  if !has('nvim')
+    " old airline unicode symbols (new symbols uses new patched fonts!)
+    ""let g:airline_left_alt_sep = '»'
+    let g:airline_left_alt_sep = '⮁'
+    let g:airline_left_sep = '⮀'
+    ""let g:airline_right_alt_sep = '«'
+    let g:airline_right_alt_sep = '⮃'
+    let g:airline_right_sep = '⮂'
+    let g:airline_symbols.linenr = '⭡'
+    let g:airline_symbols.branch = '⭠'
+    let g:airline_symbols.paste = 'ρ'
+    let g:airline_symbols.whitespace = 'Ξ'
+    let g:airline_symbols.maxlinenr = '☰'
+    let g:airline_symbols.readonly = '⭤'
+  endif
+endfunction
 
 " EasyMotion
 hi link EasyMotionTarget ErrorMsg
