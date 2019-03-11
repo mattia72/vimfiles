@@ -25,8 +25,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neocomplete.vim'     " a fast complete for lua supported vim
 Plug 'chrisbra/histwin.vim'       " browse undo-tree
 
-"Plug 'bling/vim-airline', { 'if' : 'has("gui_running") || has("nvim")' })     " status line
-
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'
 
@@ -54,12 +52,7 @@ Plug 'kopischke/vim-stay'        " automated view creation
 Plug 'Raimondi/delimitMate'      " this plugin provides automatic closing of quotes
 Plug 'tommcdo/vim-exchange'      " exchange text by operator cx
 
-Plug 'xolox/vim-shell'           " Maximze, Fullscreen (F11)...
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-reload'
-"
-"Plug 'xolox/vim-easytags'       " Project dead :( Automated tag generation and syntax highlighting in Vim
-
+Plug 'ludovicchabant/vim-gutentags', Cond(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
 Plug 'vim-scripts/taglist.vim'   " TList browser
 
 Plug 'vim-utils/vim-husk'        " command line mappings like ctrl right
@@ -93,6 +86,9 @@ call plug#end()
 "switch off fugitive
 let g:loaded_fugitive = 1
 
+"set statusline+=%{gutentags#statusline()}                                                                                :
+let g:gutentags_cache_dir = '~/.vim/gutentags'    
+let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js']
 
 " This is for taglist
 let Tlist_Inc_Winwidth = 0
@@ -157,21 +153,25 @@ if has('conceal')
 endif
 
 
-if has('python3')
+if has('python3') " exists('g:loaded_denite') doesn't work here :(
   " Ctrl-t/g up/down in the list Ctrl-o->normale mode
 
   call denite#custom#map('normal', '<C-a>',
         \ '<denite:multiple_mappings:denite:toggle_select_all'.
         \ ',denite:do_action:quickfix>', 'noremap')
-  call denite#custom#var('grep', 'command', ['rg'])
-  call denite#custom#var('grep', 'default_opts',
-        \ ['--hidden', '--vimgrep', '--smart-case'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
+
+  if (executable('rg'))
+    call denite#custom#var('grep', 'command', ['rg'])
+    call denite#custom#var('grep', 'default_opts',
+          \ ['--hidden', '--vimgrep', '--smart-case'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+    call denite#custom#var('grep', 'separator', ['--'])
+    call denite#custom#var('grep', 'final_opts', [])
+  endif
+
   nnoremap <leader>dg :<C-u>DeniteCursorWord -buffer-name=grep  grep:. <cr>
-  vnoremap <leader>dg :<C-u>Denite -buffer-name=grep  grep::: " grep operator stdy
+  "vnoremap <leader>dg :<C-u>Denite -buffer-name=grep  grep::: " grep operator stdy
   " recursive file search (requres 'ag' or 'find' (not in windows))
   nnoremap <leader>df :<C-u>Denite -buffer-name=files   file/rec  <cr>
   " most recent file list
@@ -189,7 +189,7 @@ if has('python3')
   nnoremap <leader>dm :<C-u>Denite -buffer-name=message output:message<CR>
   nnoremap <leader>dh :<C-u>Denite -buffer-name=help help <CR>
 
-else " Unite if !has('python3') 
+else " if exists('g:loaded_unite')
 
   let g:unite_source_history_yank_enable = 1
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -280,7 +280,8 @@ function! MySetLightLine()
 		    \ },
 		    \'component_function': {
 		    \   'readonly': 'LightlineReadonly',
-		    \   'fugitive': 'LightlineFugitive'
+		    \   'fugitive': 'LightlineFugitive',
+        \   'gutentags': '%{gutentags#statusline("[Generating...]")}'
 		    \ }
 	      \}
 endfunction

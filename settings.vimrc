@@ -35,7 +35,13 @@ set incsearch       " Find the next match as we type the search
 set hlsearch        " Highlight searches by default
 set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
-set grepprg=internal
+
+if (executable('rg'))
+  set grepprg=rg
+        "\ --vimgrep\ --no-heading\ --smart-case
+else
+  set grepprg=internal
+endif
 
 "-------------------------------------------------------------------------------
 " Editing

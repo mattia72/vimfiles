@@ -46,6 +46,9 @@ if has("nvim")                 " tnoremap stands for terminal mode mappings in n
   "tnoremap <leader>w <C-\><C-N><C-w>
 endif
 
+nnoremap <Leader>gr <ESC>:silent grep! --vimgrep --no-heading --smart-case '' .<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>om :CommandToTab messages
+
 " Diff this with other file
 nnoremap <leader>ds :vertical diffsplit 
 " Diff this with other 
@@ -60,12 +63,20 @@ nnoremap <leader>sn ]s
 noremap <leader>e :tabnew! ~/.vim/vimrc<cr>
 " jump to tag
 nnoremap <leader>j <C-]>
+
 " find all word under cursor in the current directory
-nnoremap <leader>fa <ESC>:vimgrep '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left>  
-nnoremap <leader>fA <ESC>:vimgrep '<C-R><C-W>' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
+nnoremap <leader>fa <ESC>:grep --vimgrep --no-heading --smart-case '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left>  
+nnoremap <leader>fA <ESC>:grep --vimgrep --no-heading --smart-case '<C-R><C-W>' .<bar>copen<Left><Left><Left><Left><Left><Left>   
 " find all selected
-vnoremap <leader>fa y<ESC>:vimgrep '<C-R>0' %<bar>copen<Left><Left><Left><Left><Left><Left>  
-vnoremap <leader>fA y<ESC>:vimgrep '<C-R>0' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
+vnoremap <leader>fa y<ESC>:grep '<C-R>0' %<bar>copen<Left><Left><Left><Left><Left><Left>  
+vnoremap <leader>fA y<ESC>:grep '<C-R>0' .<bar>copen<Left><Left><Left><Left><Left><Left>   
+
+" nnoremap <leader>fa <ESC>:vimgrep '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left>  
+" nnoremap <leader>fA <ESC>:vimgrep '<C-R><C-W>' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
+" " find all selected
+" vnoremap <leader>fa y<ESC>:vimgrep '<C-R>0' %<bar>copen<Left><Left><Left><Left><Left><Left>  
+" vnoremap <leader>fA y<ESC>:vimgrep '<C-R>0' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
+
 " search replace selected whole word
 nnoremap <leader>srw <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
 " search replace selected word
