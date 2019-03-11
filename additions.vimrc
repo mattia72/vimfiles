@@ -1,8 +1,8 @@
 
-"====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
-
-exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-set list
+let g:verbose = 0
+function! g:VerboseEchoMsg(msg)
+  if g:verbose | echom a:msg | endif
+endfunc
 
 "=====[ Highlight matches when jumping to next ]=============
 
@@ -11,7 +11,7 @@ nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
 
 
-" EITHER blink the line containing the match...
+" blink the line containing the match...
 function! HLNext (blinktime)
   set invcursorline
   redraw
@@ -20,62 +20,12 @@ function! HLNext (blinktime)
   redraw
 endfunction
 
-"" OR ELSE ring the match in red...
-"function! HLNext (blinktime)
-  "highlight RedOnRed ctermfg=red ctermbg=red
-  "let [bufnum, lnum, col, off] = getpos('.')
-  "let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-  "echo matchlen
-  "let ring_pat = (lnum > 1 ? '\%'.(lnum-1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.\|' : '')
-        "\ . '\%'.lnum.'l\%>'.max([col-4,1]) .'v\%<'.col.'v.'
-        "\ . '\|'
-        "\ . '\%'.lnum.'l\%>'.max([col+matchlen-1,1]) .'v\%<'.(col+matchlen+3).'v.'
-        "\ . '\|'
-        "\ . '\%'.(lnum+1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.'
-  "let ring = matchadd('RedOnRed', ring_pat, 101)
-  "redraw
-  "exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-  "call matchdelete(ring)
-  "redraw
-"endfunction
-
-"" OR ELSE briefly hide everything except the match...
-"function! HLNext (blinktime)
-  "highlight BlackOnBlack ctermfg=black ctermbg=black
-  "let [bufnum, lnum, col, off] = getpos('.')
-  "let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-  "let hide_pat = '\%<'.lnum.'l.'
-        "\ . '\|'
-        "\ . '\%'.lnum.'l\%<'.col.'v.'
-        "\ . '\|'
-        "\ . '\%'.lnum.'l\%>'.(col+matchlen-1).'v.'
-        "\ . '\|'
-        "\ . '\%>'.lnum.'l.'
-  "let ring = matchadd('BlackOnBlack', hide_pat, 101)
-  "redraw
-  "exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-  "call matchdelete(ring)
-  "redraw
-"endfunction
-
-"" OR ELSE just highlight the match in red...
-"function! HLNext (blinktime)
-  "let [bufnum, lnum, col, off] = getpos('.')
-  "let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-  "let target_pat = '\c\%#\%('.@/.'\)'
-  "let ring = matchadd('WhiteOnRed', target_pat, 101)
-  "redraw
-  "exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-  "call matchdelete(ring)
-  "redraw
-"endfunction
-
-
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
-
-exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~" 
-",eol:$"
-set list
+function! SetWhiteSpacesVisible()
+  exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~" 
+  ",eol:$"
+  set list
+endfunction
 
 "====[ Function to permanently delete views created by 'mkview' ]======
 
@@ -93,6 +43,24 @@ function! MyDeleteView()
   call delete(path)
   echo "Deleted: ".path
 endfunction
+
+function! CommandToTab(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  if empty(message)
+    echoerr "no output"
+  else
+    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+    tabnew
+    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+    silent put=message
+  endif
+endfunction
+
+" Example :CommandToTab highlight
+" Example :CommandToTab verbose map
+command! -nargs=+ -complete=command CommandToTab call CommandToTab(<q-args>)
 
 " # Command Delview (and it's abbreviation 'delview')
 command! Delview call MyDeleteView()

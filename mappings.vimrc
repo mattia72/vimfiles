@@ -27,17 +27,32 @@ let g:mapleader = ","
 nnoremap <leader>cp :let @+ = expand("%:p")<cr>
 nnoremap <leader>cf :let @+ = expand("%")<cr>
 
+" simple buffer explorer, after :b works tab completition 
+nnoremap <leader>b :ls<cr>:b<space>
+" same as above with split
+nnoremap <leader>vb :ls<cr>:vertical sb<space>
+nnoremap <leader>hb :ls<cr>:sb<space>
+
 " Fast saving
 "nnoremap <leader>s :w!<cr>
 " Window operation
 nnoremap <leader>w <C-W>
+if has("nvim")                 " tnoremap stands for terminal mode mappings in neovim
+  tnoremap <Esc> <C-\><C-n>   
+  tnoremap <c-h> <C-\><C-N><C-w>h
+  tnoremap <c-j> <C-\><C-N><C-w>j
+  tnoremap <c-k> <C-\><C-N><C-w>k
+  tnoremap <c-j> <C-\><C-N><C-w>j
+  "tnoremap <leader>w <C-\><C-N><C-w>
+endif
+
 " Diff this with other file
 nnoremap <leader>ds :vertical diffsplit 
 " Diff this with other 
 nnoremap <leader>dt :diffthis<CR>:vnew<CR>
 " Diff jumps
-nnoremap <leader>dp [c
-nnoremap <leader>dn ]c
+nnoremap <leader>dk [c
+nnoremap <leader>dj ]c
 " Spell jumps: next previous error
 nnoremap <leader>sp [s
 nnoremap <leader>sn ]s

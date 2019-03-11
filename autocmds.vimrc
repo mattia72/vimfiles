@@ -9,21 +9,6 @@
 " Automatically executed commands
 "-------------------------------------------------------------------------------
 
-" set cursor color and blink
-function! g:MySetGuiCursorColor()
-  if has('gui_running')
-    hi Cursor guifg=black guibg=white
-    hi iCursor guifg=black guibg=green
-  endif
-endfunction
-
-function! g:MySetTerminalCursorColor(cursor_color)
-  if !has('gui_running')
-    " Cursor color for mintty
-    :!echo -ne "\e]12;".a:cursor_color."\x07"
-  endif
-endfunction
-
 " Only do this part when compiled with support for autocommands.
 if !has("autocmd")
   finish
@@ -48,19 +33,25 @@ function! g:MySetRuler()
   "endif
 endfunction
 
+function! g:MySetTerminalCursorColor(cursor_color)
+  " Cursor color for mintty
+  :!echo -ne "\e]12;".a:cursor_color."\x07"
+endfunction
+
 function! g:MyMakeView()
   " Put these in an autocmd group, so that we can delete them easily.
   augroup MyView
-    autocmd!
-    " save/load view
+    autocmd!  " save/load view
     autocmd BufWinLeave ?* silent! mkview
     autocmd BufWinEnter ?* silent! loadview "silent! no error message if there is no file name
-
   augroup END
-endfunction
+endfunctio
 
 " When vimrc is edited, reload it
-autocmd BufWritePost *vimrc source $MYVIMRC
+augroup reread_vimrc
+  au!
+  au BufWritePost *vimrc source $MYVIMRC 
+augroup END
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -72,19 +63,11 @@ autocmd BufReadPost *
       \   exe "normal! g`\"" |
       \ endif
 
-if has('gui_running') || has('nvim')
-  " set cursor color and blink
-  autocmd ColorScheme * call g:MySetGuiCursorColor()
-  autocmd WinEnter * call g:MySetGuiCursorColor()
-else
-  "autocmd InsertEnter * call g:MySetTerminalCursorColor('#00FF00')
-  "autocmd InsertLeave * call g:MySetTerminalCursorColor('#0000FF')
-endif
+"autocmd InsertEnter * call g:MySetTerminalCursorColor('#00FF00')
+"autocmd InsertLeave * call g:MySetTerminalCursorColor('#0000FF')
 
 call MySetRuler()
 "call MyMakeView() " using kopischke/vim-stay instead
-
-" if has("autocmd") !!!
 
 " vim:tw=78:ts=4:ft=vim:norl:
 

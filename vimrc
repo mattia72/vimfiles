@@ -7,39 +7,41 @@
 "=============================================================================
 
 " Hint: create ~/_vimrc with this content 'source <path_to_this_file>'
+"       create ~/.vim/nvim/init.vim with this content 'source <path_to_this_file>'
+"       create ~/.vim/nvim/ginit.vim with this content 'source <path to gui_settings.vimrc>'
 
-" Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
 
-if filereadable(expand("~/.vim/dein.vimrc"))
-  source ~/.vim/dein.vimrc
-endif
-
-"obsolete: dein is used instead of neobundle
-"if filereadable(expand("~/.vim/neobundle.vimrc"))
-  "source ~/.vim/neobundle.vimrc
-"endif
-
 if filereadable(expand("~/.vim/settings.vimrc"))
   source ~/.vim/settings.vimrc
-endif
-
-if filereadable(expand("~/.vim/autocmds.vimrc"))
-  source ~/.vim/autocmds.vimrc
 endif
 
 if filereadable(expand("~/.vim/mappings.vimrc"))
   source ~/.vim/mappings.vimrc
 endif
 
+if filereadable(expand("~/.vim/autocmds.vimrc"))
+  source ~/.vim/autocmds.vimrc
+endif
+
+if filereadable(expand("~/.vim/vimplug.vimrc"))
+  source ~/.vim/vimplug.vimrc
+endif
+
 if filereadable(expand("~/.vim/colors.vimrc"))
   source ~/.vim/colors.vimrc
 endif
 
+" gui_running is 0 in neovim so we source gui settings from ginit.vim
+if has('gui_running') && !has('nvim') && filereadable(expand("~/.vim/gui_settings.vimrc"))
+  source ~/.vim/gui_settings.vimrc
+endif
+
+" for vim syntax plugin development and view handling etc.
 if filereadable(expand("~/.vim/additions.vimrc"))
   source ~/.vim/additions.vimrc
 endif

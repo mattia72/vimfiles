@@ -88,34 +88,25 @@ if has('mouse')
   set mouse=a
 endif
 
-if has('gui_running') || has('nvim')
-  set winaltkeys=menu " alt jumps to menu
-  set lines=40 columns=130 " set window size
-
-  set guicursor=
-  set guicursor+=i:ver100-iCursor
-  set guicursor+=n-v-c:blinkon0 "no blinking on normal, visual, command mode
-  set guicursor+=i:blinkwait10
-else
-  if !has('nvim') 
-    set term=xterm
-  endif
-  set t_Co=256
-  "repar backspace: 
-  "Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
-  inoremap <C-Del> <BS>
-  nnoremap <C-Del> <BS>
-
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
-  let &t_ti.="\e[1 q" " enter termcap mode
-  let &t_SI.="\e[1 q" " start insert mode
-  let &t_EI.="\e[4 q" " end insert mode
-  let &t_te.="\e[0 q" " out of termcap mode
+if !(has('gui_running') || has('nvim'))
+  set term=xterm
 endif
+set t_Co=256
+
+"repar backspace: 
+"Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
+inoremap <C-Del> <BS>
+nnoremap <C-Del> <BS>
+
+let &t_AB="\e[48;5;%dm"
+let &t_AF="\e[38;5;%dm"
+let &t_ti.="\e[1 q" " enter termcap mode
+let &t_SI.="\e[1 q" " start insert mode
+let &t_EI.="\e[4 q" " end insert mode
+let &t_te.="\e[0 q" " out of termcap mode
 
 " Switch syntax highlighting on, when the terminal has colors
-if &t_Co > 2 || has('gui_running')
+if &t_Co > 2 
   syntax on
 endif
 
