@@ -26,7 +26,6 @@ set indentkeys=0{,0},:,0#,!^F,o,O,e,=end,=else,=cat,=fina,=END,0\\ "keys that tr
 set copyindent "Copy whitespace for indenting from previous line (local to buffer)
 set preserveindent "Preserve kind of whitespace when changing indent (local to buffer)
 
-
 "-------------------------------------------------------------------------------
 " Searching
 "-------------------------------------------------------------------------------
@@ -36,12 +35,14 @@ set hlsearch        " Highlight searches by default
 set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
-if (executable('rg'))
-  set grepprg=rg
-        "\ --vimgrep\ --no-heading\ --smart-case
+"echom 'grepprg='.&grepprg
+if (executable('rg') && &grepprg =~ "^findstr")
+  " it fails on second load so we set it only if it's default on windows 
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case 
 else
   set grepprg=internal
 endif
+"echom 'grepprg='.&grepprg
 
 "-------------------------------------------------------------------------------
 " Editing

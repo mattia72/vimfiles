@@ -156,6 +156,7 @@ endif
 if has('python3') " exists('g:loaded_denite') doesn't work here :(
   " Ctrl-t/g up/down in the list Ctrl-o->normale mode
 
+  " C-a put result to quickfix window
   call denite#custom#map('normal', '<C-a>',
         \ '<denite:multiple_mappings:denite:toggle_select_all'.
         \ ',denite:do_action:quickfix>', 'noremap')
@@ -170,8 +171,8 @@ if has('python3') " exists('g:loaded_denite') doesn't work here :(
     call denite#custom#var('grep', 'final_opts', [])
   endif
 
-  nnoremap <leader>dg :<C-u>DeniteCursorWord -buffer-name=grep  grep:. <cr>
-  "vnoremap <leader>dg :<C-u>Denite -buffer-name=grep  grep::: " grep operator stdy
+  " grep in current directory
+  nnoremap <leader>dg :<C-u>Denite -buffer-name=grep  grep <cr>
   " recursive file search (requres 'ag' or 'find' (not in windows))
   nnoremap <leader>df :<C-u>Denite -buffer-name=files   file/rec  <cr>
   " most recent file list

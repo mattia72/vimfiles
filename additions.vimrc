@@ -67,3 +67,7 @@ command! Delview call MyDeleteView()
 " Lower-case user commands: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
 cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delview')<CR>
 
+"grep operator from "Learn Vim script the hard way"
+"
+nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " *.*"<cr>:copen<cr>
+
