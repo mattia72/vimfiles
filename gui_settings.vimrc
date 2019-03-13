@@ -6,7 +6,7 @@ if has('nvim')
 endif
 
 set winaltkeys=menu " alt jumps to menu
-set lines=40 columns=130 " set window size
+"set lines=40 columns=130 " set window size
 
 set guicursor=
 set guicursor+=i:ver100-iCursor
@@ -22,6 +22,7 @@ else
 endif
 
 colors my_molokai
+"colors molokai
 
 " set cursor color and blink
 function! g:MySetGuiCursorColor()

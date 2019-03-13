@@ -30,8 +30,9 @@ Plug 'itchyny/lightline-powerful'
 
 " lazy load on command executed
 Plug 'scrooloose/nerdtree'       , {'on': 'NERDTreeToggle'}
-
 Plug 'scrooloose/nerdcommenter'
+
+Plug 'andymass/vim-matchup'      " modern matchit and matchparen replacement, even better % navigate and highlight matching words
 
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'          " repeats plugin mappings
@@ -52,7 +53,9 @@ Plug 'kopischke/vim-stay'        " automated view creation
 Plug 'Raimondi/delimitMate'      " this plugin provides automatic closing of quotes
 Plug 'tommcdo/vim-exchange'      " exchange text by operator cx
 
-Plug 'ludovicchabant/vim-gutentags', Cond(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
+" Plug 'ludovicchabant/vim-gutentags', Cond(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
+"Plug 'c0r73x/neotags.nvim', Cond(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
+Plug 'jsfaint/gen_tags.vim'
 Plug 'vim-scripts/taglist.vim'   " TList browser
 
 Plug 'vim-utils/vim-husk'        " command line mappings like ctrl right
@@ -60,14 +63,25 @@ Plug 'justinmk/vim-sneak'        " s<char><char> than ; or s to the next
 Plug 'wellle/targets.vim'        " more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
 Plug 'mileszs/ack.vim'           " the better grep
 
+" languages
 Plug 'vim-scripts/xml.vim'          , {'for': ['xml']}
 Plug 'vim-scripts/perl-support.vim' , {'for': ['perl']}
 Plug 'kchmck/vim-coffee-script'     , {'for': ['coffe']}
 Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
 Plug 'vim-scripts/MatchTag'         , {'for': ['html']}                " highlight html tag pairs
 
-"DML syntax
-"Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }) 
+"Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
+"
+" Plug 'https://www.vim.org/scripts/download_script.php?src_id=12923', {'for': ['pascal']}
+" TODO: put it in a plugin!!! on github
+
+Plug  '~\de\vim\delphi-syntax'
+" Plug 'rkennedy/vim-delphi', {'for': ['delphi']} 
+" builtin is better?
+let pascal_delphi=1
+let pascal_symbol_operator=0
+let pascal_one_line_string=1
+let pascal_no_tabs=0        " no effect: Error in syntax file in pascal.vim
 
 " colors
 Plug 'sjl/badwolf'                        " {'script_type': 'color'}
@@ -75,6 +89,7 @@ Plug 'dsolstad/vim-wombat256i'            " {'script_type': 'color'}
 Plug 'bronzehedwick/impactjs-colorscheme' " {'script_type': 'color'}
 Plug 'altercation/vim-colors-solarized'   " {'script_type': 'color'}
 Plug 'tomasr/molokai'                     " {'script_type': 'color'}
+Plug 'sickill/vim-monokai'                " {'script_type': 'color'}
 Plug 'jnurmine/Zenburn'                   " {'script_type': 'color'}
 
 call plug#end()
@@ -86,9 +101,8 @@ call plug#end()
 "switch off fugitive
 let g:loaded_fugitive = 1
 
-"set statusline+=%{gutentags#statusline()}                                                                                :
-let g:gutentags_cache_dir = '~/.vim/gutentags'    
-let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js']
+" switch off gentags
+let g:loaded_gentags#gtags = 1
 
 " This is for taglist
 let Tlist_Inc_Winwidth = 0
@@ -106,9 +120,6 @@ nnoremap <leader>ut :Histwin<CR>
 " Rainbow braces highlight
 nnoremap <leader>rp :RainbowParenthesesToggle<CR>
 
-" Matchit help should be copyed to doc directory
-runtime macros/matchit.vim
-
 let g:xml_syntax_folding = 1
 
 " EasyMotion
@@ -123,7 +134,6 @@ if(has('lua'))
 else
   let g:neocomplete#enable_at_startup = 0
 endif
-
 
 " NeoSnippets
 let g:snippet_author='Mattia72'
@@ -209,12 +219,11 @@ else " if exists('g:loaded_unite')
   " yank history
   nnoremap <leader>uy :<C-u>Unite -buffer-name=yank    history/yank<cr>
   " buffer explorer
-  nnoremap <leader>ue :<C-u>Unite -buffer-name=buffer  buffer<cr>
-  nnoremap <leader>ub :<C-u>Unite -buffer-name=buffer  buffer<cr>
+  nnoremap <leader>ub :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
   " browse for defined mappings
-  nnoremap <leader>um :<C-u>Unite -buffer-name=mapping  mapping<CR>
+  nnoremap <leader>up :<C-u>Unite -buffer-name=mapping  mapping<CR>
   " browse messages
-  nnoremap <leader>us :<C-u>Unite output:message<CR>
+  nnoremap <leader>um :<C-u>Unite output:message<CR>
 
   " Custom mappings for the unite buffer
   autocmd FileType unite call s:unite_settings()
@@ -282,7 +291,6 @@ function! MySetLightLine()
 		    \'component_function': {
 		    \   'readonly': 'LightlineReadonly',
 		    \   'fugitive': 'LightlineFugitive',
-        \   'gutentags': '%{gutentags#statusline("[Generating...]")}'
 		    \ }
 	      \}
 endfunction

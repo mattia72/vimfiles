@@ -36,9 +36,11 @@ set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
 "echom 'grepprg='.&grepprg
-if (executable('rg') && &grepprg =~ "^findstr")
-  " it fails on second load so we set it only if it's default on windows 
-  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case 
+if (executable('rg')) 
+  if (&grepprg !~# "^rg")
+    " it fails on second load so we set it only if it has not been set already
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case 
+  endif
 else
   set grepprg=internal
 endif
@@ -70,7 +72,7 @@ set wildmode=full
 "-------------------------------------------------------------------------------
 
 set isfname+=32,38 " add space and '&' to filename chars
-set autochdir "auto switch to the current file dir
+"set autochdir "auto switch to the current file dir
 set path+=.  " path to use gf - jump to file.
 set path+=**  " path to use by :find anything reqursive
 "let &cdpath = ',' . substitute(substitute($CDPATH, '[, ]', '\\\0', 'g'), ':', ',', 'g')
@@ -117,7 +119,7 @@ if &t_Co > 2
   syntax on
 endif
 
-if has('gui_running') || has("nvim")
+if has('gui_running') 
   set cursorcolumn nocursorline "Highlight only the screen column of the cursor
 else
   set nocursorcolumn nocursorline

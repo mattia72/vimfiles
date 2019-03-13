@@ -71,3 +71,8 @@ cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delvie
 "
 nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " *.*"<cr>:copen<cr>
 
+" For syntax development
+nnoremap <F11> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+nnoremap <F12> <Esc>:syntax sync fromstart<CR>

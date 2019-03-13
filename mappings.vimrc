@@ -9,12 +9,18 @@
 " Mappings ...
 "-------------------------------------------------------------------------------
 
+"Ctrl-C, Ctrl-V and so on...
+source $VIMRUNTIME/mswin.vim
+" remap old C-V in normal mode
+nnoremap <C-V> <C-Q>
+
 " Auto indent pasted text
 nnoremap p p=`]<C-o>
 nnoremap P P=`]<C-o>
 
-" Don't use Ex mode, use Q for formatting
+" Don't use Ex mode, use Q for paragraph formatting
 noremap Q gq
+
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
@@ -63,11 +69,11 @@ noremap <leader>e :tabnew! ~/.vim/vimrc<cr>
 " jump to tag
 nnoremap <leader>j <C-]>
 
-nnoremap <leader>rf <ESC>:silent grep! '' %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <leader>rd <ESC>:silent grep! '' *.*<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>rf <ESC>:silent grep!  % <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>rd <ESC>:silent grep!  -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 " find all word under cursor in the current directory
-nnoremap <leader>fa <ESC>:silent grep! '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left>  
-nnoremap <leader>fA <ESC>:silent grep! '<C-R><C-W>' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
+nnoremap <leader>fa <ESC>:silent grep! --word-regexp '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>  
+nnoremap <leader>fA <ESC>:silent grep! '<C-R><C-W>' -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>   
 " find all selected
 vnoremap <leader>fa y<ESC>:silent grep! '<C-R>0' %<bar>copen<Left><Left><Left><Left><Left><Left>  
 vnoremap <leader>fA y<ESC>:silent grep! '<C-R>0' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
@@ -157,7 +163,8 @@ nnoremap gV `[v`]
 " Select all and increment numbers
 nnoremap <C-y> <C-a>
 nnoremap <C-x> <C-x>
-nnoremap <C-A> ggVG
+"handled by mswin.vim
+"nnoremap <C-A> ggVG 
 "
 " autocomplete parenthesis, (brackets) and braces
 "inoremap  (  ()<Left>

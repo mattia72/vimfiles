@@ -15,7 +15,6 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
-
 if filereadable(expand("~/.vim/settings.vimrc"))
   source ~/.vim/settings.vimrc
 endif
