@@ -16,6 +16,7 @@ Plug 'junegunn/vim-plug'
 Plug 'Shougo/denite.nvim' , Cond(has('python3'))
 Plug 'Shougo/unite.vim'   , Cond(!has('python3'))
 
+Plug 'neomake/neomake'            " async make
 Plug 'Shougo/neomru.vim'          " most recent file list for Unit
 Plug 'Shougo/unite-outline', Cond(!has('python3')) " it is only for Unite
 Plug 'Shougo/neoyank.vim'
@@ -39,7 +40,7 @@ Plug 'tpope/vim-repeat'          " repeats plugin mappings
 Plug 'tpope/vim-abolish'         " :%S/facilit{y, ies}/building{, s}/g
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'        , { 'on' : 'Gstatus'} " git wrapper
-Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession'       " auto session maker
 
 Plug 'Lokaltog/vim-easymotion'   " ,,w
 Plug 'kshenoy/vim-signature'     " toggle, display and navigate marks
@@ -79,9 +80,9 @@ Plug  '~\de\vim\delphi-syntax'
 " Plug 'rkennedy/vim-delphi', {'for': ['delphi']} 
 " builtin is better?
 let pascal_delphi=1
-let pascal_symbol_operator=0
-let pascal_one_line_string=1
-let pascal_no_tabs=0        " no effect: Error in syntax file in pascal.vim
+let pascal_symbol_operator=1
+if exists("pascal_one_line_string") | unlet pascal_one_line_string | endif
+if exists("pascal_no_tabs") | unlet pascal_no_tabs | endif        " let pascal_no_tabs=0 has no effect. Checked with exists() in syntax pascal.vim
 
 " colors
 Plug 'sjl/badwolf'                        " {'script_type': 'color'}

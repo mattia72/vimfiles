@@ -49,16 +49,16 @@ endfunctio
 
 " When vimrc is edited, reload it
 augroup reread_vimrc
-  au!
-  au BufWritePost *vimrc source $MYVIMRC | LightlineReload()
+  autocmd!
+  autocmd BufWritePost *vimrc source $MYVIMRC
+  autocmd BufWritePost *vimrc LightlineReload
 augroup END
 
 " close quickfix with esc
 augroup quickfix_close_with_esc
   autocmd!
   autocmd FileType qf if mapcheck('<esc>', 'n') ==# '' | nnoremap <buffer><silent> <esc> :cclose<bar>lclose<CR> | endif
-  "doesn't work with q :(
-  "autocmd FileType qf if mapcheck('q', 'n') ==# '' | nnoremap <buffer><silent> q :cclose<bar>lclose<CR> | endif
+  autocmd FileType qf nnoremap <buffer><silent> q :cclose<bar>lclose<CR>
 augroup END
 
 " When editing a file, always jump to the last known cursor position.
