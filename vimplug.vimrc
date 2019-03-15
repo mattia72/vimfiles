@@ -76,7 +76,7 @@ Plug 'vim-scripts/MatchTag'         , {'for': ['html']}                " highlig
 " Plug 'https://www.vim.org/scripts/download_script.php?src_id=12923', {'for': ['pascal']}
 " TODO: put it in a plugin!!! on github
 
-Plug  '~\de\vim\delphi-syntax'
+Plug  '~\dev\vim\delphi.vim'
 " Plug 'rkennedy/vim-delphi', {'for': ['delphi']} 
 " builtin is better?
 let pascal_delphi=1
