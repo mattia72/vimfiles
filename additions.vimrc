@@ -22,8 +22,7 @@ endfunction
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 function! SetWhiteSpacesVisible()
-  exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~" 
-  ",eol:$"
+  set listchars=eol:¬,tab:» ,trail:~,extends:>,precedes:<,space:.
   set list
 endfunction
 

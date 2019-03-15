@@ -33,11 +33,18 @@ let g:mapleader = ","
 nnoremap <leader>cp :let @+ = expand("%:p")<cr>
 nnoremap <leader>cf :let @+ = expand("%")<cr>
 
-" simple buffer explorer, after :b works tab completition 
-nnoremap <leader>b :ls<cr>:b<space>
-" same as above with split
+"got to dir of current file
+nnoremap <leader>cd <ESC>:cd %:p:h <bar> pwd <CR>
+
+
+" simple buffer explorer, after :sb works tab completition 
+nnoremap <leader>sb :ls<cr>:sb<space>
+
+" same as above with split, if not open
 nnoremap <leader>vb :ls<cr>:vertical sb<space>
 nnoremap <leader>hb :ls<cr>:sb<space>
+" run selected as cmd
+vnoremap <leader>rs :<C-R>0<cr>
 
 " Fast saving
 "nnoremap <leader>s :w!<cr>
@@ -49,8 +56,19 @@ if has("nvim")                 " tnoremap stands for terminal mode mappings in n
   tnoremap <c-j> <C-\><C-N><C-w>j
   tnoremap <c-k> <C-\><C-N><C-w>k
   tnoremap <c-j> <C-\><C-N><C-w>j
-  "tnoremap <leader>w <C-\><C-N><C-w>
+  tnoremap <A-h> <C-\><C-N><C-w>h
+  tnoremap <A-j> <C-\><C-N><C-w>j
+  tnoremap <A-k> <C-\><C-N><C-w>k
+  tnoremap <A-l> <C-\><C-N><C-w>l
 endif
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 nnoremap <leader>om :CommandToTab message<cr>
 
@@ -70,10 +88,10 @@ noremap <leader>e :tabnew! ~/.vim/vimrc<cr>
 nnoremap <leader>j <C-]>
 
 nnoremap <leader>rf <ESC>:silent grep!  % <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <leader>rd <ESC>:silent grep!  -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>rd <ESC>:silent grep!  -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 " find all word under cursor in the current directory
-nnoremap <leader>fa <ESC>:silent grep! --word-regexp '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>  
-nnoremap <leader>fA <ESC>:silent grep! '<C-R><C-W>' -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>   
+nnoremap <leader>fa <ESC>:silent grep! "<C-R><C-W>" %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>  
+nnoremap <leader>fA <ESC>:silent grep! "<C-R><C-W>" -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 " find all selected
 vnoremap <leader>fa y<ESC>:silent grep! '<C-R>0' %<bar>copen<Left><Left><Left><Left><Left><Left>  
 vnoremap <leader>fA y<ESC>:silent grep! '<C-R>0' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
