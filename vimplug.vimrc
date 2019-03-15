@@ -38,7 +38,19 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'          " repeats plugin mappings
 Plug 'tpope/vim-abolish'         " :%S/facilit{y, ies}/building{, s}/g
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'        , { 'on' : 'Gstatus'} " git wrapper
+
+Plug 'tpope/vim-fugitive', {'on': []}    " git wrapper
+    function! s:vimplug_load_fugitive()
+        if exists('b:git_dir')
+            call plug#load('vim-fugitive')
+            autocmd! vimplug_load_fugitive
+            call fugitive#detect(expand('%:p'))
+        endif
+    endfunction
+    augroup vimplug_load_fugitive
+        au!
+        au BufWinEnter * call s:vimplug_load_fugitive()
+    augroup END
 Plug 'tpope/vim-obsession'
 
 Plug 'Lokaltog/vim-easymotion'   " ,,w
