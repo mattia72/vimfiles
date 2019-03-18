@@ -40,18 +40,7 @@ Plug 'tpope/vim-repeat'          " repeats plugin mappings
 Plug 'tpope/vim-abolish'         " :%S/facilit{y, ies}/building{, s}/g
 Plug 'tpope/vim-surround'
 
-Plug 'tpope/vim-fugitive', {'on': []}    " git wrapper
-    function! s:vimplug_load_fugitive()
-        if exists('b:git_dir')
-            call plug#load('vim-fugitive')
-            autocmd! vimplug_load_fugitive
-            call fugitive#detect(expand('%:p'))
-        endif
-    endfunction
-    augroup vimplug_load_fugitive
-        au!
-        au BufWinEnter * call s:vimplug_load_fugitive()
-    augroup END
+Plug 'tpope/vim-fugitive'        " git wrapper
 Plug 'tpope/vim-obsession'
 
 Plug 'Lokaltog/vim-easymotion'   " ,,w
@@ -83,18 +72,12 @@ Plug 'kchmck/vim-coffee-script'     , {'for': ['coffe']}
 Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
 Plug 'vim-scripts/MatchTag'         , {'for': ['html']}                " highlight html tag pairs
 
-"Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
-"
-" Plug 'https://www.vim.org/scripts/download_script.php?src_id=12923', {'for': ['pascal']}
-" TODO: put it in a plugin!!! on github
+Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
 
+" TODO: put it in a plugin!!! on github
 Plug  '~\dev\vim\delphi.vim'
 " Plug 'rkennedy/vim-delphi', {'for': ['delphi']} 
 " builtin is better?
-let pascal_delphi=1
-let pascal_symbol_operator=1
-if exists("pascal_one_line_string") | unlet pascal_one_line_string | endif
-if exists("pascal_no_tabs") | unlet pascal_no_tabs | endif        " let pascal_no_tabs=0 has no effect. Checked with exists() in syntax pascal.vim
 
 " colors
 Plug 'sjl/badwolf'                        " {'script_type': 'color'}
@@ -112,7 +95,7 @@ call plug#end()
 "-------------------------------------------------------------------------------
 
 "switch off fugitive
-let g:loaded_fugitive = 1
+"let g:loaded_fugitive = 0
 
 " switch off gentags
 let g:loaded_gentags#gtags = 1

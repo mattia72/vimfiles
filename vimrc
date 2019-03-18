@@ -50,5 +50,10 @@ endif
 "-------------------------------------------------------------------------------
 
 cd ~
+source Session.vim
+" the following trick avoids the "Press RETURN ..." prompt
+echo "run :Obsession for save this session!"
+0 append
+.
 
 " vim:tw=78:ts=4:ft=vim:norl:

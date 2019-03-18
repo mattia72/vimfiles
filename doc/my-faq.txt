@@ -550,9 +550,6 @@ Usefull plugins, I'm using recently:
     s{char}{char} : Go to the next occurrence of {char}{char}
     S{char}{char} : Go to the previous occurrence of {char}{char}
 
-  vim-|easytags|
-    Automated tag generation and syntax highlighting in Vim 
-
   vim-|husk| 
     Mappings that boost vim command line mode.
     *C-a* go to the beginning of the line in command mode 
@@ -573,8 +570,6 @@ Usefull plugins, I'm using recently:
     *[B*     |:bfirst|
     *]B*     |:blast|
     etc.
-
-  |vimproc|.vim
 
   |abolish|
     :%Abolish -substitute -flags=g box{,es} bag{,s}

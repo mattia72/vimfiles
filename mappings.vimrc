@@ -38,13 +38,16 @@ nnoremap <leader>cd <ESC>:cd %:p:h <bar> pwd <CR>
 
 
 " simple buffer explorer, after :sb works tab completition 
+" sb try to find buffer in opened windows and switches to it
 nnoremap <leader>sb :ls<cr>:sb<space>
+" simple buffer explorer, after :b works tab completition 
+nnoremap <leader>b :ls<cr>:b<space>
 
 " same as above with split, if not open
 nnoremap <leader>vb :ls<cr>:vertical sb<space>
 nnoremap <leader>hb :ls<cr>:sb<space>
 " run selected as cmd
-vnoremap <leader>rs :<C-R>0<cr>
+vnoremap <leader>rs <ESC>y:<C-R>0
 
 " Fast saving
 "nnoremap <leader>s :w!<cr>
@@ -90,11 +93,11 @@ nnoremap <leader>j <C-]>
 nnoremap <leader>rf <ESC>:silent grep!  % <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left>
 nnoremap <leader>rd <ESC>:silent grep!  -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 " find all word under cursor in the current directory
-nnoremap <leader>fa <ESC>:silent grep! "<C-R><C-W>" %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>  
+nnoremap <leader>fa <ESC>:silent grep! "<C-R><C-W>" %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 nnoremap <leader>fA <ESC>:silent grep! "<C-R><C-W>" -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 " find all selected
-vnoremap <leader>fa y<ESC>:silent grep! '<C-R>0' %<bar>copen<Left><Left><Left><Left><Left><Left>  
-vnoremap <leader>fA y<ESC>:silent grep! '<C-R>0' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
+vnoremap <leader>fa y<ESC>:silent grep! "<C-R>0" %<bar>copen<Left><Left><Left><Left><Left><Left>
+vnoremap <leader>fA y<ESC>:silent grep! "<C-R>0" -g .* -g *.*<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
 " nnoremap <leader>fa <ESC>:vimgrep '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left>  
 " nnoremap <leader>fA <ESC>:vimgrep '<C-R><C-W>' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   

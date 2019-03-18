@@ -67,11 +67,13 @@ command! Delview call MyDeleteView()
 cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delview')<CR>
 
 "grep operator from "Learn Vim script the hard way"
-"
-nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " *.*"<cr>:copen<cr>
+" nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " *.*"<cr>:copen<cr>
 
 " For syntax development
 nnoremap <F11> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+" Refresh syntax highlight
 nnoremap <F12> <Esc>:syntax sync fromstart<CR>
+nnoremap <S-F12> <Esc>:so ~/dev/vim/delphi.vim/syntax/hitest.vim<CR>
+"
