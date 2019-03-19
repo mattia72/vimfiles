@@ -73,11 +73,10 @@ Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
 Plug 'vim-scripts/MatchTag'         , {'for': ['html']}                " highlight html tag pairs
 
 Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
-
-" TODO: put it in a plugin!!! on github
-Plug  '~\dev\vim\delphi.vim'
+" My own 
+"Plug 'mattia72/vim-delphi' 
+Plug  '~\dev\vim\vim-delphi'
 " Plug 'rkennedy/vim-delphi', {'for': ['delphi']} 
-" builtin is better?
 
 " colors
 Plug 'sjl/badwolf'                        " {'script_type': 'color'}
