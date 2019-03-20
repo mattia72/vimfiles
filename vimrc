@@ -46,14 +46,14 @@ if filereadable(expand("~/.vim/additions.vimrc"))
 endif
 
 "-------------------------------------------------------------------------------
-" Temporary mapings
+" Temporary mappings
 "-------------------------------------------------------------------------------
 
 cd ~
-source Session.vim
-" the following trick avoids the "Press RETURN ..." prompt
-echo "run :Obsession for save this session!"
-0 append
-.
+"source Task143727.vim
+"" the following trick avoids the "Press RETURN ..." prompt
+"echo "run :Obsession for save this session!"
+"0 append
+".
 
 " vim:tw=78:ts=4:ft=vim:norl:

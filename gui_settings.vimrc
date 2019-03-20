@@ -6,7 +6,7 @@ if has('nvim')
 endif
 
 set winaltkeys=menu " alt jumps to menu
-"set lines=40 columns=130 " set window size
+set lines=45 columns=180 " set window size
 
 set guicursor=
 set guicursor+=i:ver100-iCursor

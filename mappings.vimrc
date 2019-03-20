@@ -91,13 +91,13 @@ noremap <leader>e :tabnew! ~/.vim/vimrc<cr>
 nnoremap <leader>j <C-]>
 
 nnoremap <leader>rf <ESC>:silent grep!  % <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <leader>rd <ESC>:silent grep!  -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>rd <ESC>:silent grep! -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left>
 " find all word under cursor in the current directory
 nnoremap <leader>fa <ESC>:silent grep! "<C-R><C-W>" %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <leader>fA <ESC>:silent grep! "<C-R><C-W>" -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>fA <ESC>:silent grep! -g .* -g *.* "<C-R><C-W>" <bar>copen<Left><Left><Left><Left><Left><Left><Left>
 " find all selected
 vnoremap <leader>fa y<ESC>:silent grep! "<C-R>0" %<bar>copen<Left><Left><Left><Left><Left><Left>
-vnoremap <leader>fA y<ESC>:silent grep! "<C-R>0" -g .* -g *.*<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+vnoremap <leader>fA y<ESC>:silent grep! -g .* -g *.* "<C-R>0" <bar>copen<Left><Left><Left><Left><Left><Left><Left>
 
 " nnoremap <leader>fa <ESC>:vimgrep '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left>  
 " nnoremap <leader>fA <ESC>:vimgrep '<C-R><C-W>' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
