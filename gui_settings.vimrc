@@ -21,6 +21,7 @@ else
   set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
 endif
 
+"colors codedark
 colors my_molokai
 "colors molokai
 
@@ -30,6 +31,6 @@ function! g:MySetGuiCursorColor()
   hi iCursor guifg=black guibg=green
 endfunction
 
-
+                                     
 autocmd ColorScheme * call g:MySetGuiCursorColor()
 autocmd WinEnter * call g:MySetGuiCursorColor()

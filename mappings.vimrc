@@ -106,8 +106,8 @@ vnoremap <leader>fA y<ESC>:silent grep! -g .* -g *.* "<C-R>0" <bar>copen<Left><L
 " vnoremap <leader>fA y<ESC>:vimgrep '<C-R>0' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
 
 " search replace selected whole word
-nnoremap <leader>srw <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
-" search replace selected word
+nnoremap <leader>sR <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
+" search replace line containing selected word
 nnoremap <leader>srl <ESC>:%s/.*<C-R><C-W>.*//g<Left><Left><BackSpace>/
 " search replace selected word
 nnoremap <leader>sr <ESC>:%s/<C-R><C-W>//g<Left><Left><BackSpace>/

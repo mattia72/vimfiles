@@ -84,8 +84,8 @@ Plug 'dsolstad/vim-wombat256i'            " {'script_type': 'color'}
 Plug 'bronzehedwick/impactjs-colorscheme' " {'script_type': 'color'}
 Plug 'altercation/vim-colors-solarized'   " {'script_type': 'color'}
 Plug 'tomasr/molokai'                     " {'script_type': 'color'}
+Plug 'tomasiser/vim-code-dark'                     " {'script_type': 'color'}
 Plug 'sickill/vim-monokai'                " {'script_type': 'color'}
-Plug 'jnurmine/Zenburn'                   " {'script_type': 'color'}
 
 call plug#end()
 

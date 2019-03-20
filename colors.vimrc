@@ -24,6 +24,7 @@
 
 if has("gui_running") " in nvim it should be placed in ginit.vim
   colors my_molokai
+  "colors codedark
 else
     "set term=xterm
     "set t_Co=256
