@@ -1,11 +1,11 @@
 " Vim color file
 "
-" Author: Tomas Restrepo <tomas@winterdom.com>
+" Author: Mattia72
 "
-" Note: Based on the monokai theme for textmate
+" Note: Based on the "monokai" theme for textmate
 " by Wimer Hazenberg and its darker variant 
-" by Hamish Stuart Macpherson
-"
+" by Hamish Stuart Macpherson,
+" further on "molokai" by Tomas Restrepo
 
 hi clear
 
@@ -17,7 +17,7 @@ if version > 580
         syntax reset
     endif
 endif
-let g:colors_name="my_molokai"
+let g:colors_name="mattia"
 
 
 hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
@@ -34,7 +34,8 @@ hi Number          guifg=#AE81FF
 hi Boolean         guifg=#AE81FF
 hi Float           guifg=#AE81FF
 
-hi Identifier      guifg=#F8F8F2
+" hi Identifier      guifg=#F8F8F2
+hi Identifier      guifg=#FD971F
 
 hi Statement       guifg=#F92672               gui=bold
 hi Conditional     guifg=#F92672               gui=bold

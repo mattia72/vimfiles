@@ -22,7 +22,7 @@ else
 endif
 
 "colors codedark
-colors my_molokai
+colors mattia
 "colors molokai
 
 " set cursor color and blink

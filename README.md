@@ -27,7 +27,7 @@ Vim build may not include the Lua DLL. In that case, download [lua52.dll](http:/
  Color settings for gui and terminal:
 ```vim
  if has("gui_running")
-   colors my_molokai
+   colors mattia
  else
    colors wombat256
  endif
