@@ -50,9 +50,6 @@ endif
 "-------------------------------------------------------------------------------
 
 cd ~
-"source Task143727.vim
-"" the following trick avoids the "Press RETURN ..." prompt
-"echo "run :Obsession for save this session!"
 "0 append
 ".
 
