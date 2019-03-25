@@ -2,7 +2,8 @@
 "
 " Author: Mattia72
 "
-" Note: Based on the "monokai" theme for textmate
+" Note: How it looks, see ":h group-name"
+" Based on the "monokai" theme for textmate
 " by Wimer Hazenberg and its darker variant 
 " by Hamish Stuart Macpherson,
 " further on "molokai" by Tomas Restrepo
@@ -21,11 +22,12 @@ let g:colors_name="mattia"
 
 
 hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
-hi Comment         guifg=#588F7C
 hi CursorLine                    guibg=#293739
 hi CursorColumn                  guibg=#293739
 hi LineNr          guifg=#848483 guibg=#232526
 hi NonText         guifg=#848483 guibg=#232526
+
+hi Comment         guifg=#588F7C
 
 hi Constant        guifg=#AE81FF               gui=bold
 hi String          guifg=#E6DB74               gui=italic      " #E6DB74
@@ -36,6 +38,7 @@ hi Float           guifg=#AE81FF
 
 " hi Identifier      guifg=#F8F8F2
 hi Identifier      guifg=#FD971F
+hi Function        guifg=#A6E22E
 
 hi Statement       guifg=#F92672               gui=bold
 hi Conditional     guifg=#F92672               gui=bold
@@ -45,24 +48,22 @@ hi Operator        guifg=#F92672
 hi Keyword         guifg=#F92672               gui=bold
 hi Exception       guifg=#F92672               gui=bold 
 
-hi PreProc         guifg=#A6E22E
-
 hi Include         guifg=#A6E22E
 hi Define          guifg=#A6E22E
 hi Macro           guifg=#A6E22E               gui=italic
+hi PreProc         guifg=#A6E22E
 hi PreCondit       guifg=#A6E22E               gui=bold
-hi Function        guifg=#A6E22E
 
 hi Type            guifg=#66D9EF               gui=none
 hi StorageClass    guifg=#66D9EF               gui=italic
 hi Structure       guifg=#66D9EF
 hi Typedef         guifg=#66D9EF
 
-hi Special         guifg=#66D9EF guibg=bg      gui=italic
-hi SpecialChar     guifg=#F92672               gui=bold
+hi Special         guifg=#66D9EF  guibg=bg     gui=italic
+hi SpecialChar     guifg=#F92672               gui=bold,italic
 hi Tag             guifg=#FD971F               gui=italic
 hi Delimiter       guifg=#8F8F8F
-hi SpecialComment  guifg=#A6E22C               
+hi SpecialComment  guifg=#A6E22C               gui=italic
 hi Debug           guifg=#BCA3A3               gui=bold
 
 hi Underlined      guifg=#808080               gui=underline

@@ -10,6 +10,10 @@
 "       create ~/.vim/nvim/init.vim with this content 'source <path_to_this_file>'
 "       create ~/.vim/nvim/ginit.vim with this content 'source <path to gui_settings.vimrc>'
 
+if exists("g:vimrc_auto_load_disabled")
+  finish
+endif
+
 " This must be first, because it changes other options as a side effect.
 if has('vim_starting')
   set nocompatible               " Be iMproved
@@ -48,11 +52,12 @@ endif
 "-------------------------------------------------------------------------------
 " Temporary mappings
 "-------------------------------------------------------------------------------
-
 cd ~
-"source Task143727.vim
+
+source Session.vim
+" Obsession takes care of Session update
+
 "" the following trick avoids the "Press RETURN ..." prompt
-"echo "run :Obsession for save this session!"
 "0 append
 ".
 

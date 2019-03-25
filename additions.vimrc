@@ -75,5 +75,35 @@ nnoremap <F11> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " Refresh syntax highlight
 nnoremap <F12> <Esc>:syntax sync fromstart<CR>
-nnoremap <S-F12> <Esc>:so ~/dev/vim/delphi.vim/syntax/hitest.vim<CR>
+"nnoremap <S-F12> <Esc>:so ~/dev/vim/delphi.vim/syntax/hitest.vim<CR>
 "
+" Show syntax highlighting groups for word under cursor: Ctrl Shift P
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+nnoremap <C-S-F12> :call <SID>SynStack()<CR>
+"-------------------------------------------------------------------------------
+" Session loading...
+"-------------------------------------------------------------------------------
+let g:my_vim_session = "~/Session.vim"
+
+fu! SaveSession()
+  execute 'mksession! ' . g:my_vim_session
+endfunction
+
+fu! RestoreSession()
+  let file = expand(g:my_vim_session)
+  if filereadable(file)
+    execute 'source ' . g:my_vim_session
+  endif
+endfunction
+
+" autocmd VimLeave * call SaveSess()
+" only restore the session if the user has -not- requested a specific filename
+" doesn't work with Obsession together :(
+" autocmd VimEnter * if !argc() | call RestoreSession() | endif
+ 
