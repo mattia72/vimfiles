@@ -10,6 +10,9 @@
 "       create ~/.vim/nvim/init.vim with this content 'source <path_to_this_file>'
 "       create ~/.vim/nvim/ginit.vim with this content 'source <path to gui_settings.vimrc>'
 
+"run this to avoid reload on save
+let g:vimrc_auto_load_disabled = 1
+
 if exists("g:vimrc_auto_load_disabled")
   finish
 endif
@@ -54,7 +57,7 @@ endif
 "-------------------------------------------------------------------------------
 cd ~
 
-source Session.vim
+":so Session.vim
 " Obsession takes care of Session update
 
 "" the following trick avoids the "Press RETURN ..." prompt
