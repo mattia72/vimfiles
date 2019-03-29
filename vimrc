@@ -11,8 +11,7 @@
 "       create ~/.vim/nvim/ginit.vim with this content 'source <path to gui_settings.vimrc>'
 
 "run this to avoid reload on save
-let g:vimrc_auto_load_disabled = 1
-
+"let g:vimrc_auto_load_disabled = 1
 if exists("g:vimrc_auto_load_disabled")
   finish
 endif

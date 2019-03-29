@@ -198,6 +198,6 @@ vnoremap  {  s{}<Esc>P<Right>%
 
 " Helptags should be rebuild if doc changed
 nnoremap <leader>ht :Helptags<CR>
-" help word under cursor
-nnoremap <leader>hh K
 
+" Save and build
+nnoremap <F7> :w <bar> if filereadable("make.cmd") <bar> make <bar> else <bar> cd .. <bar> endif <cr>
