@@ -21,6 +21,8 @@ else
   set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
 endif
 
+set listchars=eol:¬,tab:»»,trail:˙,extends:⮁,precedes:⮃,space:˙
+
 "colors codedark
 colors mattia
 "colors molokai

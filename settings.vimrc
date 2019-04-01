@@ -125,7 +125,6 @@ else
   set nocursorcolumn nocursorline
 endif
 
-set listchars=eol:¬,tab:»»,trail:˙,extends:>,precedes:<,space:˙
 let &guioptions = substitute(&guioptions, "t", "", "g") "For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 set guioptions+=bh "horizontal scrollbar
 set nowrap
