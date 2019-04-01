@@ -102,7 +102,7 @@ if !(has('gui_running') || has('nvim'))
 endif
 set t_Co=256
 
-"repar backspace: 
+"repare backspace: 
 "Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
 inoremap <C-Del> <BS>
 nnoremap <C-Del> <BS>
@@ -125,6 +125,7 @@ else
   set nocursorcolumn nocursorline
 endif
 
+set listchars=eol:¬,tab:»»,trail:˙,extends:>,precedes:<,space:˙
 let &guioptions = substitute(&guioptions, "t", "", "g") "For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 set guioptions+=bh "horizontal scrollbar
 set nowrap

@@ -86,18 +86,20 @@ nnoremap <leader>dj ]c
 nnoremap <leader>sp [s
 nnoremap <leader>sn ]s
 " Fast editing of the vimrc
-noremap <leader>e :tabnew! ~/.vim/vimrc<cr>
+noremap <leader>vi :tabnew! ~/.vim/vimrc<cr>
 " jump to tag
 nnoremap <leader>j <C-]>
 
+" ripgrep in current file
 nnoremap <leader>rf <ESC>:silent grep!  % <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <leader>rd <ESC>:silent grep! -g .* -g *.* <bar>copen<Left><Left><Left><Left><Left><Left><Left>
+" ripgrep in current directory
+nnoremap <leader>rd <ESC>:silent grep! -g .* -g *.*  <bar>copen<Left><Left><Left><Left><Left><Left><Left>
 " find all word under cursor in the current directory
-nnoremap <leader>fa <ESC>:silent grep! "<C-R><C-W>" %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <leader>fA <ESC>:silent grep! -g .* -g *.* "<C-R><C-W>" <bar>copen<Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>fa <ESC>:silent grep! "<C-R><C-W>" %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <leader>fA <ESC>:silent grep! -g .* -g *.* "<C-R><C-W>" <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left>
 " find all selected
-vnoremap <leader>fa y<ESC>:silent grep! "<C-R>0" %<bar>copen<Left><Left><Left><Left><Left><Left>
-vnoremap <leader>fA y<ESC>:silent grep! -g .* -g *.* "<C-R>0" <bar>copen<Left><Left><Left><Left><Left><Left><Left>
+vnoremap <leader>fa y<ESC>:silent grep! "<C-R>0" %<bar>copen<Left><Left><Left><Left><Left><Left><Left><Left><Left>
+vnoremap <leader>fA y<ESC>:silent grep! -g .* -g *.* "<C-R>0" <bar>copen<Left><Left><Left><Left><Left><Left><Left><Left>
 
 " nnoremap <leader>fa <ESC>:vimgrep '<C-R><C-W>' %<bar>copen<Left><Left><Left><Left><Left><Left>  
 " nnoremap <leader>fA <ESC>:vimgrep '<C-R><C-W>' *.*<bar>copen<Left><Left><Left><Left><Left><Left>   
