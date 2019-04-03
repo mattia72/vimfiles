@@ -65,46 +65,46 @@ Horizontally:
   G : Jump to end of file. 
   1G : Jump to beginning of file (same as gg). 
   50G : Jump to line 50. 
-  [N]f{char}	to the Nth occurrence of {char} to the right
-  [N]F{char}	to the Nth occurrence of {char} to the left
+  [N]f{char}  to the Nth occurrence of {char} to the right
+  [N]F{char}  to the Nth occurrence of {char} to the left
   * : found next occurrence of word under the cursor 
   # : found previous occurrence of word under the cursor
 
 ==============================================================================
 2. Operators                                                 *my-faq-operators*
 
-  ~	switch case					
-  d	delete						
-  c	change 
-  y	yank						
-  >	shift right 
-  <	shift left 
-  !	filter through external command 
-  =	filter through 'equalprg' option command 
-  gq	format lines to 'textwidth' length 
-  :	start Ex command for highlighted lines 
-  r	replace a char and return to prev mode
-  s	delete a char and start insert mode
-  C	delete highlighted text and start insert 
-  S	delete highlighted text and start insert
-  R	-"- 
-  x	delete						
-  D	delete 
-  X	delete 
-  Y	yank 
-  p	put						
-  J	join 
-  U	make uppercase					
-  u	make lowercase					
-  ^]	find tag					
-  I	block insert					
-  A	block append					
+  ~  switch case          
+  d  delete            
+  c  change 
+  y  yank            
+  >  shift right 
+  <  shift left 
+  !  filter through external command 
+  =  filter through 'equalprg' option command 
+  gq  format lines to 'textwidth' length 
+  :  start Ex command for highlighted lines 
+  r  replace a char and return to prev mode
+  s  delete a char and start insert mode
+  C  delete highlighted text and start insert 
+  S  delete highlighted text and start insert
+  R  -"- 
+  x  delete            
+  D  delete 
+  X  delete 
+  Y  yank 
+  p  put            
+  J  join 
+  U  make uppercase          
+  u  make lowercase          
+  ^]  find tag          
+  I  block insert          
+  A  block append          
 
 Example:
 <c-v>jjj I{text}<esc>    insert {text} to each row before visual block
 
 ==============================================================================
-3. Text objects			          	 	       *my-faq-objects*
+3. Text objects                            *my-faq-objects*
                                                               
 These can be used after an operator or in Visual mode to select an
 object.
@@ -134,10 +134,10 @@ object.
 4. Selection                                                 *my-faq-selection*
                                                             
 Selected text will be deleted and insert mode starts.
-  gV	      Avoid the automatic reselection of the Visual area
-  	      after a Select mode mapping or menu has finished.
-  gh	      Start Select mode, characterwise.  This is like "v",
-  gH	      Start Select mode, linewise.  This is like "V",
+  gV        Avoid the automatic reselection of the Visual area
+          after a Select mode mapping or menu has finished.
+  gh        Start Select mode, characterwise.  This is like "v",
+  gH        Start Select mode, linewise.  This is like "V",
   g CTRL-H    Start Select mode, blockwise.  This is like CTRL-V,
 Selection can be modified by <Shift>-<movement> keys.
 more :help |Select-mode|
@@ -160,13 +160,13 @@ more :help |Select-mode|
   :%s/^.\{-}foo/bar/     1st occurence of 'foo' to 'bar'; non-greedy matching \{-} 
 
 Examples: 
-  :s/a\|b/xxx\0xxx/g		 modifies "a" or "b" to "xxxaxxx" or "xxxbxxx"
-  :s/\([abc]\)\([efg]\)/\2\1/g	 modifies "af fa bg" to "fa fa gb"
-  :s/abcde/abc^Mde/		 modifies "abcde"    to "abc", "de" (two lines)
+  :s/a\|b/xxx\0xxx/g     modifies "a" or "b" to "xxxaxxx" or "xxxbxxx"
+  :s/\([abc]\)\([efg]\)/\2\1/g   modifies "af fa bg" to "fa fa gb"
+  :s/abcde/abc^Mde/     modifies "abcde"    to "abc", "de" (two lines)
                                  NOTE: you need to type CTRL-V <CR> to get a ^M here
-  :s/$/\^M/			 modifies "abcde"    to "abcde^M"
-  :s/\w\+/\u\0/g		 modifies "bla bla"  to "Bla Bla" 
-  :s/\w\+/\L\0/g		 modifies "BLA BLA"  to "bla bla"
+  :s/$/\^M/       modifies "abcde"    to "abcde^M"
+  :s/\w\+/\u\0/g     modifies "bla bla"  to "Bla Bla" 
+  :s/\w\+/\L\0/g     modifies "BLA BLA"  to "bla bla"
   :%s/\(\<v_[rp]\d\{6\}\)_\(\d\{4\}\)\>/\1[\2]/g
                                  v_r000123_0001 to v_r000123[0001]
                                   
@@ -333,11 +333,11 @@ Storing glob results (note must use APPEND)
 ==============================================================================
 9. Bookmarks                                                 *my-faq-bookmarks*
 
-  m{a-z}	Mark position in current file with mark {a-z}
-  m{A-Z}	mark position and file with mark {A-Z}
-  `{a-z}	Go to mark {a-z} within the current file
-  `{A-Z}	Go to the file and mark {A-Z} 
-  '{a-z}        Jump to the beginning of the line of mark {a-z}	
+  m{a-z}        Mark position in current file with mark {a-z}
+  m{A-Z}        Mark position and file with mark {A-Z}
+  `{a-z}        Go to mark {a-z} within the current file
+  `{A-Z}        Go to the file and mark {A-Z} 
+  '{a-z}        Jump to the beginning of the line of mark {a-z}  
   ''            Return to the line where the cursor was before the latest jump.  (Two single quotes.) 
   ``            Return to the cursor position before the latest jump (undo the jump). 
   %             Jump to corresponding item, e.g. from an open brace to its matching closing brace. 
@@ -358,18 +358,18 @@ Storing glob results (note must use APPEND)
 ------------------------------------------------------------------------------
 10.2 Command mode hotkeys                          *my-faq-command-mode-hotkeys*
 
-  C-c		      Like <esc>, but do not use an abbreviation
+  C-c          Like <esc>, but do not use an abbreviation
   C-r {1-9a-z%#:.-="} Insert the contents of a register 
   C-r+C-w             Insert word under cursor
   C-d                 Lists available commands or files
-  C-f   	      Switch from commandline mode to the commandline window
+  C-f           Switch from commandline mode to the commandline window
 
 ------------------------------------------------------------------------------
 10.3 Insert mode hotkeys                            *my-faq-insert-mode-hotkeys*
 
   C-o{command}   Execute {command} and return to Insert mode
-  C-n	         Insert next match of identifier before the cursor
-  C-p	         Insert previous match of identifier before the cursor
+  C-n           Insert next match of identifier before the cursor
+  C-p           Insert previous match of identifier before the cursor
 
 Completion
   <c-n><c-p>     Word completion in insert mode
@@ -378,41 +378,41 @@ Completion
 ------------------------------------------------------------------------------
 10.4 Visual mode hotkeys                            *my-faq-visual-mode-hotkeys*
 
-  v		Start Visual mode per character.
-  V		Start Visual mode linewise.
-  <c-v>		Start Visual mode blockwise.  
+  v    Start Visual mode per character.
+  V    Start Visual mode linewise.
+  <c-v>    Start Visual mode blockwise.  
   
   remove the 'B' and '<' flags from 'cpoptions' else these doesn't work 
-  `>		Go to the end of the Visual area
-  a<cr><esc>	Break the line after the Visual area
-  `<		Jump to the start of the Visual area
-  i<cr><esc>	Break the line before the Visual area
-  !!date<cr>	Filter the Visual text through date
-  kJJ		Join the lines back together
+  `>    Go to the end of the Visual area
+  a<cr><esc>  Break the line after the Visual area
+  `<    Jump to the start of the Visual area
+  i<cr><esc>  Break the line before the Visual area
+  !!date<cr>  Filter the Visual text through date
+  kJJ    Join the lines back together
 
 more:  |blockwise-examples|
 
 ==============================================================================
 11. Folding                                                    *my-faq-folding*
 
-  zf{motion}	Operator: Define a fold manually
-  :{range}fold	Define a fold for {range} lines
-  zd		Delete one fold under the cursor
-  zD		Delete all folds under the cursor
+  zf{motion}  Operator: Define a fold manually
+  :{range}fold  Define a fold for {range} lines
+  zd    Delete one fold under the cursor
+  zD    Delete all folds under the cursor
 
-  zo		Open one fold under the cursor
-  zO		Open all folds under the cursor
-  zc		Close one fold under the cursor
-  zC		Close all folds under the cursor
+  zo    Open one fold under the cursor
+  zO    Open all folds under the cursor
+  zc    Close one fold under the cursor
+  zC    Close all folds under the cursor
 
-  zm		Fold more: decrease 'foldlevel'
-  zM		Close all folds: make 'foldlevel' zero
-  zr		Reduce folding: increase 'foldlevel'
-  zR		Open all folds: make 'foldlevel' max.
+  zm    Fold more: decrease 'foldlevel'
+  zM    Close all folds: make 'foldlevel' zero
+  zr    Reduce folding: increase 'foldlevel'
+  zR    Open all folds: make 'foldlevel' max.
 
-  zn		Fold none: reset 'foldenable'
-  zN		Fold normal set 'foldenable'
-  zi		Invert 'foldenable'
+  zn    Fold none: reset 'foldenable'
+  zN    Fold normal set 'foldenable'
+  zi    Invert 'foldenable'
 
 The 'foldmethod'=manual folds are lost when you abandon the file.  To save the folds use
 the |:mkview| command.  The view can be restored later with |:loadview|.
@@ -421,8 +421,8 @@ the |:mkview| command.  The view can be restored later with |:loadview|.
 12. Source code editing                            *my-faq-source-code-editing*
 
 Format text
-  == 	        Format current line
-  =% 	        Format code block
+  ==           Format current line
+  =%           Format code block
   =vi}          Format code block
 
 File handling
@@ -432,7 +432,7 @@ File handling
 
 Find definitions
   |gD|            go to definition of word under the cursor in current file
-  |gd|	        go to definition of word under the cursor in current function
+  |gd|          go to definition of word under the cursor in current function
 
 ==============================================================================
 13. Diff                                                          *my-faq-diff*
@@ -456,23 +456,23 @@ Undo/Redo
   <c-r>         Redo
 
 Command line window
-  q/ 	        Open the commandline window with history of searches
-  q: 	        Open the commandline window with history of commands
+  q/           Open the commandline window with history of searches
+  q:           Open the commandline window with history of commands
 
 Numbers
   <c-a>         Increment number under cursor. Hex and octal too.
   <c-x>         Decrement number under cursor. Hex and octal too.
 
 Upper/Lower Case 
-  ~{motion}		'tildeop' option: switch case of {motion} text.
-  g~{motion}		Switch case of {motion} text. 
-  g~~			Switch case of current line. 
-  gU{motion}		Make {motion} text uppercase. 
-  gu{motion}		Make {motion} text lowercase. 
+  ~{motion}    'tildeop' option: switch case of {motion} text.
+  g~{motion}    Switch case of {motion} text. 
+  g~~      Switch case of current line. 
+  gU{motion}    Make {motion} text uppercase. 
+  gu{motion}    Make {motion} text lowercase. 
 
 External commands
   :!wc %               How many words are in the edited file
-  !{motion}{filter}	Filter {motion} text lines through the external program {filter}.
+  !{motion}{filter}  Filter {motion} text lines through the external program {filter}.
   :21,25 ! rot13        Encode with rot13 the selected text
 
   :r textfile/!command  Insert textfile or external program output 
