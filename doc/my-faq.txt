@@ -1,4 +1,4 @@
-*my-faq.txt* My Vim faq for Vim version 7.4            Last change: 19 okt. 2015
+*my-faq.txt* My Vim faq for Vim version 8.1            Last change: 19 okt. 2015
                          
                        SHORT REFERENCE MANUAL by Mattia
 ==============================================================================
@@ -10,6 +10,7 @@ CONTENTS                                                      *my-faq-contents*
 4. Selection.................................................|my-faq-selection|
 5. Search and replace...................................|my-faq-search-replace|
    5.1 In multiple files..........................|my-faq-multi-search-replace|
+   5.2 Ripgrep.................................................|my-faq-ripgrep|
 6. Macros........................................................|my-faq-macro|
 7. Global command......................................|my-faq-global-commands|
    7.1 Delete lines.......................................|my-faq-delete-lines|
@@ -145,7 +146,7 @@ more :help |Select-mode|
 5. Search and replace                                   *my-faq-search-replace*
 
   /{pattern}            search pattern
-  cgn                   change highlited occurence under cursor
+  cgn                   change highlighted occurrence under cursor
   n.                    do it again on the next match
 
   *                     found next occurrence of word under the cursor 
@@ -234,6 +235,18 @@ Find and replace in multiple files with quickfix window >
   :cfirst | while 1 | cnext | endwhile
   :bufdo %s/word_1/word_2/gec
 
+------------------------------------------------------------------------------
+5.2 Ripgrep                                                    *my-faq-ripgrep*
+
+If 'grepprg' is changed to use ripgrep like this: >
+ set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case 
+
+Then you can use the following options: >
+  -i                 Case insensitive search
+  -g .*              Search in hidden directories
+  -g *.ext           Search files with "ext" extension
+  -g !*/dir[0-5]/*   Exclude dir0-5 from search
+
 ==============================================================================
 6. Macros                                                       *my-faq-macros*
 
@@ -320,8 +333,10 @@ Storing glob results (note must use APPEND)
 ==============================================================================
 9. Bookmarks                                                 *my-faq-bookmarks*
 
-  m{a-zA-Z}	Mark current position with mark {a-zA-Z}
-  `{a-z}	Go to mark {a-z} within current file
+  m{a-z}	Mark position in current file with mark {a-z}
+  m{A-Z}	mark position and file with mark {A-Z}
+  `{a-z}	Go to mark {a-z} within the current file
+  `{A-Z}	Go to the file and mark {A-Z} 
   '{a-z}        Jump to the beginning of the line of mark {a-z}	
   ''            Return to the line where the cursor was before the latest jump.  (Two single quotes.) 
   ``            Return to the cursor position before the latest jump (undo the jump). 
@@ -413,10 +428,11 @@ Format text
 File handling
   |gf|            Open file under the cursor
   <c-o>         Go back to the previous file
+  <c-i>         Go back to the next file
 
 Find definitions
   |gD|            go to definition of word under the cursor in current file
-  |gd|	          go to definition of word under the cursor in current function
+  |gd|	        go to definition of word under the cursor in current function
 
 ==============================================================================
 13. Diff                                                          *my-faq-diff*
@@ -479,7 +495,8 @@ Convert this file to HTML and upload to my wiki: >
   :color molokai
   :%s/\(<span class="Identifier">\)\(my-faq-[a-z\-].*\)<\/span>/<a href="#\2" style="color: blue;">\2<\/a>/g
   :%s/\(class="Constant"\)>\(my-faq-[a-z\-]*\)</\1 id="\2">\2</g
-  :g/\(^pre\)\|\(^body\).*/dggdd
+  :g/\(^pre\)\|\(^body\).*/d
+ggdd
   :%s#\(ftp://[^\[].*\)\(<\/span>\s*$\)#ftp://[user@]machine:port/path\2#
   :w ftp://b2_5206424@ftp.byethost2.com/htdocs/data/pages/vim/faq.txt
 
@@ -530,13 +547,13 @@ Usefull plugins, I'm using recently:
     <leader>ut : opens undo tree window
     <leader>hw : opens undo tree window (HistWin)
 
-  |unite|.vim
+  |unite|.vim  / |denite|.vim
     <leader>uf : file in current directory
     <leader>ur : most recent file list
-    <leader>uo : navigate in the current buffer
+    <leader>uo : navigate in the outline of current buffer
     <leader>uy : yank history
-    <leader>ue : buffer explorer
-    <leader>ma : browse for defined mappings
+    <leader>ub : buffer explorer
+    <leader>up : browse for defined mappings
     <leader>me : browse messages (handy for debugging)
 
   vim-|airline| 

@@ -168,7 +168,8 @@ noremap <C-tab> :tabnext<CR>
 inoremap <C-S-tab> <esc>:tabprevious<CR>i
 inoremap <C-tab> <esc>:tabnext<CR>i
 nnoremap <C-t> :tabnew<CR>
-inoremap <C-t> <esc>:tabnew<CR>
+inoremap <C-t> <esc>:tabnew<CR>        
+inoremap <S-Tab> <C-V><Tab>
 " Command line
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
