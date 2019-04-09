@@ -83,7 +83,7 @@ hi Directory       guifg=#A6E22E               gui=bold
 hi ErrorMsg        guifg=#F92672 guibg=#232526 gui=bold
 hi FoldColumn      guifg=#588F7C guibg=#000000
 hi Folded          guifg=#588F7C guibg=#000000
-hi IncSearch       guifg=#C4BE89 guibg=#000000
+hi IncSearch       guifg=#F6DE89 guibg=#000000
 
 hi MatchParen      guifg=#000000 guibg=#FD971F gui=bold
 hi ModeMsg         guifg=#E6DB74
@@ -95,7 +95,8 @@ hi PmenuSbar                     guibg=#080808
 hi PmenuThumb      guifg=#66D9EF
 
 hi Question        guifg=#66D9EF
-hi Search          guifg=#FFFFFF guibg=#455354
+hi Search          guifg=#000000 guibg=#F3D569 
+" #455354
 " marks column
 hi SignColumn      guifg=#A6E22E guibg=#232526
 if has("spell")

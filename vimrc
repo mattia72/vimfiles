@@ -56,9 +56,6 @@ cd ~
 " Temporary mappings
 "-------------------------------------------------------------------------------
 
-" Save and build
-nnoremap <F7> :w <bar> if filereadable("make.cmd") <bar> make <bar> else <bar> cd .. <bar> endif <cr>
-
 ":so Session.vim
 " Obsession takes care of Session update
 
