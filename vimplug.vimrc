@@ -13,8 +13,8 @@ call plug#begin(expand('~/.vim/plugged/'))
 " Run :PlugUpgrade for upgrade Plug itself
 Plug 'junegunn/vim-plug'
 
-Plug 'Shougo/denite.nvim' , Cond(has('python3'))
-Plug 'Shougo/unite.vim'   , Cond(!has('python3'))
+Plug 'Shougo/denite.nvim'  , Cond(has('python3'))
+Plug 'Shougo/unite.vim'    , Cond(!has('python3'))
 
 Plug 'neomake/neomake'            " async make
 Plug 'Shougo/neomru.vim'          " most recent file list for Unit
@@ -35,13 +35,13 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'andymass/vim-matchup'      " modern matchit and matchparen replacement, even better % navigate and highlight matching words
 
-Plug 'tpope/vim-unimpaired'
+"Plug 'tpope/vim-unimpaired'     " maps :next, :prev etc. 
 Plug 'tpope/vim-repeat'          " repeats plugin mappings
-Plug 'tpope/vim-abolish'         " :%S/facilit{y, ies}/building{, s}/g
+Plug 'tpope/vim-abolish'         , { 'on' : 'S' } " :%S/facilit{y, ies}/building{, s}/g
 Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-fugitive'        " git wrapper
-Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession'       " updates sessions created by mksession
 
 Plug 'Lokaltog/vim-easymotion'   " ,,w
 Plug 'kshenoy/vim-signature'     " toggle, display and navigate marks
@@ -49,7 +49,8 @@ Plug 'kshenoy/vim-signature'     " toggle, display and navigate marks
 Plug 'dhruvasagar/vim-table-mode' , { 'on' : 'Tableize' }          " creating tables
 Plug 'godlygeek/tabular'          , { 'on' : 'Tabularize' }        " creating tables
 
-Plug 'kien/rainbow_parentheses.vim',{ 'on' : 'RainbowParenthesesToggle' }
+"Plug 'kien/rainbow_parentheses.vim',{ 'on' : 'RainbowParenthesesToggle' }
+Plug 'luochen1990/rainbow'       " better rainbow
 Plug 'Konfekt/FastFold'          " it updates folding only if necessary
 Plug 'kopischke/vim-stay'        " automated view creation 
 Plug 'Raimondi/delimitMate'      " this plugin provides automatic closing of quotes
@@ -72,6 +73,10 @@ Plug 'kchmck/vim-coffee-script'     , {'for': ['coffe']}
 Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
 Plug 'vim-scripts/MatchTag'         , {'for': ['html']}                " highlight html tag pairs
 
+" development
+Plug 'vim-scripts/genutils'
+Plug 'albfan/vim-breakpts'
+
 Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
 " My own 
 "Plug 'mattia72/vim-delphi' 
@@ -84,7 +89,7 @@ Plug 'dsolstad/vim-wombat256i'            " {'script_type': 'color'}
 Plug 'bronzehedwick/impactjs-colorscheme' " {'script_type': 'color'}
 Plug 'altercation/vim-colors-solarized'   " {'script_type': 'color'}
 Plug 'tomasr/molokai'                     " {'script_type': 'color'}
-Plug 'tomasiser/vim-code-dark'                     " {'script_type': 'color'}
+Plug 'tomasiser/vim-code-dark'            " {'script_type': 'color'}
 Plug 'sickill/vim-monokai'                " {'script_type': 'color'}
 
 call plug#end()
@@ -113,7 +118,8 @@ nnoremap <leader>hw :Histwin<CR>
 nnoremap <leader>ut :Histwin<CR>
 
 " Rainbow braces highlight
-nnoremap <leader>rp :RainbowParenthesesToggle<CR>
+let g:rainbow_active = 0 "1/ 0 if you want to enable it later via :RainbowToggle
+nnoremap <leader>rp :RainbowToggle<CR>
 
 let g:xml_syntax_folding = 1
 

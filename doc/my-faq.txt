@@ -1,4 +1,4 @@
-*my-faq.txt* My Vim faq for Vim version 8.1            Last change: 19 okt. 2015
+*my-faq.txt*              My Vim faq for Vim version 8.1            
                          
                        SHORT REFERENCE MANUAL by Mattia
 ==============================================================================
@@ -28,7 +28,7 @@ CONTENTS                                                      *my-faq-contents*
 12. Source code
     editing........................................|my-faq-source-code-editing|
 13. Diff..........................................................|my-faq-diff|
-14. Extras......................................................|my-faq-extras|
+14. Misc..........................................................|my-faq-misc|
     14.1 To HTML...............................................|my-faq-to-html|
 15. Plugins....................................................|my-faq-plugins|
 
@@ -104,7 +104,7 @@ Example:
 <c-v>jjj I{text}<esc>    insert {text} to each row before visual block
 
 ==============================================================================
-3. Text objects                            *my-faq-objects*
+3. Text objects                                                *my-faq-objects*
                                                               
 These can be used after an operator or in Visual mode to select an
 object.
@@ -343,9 +343,9 @@ Storing glob results (note must use APPEND)
   %             Jump to corresponding item, e.g. from an open brace to its matching closing brace. 
 
 ==============================================================================
-10 Hotkeys                                                      *my-faq-hotkeys*
+10 Hotkeys                                                     *my-faq-hotkeys*
 ------------------------------------------------------------------------------
-10.1 Normal mode hotkeys                            *my-faq-normal-mode-hotkeys*
+10.1 Normal mode hotkeys                           *my-faq-normal-mode-hotkeys*
 
   Window handling hotkeys begins with CTRL-W, which is mapped to <leader>w.
   <leader>wc     Close current window
@@ -356,7 +356,7 @@ Storing glob results (note must use APPEND)
   Other normal mode hotkeys can be found in |my-faq-plugins| section.
 
 ------------------------------------------------------------------------------
-10.2 Command mode hotkeys                          *my-faq-command-mode-hotkeys*
+10.2 Command mode hotkeys                         *my-faq-command-mode-hotkeys*
 
   C-c          Like <esc>, but do not use an abbreviation
   C-r {1-9a-z%#:.-="} Insert the contents of a register 
@@ -365,7 +365,7 @@ Storing glob results (note must use APPEND)
   C-f           Switch from commandline mode to the commandline window
 
 ------------------------------------------------------------------------------
-10.3 Insert mode hotkeys                            *my-faq-insert-mode-hotkeys*
+10.3 Insert mode hotkeys                           *my-faq-insert-mode-hotkeys*
 
   C-o{command}   Execute {command} and return to Insert mode
   C-n           Insert next match of identifier before the cursor
@@ -376,7 +376,7 @@ Completion
   <c-x><c-l>     Line completion in insert mode
 
 ------------------------------------------------------------------------------
-10.4 Visual mode hotkeys                            *my-faq-visual-mode-hotkeys*
+10.4 Visual mode hotkeys                           *my-faq-visual-mode-hotkeys*
 
   v    Start Visual mode per character.
   V    Start Visual mode linewise.
@@ -449,7 +449,7 @@ Diff two tab: >
  :diffthis.
 
 ==============================================================================
-14. Extras                                                      *my-faq-extras*
+14. Misc                                                          *my-faq-misc*
 
 Undo/Redo
   u             Undo
@@ -506,7 +506,8 @@ NOTE: use e.g 9yy to yank these commands, then execute with: @" .
 ==============================================================================
 15. Plugins                                                    *my-faq-plugins*
 
-Usefull plugins, I'm using recently:
+Usefull plugins, I'm using recently. A complete list can be found 
+on main *:help* page at secion: |local-additions|
 
   |matchit| 
     jumps to matching word with % 
@@ -576,17 +577,6 @@ Usefull plugins, I'm using recently:
 
   vim-|shell.txt| 
     Improved integration between  Vim and its environment 
-
-  vim-|unimpaired|
-    *[a*     |:previous|
-    *]a*     |:next|
-    *[A*     |:first|
-    *]A*     |:last|
-    *[b*     |:bprevious|
-    *]b*     |:bnext|
-    *[B*     |:bfirst|
-    *]B*     |:blast|
-    etc.
 
   |abolish|
     :%Abolish -substitute -flags=g box{,es} bag{,s}
