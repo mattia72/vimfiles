@@ -240,7 +240,8 @@ Find and replace in multiple files with quickfix window >
 
 If 'grepprg' is changed to use ripgrep like this: >
  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case 
-so |:grep| searches in current directory and you can use the following options: >
+so |:grep| will search using ripgrep in current directory and you can use the 
+following options: >
  -i                 Case insensitive search
  -g .*              Search in hidden directories
  -g *.ext           Search files with "ext" extension
