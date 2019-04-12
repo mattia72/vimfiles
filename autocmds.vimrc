@@ -38,6 +38,7 @@ function! g:MySetTerminalCursorColor(cursor_color)
   :!echo -ne "\e]12;".a:cursor_color."\x07"
 endfunction
 
+
 function! g:MyMakeView()
   " Put these in an autocmd group, so that we can delete them easily.
   augroup MyView
@@ -54,11 +55,32 @@ augroup reread_vimrc
   autocmd BufWritePost *vimrc LightlineReload
 augroup END
 
-" close quickfix with esc
-augroup quickfix_close_with_esc
+function! g:SetQuickFixWindowProperties()
+  set nocursorcolumn cursorline
+endfunction
+
+function! g:GrepPostActions()
+  let qflist = getqflist()
+  if len(qflist) > 0
+    if exists('g:ripgrep_search_pattern')
+      "let @/ = trim(g:ripgrep_search_pattern,'"')
+      execute 'copen | match Error '.g:ripgrep_search_pattern
+    endif            
+    wincmd J
+    "echo 'Searched '.getcwd()
+  else 
+    "TODO better info about searched pathes
+	echohl WarningMsg | echo 'No match found in '.getcwd() | echohl None
+  endif
+endfunction
+
+augroup quickfix_autocmds
   autocmd!
   autocmd FileType qf if mapcheck('<esc>', 'n') ==# '' | nnoremap <buffer><silent> <esc> :cclose<bar>lclose<CR> | endif
   autocmd FileType qf nnoremap <buffer><silent> q :cclose<bar>lclose<CR>
+  autocmd FileType qf call g:SetQuickFixWindowProperties() 
+  autocmd QuickFixCmdPost grep call g:GrepPostActions() 
+  "autocmd BufWinEnter quickfix echo 'Hello'
 augroup END
 
 " When editing a file, always jump to the last known cursor position.

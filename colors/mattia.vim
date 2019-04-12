@@ -79,7 +79,8 @@ hi DiffChange      guifg=#89807D guibg=#4C4745
 hi DiffDelete      guifg=#960050 guibg=#1E0010
 hi DiffText                      guibg=#4C4745 gui=italic,bold
 
-hi Directory       guifg=#A6E22E               gui=bold
+hi Directory       guifg=#A6E22E
+"#6593D8 
 hi ErrorMsg        guifg=#F92672 guibg=#232526 gui=bold
 hi FoldColumn      guifg=#588F7C guibg=#000000
 hi Folded          guifg=#588F7C guibg=#000000

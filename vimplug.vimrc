@@ -25,6 +25,7 @@ Plug 'Shougo/neosnippet-snippets'
 
 Plug 'Shougo/neocomplete.vim'     " a fast complete for lua supported vim
 Plug 'chrisbra/histwin.vim'       " browse undo-tree
+Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window
 
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'

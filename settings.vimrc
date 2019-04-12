@@ -11,20 +11,20 @@
 
 set autoindent "automatically set the indent of a new line (local to buffer)
 set smartindent "do clever autoindenting (local to buffer)
+set preserveindent "Preserve kind of whitespace when changing indent (local to buffer)
+set copyindent "Copy whitespace for indenting from previous line (local to buffer)
 set smarttab "a <Tab> in an indent inserts 'shiftwidth' spaces
 set shiftwidth=2
 set shiftround "round to 'shiftwidth' for "<<" and ">>"
 set softtabstop=2
 set tabstop=2
 set expandtab "expand <Tab> to spaces in Insert mode (local to buffer)
-set cindent "enable specific indenting for C code (local to buffer)
-set cinoptions= "options for C-indenting (local to buffer)
-set cinkeys=0{,0},0),:,0#,!^F,o,O,e "keys that trigger C-indenting in Insert mode (local to buffer)
-set cinwords=if,else,while,do,for,switch "list of words that cause more C-indent (local to buffer)
-set indentexpr=GetVimIndent() "expression used to obtain the indent of a line (local to buffer)
-set indentkeys=0{,0},:,0#,!^F,o,O,e,=end,=else,=cat,=fina,=END,0\\ "keys that trigger indenting with 'indentexpr' in Insert mode (local to buffer)
-set copyindent "Copy whitespace for indenting from previous line (local to buffer)
-set preserveindent "Preserve kind of whitespace when changing indent (local to buffer)
+"set cindent "enable specific indenting for C code (local to buffer)
+"set cinoptions= "options for C-indenting (local to buffer)
+"set cinkeys=0{,0},0),:,0#,!^F,o,O,e "keys that trigger C-indenting in Insert mode (local to buffer)
+"set cinwords=if,else,while,do,for,switch "list of words that cause more C-indent (local to buffer)
+"set indentexpr=GetVimIndent() "expression used to obtain the indent of a line (local to buffer)
+"set indentkeys=0{,0},:,0#,!^F,o,O,e,=end,=else,=cat,=fina,=END,0\\ "keys that trigger indenting with 'indentexpr' in Insert mode (local to buffer)
 
 "-------------------------------------------------------------------------------
 " Searching
@@ -39,7 +39,8 @@ set smartcase       " ...unless we type a capital
 if (executable('rg')) 
   if (&grepprg !~# "^rg")
     " it fails on second load so we set it only if it has not been set already
-    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case 
+    " TODO colorized output \ --color\ "always" 
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
   endif
 else
   set grepprg=internal
