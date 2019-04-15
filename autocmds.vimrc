@@ -61,12 +61,20 @@ endfunction
 
 function! g:GrepPostActions()
   let qflist = getqflist()
-  call setqflist([], 'a', {'title' : 'Cmd output'})
+  "call setqflist([], 'a', {'title' : 'Cmd output'})
+  let cmd = 'copen | match Error '
 
   if len(qflist) > 0
-    if exists('g:ripgrep_search_pattern')
+    if exists('g:ripgrep_search_pattern') && exists('g:ripgrep_parameters')
+      "ignore case
+      if index(g:ripgrep_parameters, '"-i"') != -1 
+        let cmd = ''.cmd.shellescape('\c'.trim(g:ripgrep_search_pattern,'"'))
+      else     
+        let cmd = ''.cmd.g:ripgrep_search_pattern
+      endif
       "let @/ = trim(g:ripgrep_search_pattern,'"')
-      execute 'copen | match Error '.g:ripgrep_search_pattern
+      echom 'execute:'.cmd
+      execute cmd
     endif            
     wincmd J
   else 

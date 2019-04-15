@@ -94,28 +94,30 @@ function! RipGrep(...)
   let cmd = 'silent grep! '
   let i = a:0 - 1
   let is_path = 1
-  let params = []
+  let g:ripgrep_parameters = []
   let pattern_set=0
   let path_set=0
   let g:ripgrep_search_path = []
   while i >= 0
     " if last parameter is a file/directory
     if !empty(glob(expand(a:000[i]))) && is_path == 1
-      call insert(params, shellescape(expand(a:000[i])))
+      call insert(g:ripgrep_parameters, shellescape(expand(a:000[i])))
       call insert(g:ripgrep_search_path, expand(a:000[i]))
     else " else search string
       if pattern_set == 0 
         let g:ripgrep_search_pattern = shellescape(a:000[i])
         let pattern_set = 1
       endif
-      call insert(params, shellescape(a:000[i]))
+      call insert(g:ripgrep_parameters, shellescape(a:000[i]))
       let is_path = 0
     endif
     let i -= 1
   endwhile
   " now join from the beginning
-  for p in params | let cmd .= ' ' . p | endfor
-  "echom 'Execute: rg ' . cmd
+  for p in g:ripgrep_parameters | let cmd .= ' ' . p | endfor
+
+  "echom 'RipGrep run: ' . cmd
+	echohl ModeMsg | echo 'RipGrep'.substitute(cmd,'silent grep!','','') | echohl None
   execute cmd
 endfunction
 

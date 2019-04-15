@@ -16,7 +16,9 @@ Plug 'junegunn/vim-plug'
 Plug 'Shougo/denite.nvim'  , Cond(has('python3'))
 Plug 'Shougo/unite.vim'    , Cond(!has('python3'))
 
-Plug 'neomake/neomake'            " async make
+"Plug 'neomake/neomake'            " async make
+"Plug 'hauleth/asyncdo.vim'        " minimal asynchronous task runner
+
 Plug 'Shougo/neomru.vim'          " most recent file list for Unit
 Plug 'Shougo/unite-outline', Cond(!has('python3')) " it is only for Unite
 Plug 'Shougo/neoyank.vim'
@@ -42,6 +44,7 @@ Plug 'tpope/vim-abolish'         , { 'on' : 'S' } " :%S/facilit{y, ies}/building
 Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-fugitive'        " git wrapper
+Plug 'tpope/vim-dispatch'        " async make :Make! and :Copen
 Plug 'tpope/vim-obsession'       " updates sessions created by mksession
 
 Plug 'Lokaltog/vim-easymotion'   " ,,w
@@ -120,7 +123,7 @@ nnoremap <leader>ut :Histwin<CR>
 
 " Rainbow braces highlight
 let g:rainbow_active = 0 "1/ 0 if you want to enable it later via :RainbowToggle
-nnoremap <leader>rp :RainbowToggle<CR>
+nnoremap <leader>rt :RainbowToggle<CR>
 
 let g:xml_syntax_folding = 1
 

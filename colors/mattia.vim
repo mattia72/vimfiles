@@ -79,9 +79,12 @@ hi DiffChange      guifg=#89807D guibg=#4C4745
 hi DiffDelete      guifg=#960050 guibg=#1E0010
 hi DiffText                      guibg=#4C4745 gui=italic,bold
 
-hi Directory       guifg=#A6E22E
-"#6593D8 
-hi ErrorMsg        guifg=#F92672 guibg=#232526 gui=bold
+hi Directory       guifg=#588F7C
+"#A6E22E
+hi ErrorMsg        guifg=#F92672 guibg=#1B1D1E 
+hi WarningMsg      guifg=#EAF60E guibg=#1B1D1E
+"guibg=#333333 gui=bold
+"guibg=#232526 
 hi FoldColumn      guifg=#588F7C guibg=#000000
 hi Folded          guifg=#588F7C guibg=#000000
 hi IncSearch       guifg=#F6DE89 guibg=#000000
@@ -112,7 +115,6 @@ hi StatusLineNC    guifg=#808080 guibg=#080808
 hi VertSplit       guifg=#808080 guibg=#080808 gui=bold
 hi VisualNOS                     guibg=#403D3D
 hi Visual                        guibg=#403D3D
-hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=bold
 hi WildMenu        guifg=#66D9EF guibg=#000000
 
 "
