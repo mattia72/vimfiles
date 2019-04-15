@@ -97,10 +97,12 @@ function! RipGrep(...)
   let params = []
   let pattern_set=0
   let path_set=0
+  let g:ripgrep_search_path = []
   while i >= 0
     " if last parameter is a file/directory
     if !empty(glob(expand(a:000[i]))) && is_path == 1
       call insert(params, shellescape(expand(a:000[i])))
+      call insert(g:ripgrep_search_path, expand(a:000[i]))
     else " else search string
       if pattern_set == 0 
         let g:ripgrep_search_pattern = shellescape(a:000[i])

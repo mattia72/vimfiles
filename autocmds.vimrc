@@ -61,16 +61,24 @@ endfunction
 
 function! g:GrepPostActions()
   let qflist = getqflist()
+  call setqflist([], 'a', {'title' : 'Cmd output'})
+
   if len(qflist) > 0
     if exists('g:ripgrep_search_pattern')
       "let @/ = trim(g:ripgrep_search_pattern,'"')
       execute 'copen | match Error '.g:ripgrep_search_pattern
     endif            
     wincmd J
-    "echo 'Searched '.getcwd()
   else 
     "TODO better info about searched pathes
-	echohl WarningMsg | echo 'No match found in '.getcwd() | echohl None
+	echom 'len '.len(g:ripgrep_search_path)
+    if len(g:ripgrep_search_path) > 0
+	  echohl WarningMsg | echo 'No match found in '.join(g:ripgrep_search_path,', ') | echohl None
+	  echom 'No match found in '.join(g:ripgrep_search_path,', ')
+	else
+	  echohl WarningMsg | echo 'No match found in '.getcwd() | echohl None
+	  echom 'No match found in '.getcwd() 
+	endif
   endif
 endfunction
 
