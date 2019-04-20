@@ -53,6 +53,7 @@ augroup reread_vimrc
   autocmd!
   autocmd BufWritePost *vimrc source $MYVIMRC
   autocmd BufWritePost *vimrc LightlineReload
+  autocmd FileType vim nnoremap <buffer> <F7> :wa<bar>source %<cr>
 augroup END
 
 function! g:SetQuickFixWindowProperties()
@@ -73,19 +74,19 @@ function! g:GrepPostActions()
         let cmd = ''.cmd.g:ripgrep_search_pattern
       endif
       "let @/ = trim(g:ripgrep_search_pattern,'"')
-      echom 'execute:'.cmd
+      "echom 'execute:'.cmd
       execute cmd
     endif            
     wincmd J
   else 
-    "TODO better info about searched pathes
+    "TODO QuickFixCmdPost doesn't fired on empty qflist
 	echom 'len '.len(g:ripgrep_search_path)
     if len(g:ripgrep_search_path) > 0
-	  echohl WarningMsg | echo 'No match found in '.join(g:ripgrep_search_path,', ') | echohl None
-	  echom 'No match found in '.join(g:ripgrep_search_path,', ')
+	  echohl WarningMsg | redraw | echo 'No match found in '.join(g:ripgrep_search_path,', ') | echohl None
+	  "echom 'No match found in '.join(g:ripgrep_search_path,', ')
 	else
-	  echohl WarningMsg | echo 'No match found in '.getcwd() | echohl None
-	  echom 'No match found in '.getcwd() 
+	  echohl WarningMsg | redraw | echo 'No match found in '.getcwd() | echohl None
+	  "echom 'No match found in '.getcwd() 
 	endif
   endif
 endfunction

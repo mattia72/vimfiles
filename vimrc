@@ -51,6 +51,7 @@ if filereadable(expand("~/.vim/additions.vimrc"))
   source ~/.vim/additions.vimrc
 endif
 
+set path+=~
 cd ~
 
 "-------------------------------------------------------------------------------
