@@ -53,6 +53,7 @@ augroup reread_vimrc
   autocmd!
   autocmd BufWritePost *vimrc source $MYVIMRC
   autocmd BufWritePost *vimrc LightlineReload
+  autocmd FileType vim nnoremap <buffer> <F7> :wa<bar>source %<cr>
 augroup END
 
 augroup quickfix_autocmds
