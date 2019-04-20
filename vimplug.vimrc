@@ -44,7 +44,8 @@ Plug 'tpope/vim-abolish'         , { 'on' : 'S' } " :%S/facilit{y, ies}/building
 Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-fugitive'        " git wrapper
-Plug 'tpope/vim-dispatch'        " async make :Make! and :Copen
+"Plug 'tpope/vim-dispatch'        " async make :Make! and :Copen
+Plug 'skywind3000/asyncrun.vim'  " async command execution 
 Plug 'tpope/vim-obsession'       " updates sessions created by mksession
 
 Plug 'Lokaltog/vim-easymotion'   " ,,w
@@ -85,6 +86,7 @@ Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
 " My own 
 "Plug 'mattia72/vim-delphi' 
 Plug  '~\dev\vim\vim-delphi'
+Plug  '~\dev\vim\vim-ripgrep'
 " Plug 'rkennedy/vim-delphi', {'for': ['delphi']} 
 
 " colors

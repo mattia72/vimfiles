@@ -90,40 +90,6 @@ noremap <leader>vi :tabnew! ~/.vim/vimrc<cr>
 " jump to tag
 nnoremap <leader>j <C-]>
 
-function! RipGrep(...)
-  let cmd = 'silent grep! '
-  let i = a:0 - 1
-  let is_path = 1
-  let g:ripgrep_parameters = []
-  let pattern_set=0
-  let path_set=0
-  let g:ripgrep_search_path = []
-  while i >= 0
-    " if last parameter is a file/directory
-    if !empty(glob(expand(a:000[i]))) && is_path == 1
-      call insert(g:ripgrep_parameters, shellescape(expand(a:000[i])))
-      call insert(g:ripgrep_search_path, expand(a:000[i]))
-    else " else search string
-      if pattern_set == 0 
-        let g:ripgrep_search_pattern = shellescape(a:000[i])
-        let pattern_set = 1
-      endif
-      call insert(g:ripgrep_parameters, shellescape(a:000[i]))
-      let is_path = 0
-    endif
-    let i -= 1
-  endwhile
-  " now join from the beginning
-  for p in g:ripgrep_parameters | let cmd .= ' ' . p | endfor
-
-  "echom 'RipGrep run: ' . cmd
-	echohl ModeMsg | echo 'RipGrep'.substitute(cmd,'silent grep!','','') | echohl None
-  execute cmd
-endfunction
-
-command! -nargs=+ -complete=file RipGrep call RipGrep(<f-args>) | cwindow 
-"\| execute 'match Error '. g:ripgrep_pattern
-
 " ripgrep in current file
 nnoremap <leader>rf <ESC>:RipGrep  %<Left><Left>
 " ripgrep in current directory

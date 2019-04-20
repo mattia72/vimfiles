@@ -55,48 +55,8 @@ augroup reread_vimrc
   autocmd BufWritePost *vimrc LightlineReload
 augroup END
 
-function! g:SetQuickFixWindowProperties()
-  set nocursorcolumn cursorline
-endfunction
-
-function! g:GrepPostActions()
-  let qflist = getqflist()
-  "call setqflist([], 'a', {'title' : 'Cmd output'})
-  let cmd = 'copen | match Error '
-
-  if len(qflist) > 0
-    if exists('g:ripgrep_search_pattern') && exists('g:ripgrep_parameters')
-      "ignore case
-      if index(g:ripgrep_parameters, '"-i"') != -1 
-        let cmd = ''.cmd.shellescape('\c'.trim(g:ripgrep_search_pattern,'"'))
-      else     
-        let cmd = ''.cmd.g:ripgrep_search_pattern
-      endif
-      "let @/ = trim(g:ripgrep_search_pattern,'"')
-      echom 'execute:'.cmd
-      execute cmd
-    endif            
-    wincmd J
-  else 
-    "TODO better info about searched pathes
-	echom 'len '.len(g:ripgrep_search_path)
-    if len(g:ripgrep_search_path) > 0
-	  echohl WarningMsg | echo 'No match found in '.join(g:ripgrep_search_path,', ') | echohl None
-	  echom 'No match found in '.join(g:ripgrep_search_path,', ')
-	else
-	  echohl WarningMsg | echo 'No match found in '.getcwd() | echohl None
-	  echom 'No match found in '.getcwd() 
-	endif
-  endif
-endfunction
-
 augroup quickfix_autocmds
   autocmd!
-  autocmd FileType qf if mapcheck('<esc>', 'n') ==# '' | nnoremap <buffer><silent> <esc> :cclose<bar>lclose<CR> | endif
-  autocmd FileType qf nnoremap <buffer><silent> q :cclose<bar>lclose<CR>
-  autocmd FileType qf call g:SetQuickFixWindowProperties() 
-  autocmd QuickFixCmdPost grep call g:GrepPostActions() 
-  "autocmd BufWinEnter quickfix echo 'Hello'
 augroup END
 
 " When editing a file, always jump to the last known cursor position.
