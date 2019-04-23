@@ -16,10 +16,12 @@ Plug 'junegunn/vim-plug'
 Plug 'Shougo/denite.nvim'  , Cond(has('python3'))
 Plug 'Shougo/unite.vim'    , Cond(!has('python3'))
 
-"Plug 'neomake/neomake'            " async make
-"Plug 'hauleth/asyncdo.vim'        " minimal asynchronous task runner
+Plug 'neomake/neomake'         " async make
+"Plug 'tpope/vim-dispatch'      " async make :Make! and :Copen
+Plug 'hauleth/asyncdo.vim'      " minimal asynchronous task runner
+Plug 'skywind3000/asyncrun.vim' " async external command execution
 
-Plug 'Shougo/neomru.vim'          " most recent file list for Unit
+Plug 'Shougo/neomru.vim'        " most recent file list for Unit
 Plug 'Shougo/unite-outline', Cond(!has('python3')) " it is only for Unite
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neosnippet'
@@ -44,8 +46,6 @@ Plug 'tpope/vim-abolish'         , { 'on' : 'S' } " :%S/facilit{y, ies}/building
 Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-fugitive'        " git wrapper
-"Plug 'tpope/vim-dispatch'        " async make :Make! and :Copen
-Plug 'skywind3000/asyncrun.vim'  " async command execution 
 Plug 'tpope/vim-obsession'       " updates sessions created by mksession
 
 Plug 'Lokaltog/vim-easymotion'   " ,,w
@@ -83,8 +83,8 @@ Plug 'vim-scripts/genutils'
 Plug 'albfan/vim-breakpts'
 
 Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
-" My own 
-"Plug 'mattia72/vim-delphi' 
+
+" My own plugins
 Plug  '~\dev\vim\vim-delphi'
 Plug  '~\dev\vim\vim-ripgrep'
 " Plug 'rkennedy/vim-delphi', {'for': ['delphi']} 

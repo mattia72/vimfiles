@@ -2,7 +2,7 @@
 "
 " Author: Mattia72
 "
-" Note: How it looks, see ":h group-name"
+" Note: How it looks like, see ":h group-name"
 " Based on the "monokai" theme for textmate
 " by Wimer Hazenberg and its darker variant 
 " by Hamish Stuart Macpherson,
