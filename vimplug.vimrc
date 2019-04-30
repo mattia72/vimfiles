@@ -13,8 +13,18 @@ call plug#begin(expand('~/.vim/plugged/'))
 " Run :PlugUpgrade for upgrade Plug itself
 Plug 'junegunn/vim-plug'
 
-Plug 'Shougo/denite.nvim'  , Cond(has('python3'))
-Plug 'Shougo/unite.vim'    , Cond(!has('python3'))
+Plug 'Shougo/denite.nvim'         , Cond(has('python3'))
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim'     , Cond(has('python3')) , { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'     , Cond(has('python3'))
+  Plug 'roxma/nvim-yarp'          , Cond(has('python3')) " required by denite
+  Plug 'roxma/vim-hug-neovim-rpc' , Cond(has('python3')) " required by denite
+endif
+
+Plug 'Shougo/unite.vim'           , Cond(!has('python3'))
+Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3'))  " a fast complete for lua supported vim
 
 Plug 'neomake/neomake'         " async make
 "Plug 'tpope/vim-dispatch'      " async make :Make! and :Copen
@@ -23,18 +33,16 @@ Plug 'skywind3000/asyncrun.vim' " async external command execution
 
 Plug 'Shougo/neomru.vim'        " most recent file list for Unit
 Plug 'Shougo/unite-outline', Cond(!has('python3')) " it is only for Unite
-Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/neoyank.vim'       " yank register browser for unite/denite
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
-Plug 'Shougo/neocomplete.vim'     " a fast complete for lua supported vim
 Plug 'chrisbra/histwin.vim'       " browse undo-tree
 Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window
 
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'
 
-" lazy load on command executed
 Plug 'scrooloose/nerdtree'       , {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/nerdcommenter'
 
@@ -51,7 +59,7 @@ Plug 'tpope/vim-obsession'       " updates sessions created by mksession
 Plug 'Lokaltog/vim-easymotion'   " ,,w
 Plug 'kshenoy/vim-signature'     " toggle, display and navigate marks
 
-Plug 'dhruvasagar/vim-table-mode' , { 'on' : 'Tableize' }          " creating tables
+" Plug 'dhruvasagar/vim-table-mode' , { 'on' : 'Tableize' }          " creating tables
 Plug 'godlygeek/tabular'          , { 'on' : 'Tabularize' }        " creating tables
 
 "Plug 'kien/rainbow_parentheses.vim',{ 'on' : 'RainbowParenthesesToggle' }
@@ -62,7 +70,7 @@ Plug 'Raimondi/delimitMate'      " this plugin provides automatic closing of quo
 Plug 'tommcdo/vim-exchange'      " exchange text by operator cx
 
 " Plug 'ludovicchabant/vim-gutentags', Cond(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
-"Plug 'c0r73x/neotags.nvim', Cond(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
+" Plug 'c0r73x/neotags.nvim', Cond(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
 Plug 'jsfaint/gen_tags.vim'
 Plug 'vim-scripts/taglist.vim'   " TList browser
 
@@ -74,9 +82,9 @@ Plug 'mileszs/ack.vim'           " the better grep
 " languages
 Plug 'vim-scripts/xml.vim'          , {'for': ['xml']}
 Plug 'vim-scripts/perl-support.vim' , {'for': ['perl']}
-Plug 'kchmck/vim-coffee-script'     , {'for': ['coffe']}
+"Plug 'kchmck/vim-coffee-script'     , {'for': ['coffe']}
 Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
-Plug 'vim-scripts/MatchTag'         , {'for': ['html']}                " highlight html tag pairs
+" Plug 'vim-scripts/MatchTag'         , {'for': ['html']}                " highlight html tag pairs
 
 " development
 Plug 'vim-scripts/genutils'
@@ -87,16 +95,15 @@ Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
 " My own plugins
 Plug  '~\dev\vim\vim-delphi'
 Plug  '~\dev\vim\vim-ripgrep'
-" Plug 'rkennedy/vim-delphi', {'for': ['delphi']} 
 
 " colors
-Plug 'sjl/badwolf'                        " {'script_type': 'color'}
-Plug 'dsolstad/vim-wombat256i'            " {'script_type': 'color'}
-Plug 'bronzehedwick/impactjs-colorscheme' " {'script_type': 'color'}
-Plug 'altercation/vim-colors-solarized'   " {'script_type': 'color'}
-Plug 'tomasr/molokai'                     " {'script_type': 'color'}
-Plug 'tomasiser/vim-code-dark'            " {'script_type': 'color'}
-Plug 'sickill/vim-monokai'                " {'script_type': 'color'}
+"Plug 'sjl/badwolf'                        " {'script_type': 'color'}
+"Plug 'dsolstad/vim-wombat256i'            " {'script_type': 'color'}
+"Plug 'bronzehedwick/impactjs-colorscheme' " {'script_type': 'color'}
+"Plug 'altercation/vim-colors-solarized'   " {'script_type': 'color'}
+"Plug 'tomasr/molokai'                     " {'script_type': 'color'}
+"Plug 'tomasiser/vim-code-dark'            " {'script_type': 'color'}
+"Plug 'sickill/vim-monokai'                " {'script_type': 'color'}
 
 call plug#end()
 
@@ -171,8 +178,9 @@ endif
 
 
 if has('python3') " exists('g:loaded_denite') doesn't work here :(
-  " Ctrl-t/g up/down in the list Ctrl-o->normale mode
+  let g:python3_host_prog = 'C:\Python37\python.exe'
 
+  " Ctrl-t/g up/down in the list Ctrl-o->normale mode
   " C-a put result to quickfix window
   call denite#custom#map('normal', '<C-a>',
         \ '<denite:multiple_mappings:denite:toggle_select_all'.
