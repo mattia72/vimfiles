@@ -15,8 +15,10 @@ Plug 'junegunn/vim-plug'
 
 Plug 'Shougo/denite.nvim'         , Cond(has('python3'))
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim'     , Cond(has('python3')) , { 'do': ':UpdateRemotePlugins' }
+if has('nvim') 
+  if has('python3')
+    Plug 'Shougo/deoplete.nvim'     ,  { 'do': ':UpdateRemotePlugins' }
+  endif
 else
   Plug 'Shougo/deoplete.nvim'     , Cond(has('python3'))
   Plug 'roxma/nvim-yarp'          , Cond(has('python3')) " required by denite
