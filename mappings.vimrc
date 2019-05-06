@@ -96,10 +96,10 @@ nnoremap <leader>rf <ESC>:RipGrep  %<Left><Left>
 nnoremap <leader>rd <ESC>:RipGrep 
 " find all word under cursor in the current directory
 nnoremap <leader>fa <ESC>:RipGrep -w <C-R><C-W> %<Left><Left>
-nnoremap <leader>fA <ESC>:AsyncRipGrep -w <C-R><C-W> 
+nnoremap <leader>fA <ESC>:RipGrepAsync -w <C-R><C-W> 
 " find all selected
 vnoremap <leader>fa y<ESC>:RipGrep <C-R>0 %<Left><Left>
-vnoremap <leader>fA y<ESC>:AsyncRipGrep <C-R>0
+vnoremap <leader>fA y<ESC>:RipGrepAsync <C-R>0
 
 " search replace selected whole word
 nnoremap <leader>sR <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/

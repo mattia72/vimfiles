@@ -82,7 +82,9 @@ hi DiffText                      guibg=#4C4745 gui=italic,bold
 hi Directory       guifg=#588F7C
 "#A6E22E
 hi ErrorMsg        guifg=#F92672 guibg=#1B1D1E 
+hi Error           guifg=#F92672 guibg=#1B1D1E 
 hi WarningMsg      guifg=#EAF60E guibg=#1B1D1E
+hi Warning         guifg=#EAF60E guibg=#1B1D1E
 "guibg=#333333 gui=bold
 "guibg=#232526 
 hi FoldColumn      guifg=#588F7C guibg=#000000

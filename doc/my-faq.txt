@@ -498,8 +498,7 @@ Convert this file to HTML and upload to my wiki: >
   :color molokai
   :%s/\(<span class="Identifier">\)\(my-faq-[a-z\-].*\)<\/span>/<a href="#\2" style="color: blue;">\2<\/a>/g
   :%s/\(class="Constant"\)>\(my-faq-[a-z\-]*\)</\1 id="\2">\2</g
-  :g/\(^pre\)\|\(^body\).*/d
-ggdd
+  :g/\(^pre\)\|\(^body\).*/d^Mggdd
   :%s#\(ftp://[^\[].*\)\(<\/span>\s*$\)#ftp://[user@]machine:port/path\2#
   :w ftp://b2_5206424@ftp.byethost2.com/htdocs/data/pages/vim/faq.txt
 
