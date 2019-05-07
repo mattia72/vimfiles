@@ -28,7 +28,7 @@ endif
 Plug 'Shougo/unite.vim'           , Cond(!has('python3'))
 Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3'))  " a fast complete for lua supported vim
 
-Plug 'neomake/neomake'         " async make
+"Plug 'neomake/neomake'         " async make
 "Plug 'tpope/vim-dispatch'      " async make :Make! and :Copen
 "Plug 'hauleth/asyncdo.vim'      " minimal async task runner (no support since 2018)
 Plug 'skywind3000/asyncrun.vim' " async external command execution
