@@ -55,8 +55,10 @@ set path+=~
 cd ~
 
 "-------------------------------------------------------------------------------
-" Temporary mappings
+" Temporary things...
 "-------------------------------------------------------------------------------
+
+set path+=~/dev/vim/**
 
 ":so Session.vim
 " Obsession takes care of Session update
