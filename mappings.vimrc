@@ -120,7 +120,7 @@ nnoremap <leader><space> :noh<cr>
 " Folding...
 nnoremap <leader>fs :call <SID>MyFoldSyntax()<cr>
 "work with an xml..
-nnoremap <leader>xm :setfiletype xml<cr> :call <SID>MyFoldSyntax()<CR>ggVG=
+"nnoremap <leader>xm :setfiletype xml<cr> :call <SID>MyFoldSyntax()<CR>ggVG=
 "xml formatting
 nnoremap <leader>xf Go<esc>:r ! xmllint --format %<cr>
 

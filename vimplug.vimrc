@@ -91,10 +91,10 @@ Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
 " development
 Plug 'vim-scripts/genutils'
 Plug 'albfan/vim-breakpts'
-
-Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
+Plug 'h1mesuke/vim-unittest'
 
 " My own plugins
+"Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
 Plug  '~\dev\vim\vim-delphi'
 Plug  '~\dev\vim\vim-ripgrep'
 
