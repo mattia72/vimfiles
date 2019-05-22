@@ -69,7 +69,6 @@ hi Debug           guifg=#BCA3A3               gui=bold
 hi Underlined      guifg=#808080               gui=underline
 
 hi Ignore          guifg=#808080 guibg=bg
-hi Error           guifg=#960050 guibg=#1E0010
 hi Todo            guifg=#FFFFFF guibg=bg      gui=bold
 hi SpecialKey      guifg=#888A85               gui=italic
 hi Title           guifg=#ef5939
@@ -82,9 +81,10 @@ hi DiffText                      guibg=#4C4745 gui=italic,bold
 hi Directory       guifg=#588F7C
 "#A6E22E
 hi ErrorMsg        guifg=#F92672 guibg=#1B1D1E 
-hi Error           guifg=#F92672 guibg=#1B1D1E 
+" different background to highlight space errors!
+hi Error           guifg=#F92672 guibg=#1E0010 
 hi WarningMsg      guifg=#EAF60E guibg=#1B1D1E
-hi Warning         guifg=#EAF60E guibg=#1B1D1E
+hi Warning         guifg=#EAF60E guibg=#1E0010
 "guibg=#333333 gui=bold
 "guibg=#232526 
 hi FoldColumn      guifg=#588F7C guibg=#000000
