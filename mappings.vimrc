@@ -144,8 +144,15 @@ function! <SID>MyShowFoldIndicatorColumn()
     set foldcolumn=1
   endif
 endfunction
+
 " load all file from quickfix window
 nnoremap <leader>lq :cfirst <bar> while 1 <bar> cnext <bar> endwhile <cr>
+
+" close help window
+nnoremap <leader>hq :helpclose <cr>
+" close quickfix window
+nnoremap <leader>cq :cclose <cr>
+
 " close a buffer
 nnoremap <leader>bd :bdelete <cr>
 " close all buffer
