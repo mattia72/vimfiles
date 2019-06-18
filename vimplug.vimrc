@@ -44,7 +44,7 @@ Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window
 
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'
-" Plug 'albertomontesg/lightline-asyncrun'
+Plug 'albertomontesg/lightline-asyncrun'
 
 Plug 'scrooloose/nerdtree'       , {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/nerdcommenter'
@@ -313,6 +313,17 @@ function! MySetLightLine()
 		    \   'fugitive': 'LightlineFugitive',
 		    \ }
 	      \}
+
+  let g:lightline.component_expand = {
+        \ 'asyncrun_status': 'lightline#asyncrun#status',
+        \ }
+
+  let g:lightline.active = {
+        \ 'right': [
+        \	  ['percent', 'lineinfo'],
+        \	  ['fileformat', 'fileencoding', 'filetype'],
+        \   ['asyncrun_status']
+        \ ]}
 endfunction
 
 function! LightlineReadonly()
