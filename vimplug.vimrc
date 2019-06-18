@@ -44,6 +44,7 @@ Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window
 
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'
+" Plug 'albertomontesg/lightline-asyncrun'
 
 Plug 'scrooloose/nerdtree'       , {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/nerdcommenter'
@@ -289,6 +290,8 @@ function! MySetAirLine()
     let g:airline_symbols.maxlinenr = '☰'
     let g:airline_symbols.readonly = '⭤'
   endif
+  let g:asyncrun_status = "stopped" 
+  let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 endfunction
 
 " lightline
