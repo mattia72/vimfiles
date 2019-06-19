@@ -33,8 +33,8 @@ let g:mapleader = ","
 nnoremap <leader>cp :let @+ = expand("%:p")<cr>
 nnoremap <leader>cf :let @+ = expand("%")<cr>
 
-"got to dir of current file
-nnoremap <leader>cd <ESC>:cd %:p:h <bar> pwd <CR>
+"got to dir of current file in current window only
+nnoremap <leader>cd <ESC>:lcd %:p:h <bar> pwd <CR>
 
 
 " simple buffer explorer, after :sb works tab completition 
