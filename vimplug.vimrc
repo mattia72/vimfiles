@@ -96,6 +96,8 @@ Plug 'h1mesuke/vim-unittest'
 
 " My own plugins
 "Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
+Plug 'vim-scripts/Decho'
+
 Plug  '~\dev\vim\vim-delphi'
 Plug  '~\dev\vim\vim-ripgrep'
 
