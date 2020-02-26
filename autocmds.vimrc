@@ -39,14 +39,14 @@ function! g:MySetTerminalCursorColor(cursor_color)
 endfunction
 
 
-function! g:MyMakeView()
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup MyView
-    autocmd!  " save/load view
-    autocmd BufWinLeave ?* silent! mkview
-    autocmd BufWinEnter ?* silent! loadview "silent! no error message if there is no file name
-  augroup END
-endfunctio
+"function! g:MyMakeView()
+  "" Put these in an autocmd group, so that we can delete them easily.
+  "augroup MyView
+    "autocmd!  " save/load view
+    "autocmd BufWinLeave ?* silent! mkview
+    "autocmd BufWinEnter ?* silent! loadview "silent! no error message if there is no file name
+  "augroup END
+"endfunctio
 
 " When vimrc is edited, reload it
 augroup reread_vimrc
