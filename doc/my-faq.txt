@@ -550,14 +550,28 @@ on main *:help* page at secion: |local-additions|
     <leader>ut : opens undo tree window
     <leader>hw : opens undo tree window (HistWin)
 
-  |unite|.vim  / |denite|.vim
+  |unite|.vim  
     <leader>uf : file in current directory
     <leader>ur : most recent file list
     <leader>uo : navigate in the outline of current buffer
     <leader>uy : yank history
     <leader>ub : buffer explorer
     <leader>up : browse for defined mappings
-    <leader>me : browse messages (handy for debugging)
+    <leader>um : browse messages (handy for debugging)
+
+  |denite|.vim will be loaded instead of |unite| if has('python3')
+    <leader>df : file in current directory
+    <leader>dr : most recent file list
+    <leader>do : navigate in the outline of current buffer
+    <leader>dy : yank history
+    <leader>db : buffer explorer
+    <leader>dp : browse for defined mappings
+    <leader>dm : browse messages (handy for debugging)
+  Note: 
+    i: filter in |denit| window
+    d: delete in |denit| window
+    p: preview in |denit| window ???
+    q: quit from |denit| window
 
   vim-|airline| 
     status/tabline that's light as air :)    

@@ -181,15 +181,37 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
-
+"https://github.com/roxma/nvim-yarp#requirements
 if has('python3') " exists('g:loaded_denite') doesn't work here :(
-  let g:python3_host_prog = 'C:\Python37\python.exe'
+  let g:python3_host_prog = 'C:\Python38\python.exe'
+
+	" Define mappings
+	autocmd FileType denite call s:denite_my_settings()
+	function! s:denite_my_settings() abort
+	  nnoremap <silent><buffer><expr> <CR>
+	        \ denite#do_map('do_action')
+	  nnoremap <silent><buffer><expr> d
+	        \ denite#do_map('do_action', 'delete')
+	  nnoremap <silent><buffer><expr> p
+	        \ denite#do_map('do_action', 'preview')
+	  nnoremap <silent><buffer><expr> q
+	        \ denite#do_map('quit')
+	  nnoremap <silent><buffer><expr> i
+	        \ denite#do_map('open_filter_buffer')
+	  nnoremap <silent><buffer><expr> <Space>
+	        \ denite#do_map('toggle_select').'j'
+	endfunction
+
+	autocmd FileType denite-filter call s:denite_filter_my_settings()
+	function! s:denite_filter_my_settings() abort
+	  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+	endfunction
 
   " Ctrl-t/g up/down in the list Ctrl-o->normale mode
   " C-a put result to quickfix window
-  call denite#custom#map('normal', '<C-a>',
-        \ '<denite:multiple_mappings:denite:toggle_select_all'.
-        \ ',denite:do_action:quickfix>', 'noremap')
+  "call denite#custom#map('normal', '<C-a>',
+        "\ '<denite:multiple_mappings:denite:toggle_select_all'.
+        "\ ',denite:do_action:quickfix>', 'noremap')
 
   if (executable('rg'))
     call denite#custom#var('grep', 'command', ['rg'])
@@ -206,7 +228,7 @@ if has('python3') " exists('g:loaded_denite') doesn't work here :(
   " recursive file search (requres 'ag' or 'find' (not in windows))
   nnoremap <leader>df :<C-u>Denite -buffer-name=files   file/rec  <cr>
   " most recent file list
-  nnoremap <leader>dr :<C-u>Denite -buffer-name=mru     file_mru -mode=normal <cr>
+  nnoremap <leader>dr :<C-u>Denite -buffer-name=mru     file_mru <cr> 
   " navigate in the current buffer
   nnoremap <leader>do :<C-u>Denite -buffer-name=outline outline <cr>
   " yank history
