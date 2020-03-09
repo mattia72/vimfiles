@@ -81,6 +81,7 @@ Plug 'vim-utils/vim-husk'        " command line mappings like ctrl right
 Plug 'justinmk/vim-sneak'        " s<char><char> than ; or s to the next
 Plug 'wellle/targets.vim'        " more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
 Plug 'mileszs/ack.vim'           " the better grep
+Plug 'yssl/QFEnter'              " QFEnter allows you to open items from quickfix or location list wherever you wish.
 
 " languages
 Plug 'vim-scripts/xml.vim'          , {'for': ['xml']}

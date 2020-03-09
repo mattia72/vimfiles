@@ -38,7 +38,7 @@ nnoremap <leader>cd <ESC>:lcd %:p:h <bar> pwd <CR>
 
 
 " simple buffer explorer, after :sb works tab completition 
-" sb try to find buffer in opened windows and switches to it
+" sb tries to find buffer in opened windows and switches to it
 nnoremap <leader>sb :ls<cr>:sb<space>
 " simple buffer explorer, after :b works tab completition 
 nnoremap <leader>b :ls<cr>:b<space>
@@ -99,12 +99,19 @@ vnoremap <leader>fA y<ESC>:RipGrep <C-R>0
 
 " search replace selected whole word
 nnoremap <leader>sR <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
+" search replace selected whole word case sensitive
+nnoremap <leader>sRC <ESC>:%s/\C\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
 " search replace line containing selected word
 nnoremap <leader>srl <ESC>:%s/.*<C-R><C-W>.*//g<Left><Left><BackSpace>/
 " search replace selected word
 nnoremap <leader>sr <ESC>:%s/<C-R><C-W>//g<Left><Left><BackSpace>/
+" search replace selected word case sensitive
+nnoremap <leader>src <ESC>:%s/\C<C-R><C-W>//g<Left><Left><BackSpace>/
 " search replace selected
 vnoremap <leader>sr y<ESC>:%s/<C-R>0//g<Left><Left><BackSpace>/
+" search replace selected case sensitive
+vnoremap <leader>src y<ESC>:%s/\C<C-R>0//g<Left><Left><BackSpace>/
+
 " highlight selected
 vnoremap <leader>sh y<ESC>:match Error /<C-R>0/ 
 "reload syntax
@@ -198,4 +205,9 @@ vnoremap  {  s{}<Esc>P<Right>%
 
 " Helptags should be rebuild if doc changed
 nnoremap <leader>ht :Helptags<CR>
+
+" abbreviations
+iabbrev <expr> 2dd  strftime("%d.%m.%Y")
+iabbrev <expr> 2dm  strftime("%Y.%m.%d")
+
 
