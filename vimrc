@@ -21,6 +21,11 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
+if exists('g:vscode') 
+  source ~/.vim/vscode.vimrc
+  finish
+endif
+
 if filereadable(expand("~/.vim/settings.vimrc"))
   source ~/.vim/settings.vimrc
 endif
