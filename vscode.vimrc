@@ -70,3 +70,34 @@ set path+=.             " path to use gf - jump to file.
 "set path+=**            " path to use by :find anything reqursive
 " let &cdpath = ',' . substitute(substitute($CDPATH, '[, ]', '\\\0', 'g'), ':', ',', 'g')
 " set cdpath+=.  " path to use gf - jump to file.
+
+call plug#begin(expand('~/.vim/plugged/'))
+
+" Run :PlugUpgrade for upgrade Plug itself
+Plug 'junegunn/vim-plug'
+
+Plug 'tpope/vim-abolish'         , { 'on' : 'S' } " :%S/facilit{y, ies}/building{, s}/g
+Plug 'tpope/vim-surround'
+
+Plug 'asvetliakov/vim-easymotion'
+" hi link EasyMotionTarget ErrorMsg
+" hi link EasyMotionShade  Comment
+
+Plug 'kshenoy/vim-signature'     " toggle, display and navigate marks
+
+Plug 'godlygeek/tabular'          , { 'on' : 'Tabularize' }        " creating tables
+
+Plug 'justinmk/vim-sneak'        " s<char><char> than ; or s to the next
+Plug 'wellle/targets.vim'        " more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
+
+" My own plugins
+Plug 'vim-scripts/Decho'
+
+Plug  '~\dev\vim\vim-ripgrep'
+
+xmap ,c  <Plug>VSCodeCommentary
+nmap ,c  <Plug>VSCodeCommentary
+omap ,c  <Plug>VSCodeCommentary
+nmap ,cc <Plug>VSCodeCommentaryLine
+
+call plug#end()

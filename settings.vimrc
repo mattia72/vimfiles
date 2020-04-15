@@ -15,7 +15,7 @@ set preserveindent " Preserve kind of whitespace when changing indent (local to 
 set copyindent     " Copy whitespace for indenting from previous line (local to buffer)
 set smarttab       " a <Tab> in an indent inserts 'shiftwidth' spaces
 set shiftwidth=2
-set shiftround     " round to 'shiftwidth' for                                          " <<                                                                             " and " >> "
+set shiftround     " round to 'shiftwidth' for <<  and  >> 
 set softtabstop=2
 set tabstop=2
 set expandtab      " expand <Tab> to spaces in Insert mode (local to buffer)

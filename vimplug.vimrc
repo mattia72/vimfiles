@@ -29,6 +29,7 @@ Plug 'Shougo/unite.vim'           , Cond(!has('python3'))
 Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3'))  " a fast complete for lua supported vim
 
 Plug 'vifm/vifm.vim'            " vifm in vim
+Plug 'mhinz/vim-startify'       " startup screen
 
 "Plug 'neomake/neomake'         " async make
 "Plug 'tpope/vim-dispatch'      " async make :Make! and :Copen
