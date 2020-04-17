@@ -15,8 +15,10 @@ source $VIMRUNTIME/mswin.vim
 nnoremap <C-V> <C-Q>
 
 " Auto indent pasted text
-nnoremap p p=`]<C-o>
-nnoremap P P=`]<C-o>
+if ! has('nvim') 
+  nnoremap p p=`]<C-o>
+  nnoremap P P=`]<C-o>
+endif
 
 " Don't use Ex mode, use Q for paragraph formatting
 noremap Q gq
@@ -53,7 +55,7 @@ vnoremap <leader>rs <ESC>y:<C-R>0
 "nnoremap <leader>s :w!<cr>
 " Window operation
 nnoremap <leader>w <C-W>
-if has("nvim")                 " tnoremap stands for terminal mode mappings in neovim
+if has('nvim')                 " tnoremap stands for terminal mode mappings in neovim
   tnoremap <Esc> <C-\><C-n>   
   tnoremap <c-h> <C-\><C-N><C-w>h
   tnoremap <c-j> <C-\><C-N><C-w>j
