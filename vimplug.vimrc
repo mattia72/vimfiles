@@ -120,6 +120,26 @@ call plug#end()
 " Plugin settings
 "-------------------------------------------------------------------------------
 
+" start screen settings
+let g:startify_session_sort = 1
+let g:startify_fortune_use_unicode = 1
+let g:startify_session_persistence = 1
+let s:intro = split(execute('version'), '\(\n\|(\|)\)')
+let s:end_index = has('nvim') ? 2 : 3
+let g:startify_custom_header =
+      \ startify#pad(startify#fortune#boxed(s:intro[0:s:end_index]))
+let g:startify_commands = [
+      \ ':help reference',
+      \ ':so ~\Session | so ~\delphi-dev.vim',
+      \ ]
+let g:startify_lists = [
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ { 'type': 'files',     'header': ['   MRU']            },
+      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ ]
+
 "switch off fugitive
 "let g:loaded_fugitive = 0
 

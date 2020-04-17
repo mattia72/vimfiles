@@ -60,6 +60,7 @@ augroup END
 
 augroup quickfix_autocmds
   autocmd!
+  autocmd FileType qf nnoremap <buffer> <F5> :setlocal syntax=qf <cr>
 augroup END
 
 " When editing a file, always jump to the last known cursor position.
