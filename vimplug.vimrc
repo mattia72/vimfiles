@@ -120,7 +120,11 @@ call plug#end()
 " Plugin settings
 "-------------------------------------------------------------------------------
 
-" start screen settings
+"UnitTest
+nnoremap <leader>su :wa <bar> UnitTest<CR>
+nnoremap <leader><F5> :wa <bar> UnitTest<CR>
+
+" Startify: start screen settings
 let g:startify_session_sort = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_persistence = 1
@@ -129,8 +133,9 @@ let s:end_index = has('nvim') ? 2 : 3
 let g:startify_custom_header =
       \ startify#pad(startify#fortune#boxed(s:intro[0:s:end_index]))
 let g:startify_commands = [
-      \ ':help reference',
-      \ ':so ~\Session | so ~\delphi-dev.vim',
+      \ ':ec "FAQ    " | help my-faq.txt',
+      \ ':ec "Delphi " | so ~\Session.vim | so ~\delphi-dev.vim',
+      \ ':ec "RipGrep" | so ~\dev\vim\vim-ripgrep\Session.vim',
       \ ]
 let g:startify_lists = [
       \ { 'type': 'commands',  'header': ['   Commands']       },
