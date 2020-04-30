@@ -15,8 +15,12 @@ nmap ,c  <Plug>VSCodeCommentary
 omap ,c  <Plug>VSCodeCommentary
 nmap ,cc <Plug>VSCodeCommentaryLine
 
+" find word under cursor
 nmap ,fa :<C-u>call VSCodeNotify('actions.find')<CR>
+" find word under cursor in files
 nmap ,fA :<C-u>call VSCodeNotify('workbench.action.findInFiles')<CR>
+" close active editor
+nmap ,wq :<C-u>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
 
 "-------------------------------------------------------------------------------
 " Plugins ...
