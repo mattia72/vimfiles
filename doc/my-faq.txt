@@ -598,6 +598,16 @@ on main *:help* page at secion: |local-additions|
     :%Abolish -substitute -flags=g box{,es} bag{,s}
     :%S/box{,es}/bag{,s}/g
 
+  |breakpts|
+    Debug your vimscript 
+    :|BreakPts|  : Show list of functions currently defined by all scripts
+                 to find the function you want to debug, use |/|
+    Within the |BreakPts| window:
+    o          : open the appropriate function: |BPOpen|
+    <BACK>     : go back to the previous view: |BPBack|
+    <F9>       : toggle breakpoint within a function: |BPToggle|
+    R          : Refresh the current view: |BPRefresh|
+    How to debug |:BPRemoteServ|
 
 The following plugins are lazy loaded: 
     * |MatchTag| : html tag match
@@ -605,6 +615,7 @@ The following plugins are lazy loaded:
     * |vim-coffee-script|
     * |vim-ps1|  : for powershell
     * |xml.vim|  : xml syntax plugin
+    * |breakpts| : debug helper
 
 ------------------------------------------------------------------------------
  vim:tw=79:ts=8:ft=help:norl:

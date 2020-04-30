@@ -17,18 +17,7 @@ if dein#load_state(expand('~/.vim/bundle/'))
         \{'script_type': 'ftplugin', 'on_ft': ['xml', 'xsl']})
   call dein#add('vim-scripts/perl-support.vim', 
         \{ 'script_type': 'ftplugin', 'on_ft': ['pl', 'pm']}) 
-  "call dein#add('kchmck/vim-coffee-script', 
-        "\{'script_type': 'ftplugin', 'on_ft': ['coffe']}) 
-  "call dein#add('PProvost/vim-ps1', 
-        "\{'script_type': 'ftplugin', 'on_ft': ['ps1', 'pm1']}) 
-  "call dein#add('MatchTag', 
-        "\{'script_type': 'ftplugin', 'on_ft': ['html', 'htm']})              " highlight html tag pairs)
 
-  "DML synt" "\ 'script_type': 'ftplugin', ax
-  call dein#add('mattia72/vim-abinitio' , 
-        \{ 
-        \ 'on_ft': ['dml', 'xfr' ]
-        \}) 
 
   call dein#end()
   "call dein#save_state()

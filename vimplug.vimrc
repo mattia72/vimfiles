@@ -122,7 +122,7 @@ call plug#end()
 
 "UnitTest
 nnoremap <leader>su :wa <bar> UnitTest<CR>
-nnoremap <leader><F5> :wa <bar> UnitTest<CR>
+nnoremap <F5> :wa <bar> UnitTest<CR>
 
 " Startify: start screen settings
 let g:startify_session_sort = 1
