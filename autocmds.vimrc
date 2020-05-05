@@ -60,6 +60,7 @@ augroup END
 
 augroup quickfix_autocmds
   autocmd!
+  "autocmd FileType qf setlocal syntax=qf
   autocmd FileType qf nnoremap <buffer> <F5> :setlocal syntax=qf <cr>
 augroup END
 

@@ -43,7 +43,7 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
 Plug 'chrisbra/histwin.vim'       " browse undo-tree
-Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window
+Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window :BD, BB
 
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'
@@ -369,13 +369,18 @@ function! MySetLightLine()
 
   let g:lightline.component_expand = {
         \ 'asyncrun_status': 'lightline#asyncrun#status',
+        \ 'current_directory': 'getcwd',
         \ }
 
   let g:lightline.active = {
+		    \ 'left': [ 
+	      \   [ 'mode', 'paste' ],
+		    \   [ 'readonly','current_directory','relativepath', 'modified' ],
+        \  ],
         \ 'right': [
         \	  ['percent', 'lineinfo'],
         \	  ['fileformat', 'fileencoding', 'filetype'],
-        \   ['asyncrun_status']
+        \   ['asyncrun_status'],
         \ ]}
 endfunction
 
