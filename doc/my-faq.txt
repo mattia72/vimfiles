@@ -1,4 +1,4 @@
-*my-faq.txt*              My Vim faq for Vim version 8.1            
+*my-faq.txt*           My Vim faq for Vim version 8.1 and nvim            
                          
                        SHORT REFERENCE MANUAL by Mattia
 ==============================================================================
@@ -36,69 +36,69 @@ CONTENTS                                                      *my-faq-contents*
 1. Motion                                                       *my-faq-motion*
 
 Vertically:
-  k : line upward 
-  j : line downward 
-  + : line downward, on the first non-blank character
-  - : line upward, on the first non-blank character
-Horizontally:  
-  h : previous character
-  l : next character
-  e : Move forward to the end of a word. 
-  w : Move forward to the beginning of a word. 
-  3w : Move forward three words. 
-  b : Move backward to the beginning of a word. 
-  3b : Move backward three words. 
-  $ : Move to the end of the line. 
-  0 : Move to the beginning of the line. 
-  ^ : Move to the first non-blank character of the line. 
-  ) : Jump forward one sentence. 
-  ( : Jump backward one sentence. 
-  } : Jump forward one paragraph. 
-  { : Jump backward one paragraph. 
-  H : Jump to the top of the screen. 
-  M : Jump to the middle of the screen. 
-  L : Jump to the bottom of the screen. 
-  10<PageUp> or 
-  10<CTRL-B> : Move 10 pages up. 
-  5<PageDown> or
-  5<CTRL-F> : Move 5 pages down. 
-  G : Jump to end of file. 
-  1G : Jump to beginning of file (same as gg). 
-  50G : Jump to line 50. 
-  [N]f{char}  to the Nth occurrence of {char} to the right
-  [N]F{char}  to the Nth occurrence of {char} to the left
-  * : found next occurrence of word under the cursor 
-  # : found previous occurrence of word under the cursor
+  |k|             line upward
+  |j|             line downward
+  |+|             line downward, on the first non-blank character
+  |-|             line upward, on the first non-blank character
+Horizontally:
+  |h|             previous character
+  |l|             next character
+  |e|             Move forward to the end of a word.
+  |w|             Move forward to the beginning of a word.
+  3w            Move forward three words.
+  |b|             Move backward to the beginning of a word.
+  3b            Move backward three words.
+  |$|             Move to the end of the line.
+  |0|             Move to the beginning of the line.
+  |^|             Move to the first non-blank character of the line.
+  |)|             Jump forward one sentence.
+  |(|             Jump backward one sentence.
+  |}|             Jump forward one paragraph.
+  |{|             Jump backward one paragraph.
+  |H|             Jump to the top of the screen.
+  |M|             Jump to the middle of the screen.
+  |L|             Jump to the bottom of the screen.
+  10<PageUp>    or
+  10<CTRL-B>    Move 10 pages up.
+  5<PageDown>   or
+  5<CTRL-F>     Move 5 pages down.
+  |G|             Jump to end of file.
+  1G            Jump to beginning of file (same as gg).
+  50G           Jump to line 50.
+  [N]f{char}    to the Nth occurrence of {char} to the right
+  [N]F{char}    to the Nth occurrence of {char} to the left
+  *             found next occurrence of word under the cursor
+  |#|             found previous occurrence of word under the cursor
 
 ==============================================================================
 2. Operators                                                 *my-faq-operators*
 
-  ~  switch case          
-  d  delete            
-  c  change 
-  y  yank            
-  >  shift right 
-  <  shift left 
-  !  filter through external command 
-  =  filter through 'equalprg' option command 
-  gq  format lines to 'textwidth' length 
-  :  start Ex command for highlighted lines 
-  r  replace a char and return to prev mode
-  s  delete a char and start insert mode
-  C  delete highlighted text and start insert 
-  S  delete highlighted text and start insert
-  R  -"- 
-  x  delete            
-  D  delete 
-  X  delete 
-  Y  yank 
-  p  put            
-  J  join 
-  U  make uppercase          
-  u  make lowercase          
-  ^]  find tag          
-  I  block insert          
-  A  block append          
+  |~|     switch case
+  |d|     delete
+  |c|     change
+  |y|     yank
+  |>|     shift right
+  |<|     shift left
+  |!|     filter through external command
+  |=|     filter through 'equalprg' option command
+  |gq|    format lines to 'textwidth' length
+  |:|     start Ex command for highlighted lines
+  |r|     replace a char and return to prev mode
+  |s|     delete a char and start insert mode
+  |C|     delete highlighted text and start insert
+  |S|     delete highlighted text and start insert
+  |R|     -"-
+  |x|     delete
+  |D|     delete
+  |X|     delete
+  |Y|     yank
+  |p|     put
+  |J|     join
+  |U|     make uppercase
+  |u|     make lowercase
+  |^]|    find tag
+  |I|     block insert
+  |A|     block append
 
 Example:
 <c-v>jjj I{text}<esc>    insert {text} to each row before visual block
@@ -112,33 +112,36 @@ object.
   a(n)  in    meaning~
 ------------------------------------------------------------------------------
   a"    i"    double quoted string
-  a'    i'    single quoted string
-  a(    i(    same as ab ib
-  a)    i)    same as ab ib
-  a<    i<    "a <>" from '<' to the matching '>'
-  a>    i>    same as a< i<
-  aB    iB    "a Block" from "[{" to "]}" (with brackets)
-  aW    iW    "a WORD" (with white space)
-  a[    i[    "a []" from '[' to the matching ']'
-  a]    i]    same as a[ i[
-  a`    i`    string in backticks
-  ab    ib    "a block" from "[(" to "])" (with braces)
-  ap    ip    "a paragraph" (with white space)
-  as    is    "a sentence" (with white space)
-  at    it    "a (html)tag block" (with white space)
-  aw    iw    "a word" (with white space)
-  a{    i{    same as aB iB
-  a}    i}    same as aB iB
+  |a'|    |i'|    single quoted string
+  |a(|    |i(|    same as ab ib
+  |a)|    |i)|    same as ab ib
+  |a<|    |i<|    "a <>" from '<' to the matching '>'
+  |a>|    |i>|    same as a< i<
+  |aB|    |iB|    "a Block" from "[{" to "]}" (with brackets)
+  |aW|    |iW|    "a WORD" (with white space)
+  |a[|    |i[|    "a []" from '[' to the matching ']'
+  |a]|    |i]|    same as a[ i[
+  |a`|    |i`|    string in backticks
+  |ab|    |ib|    "a block" from "[(" to "])" (with braces)
+  |ap|    |ip|    "a paragraph" (with white space)
+  |as|    |is|    "a sentence" (with white space)
+  |at|    |it|    "a (html)tag block" (with white space)
+  |aw|    |iw|    "a word" (with white space)
+  |a{|    |i{|    same as aB iB
+  |a}|    |i}|    same as aB iB
 
 ==============================================================================
 4. Selection                                                 *my-faq-selection*
                                                             
 Selected text will be deleted and insert mode starts.
-  gV        Avoid the automatic reselection of the Visual area
-          after a Select mode mapping or menu has finished.
-  gh        Start Select mode, characterwise.  This is like "v",
-  gH        Start Select mode, linewise.  This is like "V",
-  g CTRL-H    Start Select mode, blockwise.  This is like CTRL-V,
+  |gv|	      Start Visual mode with the same area as the previous
+	      area and the same mode.
+  |gV|          Avoid the automatic reselection of the Visual area
+              after a Select mode mapping or menu has finished.
+  |gh|          Start Select mode, characterwise. This is like |v|,
+  |gH|          Start Select mode, linewise. This is like |V|,
+  |g|CTRL-H     Start Select mode, blockwise. This is like CTRL-V
+
 Selection can be modified by <Shift>-<movement> keys.
 more :help |Select-mode|
 
@@ -160,15 +163,14 @@ more :help |Select-mode|
   :%s/^.\{-}foo/bar/     1st occurence of 'foo' to 'bar'; non-greedy matching \{-} 
 
 Examples: 
-  :s/a\|b/xxx\0xxx/g     modifies "a" or "b" to "xxxaxxx" or "xxxbxxx"
-  :s/\([abc]\)\([efg]\)/\2\1/g   modifies "af fa bg" to "fa fa gb"
-  :s/abcde/abc^Mde/     modifies "abcde"    to "abc", "de" (two lines)
-                                 NOTE: you need to type CTRL-V <CR> to get a ^M here
-  :s/$/\^M/       modifies "abcde"    to "abcde^M"
-  :s/\w\+/\u\0/g     modifies "bla bla"  to "Bla Bla" 
-  :s/\w\+/\L\0/g     modifies "BLA BLA"  to "bla bla"
-  :%s/\(\<v_[rp]\d\{6\}\)_\(\d\{4\}\)\>/\1[\2]/g
-                                 v_r000123_0001 to v_r000123[0001]
+  :s/a\|b/xxx\0xxx/g            modifies "a" or "b" to "xxxaxxx" or "xxxbxxx"
+  :s/\([abc]\)\([efg]\)/\2\1/g  modifies "af fa bg" to "fa fa gb"
+  :s/abcde/abc^Mde/             modifies "abcde" to "abc", "de" (two lines)
+  NOTE: you need to type CTRL-V <CR> to get a ^M here
+  :s/$/\^M/                     modifies "abcde" to "abcde^M"
+  :s/\w\+/\u\0/g                modifies "bla bla" to "Bla Bla"
+  :s/\w\+/\L\0/g                modifies "BLA BLA" to "bla bla"
+  :%s/\(\<v_[rp]\d\{6\}\)_\(\d\{4\}\)\>/\1[\2]/g  v_r000123_0001 to v_r000123[0001]
                                   
 more :help |change.txt|
 
@@ -361,61 +363,61 @@ Storing glob results (note must use APPEND)
 ------------------------------------------------------------------------------
 10.2 Command mode hotkeys                         *my-faq-command-mode-hotkeys*
 
-  C-c          Like <esc>, but do not use an abbreviation
+  C-c                 Like <esc>, but do not use an abbreviation
   C-r {1-9a-z%#:.-="} Insert the contents of a register 
   C-r+C-w             Insert word under cursor
   C-d                 Lists available commands or files
-  C-f           Switch from commandline mode to the commandline window
+  C-f                 Switch from commandline mode to the commandline window
 
 ------------------------------------------------------------------------------
 10.3 Insert mode hotkeys                           *my-faq-insert-mode-hotkeys*
 
-  C-o{command}   Execute {command} and return to Insert mode
-  C-n           Insert next match of identifier before the cursor
-  C-p           Insert previous match of identifier before the cursor
+  <c-o>{command}  Execute {command} and return to Insert mode
+  <c-n>           Insert next match of identifier before the cursor
+  <c-p>           Insert previous match of identifier before the cursor
 
 Completion
-  <c-n><c-p>     Word completion in insert mode
-  <c-x><c-l>     Line completion in insert mode
+  <c-n><c-p>      Word completion in insert mode
+  <c-x><c-l>      Line completion in insert mode
 
 ------------------------------------------------------------------------------
 10.4 Visual mode hotkeys                           *my-faq-visual-mode-hotkeys*
 
-  v    Start Visual mode per character.
-  V    Start Visual mode linewise.
-  <c-v>    Start Visual mode blockwise.  
+  |v|             Start Visual mode per character.
+  |V|             Start Visual mode linewise.
+  <c-v>         Start Visual mode blockwise.  
   
-  remove the 'B' and '<' flags from 'cpoptions' else these doesn't work 
-  `>    Go to the end of the Visual area
-  a<cr><esc>  Break the line after the Visual area
-  `<    Jump to the start of the Visual area
-  i<cr><esc>  Break the line before the Visual area
-  !!date<cr>  Filter the Visual text through date
-  kJJ    Join the lines back together
+  remove the 'B' and '<' flags from 'cpoptions' else these won't work:
+  |`>|            Go to the end of the Visual area
+  a<cr><esc>    Break the line after the Visual area
+  |`<|            Jump to the start of the Visual area
+  i<cr><esc>    Break the line before the Visual area
+  !!date<cr>    Filter the Visual text through date
+  kJJ           Join the lines back together
 
 more:  |blockwise-examples|
 
 ==============================================================================
 11. Folding                                                    *my-faq-folding*
 
-  zf{motion}  Operator: Define a fold manually
-  :{range}fold  Define a fold for {range} lines
-  zd    Delete one fold under the cursor
-  zD    Delete all folds under the cursor
+  |zf|{motion}    Operator: Define a fold manually
+  :{range}|fold|  Define a fold for {range} lines
+  |zd|            Delete one fold under the cursor
+  |zD|            Delete all folds under the cursor
 
-  zo    Open one fold under the cursor
-  zO    Open all folds under the cursor
-  zc    Close one fold under the cursor
-  zC    Close all folds under the cursor
+  |zo|            Open one fold under the cursor
+  |zO|            Open all folds under the cursor
+  |zc|            Close one fold under the cursor
+  |zC|            Close all folds under the cursor
 
-  zm    Fold more: decrease 'foldlevel'
-  zM    Close all folds: make 'foldlevel' zero
-  zr    Reduce folding: increase 'foldlevel'
-  zR    Open all folds: make 'foldlevel' max.
+  |zm|            Fold more: decrease 'foldlevel'
+  |zM|            Close all folds: make 'foldlevel' zero
+  |zr|            Reduce folding: increase 'foldlevel'
+  |zR|            Open all folds: make 'foldlevel' max.
 
-  zn    Fold none: reset 'foldenable'
-  zN    Fold normal set 'foldenable'
-  zi    Invert 'foldenable'
+  |zn|            Fold none: reset 'foldenable'
+  |zN|            Fold normal set 'foldenable'
+  |zi|            Invert 'foldenable'
 
 The 'foldmethod'=manual folds are lost when you abandon the file.  To save the folds use
 the |:mkview| command.  The view can be restored later with |:loadview|.
@@ -424,23 +426,23 @@ the |:mkview| command.  The view can be restored later with |:loadview|.
 12. Source code editing                            *my-faq-source-code-editing*
 
 Format text
-  ==           Format current line
-  =%           Format code block
-  =vi}          Format code block
+  |==|            Format current line
+  |=%|            Format code block
+  |=|vi}          Format code block
 
 File handling
   |gf|            Open file under the cursor
-  <c-o>         Go back to the previous file
-  <c-i>         Go back to the next file
+  |<c-o>|         Go back to the previous file
+  |<c-i>|         Go back to the next file
 
 Find definitions
   |gD|            go to definition of word under the cursor in current file
-  |gd|          go to definition of word under the cursor in current function
+  |gd|            go to definition of word under the cursor in current function
 
 ==============================================================================
 13. Diff                                                          *my-faq-diff*
 
-vimdiff (or vim -d) compares two files: 
+|vimdiff| (or vim -d) compares two files: 
   <leader>ds    same as: >
   :vert diffsplit {other-file}
 
@@ -455,36 +457,36 @@ Diff two tab: >
 14. Misc                                                          *my-faq-misc*
 
 Undo/Redo
-  u             Undo
-  <c-r>         Redo
+  |u|             Undo
+  |<c-r>|         Redo
 
 Command line window
-  q/           Open the commandline window with history of searches
-  q:           Open the commandline window with history of commands
+  |q/|           Open the commandline window with history of searches
+  |q:|           Open the commandline window with history of commands
 
 Numbers
-  <c-a>         Increment number under cursor. Hex and octal too.
-  <c-x>         Decrement number under cursor. Hex and octal too.
+  |<c-a>|         Increment number under cursor. Hex and octal too.
+  |<c-x>|         Decrement number under cursor. Hex and octal too.
 
 Upper/Lower Case 
-  ~{motion}    'tildeop' option: switch case of {motion} text.
-  g~{motion}    Switch case of {motion} text. 
-  g~~      Switch case of current line. 
-  gU{motion}    Make {motion} text uppercase. 
-  gu{motion}    Make {motion} text lowercase. 
+  |~{motion}|    'tildeop' option: switch case of {motion} text.
+  |g~{motion}|    Switch case of {motion} text. 
+  |g~~|      Switch case of current line. 
+  |gU{motion}|    Make {motion} text uppercase. 
+  |gu{motion}|    Make {motion} text lowercase. 
 
 External commands
-  :!wc %               How many words are in the edited file
-  !{motion}{filter}  Filter {motion} text lines through the external program {filter}.
-  :21,25 ! rot13        Encode with rot13 the selected text
+  :!|wc| %               How many words are in the edited file
+  |!{motion}{filter}|  Filter {motion} text lines through the external program {filter}.
+  :21,25 ! |rot13|        Encode with rot13 the selected text
 
   :r textfile/!command  Insert textfile or external program output 
   
 Redirect command output to a file
-  :redir > file.txt     Redirect the output of the next commands to the file.txt
-  :redir @a             Redirect the output of the next commands to register a.
+  :|redir| > file.txt     Redirect the output of the next commands to the file.txt
+  :|redir| @a             Redirect the output of the next commands to register a.
   :{cmd}                some command with output. eg. :g/{pattern}/
-  :redir END            Redirection end.
+  :|redir| END            Redirection end.
   
 ------------------------------------------------------------------------------
 14.1 To HTML                                                   *my-faq-to-html*

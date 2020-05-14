@@ -129,6 +129,10 @@ nnoremap <leader>fs :call <SID>MyFoldSyntax()<cr>
 "xml formatting
 nnoremap <leader>xf Go<esc>:r ! xmllint --format %<cr>
 
+"open file under cursor in vsplit window
+nnoremap <leader>gf <C-W>vgf<C-W>L
+vnoremap <leader>gf <C-W>vgf<C-W>L
+
 function! <SID>MyFoldSyntax()
   set foldmethod=syntax
   set foldcolumn=1
@@ -162,6 +166,8 @@ nnoremap <leader>cq :cclose <cr>
 nnoremap <leader>bd :bdelete <cr>
 " close all buffer
 nnoremap <leader>bda :bufdo bdelete <cr>
+" close all, except current buffer
+nnoremap <leader>ba :w <bar> %bd <bar> e# <bar> bd# <CR>
 " next buffer
 nnoremap <leader>bn :bnext <cr>
 " Tab navigation like firefox

@@ -43,7 +43,7 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
 Plug 'chrisbra/histwin.vim'       " browse undo-tree
-Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window :BD, BB
+Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window :BD, BW
 
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'
@@ -366,6 +366,9 @@ function! MySetLightLine()
 		    \   'fugitive': 'LightlineFugitive',
 		    \ }
 	      \}
+
+  let g:lightline#asyncrun#indicator_run = 'running...'
+  let g:lightline#asyncrun#indicator_none = ''
 
   let g:lightline.component_expand = {
         \ 'asyncrun_status': 'lightline#asyncrun#status',

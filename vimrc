@@ -30,7 +30,9 @@ if filereadable(expand("~/.vim/mappings.vimrc"))
 endif
 
 if exists('g:vscode') 
-  source ~/.vim/vscode.vimrc
+  if filereadable("~/.vim/vscode.vimrc")
+    source ~/.vim/vscode.vimrc
+  endif
   finish
 endif
 
