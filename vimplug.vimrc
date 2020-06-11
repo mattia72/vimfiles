@@ -44,6 +44,7 @@ Plug 'Shougo/neosnippet-snippets'
 
 Plug 'chrisbra/histwin.vim'       " browse undo-tree
 Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window :BD, BW
+Plug 'ton/vim-bufsurf'            " BufSurfForward/Back jumping in buffer history list
 
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'
@@ -119,6 +120,10 @@ call plug#end()
 "-------------------------------------------------------------------------------
 " Plugin settings
 "-------------------------------------------------------------------------------
+
+" vim-bufsurf
+nnoremap <silent> <S-C-I> :BufSurfBack<CR>
+nnoremap <silent> <S-C-O> :BufSurfForward<CR>
 
 "UnitTest
 nnoremap <leader>su :wa <bar> UnitTest<CR>
