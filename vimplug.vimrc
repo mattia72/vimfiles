@@ -322,7 +322,7 @@ endfunction
 
 " Airline
 function! MySetAirLine()
-  set encoding=utf8
+  setlocal encoding=utf8
 
   " set guifont is GuiFont in nvim...
   "  set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
@@ -354,7 +354,7 @@ endfunction
 
 " lightline
 function! MySetLightLine()
-  set encoding=utf8
+  setlocal encoding=utf8
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   set noshowmode
   nnoremap <leader>ll :LightlineReload<cr>
