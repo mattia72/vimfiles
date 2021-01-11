@@ -21,6 +21,13 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
+if exists('g:vscode') 
+  if filereadable("~/.vim/vscode.vimrc")
+    source ~/.vim/vscode.vimrc
+  endif
+  finish
+endif
+
 if filereadable(expand("~/.vim/settings.vimrc"))
   source ~/.vim/settings.vimrc
 endif
@@ -29,12 +36,6 @@ if filereadable(expand("~/.vim/mappings.vimrc"))
   source ~/.vim/mappings.vimrc
 endif
 
-if exists('g:vscode') 
-  if filereadable("~/.vim/vscode.vimrc")
-    source ~/.vim/vscode.vimrc
-  endif
-  finish
-endif
 
 if filereadable(expand("~/.vim/autocmds.vimrc"))
   source ~/.vim/autocmds.vimrc
