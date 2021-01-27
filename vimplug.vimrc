@@ -94,11 +94,13 @@ Plug 'vim-scripts/perl-support.vim' , {'for': ['perl']}
 Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
 " Plug 'vim-scripts/MatchTag'         , {'for': ['html']}                " highlight html tag pairs
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " development
 Plug 'vim-scripts/genutils'
 Plug 'albfan/vim-breakpts'
 Plug 'h1mesuke/vim-unittest'
-
 " My own plugins
 "Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
 Plug 'vim-scripts/Decho'
