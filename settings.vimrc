@@ -53,7 +53,7 @@ set virtualedit=all
 set bufhidden=hide                      " This option specifies what happens when a buffer is no longer displayed in a window:
 set formatoptions=tcqronl
 set switchbuf=useopen,usetab
-set viewdir=$HOME\.vim\view
+set viewdir=$HOME\.vim\.view
 set viewoptions=cursor,folds,slash,unix
 set history=50                          " keep 50 lines of command line history
 
@@ -135,5 +135,6 @@ set sidescrolloff=15
 set sidescroll=1
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set number relativenumber
+set shell=pwsh\ -NoProfile
 
 " vim:tw=78:ts=4:ft=vim:norl:

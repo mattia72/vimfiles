@@ -65,6 +65,7 @@ if has('nvim')                 " tnoremap stands for terminal mode mappings in n
   tnoremap <A-j> <C-\><C-N><C-w>j
   tnoremap <A-k> <C-\><C-N><C-w>k
   tnoremap <A-l> <C-\><C-N><C-w>l
+  nnoremap <leader>tt :vsplit<CR><C-W>L:terminal<CR>
 endif
 inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-j> <C-\><C-N><C-w>j
@@ -161,15 +162,8 @@ nnoremap <leader>lq :cfirst <bar> while 1 <bar> cnext <bar> endwhile <cr>
 nnoremap <leader>hq :helpclose <cr>
 " close quickfix window
 nnoremap <leader>cq :cclose <cr>
-
-" close a buffer
-nnoremap <leader>bd :bdelete <cr>
-" close all buffer
-nnoremap <leader>bda :bufdo bdelete <cr>
 " close all, except current buffer
 nnoremap <leader>ba :w <bar> %bd <bar> e# <bar> bd# <CR>
-" next buffer
-nnoremap <leader>bn :bnext <cr>
 " Tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
 nnoremap <leader>tp :tabprevious<CR>

@@ -97,6 +97,10 @@ Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" TODO: jump between delphi functions
+Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-CountJump'
+
 " development
 Plug 'vim-scripts/genutils'
 Plug 'albfan/vim-breakpts'
@@ -322,39 +326,9 @@ function! s:unite_settings()
   imap <silent><buffer><expr> <C-s>     unite#do_action('split')
 endfunction
 
-" Airline
-function! MySetAirLine()
-  setlocal encoding=utf8
-
-  " set guifont is GuiFont in nvim...
-  "  set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-  let g:airline_powerline_fonts = 1
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline_section_b = '%{ObsessionStatus()}'
-
-  if !has('nvim')
-    " old airline unicode symbols (new symbols uses new patched fonts!)
-    ""let g:airline_left_alt_sep = '»'
-    let g:airline_left_alt_sep = '⮁'
-    let g:airline_left_sep = '⮀'
-    ""let g:airline_right_alt_sep = '«'
-    let g:airline_right_alt_sep = '⮃'
-    let g:airline_right_sep = '⮂'
-    let g:airline_symbols.linenr = '⭡'
-    let g:airline_symbols.branch = '⭠'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.whitespace = 'Ξ'
-    let g:airline_symbols.maxlinenr = '☰'
-    let g:airline_symbols.readonly = '⭤'
-  endif
-  let g:asyncrun_status = "stopped" 
-  let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
-endfunction
-
+" --------------------------------------------
 " lightline
+" --------------------------------------------
 function! MySetLightLine()
   setlocal encoding=utf8
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -406,12 +380,99 @@ function! LightlineFugitive()
 	return ''
 endfunction
 
-command! LightlineReload call LightlineReload()
+command! LightlineReload call <SID>LightlineReload()
 
-function! LightlineReload()
+function! <SID>LightlineReload()
   call lightline#init()
   call lightline#colorscheme()
   call lightline#update()
 endfunction
-
 call MySetLightLine()
+
+" --------------------------------------------
+" bufkill 
+" --------------------------------------------
+" close a buffer :h bufkill
+nnoremap <leader>bd :BD <cr>
+" delete buffer and close window
+nnoremap <leader>wd :bd <cr>
+" close all buffer
+nnoremap <leader>bda :bufdo BD <cr>
+" prev/next buffer  :h bufkill
+nnoremap <leader>bp :BB <cr>
+nnoremap <leader>bn :BF <cr>
+
+" --------------------------------------------
+" fzf 
+" --------------------------------------------
+function! <SID>ExecInCmd(command)
+  let tmp=&shell
+  set shell=cmd
+  execute a:command
+  let &shell=tmp
+endfunction
+
+nnoremap <leader>F  :call <SID>ExecInCmd('Files')<CR>
+
+"cmap FFiles :call <SID>ExecInCmd('Files')
+
+nnoremap <leader>B  :call <SID>ExecInCmd('Buffers')<CR>
+"nnoremap <leader>G  :call fzf#vim#grep('rg --vimgrep --no-heading --color=always --smart-case ""', 1, {'options':'--exact --delimiter : --nth 4.. --query=<C-r><C-w> +i'})<CR>
+
+command! -bang -nargs=* FContentOnlyRg call fzf#vim#grep("rg --column --line-number --hidden --no-heading --color=always --smart-case -g !.git -g !.cache -g !.view ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+command! -bang -nargs=* FFzf call <SID>ExecInCmd('FZF')
+command! -bang -nargs=* FFiles call <SID>ExecInCmd('Files')
+command! -bang -nargs=* FBuffers call <SID>ExecInCmd('Buffers')
+command! -bang -nargs=* FMaps call <SID>ExecInCmd('Maps')
+command! -bang -nargs=* FRg call <SID>ExecInCmd('Rg')
+
+"command! -bang -nargs=* Fz
+      "\ call fzf#vim#grep(
+      "\       'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 0,
+      "\       {'options': '--no-hscroll --delimiter : --nth 4..'},
+      "\       <bang>!0)
+
+
+" close fzf with two Esc faster
+if has('nvim')
+  aug fzf_setup
+    au!
+    au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
+  aug END
+end
+
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history
+" - History files will be stored in the specified directory
+" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+"   'previous-history' instead of 'down' and 'up'.
