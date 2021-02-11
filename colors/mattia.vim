@@ -27,24 +27,24 @@ hi CursorColumn                  guibg=#293739
 hi LineNr          guifg=#848483 guibg=#232526
 hi NonText         guifg=#848483 guibg=#232526
 
-hi Comment         guifg=#588F7C
+hi Comment         guifg=#588F7C			   gui=italic
+
+hi String          guifg=#E6DB74               gui=none
+hi Character       guifg=#E6DB74               gui=underline
 
 hi Constant        guifg=#AE81FF               gui=bold
-hi String          guifg=#E6DB74               gui=italic      " #E6DB74
-hi Character       guifg=#E6DB74               gui=bold,italic " #E6DB74
 hi Number          guifg=#AE81FF
 hi Boolean         guifg=#AE81FF
 hi Float           guifg=#AE81FF
 
-" hi Identifier      guifg=#F8F8F2
 hi Identifier      guifg=#FD971F
 hi Function        guifg=#A6E22E
 
 hi Statement       guifg=#F92672               gui=bold
 hi Conditional     guifg=#F92672               gui=bold
 hi Repeat          guifg=#F92672               gui=bold 
-hi Label           guifg=#F92672               gui=italic "#E6DB74
-hi Operator        guifg=#F92672
+hi Label           guifg=#F92672               gui=italic,underline
+hi Operator        guifg=#BCA3A3                              
 hi Keyword         guifg=#F92672               gui=bold
 hi Exception       guifg=#F92672               gui=bold 
 
@@ -55,7 +55,7 @@ hi PreProc         guifg=#A6E22E
 hi PreCondit       guifg=#A6E22E               gui=bold
 
 hi Type            guifg=#66D9EF               gui=none
-hi StorageClass    guifg=#66D9EF               gui=italic
+hi StorageClass    guifg=#66D9EF               gui=bold
 hi Structure       guifg=#66D9EF
 hi Typedef         guifg=#66D9EF
 
@@ -64,7 +64,7 @@ hi SpecialChar     guifg=#F92672               gui=bold,italic
 hi Tag             guifg=#FD971F               gui=italic
 hi Delimiter       guifg=#8F8F8F
 hi SpecialComment  guifg=#A6E22C               gui=italic
-hi Debug           guifg=#BCA3A3               gui=bold
+hi Debug           guifg=#BCA3A3               gui=bold,italic
 
 hi Underlined      guifg=#808080               gui=underline
 
@@ -200,7 +200,7 @@ if &t_Co > 255
    hi WildMenu        ctermfg=81  ctermbg=16
 
    hi Normal          ctermfg=252 ctermbg=233
-   hi Comment         ctermfg=59
+   hi Comment         ctermfg=59                cterm=italic
    hi CursorLine                  ctermbg=238   cterm=none
    hi CursorColumn                ctermbg=238
    hi LineNr          ctermfg=250 ctermbg=238
