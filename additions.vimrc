@@ -43,6 +43,28 @@ function! MyDeleteView()
   echo "Deleted: ".path
 endfunction
 
+function! g:MySetDefaultShell()
+  let g:default_shell_options =[&shell, &shellquote, &shellpipe, &shellxquote, &shellcmdflag, &shellredir]
+	set shellquote& | set shellpipe& | set shellxquote& | set shellcmdflag& | set shellredir& | set shell&
+endfunction
+
+function! g:MyRestoreOrigShell()
+  let &shell        = g:default_shell_options[0]
+  let &shellquote   = g:default_shell_options[1]
+  let &shellpipe    = g:default_shell_options[2]
+  let &shellxquote  = g:default_shell_options[3]
+  let &shellcmdflag = g:default_shell_options[4]
+  let &shellredir   = g:default_shell_options[5]
+endfunction
+
+function! g:MyExecInCmd(command, ...)
+  let tmp=&shell
+  set shell=cmd
+	echohl ModeMsg | echo '[vimplug.vimrc] Exceute in cmd shell: '.a:command.' '.join(a:000," ") | echohl None
+  execute a:command join(a:000," ")
+  let &shell=tmp
+endfunction
+
 function! CommandToTab(cmd)
   redir => message
   silent execute a:cmd

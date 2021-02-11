@@ -65,7 +65,9 @@ if has('nvim')                 " tnoremap stands for terminal mode mappings in n
   tnoremap <A-j> <C-\><C-N><C-w>j
   tnoremap <A-k> <C-\><C-N><C-w>k
   tnoremap <A-l> <C-\><C-N><C-w>l
-  nnoremap <leader>tt :vsplit<CR><C-W>L:terminal<CR>
+  command! Pwsh :set shell=pwsh|:term
+  cabbrev pwsh Pwsh
+  nnoremap <leader>tt :vsplit<CR><C-W>L:Pwsh<CR>
 endif
 inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-j> <C-\><C-N><C-w>j

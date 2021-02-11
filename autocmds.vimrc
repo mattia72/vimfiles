@@ -38,7 +38,14 @@ function! g:MySetTerminalCursorColor(cursor_color)
   :!echo -ne "\e]12;".a:cursor_color."\x07"
 endfunction
 
-
+function! g:MySetDefaultTermShell()
+  if has('nvim') 
+    " if powershell doesn't work ...
+    augroup set_term_shell
+      autocmd TermOpen * :call MySetDefaultShell()
+    augroup END
+  endif
+endfunction
 "function! g:MyMakeView()
   "" Put these in an autocmd group, so that we can delete them easily.
   "augroup MyView

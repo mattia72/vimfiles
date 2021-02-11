@@ -135,6 +135,10 @@ set sidescrolloff=15
 set sidescroll=1
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set number relativenumber
-set shell=pwsh\ -NoProfile
+"let &shell = has('win32') ? 'powershell' : 'pwsh'
+set shell=pwsh
+set shellquote= shellpipe=\| shellxquote=
+set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+set shellredir=\|\ Out-File\ -Encoding\ UTF8
 
 " vim:tw=78:ts=4:ft=vim:norl:

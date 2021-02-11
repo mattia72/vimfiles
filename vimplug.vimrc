@@ -406,19 +406,9 @@ nnoremap <leader>bn :BF <cr>
 " --------------------------------------------
 " fzf 
 " --------------------------------------------
-function! g:MyExecInCmd(command, ...)
-  let tmp=&shell
-  set shell=cmd
-	echohl ModeMsg | echo '[vimplug.vimrc] Exceute in cmd shell: '.a:command.' '.join(a:000," ") | echohl None
-  execute a:command join(a:000," ")
-  let &shell=tmp
-endfunction
 
-nnoremap <leader>F  :call MyExecInCmd('Files')<CR>
-
-"cmap FFiles :call MyExecInCmd('Files')
-
-nnoremap <leader>B  :call MyExecInCmd('Buffers')<CR>
+nnoremap <leader>ff  :Files<CR>
+nnoremap <leader>fb  :Buffers<CR>
 "nnoremap <leader>G  :call fzf#vim#grep('rg --vimgrep --no-heading --color=always --smart-case ""', 1, {'options':'--exact --delimiter : --nth 4.. --query=<C-r><C-w> +i'})<CR>
 
 command! -bang -nargs=* FContentOnlyRg 
@@ -426,25 +416,13 @@ command! -bang -nargs=* FContentOnlyRg
 			\ "rg --column --line-number --hidden --no-heading --color=always --smart-case -g !.git -g !.cache -g !.view ".shellescape(<q-args>), 
 			\ 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
-command! -bang -nargs=* FFzf call MyExecInCmd('FZF', <f-args>)
-command! -bang -nargs=* FFiles call MyExecInCmd('Files', <f-args>)
-command! -bang -nargs=* FBuffers call MyExecInCmd('Buffers', <f-args>)
-command! -bang -nargs=* FMaps call MyExecInCmd('Maps', <f-args>)
-command! -bang -nargs=* FRg call MyExecInCmd('Rg', <f-args>)
-
-"command! -bang -nargs=* Fz
-      "\ call fzf#vim#grep(
-      "\       'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 0,
-      "\       {'options': '--no-hscroll --delimiter : --nth 4..'},
-      "\       <bang>!0)
-
 
 " close fzf with two Esc faster
 if has('nvim')
-  aug fzf_setup
-    au!
-    au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
-  aug END
+  augroup fzf_setup
+    autocmd!
+    autocmd TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
+  augroup END
 end
 
 " An action can be a reference to a function that processes selected lines
