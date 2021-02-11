@@ -96,6 +96,7 @@ Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'chengzeyi/fzf-preview.vim'
 
 " TODO: jump between delphi functions
 Plug 'inkarkat/vim-ingo-library'
@@ -405,27 +406,31 @@ nnoremap <leader>bn :BF <cr>
 " --------------------------------------------
 " fzf 
 " --------------------------------------------
-function! <SID>ExecInCmd(command)
+function! g:MyExecInCmd(command, ...)
   let tmp=&shell
   set shell=cmd
-  execute a:command
+	echohl ModeMsg | echo '[vimplug.vimrc] Exceute in cmd shell: '.a:command.' '.join(a:000," ") | echohl None
+  execute a:command join(a:000," ")
   let &shell=tmp
 endfunction
 
-nnoremap <leader>F  :call <SID>ExecInCmd('Files')<CR>
+nnoremap <leader>F  :call MyExecInCmd('Files')<CR>
 
-"cmap FFiles :call <SID>ExecInCmd('Files')
+"cmap FFiles :call MyExecInCmd('Files')
 
-nnoremap <leader>B  :call <SID>ExecInCmd('Buffers')<CR>
+nnoremap <leader>B  :call MyExecInCmd('Buffers')<CR>
 "nnoremap <leader>G  :call fzf#vim#grep('rg --vimgrep --no-heading --color=always --smart-case ""', 1, {'options':'--exact --delimiter : --nth 4.. --query=<C-r><C-w> +i'})<CR>
 
-command! -bang -nargs=* FContentOnlyRg call fzf#vim#grep("rg --column --line-number --hidden --no-heading --color=always --smart-case -g !.git -g !.cache -g !.view ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* FContentOnlyRg 
+			\ call fzf#vim#grep(
+			\ "rg --column --line-number --hidden --no-heading --color=always --smart-case -g !.git -g !.cache -g !.view ".shellescape(<q-args>), 
+			\ 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
-command! -bang -nargs=* FFzf call <SID>ExecInCmd('FZF')
-command! -bang -nargs=* FFiles call <SID>ExecInCmd('Files')
-command! -bang -nargs=* FBuffers call <SID>ExecInCmd('Buffers')
-command! -bang -nargs=* FMaps call <SID>ExecInCmd('Maps')
-command! -bang -nargs=* FRg call <SID>ExecInCmd('Rg')
+command! -bang -nargs=* FFzf call MyExecInCmd('FZF', <f-args>)
+command! -bang -nargs=* FFiles call MyExecInCmd('Files', <f-args>)
+command! -bang -nargs=* FBuffers call MyExecInCmd('Buffers', <f-args>)
+command! -bang -nargs=* FMaps call MyExecInCmd('Maps', <f-args>)
+command! -bang -nargs=* FRg call MyExecInCmd('Rg', <f-args>)
 
 "command! -bang -nargs=* Fz
       "\ call fzf#vim#grep(

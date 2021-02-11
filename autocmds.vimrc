@@ -74,8 +74,8 @@ autocmd BufReadPost *
       \   exe "normal! g`\"" |
       \ endif
 
-"autocmd InsertEnter * call g:MySetTerminalCursorColor('#00FF00')
-"autocmd InsertLeave * call g:MySetTerminalCursorColor('#0000FF')
+"autocmd InsertEnter * call MySetTerminalCursorColor('#00FF00')
+"autocmd InsertLeave * call MySetTerminalCursorColor('#0000FF')
 
 call MySetRuler()
 "call MyMakeView() " using kopischke/vim-stay instead
