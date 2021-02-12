@@ -4,7 +4,7 @@
 "
 " Note: How it looks like, see ":h group-name"
 " Based on the "monokai" theme for textmate
-" by Wimer Hazenberg and its darker variant 
+" by Wimer Hazenberg and its darker variant
 " by Hamish Stuart Macpherson,
 " further on "molokai" by Tomas Restrepo
 
@@ -27,49 +27,53 @@ hi CursorColumn                  guibg=#293739
 hi LineNr          guifg=#848483 guibg=#232526
 hi NonText         guifg=#848483 guibg=#232526
 
-hi Comment         guifg=#588F7C			   gui=italic
+" Note: How it looks like, see ":h group-name"
+hi Comment         guifg=#588F7C			         gui=italic         "any comment
 
-hi String          guifg=#E6DB74               gui=none
-hi Character       guifg=#E6DB74               gui=underline
-
-hi Constant        guifg=#AE81FF               gui=bold
-hi Number          guifg=#AE81FF
-hi Boolean         guifg=#AE81FF
-hi Float           guifg=#AE81FF
-
-hi Identifier      guifg=#FD971F
-hi Function        guifg=#A6E22E
-
-hi Statement       guifg=#F92672               gui=bold
-hi Conditional     guifg=#F92672               gui=bold
-hi Repeat          guifg=#F92672               gui=bold 
-hi Label           guifg=#F92672               gui=italic,underline
-hi Operator        guifg=#BCA3A3                              
-hi Keyword         guifg=#F92672               gui=bold
-hi Exception       guifg=#F92672               gui=bold 
-
-hi Include         guifg=#A6E22E
-hi Define          guifg=#A6E22E
-hi Macro           guifg=#A6E22E               gui=italic
-hi PreProc         guifg=#A6E22E
-hi PreCondit       guifg=#A6E22E               gui=bold
-
-hi Type            guifg=#66D9EF               gui=none
-hi StorageClass    guifg=#66D9EF               gui=bold
-hi Structure       guifg=#66D9EF
-hi Typedef         guifg=#66D9EF
-
-hi Special         guifg=#66D9EF  guibg=bg     gui=italic
-hi SpecialChar     guifg=#F92672               gui=bold,italic
-hi Tag             guifg=#FD971F               gui=italic
-hi Delimiter       guifg=#8F8F8F
-hi SpecialComment  guifg=#A6E22C               gui=italic
-hi Debug           guifg=#BCA3A3               gui=bold,italic
-
-hi Underlined      guifg=#808080               gui=underline
-
-hi Ignore          guifg=#808080 guibg=bg
-hi Todo            guifg=#FFFFFF guibg=bg      gui=bold
+hi Constant        guifg=#AE81FF               gui=bold           "any constant
+hi String          guifg=#E6DB74               gui=none           "a string constant: "this is a string"
+hi Character       guifg=#E6DB74               gui=bold           "a character constant: 'c', '\n'
+hi Number          guifg=#AE81FF                                  "a number constant: 234, 0xff
+hi Boolean         guifg=#AE81FF                                  "a boolean constant: TRUE, false
+hi Float           guifg=#AE81FF                                  "a floating point constant: 2.3e10
+                                                                  "
+hi Identifier      guifg=#FD971F                                  "any variable name
+hi Function        guifg=#A6E22E                                  "function name (also: methods for classes)
+                                                                  "
+hi Statement       guifg=#F92672               gui=bold           "any statement
+hi Conditional     guifg=#F92672               gui=bold           "if, then, else, endif, switch, etc.
+hi Repeat          guifg=#F92672               gui=bold           "for, do, while, etc.
+hi Label           guifg=#F92672               gui=italic         "case, default, etc.
+hi Operator        guifg=#BCA3A3               gui=none           ""sizeof", "+", "*", etc.
+hi Keyword         guifg=#F92672               gui=bold           "any other keyword
+hi Exception       guifg=#F92672               gui=bold           "try, catch, throw
+                                                                  "
+hi PreProc         guifg=#A6E22E                                  "generic Preprocessor
+hi Include         guifg=#A6E22E                                  "preprocessor #include
+hi Define          guifg=#A6E22E                                  "preprocessor #define
+hi Macro           guifg=#A6E22E               gui=italic         "same as Define
+hi PreCondit       guifg=#A6E22E               gui=bold           "preprocessor #if, #else, #endif, etc.
+                                                                  "
+hi Type            guifg=#66D9EF               gui=none           "int, long, char, etc.
+hi StorageClass    guifg=#66D9EF               gui=bold           "static, register, volatile, etc.
+hi Structure       guifg=#66D9EF                                  "struct, union, enum, etc.
+hi Typedef         guifg=#66D9EF                                  "A typedef
+                                                                  "
+hi Special         guifg=#66D9EF  guibg=bg     gui=italic         "any special symbol
+hi SpecialChar     guifg=#F92672               gui=bold,italic    "special character in a constant
+hi Tag             guifg=#FD971F               gui=italic         "you can use CTRL-] on this
+hi Delimiter       guifg=#8F8F8F                                  "character that needs attention
+hi SpecialComment  guifg=#A6E22C               gui=italic         "special things inside a comment
+hi Debug           guifg=#BCA3A3               gui=bold,italic    "debugging statements
+                                                                  "
+hi Underlined      guifg=#808080               gui=underline      "text that stands out, HTML links
+                                                                  "
+hi Ignore          guifg=#808080 guibg=bg                         "left blank, hidden  |hl-Ignore|
+" different background to highlight space errors!                 "
+hi Error           guifg=#F92672 guibg=#1E0010                    "any erroneous construct
+                                                                  "
+hi Todo            guifg=#FFFFFF guibg=bg      gui=bold           "anything that needs extra attention; mostly the
+                                                                  "keywords TODO FIXME and XXX
 hi SpecialKey      guifg=#888A85               gui=italic
 hi Title           guifg=#ef5939
 hi Cursor          guifg=#000000 guibg=#F8F8F0
@@ -80,13 +84,11 @@ hi DiffText                      guibg=#4C4745 gui=italic,bold
 
 hi Directory       guifg=#588F7C
 "#A6E22E
-hi ErrorMsg        guifg=#F92672 guibg=#1B1D1E 
-" different background to highlight space errors!
-hi Error           guifg=#F92672 guibg=#1E0010 
+hi ErrorMsg        guifg=#F92672 guibg=#1B1D1E
 hi WarningMsg      guifg=#EAF60E guibg=#1B1D1E
 hi Warning         guifg=#EAF60E guibg=#1E0010
 "guibg=#333333 gui=bold
-"guibg=#232526 
+"guibg=#232526
 hi FoldColumn      guifg=#588F7C guibg=#000000
 hi Folded          guifg=#588F7C guibg=#000000
 hi IncSearch       guifg=#F6DE89 guibg=#000000
@@ -101,7 +103,7 @@ hi PmenuSbar                     guibg=#080808
 hi PmenuThumb      guifg=#66D9EF
 
 hi Question        guifg=#66D9EF
-hi Search          guifg=#000000 guibg=#F3D569 
+hi Search          guifg=#000000 guibg=#F3D569
 " #455354
 " marks column
 hi SignColumn      guifg=#A6E22E guibg=#232526
