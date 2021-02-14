@@ -43,8 +43,7 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
 Plug 'chrisbra/histwin.vim'       " browse undo-tree
-Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window :BD, BW
-Plug 'ton/vim-bufsurf'            " BufSurfForward/Back jumping in buffer history list
+Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window :BD, BW, BF, BB
 
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/lightline-powerful'
@@ -94,9 +93,15 @@ Plug 'vim-scripts/perl-support.vim' , {'for': ['perl']}
 Plug 'zigford/vim-powershell'       , {'for': ['ps1', 'psm1']}
 " Plug 'vim-scripts/MatchTag'       , {'for': ['html']}                " highlight html tag pairs
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'chengzeyi/fzf-preview.vim'
+if has('nvim')
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+endif
+
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'chengzeyi/fzf-preview.vim'
 
 " TODO: jump between delphi functions
 Plug 'inkarkat/vim-ingo-library'
@@ -127,10 +132,6 @@ call plug#end()
 "-------------------------------------------------------------------------------
 " Plugin settings
 "-------------------------------------------------------------------------------
-
-" vim-bufsurf
-nnoremap <silent> <S-C-I> :BufSurfBack<CR>
-nnoremap <silent> <S-C-O> :BufSurfForward<CR>
 
 "UnitTest
 nnoremap <leader>su :wa <bar> UnitTest<CR>
