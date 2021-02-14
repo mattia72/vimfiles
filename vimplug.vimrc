@@ -90,9 +90,9 @@ Plug 'yssl/QFEnter'              " QFEnter allows you to open items from quickfi
 " languages
 Plug 'vim-scripts/xml.vim'          , {'for': ['xml']}
 Plug 'vim-scripts/perl-support.vim' , {'for': ['perl']}
-"Plug 'kchmck/vim-coffee-script'     , {'for': ['coffe']}
-Plug 'PProvost/vim-ps1'             , {'for': ['ps1']}
-" Plug 'vim-scripts/MatchTag'         , {'for': ['html']}                " highlight html tag pairs
+"Plug 'kchmck/vim-coffee-script'    , {'for': ['coffe']}
+Plug 'zigford/vim-powershell'       , {'for': ['ps1', 'psm1']}
+" Plug 'vim-scripts/MatchTag'       , {'for': ['html']}                " highlight html tag pairs
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
