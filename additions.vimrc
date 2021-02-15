@@ -57,6 +57,9 @@ function! g:MyRestoreOrigShell()
   let &shellredir   = g:default_shell_options[5]
 endfunction
 
+command!  MySetDefaultShell call MySetDefaultShell()
+command!  MyRestoreOrigShell call MyRestoreOrigShell()
+
 function! g:MyExecInCmd(command, ...)
   let tmp=&shell
   set shell=cmd
@@ -64,6 +67,8 @@ function! g:MyExecInCmd(command, ...)
   execute a:command join(a:000," ")
   let &shell=tmp
 endfunction
+
+command! -nargs=+ -complete=command MyExecInCmd call MyExecInCmd(<q-args>)
 
 function! CommandToTab(cmd)
   redir => message
@@ -81,17 +86,15 @@ endfunction
 
 " Example :CommandToTab highlight
 " Example :CommandToTab verbose map
-command! -nargs=+ -complete=command CommandToTab call CommandToTab(<q-args>)
+command! -nargs=+ -complete=command MyCommandToTab call CommandToTab(<q-args>)
 
 " # Command Delview (and it's abbreviation 'delview')
-command! Delview call MyDeleteView()
+command! MyDelview call MyDeleteView()
 " Lower-case user commands: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
-cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delview')<CR>
-
-"grep operator from "Learn Vim script the hard way"
-" nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " *.*"<cr>:copen<cr>
-
+cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'MyDelview' : 'delview')<CR>
+"-------------------------------------------------------------------------------
 " For syntax development
+"-------------------------------------------------------------------------------
 nnoremap <F11> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>

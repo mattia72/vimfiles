@@ -90,18 +90,21 @@ Plug 'yssl/QFEnter'              " QFEnter allows you to open items from quickfi
 Plug 'vim-scripts/xml.vim'          , {'for': ['xml']}
 Plug 'vim-scripts/perl-support.vim' , {'for': ['perl']}
 "Plug 'kchmck/vim-coffee-script'    , {'for': ['coffe']}
-Plug 'zigford/vim-powershell'       , {'for': ['ps1', 'psm1']}
+"Plug 'zigford/vim-powershell'       , {'for': ['ps1', 'psm1']}
+Plug 'PProvost/vim-ps1'             , {'for': ['ps1', 'psm1']}
 " Plug 'vim-scripts/MatchTag'       , {'for': ['html']}                " highlight html tag pairs
 
 if has('nvim')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-endif
-
+else
+  " if Telescope breaks...
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'chengzeyi/fzf-preview.vim'
+endif
+
 
 " TODO: jump between delphi functions
 Plug 'inkarkat/vim-ingo-library'
@@ -407,10 +410,19 @@ nnoremap <leader>bn :BF <cr>
 " --------------------------------------------
 " fzf 
 " --------------------------------------------
-
-nnoremap <leader>ff  :Files<CR>
-nnoremap <leader>fb  :Buffers<CR>
-"nnoremap <leader>G  :call fzf#vim#grep('rg --vimgrep --no-heading --color=always --smart-case ""', 1, {'options':'--exact --delimiter : --nth 4.. --query=<C-r><C-w> +i'})<CR>
+if has('nvim')
+  nnoremap <leader>ff <cmd>Telescope find_files<cr>
+  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  nnoremap <leader>fb <cmd>Telescope buffers<cr>
+  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+ "-- Change change prompt prefix for find_files builtin function:
+  "nnoremap <leader>fg :lua require('telescope.builtin').live_grep({ prompt_prefix=🔍 })<CR>
+  "nnoremap <leader>fg :Telescope live_grep prompt_prefix=🔍<CR>
+else
+  nnoremap <leader>ff  :Files<CR>
+  nnoremap <leader>fb  :Buffers<CR>
+  "nnoremap <leader>G  :call fzf#vim#grep('rg --vimgrep --no-heading --color=always --smart-case ""', 1, {'options':'--exact --delimiter : --nth 4.. --query=<C-r><C-w> +i'})<CR>
+endif
 
 command! -bang -nargs=* FContentOnlyRg 
 			\ call fzf#vim#grep(
