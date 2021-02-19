@@ -16,6 +16,8 @@ if exists("g:vimrc_auto_load_disabled")
   finish
 endif
 
+language en_us
+
 " This must be first, because it changes other options as a side effect.
 if has('vim_starting')
   set nocompatible               " Be iMproved

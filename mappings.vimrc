@@ -65,9 +65,12 @@ if has('nvim')                 " tnoremap stands for terminal mode mappings in n
   tnoremap <A-j> <C-\><C-N><C-w>j
   tnoremap <A-k> <C-\><C-N><C-w>k
   tnoremap <A-l> <C-\><C-N><C-w>l
-  command! Pwsh :set shell=pwsh|:term
-  cabbrev pwsh Pwsh
-  nnoremap <leader>tt :vsplit<CR><C-W>L:Pwsh<CR>
+  command! MyPwsh :call MySetPowerShell()|:term
+  cabbrev pwsh MyPwsh
+  command! Cmd :call MySetDefaultShell()|:term
+  cabbrev cmd MyCmd
+  nnoremap <leader>tt :vsplit<CR><C-W>L:MyPwsh<CR>:MySetDefaultShell<CR>
+  nnoremap <leader>tc :vsplit<CR><C-W>L:MyCmd<CR>
 endif
 inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-j> <C-\><C-N><C-w>j
@@ -168,9 +171,7 @@ nnoremap <leader>cq :cclose <cr>
 nnoremap <leader>ba :w <bar> %bd <bar> e# <bar> bd# <CR>
 " Tab navigation like firefox
 nnoremap <C-S-tab> :tabprevious<CR>
-nnoremap <leader>tp :tabprevious<CR>
 nnoremap <C-tab> :tabnext<CR>
-nnoremap <leader>tn :tabnext<CR>
 noremap <C-S-tab> :tabprevious<CR>
 noremap <C-tab> :tabnext<CR>
 inoremap <C-S-tab> <esc>:tabprevious<CR>i
