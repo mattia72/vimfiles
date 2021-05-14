@@ -44,7 +44,7 @@ hi Statement       guifg=#F92672               gui=bold           "any statement
 hi Conditional     guifg=#F92672               gui=bold           "if, then, else, endif, switch, etc.
 hi Repeat          guifg=#F92672               gui=bold           "for, do, while, etc.
 hi Label           guifg=#F92672               gui=italic         "case, default, etc.
-hi Operator        guifg=#BCA3A3               gui=none           ""sizeof", "+", "*", etc.
+hi Operator        guifg=#CC6699               gui=none           ""sizeof", "+", "*", etc.
 hi Keyword         guifg=#F92672               gui=bold           "any other keyword
 hi Exception       guifg=#F92672               gui=bold           "try, catch, throw
                                                                   "

@@ -153,8 +153,9 @@ let g:startify_custom_header =
       \ startify#pad(startify#fortune#boxed(s:intro[0:s:end_index]))
 let g:startify_commands = [
       \ ':ec "FAQ    " | help my-faq.txt',
-      \ ':ec "Delphi " | so ~\Session.vim | so ~\delphi-dev.vim',
-      \ ':ec "RipGrep" | so ~\dev\vim\vim-ripgrep\Session.vim',
+      \ ':ec "Delphi " | so ~\delphi-dev.vim | so ~\Session.vim ',
+      \ ':ec "vim-ripgrep" | so ~\dev\vim\vim-ripgrep\Session.vim',
+      \ ':ec "vim-delphi" | so ~\dev\vim\vim-delphi\Session.vim',
       \ ]
 let g:startify_lists = [
       \ { 'type': 'commands',  'header': ['   Commands']       },

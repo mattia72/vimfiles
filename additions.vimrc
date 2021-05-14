@@ -43,23 +43,6 @@ function! MyDeleteView()
   echo "Deleted: ".path
 endfunction
 
-function! g:MySetDefaultShell()
-  let g:default_shell_options =[&shell, &shellquote, &shellpipe, &shellxquote, &shellcmdflag, &shellredir]
-	set shellquote& | set shellpipe& | set shellxquote& | set shellcmdflag& | set shellredir& | set shell&
-endfunction
-
-function! g:MyRestoreOrigShell()
-  let &shell        = g:default_shell_options[0]
-  let &shellquote   = g:default_shell_options[1]
-  let &shellpipe    = g:default_shell_options[2]
-  let &shellxquote  = g:default_shell_options[3]
-  let &shellcmdflag = g:default_shell_options[4]
-  let &shellredir   = g:default_shell_options[5]
-endfunction
-
-command!  MySetDefaultShell call MySetDefaultShell()
-command!  MyRestoreOrigShell call MyRestoreOrigShell()
-
 function! g:MyExecInCmd(command, ...)
   let tmp=&shell
   set shell=cmd
