@@ -65,7 +65,11 @@ if has('nvim')                 " tnoremap stands for terminal mode mappings in n
   tnoremap <A-j> <C-\><C-N><C-w>j
   tnoremap <A-k> <C-\><C-N><C-w>k
   tnoremap <A-l> <C-\><C-N><C-w>l
-  command! Pwsh :set shell=pwsh|:term
+  if(executable('pwsh'))
+    command! Pwsh :set shell=pwsh|:term
+  elseif(executable('powershell'))
+    command! Pwsh :set shell=powershell|:term
+  endif
   cabbrev pwsh Pwsh
   nnoremap <leader>tt :vsplit<CR><C-W>L:Pwsh<CR>
 endif
