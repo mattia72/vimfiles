@@ -62,9 +62,9 @@ hi Typedef         guifg=#66D9EF                                  "A typedef
 hi Special         guifg=#66D9EF  guibg=bg     gui=italic         "any special symbol
 hi SpecialChar     guifg=#F92672               gui=bold,italic    "special character in a constant
 hi Tag             guifg=#FD971F               gui=italic         "you can use CTRL-] on this
-hi Delimiter       guifg=#8F8F8F                                  "character that needs attention
+hi Delimiter       guifg=#BCA3A3               gui=bold           "character that needs attention
 hi SpecialComment  guifg=#A6E22C               gui=italic         "special things inside a comment
-hi Debug           guifg=#BCA3A3               gui=bold,italic    "debugging statements
+hi Debug           guifg=#8F8F8F               gui=bold,italic    "debugging statements
                                                                   "
 hi Underlined      guifg=#808080               gui=underline      "text that stands out, HTML links
                                                                   "
@@ -82,7 +82,7 @@ hi DiffChange      guifg=#89807D guibg=#4C4745
 hi DiffDelete      guifg=#960050 guibg=#1E0010
 hi DiffText                      guibg=#4C4745 gui=italic,bold
 
-hi Directory       guifg=#588F7C
+hi Directory       guifg=#588F7C 
 "#A6E22E
 hi ErrorMsg        guifg=#F92672 guibg=#1B1D1E
 hi WarningMsg      guifg=#EAF60E guibg=#1B1D1E

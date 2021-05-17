@@ -416,6 +416,7 @@ if has('nvim')
   nnoremap <leader>fg <cmd>Telescope live_grep<cr>
   nnoremap <leader>fb <cmd>Telescope buffers<cr>
   nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  nnoremap <leader>fp <cmd>lua require('telescope.builtin').keymaps()<cr>
  "-- Change change prompt prefix for find_files builtin function:
   "nnoremap <leader>fg :lua require('telescope.builtin').live_grep({ prompt_prefix=🔍 })<CR>
   "nnoremap <leader>fg :Telescope live_grep prompt_prefix=🔍<CR>

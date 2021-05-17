@@ -120,6 +120,11 @@ vnoremap <leader>sr y<ESC>:%s/<C-R>0//g<Left><Left><BackSpace>/
 " search replace selected case sensitive
 vnoremap <leader>src y<ESC>:%s/\C<C-R>0//g<Left><Left><BackSpace>/
 
+" copy selected to clipboard
+vnoremap <leader>yy "+y
+" paste selected to clipboard
+nnoremap <leader>pp "+p
+
 " highlight selected
 vnoremap <leader>sh y<ESC>:match Error /<C-R>0/ 
 "reload syntax
