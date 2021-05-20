@@ -62,7 +62,7 @@ hi Typedef         guifg=#66D9EF                                  "A typedef
 hi Special         guifg=#66D9EF  guibg=bg     gui=italic         "any special symbol
 hi SpecialChar     guifg=#F92672               gui=bold,italic    "special character in a constant
 hi Tag             guifg=#FD971F               gui=italic         "you can use CTRL-] on this
-hi Delimiter       guifg=#BCA3A3               gui=bold           "character that needs attention
+hi Delimiter       guifg=#BCA3A3                                  "character that needs attention
 hi SpecialComment  guifg=#A6E22C               gui=italic         "special things inside a comment
 hi Debug           guifg=#8F8F8F               gui=bold,italic    "debugging statements
                                                                   "
