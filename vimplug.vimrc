@@ -86,6 +86,8 @@ Plug 'wellle/targets.vim'        " more text objects https://github.com/wellle/t
 Plug 'mileszs/ack.vim'           " the better grep
 Plug 'yssl/QFEnter'              " QFEnter allows you to open items from quickfix or location list wherever you wish.
 
+"Plug 'adah1972/vim-copy-as-rtf'  " Vim plugin for copying syntax highlighted code as RTF on Windows/macOS/X11
+
 " languages
 Plug 'vim-scripts/xml.vim'          , {'for': ['xml']}
 Plug 'vim-scripts/perl-support.vim' , {'for': ['perl']}
@@ -120,6 +122,7 @@ Plug 'vim-scripts/Decho'
 
 Plug  '~\dev\vim\vim-delphi'
 Plug  '~\dev\vim\vim-ripgrep'
+Plug  '~\dev\vim\vim-copy-as-rtf'
 
 " colors
 "Plug 'sjl/badwolf'                        " {'script_type': 'color'}
