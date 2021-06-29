@@ -9,6 +9,12 @@
 " Mappings ...
 "-------------------------------------------------------------------------------
 
+let s:fname = resolve(expand('<sfile>:t'))
+function! <SID>MyEchoMessage(msg)
+    echohl StatusLineNC | echo s:fname.': '.a:msg | echohl None
+endfunction
+
+
 "Ctrl-C, Ctrl-V and so on...
 source $VIMRUNTIME/mswin.vim
 " remap old C-V in normal mode
@@ -32,8 +38,8 @@ let mapleader = ","
 let g:mapleader = ","
 
 " Copy full path or file name to clipboard
-nnoremap <leader>cp :let @+ = expand("%:p")<cr>
-nnoremap <leader>cf :let @+ = expand("%")<cr>
+nnoremap <leader>cp :let @+ = expand("%:p")<cr>:call <SID>MyEchoMessage('Path of current file was copied to clipboard.')<CR>
+nnoremap <leader>cf :let @+ = expand("%")<cr>:call <SID>MyEchoMessage('Name of current file was copied to clipboard.')<CR>
 
 "got to dir of current file in current window only
 nnoremap <leader>cd <ESC>:lcd %:p:h <bar> pwd <CR>
@@ -121,7 +127,7 @@ vnoremap <leader>sr y<ESC>:%s/<C-R>0//g<Left><Left><BackSpace>/
 vnoremap <leader>src y<ESC>:%s/\C<C-R>0//g<Left><Left><BackSpace>/
 
 " copy selected to clipboard
-vnoremap <leader>yy "+y
+vnoremap <leader>yy "+y:call <SID>MyEchoMessage('The selected text was copied to clipboard.')<CR>
 " paste selected to clipboard
 nnoremap <leader>pp "+p
 

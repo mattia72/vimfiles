@@ -19,12 +19,43 @@ if version > 580
     endif
 endif
 let g:colors_name="mattia"
+
 let statement_color="#2B91AF" "blue
 "let statement_color="#F92672" "red
+let identifier_color="#FD971F" "orange
+
 let statement_color_norm=statement_color . " gui=none"
 let statement_color_bold=statement_color . " gui=bold"
 let statement_color_italic=statement_color . " gui=italic"
 
+let colorDefs = {}
+let colorDefs['Identifier'] = {"guifg": identifier_color, "gui": "none"}
+let colorDefs['Function']   = {"guifg": identifier_color, "gui": "bold"}
+
+function ExecHi(colorDefs)
+  for key in keys(a:colorDefs)
+    let s:colours = a:colorDefs[key]
+    if has_key(s:colours, 'gui')
+      let gui = s:colours['gui']
+    else
+      let gui='none'
+    endif
+    if has_key(s:colours, 'guifg')
+      let guifg = s:colours['guifg']
+    else
+      let guifg='none'
+    endif
+    if has_key(s:colours, 'guibg')
+      let guibg = s:colours['guibg']
+    else
+      let guibg='none'
+    endif
+    if key =~ '^\k*$'
+      "execute "hi ".key." term=".term." cterm=".cterm." gui=".gui." ctermfg=".ctermfg." guifg=".guifg." ctermbg=".ctermbg." guibg=".guibg." guisp=".guisp
+      execute "hi ".key." gui=".gui." guifg=".guifg." guibg=".guibg
+    endif
+  endfor
+endfunction
 
 hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
 hi CursorLine                    guibg=#293739
@@ -42,8 +73,9 @@ hi Number          guifg=#AE81FF                                  "a number cons
 hi Boolean         guifg=#AE81FF                                  "a boolean constant: TRUE, false
 hi Float           guifg=#AE81FF                                  "a floating point constant: 2.3e10
                                                                   "
-hi Identifier      guifg=#FD971F                                  "any variable name
-hi Function        guifg=#A6E22E                                  "function name (also: methods for classes)
+call ExecHi(colorDefs)                                                 "any variable name
+"hi Identifier      guifg=#FD971F                                  "any variable name
+"hi Function        guifg=#A6E22E                                  "function name (also: methods for classes)
                                                                   "
 exe "hi Statement       guifg=".statement_color_norm
 exe "hi Conditional     guifg=".statement_color_bold              

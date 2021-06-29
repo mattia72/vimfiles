@@ -24,7 +24,8 @@ endif
 set listchars=eol:¬,tab:-»,trail:˙,extends:⮁,precedes:⮃,space:˙
 
 "colors codedark
-colors mattia
+colors mattia_blue
+"colors mattia
 "colors molokai
 
 " set cursor color and blink
