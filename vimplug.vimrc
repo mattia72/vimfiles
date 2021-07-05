@@ -13,6 +13,8 @@ call plug#begin(expand('~/.vim/plugged/'))
 " Run :PlugUpgrade for upgrade Plug itself
 Plug 'junegunn/vim-plug'
 
+
+Plug 'ryanoasis/vim-devicons'
 Plug 'Shougo/denite.nvim'         , Cond(has('python3'))
 
 if has('nvim') 
@@ -29,7 +31,12 @@ Plug 'Shougo/unite.vim'           , Cond(!has('python3'))
 Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3'))  " a fast complete for lua supported vim
 
 Plug 'vifm/vifm.vim'            " vifm in vim
-Plug 'mhinz/vim-startify'       " startup screen
+if has('nvim') 
+  Plug 'glepnir/dashboard-nvim'  " startup screen
+else
+  Plug 'mhinz/vim-startify'       " startup screen
+endif
+
 
 "Plug 'neomake/neomake'         " async make
 "Plug 'tpope/vim-dispatch'      " async make :Make! and :Copen
@@ -116,9 +123,10 @@ Plug 'inkarkat/vim-CountJump'
 Plug 'vim-scripts/genutils'
 Plug 'albfan/vim-breakpts'
 Plug 'h1mesuke/vim-unittest'
+Plug 'vim-scripts/Decho'
+
 " My own plugins
 "Plug 'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
-Plug 'vim-scripts/Decho'
 
 Plug  '~\dev\vim\vim-delphi'
 Plug  '~\dev\vim\vim-ripgrep'
@@ -144,26 +152,58 @@ nnoremap <leader>su :wa <bar> UnitTest<CR>
 nnoremap <F5> :wa <bar> UnitTest<CR>
 
 " Startify: start screen settings
-let g:startify_session_sort = 1
-let g:startify_fortune_use_unicode = 1
-let g:startify_session_persistence = 1
-let s:intro = split(execute('version'), '\(\n\|(\|)\)')
-let s:end_index = has('nvim') ? 2 : 3
-let g:startify_custom_header =
-      \ startify#pad(startify#fortune#boxed(s:intro[0:s:end_index]))
-let g:startify_commands = [
-      \ ':ec "FAQ    " | help my-faq.txt',
-      \ ':ec "Delphi " | so ~\delphi-dev.vim | so ~\Session.vim ',
-      \ ':ec "vim-ripgrep" | so ~\dev\vim\vim-ripgrep\Session.vim',
-      \ ':ec "vim-delphi" | so ~\dev\vim\vim-delphi\Session.vim',
-      \ ]
-let g:startify_lists = [
-      \ { 'type': 'commands',  'header': ['   Commands']       },
-      \ { 'type': 'files',     'header': ['   MRU']            },
-      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ ]
+if exists('g:startify_session_sort')
+  let g:startify_session_sort = 1
+  let g:startify_fortune_use_unicode = 1
+  let g:startify_session_persistence = 1
+  let s:intro = split(execute('version'), '\(\n\|(\|)\)')
+  let s:end_index = has('nvim') ? 2 : 3
+  let g:startify_custom_header =
+        \ startify#pad(startify#fortune#boxed(s:intro[0:s:end_index]))
+  let g:startify_commands = [
+        \ ':ec "FAQ    " | help my-faq.txt',
+        \ ':ec "Delphi " | so ~\delphi-dev.vim | so ~\Session.vim ',
+        \ ':ec "vim-ripgrep" | so ~\dev\vim\vim-ripgrep\Session.vim',
+        \ ':ec "vim-delphi" | so ~\dev\vim\vim-delphi\Session.vim',
+        \ ]
+  let g:startify_lists = [
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ ]
+end
+
+"if exists('g:dashboard_default_executive')
+let g:dashboard_default_executive = 'telescope'
+let g:dashboard_custom_header = [
+      \ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+      \ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+      \ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+      \ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+      \ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+      \ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+      \]
+
+"let g:dashboard_custom_shortcut_icon = {}
+"let g:dashboard_custom_shortcut_icon['last_session'] = 'ℓ '
+"let g:dashboard_custom_shortcut_icon['find_history'] = '⮁ '
+"let g:dashboard_custom_shortcut_icon['find_file'] = '🔍 '
+"let g:dashboard_custom_shortcut_icon['new_file'] = '⮁ '
+"let g:dashboard_custom_shortcut_icon['change_colorscheme'] = '⮁ '
+"let g:dashboard_custom_shortcut_icon['find_word'] = '⮁ '
+"let g:dashboard_custom_shortcut_icon['book_marks'] = '⮁ '
+
+  "nmap <Leader>ss :<C-u>SessionSave<CR>
+  "nmap <Leader>sl :<C-u>SessionLoad<CR>
+  "nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+  "nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
+  "nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+  "nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+  "nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
+  "nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+"endif
 
 "switch off fugitive
 "let g:loaded_fugitive = 0
@@ -412,14 +452,17 @@ nnoremap <leader>bp :BB <cr>
 nnoremap <leader>bn :BF <cr>
 
 " --------------------------------------------
-" fzf 
+" Telescope 
 " --------------------------------------------
 if has('nvim')
+  "history
+  nnoremap <leader>fm <cmd>Telescope oldfiles<cr>
   nnoremap <leader>ff <cmd>Telescope find_files<cr>
   nnoremap <leader>fg <cmd>Telescope live_grep<cr>
   nnoremap <leader>fb <cmd>Telescope buffers<cr>
   nnoremap <leader>fh <cmd>Telescope help_tags<cr>
   nnoremap <leader>fp <cmd>lua require('telescope.builtin').keymaps()<cr>
+  nnoremap <leader>fl <cmd>lua require('telescope.builtin').planets()<cr>
  "-- Change change prompt prefix for find_files builtin function:
   "nnoremap <leader>fg :lua require('telescope.builtin').live_grep({ prompt_prefix=🔍 })<CR>
   "nnoremap <leader>fg :Telescope live_grep prompt_prefix=🔍<CR>
