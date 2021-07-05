@@ -175,8 +175,9 @@ if exists('g:startify_session_sort')
         \ ]
 end
 
-"if exists('g:dashboard_default_executive')
+if has('nvim')
 let g:dashboard_default_executive = 'telescope'
+let g:dashboard_session_directory = '~/.cache/session'
 let g:dashboard_custom_header = [
       \ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
       \ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
@@ -186,24 +187,27 @@ let g:dashboard_custom_header = [
       \ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
       \]
 
-"let g:dashboard_custom_shortcut_icon = {}
-"let g:dashboard_custom_shortcut_icon['last_session'] = 'ℓ '
-"let g:dashboard_custom_shortcut_icon['find_history'] = '⮁ '
-"let g:dashboard_custom_shortcut_icon['find_file'] = '🔍 '
-"let g:dashboard_custom_shortcut_icon['new_file'] = '⮁ '
-"let g:dashboard_custom_shortcut_icon['change_colorscheme'] = '⮁ '
-"let g:dashboard_custom_shortcut_icon['find_word'] = '⮁ '
-"let g:dashboard_custom_shortcut_icon['book_marks'] = '⮁ '
-
-  "nmap <Leader>ss :<C-u>SessionSave<CR>
-  "nmap <Leader>sl :<C-u>SessionLoad<CR>
-  "nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-  "nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
-  "nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-  "nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-  "nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-  "nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
-"endif
+nmap <Leader>ss :<C-u>SessionSave<CR>
+nmap <Leader>sl :<C-u>SessionLoad<CR>
+"nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
+"nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+"nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
+"nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+lua << EOF
+vim.g.dashboard_custom_section = {
+    a = {description = {'  Delphi                            '}, command = 'so ~/delphi-dev.vim | so ~/Session.vim'},
+    b = {description = {'  Reload Last Session            ,sl'}, command = 'SessionLoad'},
+    c = {description = {'  Recently Opened Files          ,fm'}, command = 'Telescope oldfiles'},
+    d = {description = {'  Open Project                      '}, command = 'Telescope marks'},
+    e = {description = {'  Jump to Bookmark                  '}, command = 'Telescope project'},
+    f = {description = {'  Find File                      ,ff'}, command = 'Telescope find_files'},
+    g = {description = {'  Find Word                      ,fa'}, command = 'Telescope live_grep'},
+    h = {description = {'  Open Neovim Configuration      ,vi'}, command = ':tabnew! ~/.vim/vim.vimrc'}
+}
+EOF
+endif
 
 "switch off fugitive
 "let g:loaded_fugitive = 0
@@ -386,16 +390,22 @@ function! MySetLightLine()
 
   let g:lightline = {
         \'colorscheme': 'powerline',
-        \'separator' : { 'left': '⮀', 'right': '⮂' },
-	      \'subseparator' : { 'left': '⮁', 'right': '⮃' },
-		    \'component': {
-		    \   'lineinfo': '⭡ %3l:%-2v',
-		    \ },
 		    \'component_function': {
 		    \   'readonly': 'LightlineReadonly',
 		    \   'fugitive': 'LightlineFugitive',
-		    \ }
+		    \ },
+        \'separator' : { 'left': '', 'right': '' },
+				\'subseparator' : { 'left': '', 'right': '' },
+				\'component': {
+				\   'lineinfo': ' %3l:%-2v',
+				\ }
 	      \}
+	"Ubuntu for powerline
+        "'separator' : { 'left': '⮀', 'right': '⮂' },
+				"'subseparator' : { 'left': '⮁', 'right': '⮃' },
+				"'component': {
+				"   'lineinfo': '⭡ %3l:%-2v',
+				" },
 
   let g:lightline#asyncrun#indicator_run = 'running...'
   let g:lightline#asyncrun#indicator_none = ''
@@ -418,13 +428,15 @@ function! MySetLightLine()
 endfunction
 
 function! LightlineReadonly()
-	return &readonly ? '⭤' : ''
+	"return &readonly ? '⭤' : ''
+	return &readonly ? '' : ''
 endfunction
 
 function! LightlineFugitive()
 	if exists('*fugitive#head')
 		let branch = fugitive#head()
-		return branch !=# '' ? '⭠ '.branch : ''
+		return branch !=# '' ? ''.branch : ''
+		"return branch !=# '' ? '⭠ '.branch : ''
 	endif
 	return ''
 endfunction

@@ -16,9 +16,11 @@ set guicursor+=i:blinkwait10
 syntax on
 
 if has('nvim')
-  GuiFont! Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
+  "GuiFont! Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
+  GuiFont! UbuntuMono\ NF:h12:cEASTEUROPE
 else
-  set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
+  "set guifont=Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE
+  set guifont=UbuntuMono\ NF:h12:cEASTEUROPE
 endif
 
 set listchars=eol:¬,tab:-»,trail:˙,extends:⮁,precedes:⮃,space:˙
