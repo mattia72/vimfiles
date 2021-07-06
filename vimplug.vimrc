@@ -13,21 +13,7 @@ call plug#begin(expand('~/.vim/plugged/'))
 " Run :PlugUpgrade for upgrade Plug itself
 Plug 'junegunn/vim-plug'
 
-
 Plug 'ryanoasis/vim-devicons'
-Plug 'Shougo/denite.nvim'         , Cond(has('python3'))
-
-if has('nvim') 
-  if has('python3')
-    Plug 'Shougo/deoplete.nvim'     ,  { 'do': ':UpdateRemotePlugins' }
-  endif
-else
-  Plug 'Shougo/deoplete.nvim'     , Cond(has('python3'))
-  Plug 'roxma/nvim-yarp'          , Cond(has('python3')) " required by denite
-  Plug 'roxma/vim-hug-neovim-rpc' , Cond(has('python3')) " required by denite
-endif
-
-Plug 'Shougo/unite.vim'           , Cond(!has('python3'))
 Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3'))  " a fast complete for lua supported vim
 
 Plug 'vifm/vifm.vim'            " vifm in vim
@@ -37,15 +23,11 @@ else
   Plug 'mhinz/vim-startify'       " startup screen
 endif
 
-
 "Plug 'neomake/neomake'         " async make
 "Plug 'tpope/vim-dispatch'      " async make :Make! and :Copen
 "Plug 'hauleth/asyncdo.vim'      " minimal async task runner (no support since 2018)
 Plug 'skywind3000/asyncrun.vim' " async external command execution
 
-Plug 'Shougo/neomru.vim'        " most recent file list for Unit
-Plug 'Shougo/unite-outline', Cond(!has('python3')) " it is only for Unite
-Plug 'Shougo/neoyank.vim'       " yank register browser for unite/denite
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
@@ -273,111 +255,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-
-"https://github.com/roxma/nvim-yarp#requirements
-if has('python3') " exists('g:loaded_denite') doesn't work here :(
-  let g:python3_host_prog = 'C:\Python38\python.exe'
-
-	" Define mappings
-	autocmd FileType denite call s:denite_my_settings()
-	function! s:denite_my_settings() abort
-	  nnoremap <silent><buffer><expr> <CR>
-	        \ denite#do_map('do_action')
-	  nnoremap <silent><buffer><expr> d
-	        \ denite#do_map('do_action', 'delete')
-	  nnoremap <silent><buffer><expr> p
-	        \ denite#do_map('do_action', 'preview')
-	  nnoremap <silent><buffer><expr> q
-	        \ denite#do_map('quit')
-	  nnoremap <silent><buffer><expr> i
-	        \ denite#do_map('open_filter_buffer')
-	  nnoremap <silent><buffer><expr> <Space>
-	        \ denite#do_map('toggle_select').'j'
-	endfunction
-
-	autocmd FileType denite-filter call s:denite_filter_my_settings()
-	function! s:denite_filter_my_settings() abort
-	  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
-	endfunction
-
-  " Ctrl-t/g up/down in the list Ctrl-o->normale mode
-  " C-a put result to quickfix window
-  "call denite#custom#map('normal', '<C-a>',
-        "\ '<denite:multiple_mappings:denite:toggle_select_all'.
-        "\ ',denite:do_action:quickfix>', 'noremap')
-
-  if (executable('rg'))
-    call denite#custom#var('grep', 'command', ['rg'])
-    call denite#custom#var('grep', 'default_opts',
-          \ ['--hidden', '--vimgrep', '--smart-case'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
-  endif
-
-  " grep in current directory
-  nnoremap <leader>dg :<C-u>Denite -buffer-name=grep  grep <cr>
-  " recursive file search (requres 'ag' or 'find' (not in windows))
-  nnoremap <leader>df :<C-u>Denite -buffer-name=files   file/rec  <cr>
-  " most recent file list
-  nnoremap <leader>dr :<C-u>Denite -buffer-name=mru     file_mru <cr> 
-  " navigate in the current buffer
-  nnoremap <leader>do :<C-u>Denite -buffer-name=outline outline <cr>
-  " yank history
-  nnoremap <leader>dy :<C-u>Denite -buffer-name=neoyank neoyank<cr>
-  " buffer explorer
-  nnoremap <leader>de :<C-u>Denite -buffer-name=buffer  buffer<cr>
-  nnoremap <leader>db :<C-u>Denite -buffer-name=buffer  buffer<cr>
-  " browse for defined mappings
-  nnoremap <leader>dp :<C-u>Denite -buffer-name=mapping  output:'verbose map'<CR>
-  " browse messages
-  nnoremap <leader>dm :<C-u>Denite -buffer-name=message output:message<CR>
-  nnoremap <leader>dh :<C-u>Denite -buffer-name=help help <CR>
-
-else " if exists('g:loaded_unite')
-
-  let g:unite_source_history_yank_enable = 1
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
-
-  " Default action is open in current buffer,
-  " !!!! Ctrl-t opens selected in new tab! !!!
-  "
-  " recursive file search (requres 'ag' or 'find' (not in windows))
-  "nnoremap <leader>ut :<C-u>Unite -buffer-name=files   -start-insert file_rec/async:! <cr>
-  " file in current directory
-  nnoremap <leader>uf :<C-u>Unite -buffer-name=files   -start-insert file <cr>
-  " most recent file list
-  nnoremap <leader>ur :<C-u>Unite -buffer-name=mru     -start-insert file_mru <cr>
-  " navigate in the current buffer
-  nnoremap <leader>uo :<C-u>Unite -buffer-name=outline -start-insert outline<cr>
-  " yank history
-  nnoremap <leader>uy :<C-u>Unite -buffer-name=yank    history/yank<cr>
-  " buffer explorer
-  nnoremap <leader>ub :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
-  " browse for defined mappings
-  nnoremap <leader>up :<C-u>Unite -buffer-name=mapping  mapping<CR>
-  " browse messages
-  nnoremap <leader>um :<C-u>Unite output:message<CR>
-
-  " Custom mappings for the unite buffer
-  autocmd FileType unite call s:unite_settings()
-endif
-
-function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <TAB>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-  " Reverse sort order on S
-  nnoremap <buffer><expr> S      unite#mappings#set_current_sorters(
-        \ empty(unite#mappings#get_current_sorters()) ?
-        \ ['sorter_reverse'] : [])
-  " Runs "split" action by <C-s>.
-  imap <silent><buffer><expr> <C-s>     unite#do_action('split')
-endfunction
 
 " --------------------------------------------
 " lightline
