@@ -13,6 +13,16 @@ call plug#begin(expand('~/.vim/plugged/'))
 " Run :PlugUpgrade for upgrade Plug itself
 Plug 'junegunn/vim-plug'
 
+Plug 'folke/which-key.nvim'
+
+lua << EOF
+  require("which-key").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+
 Plug 'ryanoasis/vim-devicons'
 Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3'))  " a fast complete for lua supported vim
 
