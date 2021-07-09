@@ -169,6 +169,7 @@ if exists('g:startify_session_sort')
         \ ]
 end
 
+"it works so
 "lua require('plug-dashboard')
 source ~/.vim/nvim/lua/plug-dashboard.lua
 
