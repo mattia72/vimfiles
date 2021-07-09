@@ -15,18 +15,11 @@ Plug 'junegunn/vim-plug'
 
 Plug 'folke/which-key.nvim'
 
-lua << EOF
-  require("which-key").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-EOF
-
 Plug 'ryanoasis/vim-devicons'
 Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3'))  " a fast complete for lua supported vim
 
-Plug 'vifm/vifm.vim'            " vifm in vim
+"Plug 'vifm/vifm.vim'            " vifm in vim
+"
 if has('nvim') 
   Plug 'glepnir/dashboard-nvim'  " startup screen
 else
@@ -94,6 +87,7 @@ Plug 'vim-scripts/perl-support.vim' , {'for': ['perl']}
 "Plug 'zigford/vim-powershell'       , {'for': ['ps1', 'psm1']}
 Plug 'PProvost/vim-ps1'             , {'for': ['ps1', 'psm1']}
 " Plug 'vim-scripts/MatchTag'       , {'for': ['html']}                " highlight html tag pairs
+Plug 'euclidianAce/BetterLua.vim'    , {'for': ['lua']}
 
 if has('nvim')
   Plug 'nvim-lua/popup.nvim'
@@ -143,6 +137,14 @@ call plug#end()
 nnoremap <leader>su :wa <bar> UnitTest<CR>
 nnoremap <F5> :wa <bar> UnitTest<CR>
 
+lua << EOF
+  require("which-key").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+
 " Startify: start screen settings
 if exists('g:startify_session_sort')
   let g:startify_session_sort = 1
@@ -167,39 +169,8 @@ if exists('g:startify_session_sort')
         \ ]
 end
 
-if has('nvim')
-let g:dashboard_default_executive = 'telescope'
-let g:dashboard_session_directory = '~/.cache/session'
-let g:dashboard_custom_header = [
-      \ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-      \ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-      \ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-      \ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-      \ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-      \ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-      \]
-
-nmap <Leader>ss :<C-u>SessionSave<CR>
-nmap <Leader>sl :<C-u>SessionLoad<CR>
-"nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
-"nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-"nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-"nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
-lua << EOF
-vim.g.dashboard_custom_section = {
-    a = {description = {'  Delphi                            '}, command = 'so ~/delphi-dev.vim | so ~/Session.vim'},
-    b = {description = {'  Reload Last Session            ,sl'}, command = 'SessionLoad'},
-    c = {description = {'  Recently Opened Files          ,fm'}, command = 'Telescope oldfiles'},
-    d = {description = {'  Open Project                      '}, command = 'Telescope marks'},
-    e = {description = {'  Jump to Bookmark                  '}, command = 'Telescope project'},
-    f = {description = {'  Find File                      ,ff'}, command = 'Telescope find_files'},
-    g = {description = {'  Find Word                      ,fa'}, command = 'Telescope live_grep'},
-    h = {description = {'  Open Neovim Configuration      ,vi'}, command = ':tabnew! ~/.vim/vim.vimrc'}
-}
-EOF
-endif
+"lua require('plug-dashboard')
+source ~/.vim/nvim/lua/plug-dashboard.lua
 
 "switch off fugitive
 "let g:loaded_fugitive = 0
