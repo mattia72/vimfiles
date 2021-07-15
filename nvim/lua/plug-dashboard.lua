@@ -4,71 +4,60 @@
 
 vim.g.dashboard_default_executive = 'telescope'
 --vim.g.dashboard_session_directory = "~/.cache/session"
-vim.cmd("let g:dashboard_session_directory = $HOME..'/.cache/nvim/.sessions'")
-
+--vim.cmd("let g:dashboard_session_directory = $HOME..'/.cache/nvim/.sessions'")
 
 --nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
-vim.api.nvim_set_keymap('n', '<leader>ff', ':DashboardFindFile<CR>', { noremap = true, silent = true })
+--vim.api.nvim_set_keymap('n', '<leader>ff', ':DashboardFindFile<CR>', { noremap = true, silent = true })
 --"nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
 --"nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
 --nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-vim.api.nvim_set_keymap('n', '<leader>fa', ':DashboardFindWord<CR>', { noremap = true, silent = true })
+--vim.api.nvim_set_keymap('n', '<leader>fa', ':DashboardFindWord<CR>', { noremap = true, silent = true })
 --"nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
 --"nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 vim.api.nvim_set_keymap('n', '<leader>ss', ':<C-u>SessionSave<CR>', { noremap = false, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ss', ':<C-u>SessionSave<CR>', { noremap = false, silent = true })
 
 vim.api.nvim_exec([[
-hi dashboardHeader    guifg=#0087d7
-hi dashboardFooter    guifg=#008f00
-hi dashboardCenter    guifg=#ffaf00
-hi dashboardShortCut  guifg=#00d700
+function! MySetDashboardColor()
+  hi dashboardHeader    guifg=#0087d7
+  hi dashboardFooter    guifg=#008f00
+  hi dashboardCenter    guifg=#ffaf00
+  hi dashboardShortCut  guifg=#00d700
+endfunction
+
+autocmd User dashboardReady call  MySetDashboardColor()
 ]], false)
 
 vim.g.dashboard_custom_section = {
     a = {description = {'  Delphi                            '}, command = 'so ~/delphi-dev.vim | so ~/Session.vim'},
     b = {description = {'  Reload Last Session            ,sl'}, command = 'SessionLoad'},
     c = {description = {'  Recently Opened Files          ,fr'}, command = 'Telescope oldfiles'},
-    d = {description = {'  Open Project                      '}, command = 'Telescope marks'},
-    e = {description = {'  Jump to Bookmark                  '}, command = 'Telescope project'},
+    --d = {description = {'  Open Project                      '}, command = 'Telescope ???'},
+    e = {description = {'  Jump to Bookmark                  '}, command = 'Telescope marks'},
     f = {description = {'  Find File                      ,ff'}, command = 'Telescope find_files'},
     g = {description = {'  Find Word                      ,fa'}, command = 'Telescope live_grep'},
-    h = {description = {'  Open Neovim Configuration      ,vi'}, command = ':tabnew! ~/.vim/vim.vimrc'}
+    h = {description = {'  Open Neovim Configuration      ,vi'}, command = ':tabnew! ~/.vim/vimrc'}
 }
-
-local wk = require("which-key")
-
-wk.register({
-  f = {
-    name = "file", -- optional group name
-    f = { "<cmd>Telescope find_files<cr>", "Telescope Find File" }, -- create a binding with label
-    r = { "<cmd>Telescope oldfiles<cr>", "Telescope Open Recent File", noremap=true }, -- additional options for creating the keymap
-    --n = { "New File" }, -- just a label. don't create any mapping
-    --e = "Edit File", -- same as above
-    --["1"] = "which_key_ignore",  -- special label to hide it in the popup
-    --b = { function() print("bar") end, "Foobar" } -- you can also pass functions!
-  },
-}, { prefix = "<leader>" })
 
 
  vim.g.dashboard_custom_header = {
-'                       ▒                                                                                                  ',
-'     ░▓▓▓            ▓▓▓                                                                                                ',
-'   ▒▓▓▓▓▓▓▒          ░▓▓▓▓                                                                                              ',
-' ▒▓▓▓▓▓▓░░░░         ▓▓▓▓▓▓▒                                                                 ▓▓▓▓                       ',
-'▓▓▓▒▓▓▓▓▒▒▒▒▒        ▓▓▓▓▓▓▓▓                                                                                           ',
-'▓▓▓▓▓▒▓▓▓▓▓▓▓▓▒      ░▓▓▓▓▓▓▓        ▒    ▓▓▒▒         ▒▒▓▒         ▒▓▓▒▒    ▓▓▓▓       ▒▓▓▓ ▓▓▓▓  ▓▓▓ ░▓▓▓▓▒  ░▓▓▓▓▓▓  ',
-'▓░░░░░▒▓▓▓▓▓▓▓▓▓     ░▓▓▓▓▓▓▓        ▓▓▓░     ▓▒    ▓▓      ░▓   ░▓▓     ░▓▓  ▓▓▓▓     ▓▓▓▓  ▓▓▓▓  ▓▓▓▓▓▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▒',
-'▓▒▒▒▒▒▒▒░░░░░░░░▓    ░▓▓▓▓▓▓▓        ▓▓        ▓░  ▓░        ▓░ ▓▓         ▓▓  ▓▓▓▓    ▓▓▓░  ▓▓▓▓  ▓▓▓▓    ░▓▓▓▒    ▒▓▓▓',
-'▓▓▓▓▓▓▓▓ ▓▒▒▒▒▒▒▒▒▒  ░▓▓▓▓▓▓▓        ▓▓        ▓░ ░▓▓▓▓▓▓▓▓▓▓▓▓ ▓▒          ▓▓  ▓▓▓   ▓▓▓▓   ▓▓▓▓  ▓▓▓▓     ▓▓▓▒    ▒▓▓▓',
-'▓░░░░░░░   ▒▒▒▒▒▒▒▒▓ ░▓▓▓▓▓▓▓        ▓▓        ▓░ ░▓            ▓▓          ▓▓  ▓▓▓▓ ▒▓▓▓    ▓▓▓▓  ▓▓▓▓     ▓▓▓▒    ▒▓▓▓',
-'▓░░░░░░░    ▓▓▓▓▓▓▓▓▓░▓▓▓▓▓▓▓        ▓▓        ▓░  ▓░           ▓▓         ▓▓    ▒▓▓▒▓▓▓     ▓▓▓▓  ▓▓▓▓     ▓▓▓▒    ▒▓▓▓',
-'▓▒▒▒▒▒▒▒     ▒▒▒▓▒▒▒▒▓▓▓▓▓▓▓▓        ▓▓        ▓░   ▓▓       ▓▒  ▒▓       ▓▓░     ▓▓▓▓▓      ▓▓▓▓  ▓▓▓▓     ▓▓▓▒    ▒▓▓▓',
-'▓▓▓▓▒▓▓▓       ░░░░░░▓▓▓▓▓▓▓▓        ▓▓        ▓░     ▒▓▓▓▓▓▒      ░▒▓▓▓▓▒         ▒▒▒░      ▓▓▓▓  ▓▓▓▒     ▓▓▓▒    ▓▓▓▓',
-'▓▒▒▒▒▒▒▒        ▓▒▒▒▒▓▓▓▓▓▓▓▓                                                                                           ',
-' ░░░░░░░         ▓▓▓▓▓▓▓▓▓▓▓                                                                                            ',
-'    ▒▒▒▒           ▓▓▓▓▓▓▓                                                                                              ',
-'      ▒▒            ░▓▓▓                                                                                                ',
+'                                                                                                                       ',
+'     ░▓▓▓            ▓▓▓                                                                                              ',
+'   ▒▓▓▓▓▓▓▒          ░▓▓▓▓                                                                                            ',
+' ▒▓▓▓▓▓▓░░░░         ▓▓▓▓▓▓▒                                                               ▓▓▓▓                       ',
+' ▓▓▒▓▓▓▓▒▒▒▒▒        ▓▓▓▓▓▓▓                                                                                          ',
+' ▓▓▓▓▒▓▓▓▓▓▓▓▓▒      ░▓▓▓▓▓▓       ▒    ▓▓▒▒         ▒▒▓▒         ▒▓▓▒▒    ▓▓▓▓       ▒▓▓▓ ▓▓▓▓  ▓▓▓ ░▓▓▓▓▒  ░▓▓▓▓▓▓  ',
+' ░░░░░▒▓▓▓▓▓▓▓▓▓     ░▓▓▓▓▓▓       ▓▓▓░     ▓▒    ▓▓      ░▓   ░▓▓     ░▓▓  ▓▓▓▓     ▓▓▓▓  ▓▓▓▓  ▓▓▓▓▓▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▒',
+' ▒▒▒▒▒▒▒░░░░░░░░▓    ░▓▓▓▓▓▓       ▓▓        ▓░  ▓░        ▓░ ▓▓         ▓▓  ▓▓▓▓    ▓▓▓░  ▓▓▓▓  ▓▓▓▓    ░▓▓▓▒    ▒▓▓▓',
+' ▓▓▓▓▓▓▓ ▓▒▒▒▒▒▒▒▒▒  ░▓▓▓▓▓▓       ▓▓        ▓░ ░▓▓▓▓▓▓▓▓▓▓▓▓ ▓▒          ▓▓  ▓▓▓   ▓▓▓▓   ▓▓▓▓  ▓▓▓▓     ▓▓▓▒    ▒▓▓▓',
+' ░░░░░░░   ▒▒▒▒▒▒▒▒▓ ░▓▓▓▓▓▓       ▓▓        ▓░ ░▓            ▓▓          ▓▓  ▓▓▓▓ ▒▓▓▓    ▓▓▓▓  ▓▓▓▓     ▓▓▓▒    ▒▓▓▓',
+' ░░░░░░░    ▓▓▓▓▓▓▓▓▓░▓▓▓▓▓▓       ▓▓        ▓░  ▓░           ▓▓         ▓▓    ▒▓▓▒▓▓▓     ▓▓▓▓  ▓▓▓▓     ▓▓▓▒    ▒▓▓▓',
+' ▒▒▒▒▒▒▒     ▒▒▒▓▒▒▒▒▓▓▓▓▓▓▓       ▓▓        ▓░   ▓▓       ▓▒  ▒▓       ▓▓░     ▓▓▓▓▓      ▓▓▓▓  ▓▓▓▓     ▓▓▓▒    ▒▓▓▓',
+' ▓▓▓▒▓▓▓       ░░░░░░▓▓▓▓▓▓▓       ▓▓        ▓░     ▒▓▓▓▓▓▒      ░▒▓▓▓▓▒         ▒▒▒░      ▓▓▓▓  ▓▓▓▒     ▓▓▓▒    ▓▓▓▓',
+' ░░░░░░░        ▓▒▒▒▒▓▓▓▓▓▓▓                                                                                          ',
+'  ░░░░░░         ▓▓▓▓▓▓▓▓▓▓                                                                                           ',
+'    ░░░░           ▓▓▓▓▓▓▓                                                                                            ',
+'      ░▒            ░▓▓▓                                                                                              ',
 --
 --'            ▓                 ▒                                                                                                                                 ',
 --'        ░▓▓░                ▓▓▓                                                                                                                                 ',

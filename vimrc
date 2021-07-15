@@ -38,7 +38,6 @@ if filereadable(expand("~/.vim/mappings.vimrc"))
   source ~/.vim/mappings.vimrc
 endif
 
-
 if filereadable(expand("~/.vim/autocmds.vimrc"))
   source ~/.vim/autocmds.vimrc
 endif

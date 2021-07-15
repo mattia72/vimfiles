@@ -14,6 +14,10 @@ function! <SID>MyEchoMessage(msg)
     echohl StatusLineNC | echo s:fname.': '.a:msg | echohl None
 endfunction
 
+"repare backspace: 
+"Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
+inoremap <C-Del> <BS>
+nnoremap <C-Del> <BS>
 
 "Ctrl-C, Ctrl-V and so on...
 source $VIMRUNTIME/mswin.vim

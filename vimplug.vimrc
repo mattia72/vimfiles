@@ -14,9 +14,11 @@ call plug#begin(expand('~/.vim/plugged/'))
 Plug 'junegunn/vim-plug'
 
 Plug 'folke/which-key.nvim'
-
 Plug 'ryanoasis/vim-devicons'
-Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3'))  " a fast complete for lua supported vim
+
+Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3') ) " && !has('nvim'))   a fast complete for lua supported vim
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 
 "Plug 'vifm/vifm.vim'            " vifm in vim
 "
@@ -30,9 +32,6 @@ endif
 "Plug 'tpope/vim-dispatch'      " async make :Make! and :Copen
 "Plug 'hauleth/asyncdo.vim'      " minimal async task runner (no support since 2018)
 Plug 'skywind3000/asyncrun.vim' " async external command execution
-
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
 
 Plug 'chrisbra/histwin.vim'       " browse undo-tree
 Plug 'qpkorr/vim-bufkill'         " delete buffer without closing window :BD, BW, BF, BB
@@ -169,9 +168,13 @@ if exists('g:startify_session_sort')
         \ ]
 end
 
-source ~/.vim/nvim/lua/plug-dashboard.lua
-"it works also...
-"lua require('plug-dashboard')
+if has('nvim') || has('lua') 
+  if filereadable(expand("~/.vim/nvim/lua/plug-dashboard.lua"))
+    source ~/.vim/nvim/lua/plug-dashboard.lua
+  endif
+  "it works also...
+  "lua require('plug-dashboard')
+endif
 
 "switch off fugitive
 "let g:loaded_fugitive = 0
@@ -202,7 +205,7 @@ let g:xml_syntax_folding = 1
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
 
-if(has('lua'))
+if(has('nvim') || has('lua')) && exists('g:loaded_neocomplete')
   " NeoComplete settings in separate file...
   if filereadable(expand("~/.vim/neocomplete.vimrc"))
     source ~/.vim/neocomplete.vimrc
@@ -252,19 +255,19 @@ function! MySetLightLine()
 		    \'component_function': {
 		    \   'readonly': 'LightlineReadonly',
 		    \   'fugitive': 'LightlineFugitive',
-		    \ },
-        \'separator' : { 'left': '', 'right': '' },
-				\'subseparator' : { 'left': '', 'right': '' },
-				\'component': {
-				\   'lineinfo': ' %3l:%-2v',
-				\ }
+		    \ },                        
+        \'separator' : { 'left': '', 'right': '' },
+				\'subseparator' : { 'left': '', 'right': '' },
+				\'component': { 'lineinfo': ' %3l:%-2v', }
 	      \}
+
+        "\'separator' : { 'left': '', 'right': '' },
+				"\'subseparator' : { 'left': '', 'right': '' },
+				"
 	"Ubuntu for powerline
         "'separator' : { 'left': '⮀', 'right': '⮂' },
 				"'subseparator' : { 'left': '⮁', 'right': '⮃' },
-				"'component': {
-				"   'lineinfo': '⭡ %3l:%-2v',
-				" },
+				"'component': { 'lineinfo': '⭡ %3l:%-2v', },
 
   let g:lightline#asyncrun#indicator_run = 'running...'
   let g:lightline#asyncrun#indicator_none = ''
@@ -325,22 +328,8 @@ nnoremap <leader>bn :BF <cr>
 " --------------------------------------------
 " Telescope 
 " --------------------------------------------
-if has('nvim')
-  "history
-  "nnoremap <leader>fr <cmd>Telescope oldfiles<cr>
-  "nnoremap <leader>ff <cmd>Telescope find_files<cr>
-  "nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-  nnoremap <leader>fb <cmd>Telescope buffers<cr>
-  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-  nnoremap <leader>fp <cmd>lua require('telescope.builtin').keymaps()<cr>
-  nnoremap <leader>fl <cmd>lua require('telescope.builtin').planets()<cr>
- "-- Change change prompt prefix for find_files builtin function:
-  nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({ prompt_prefix='🔍 ',})<CR>
-  "nnoremap <leader>fg :Telescope live_grep prompt_prefix=🔍 <CR>
-else
-  nnoremap <leader>ff  :Files<CR>
-  nnoremap <leader>fb  :Buffers<CR>
-  "nnoremap <leader>G  :call fzf#vim#grep('rg --vimgrep --no-heading --color=always --smart-case ""', 1, {'options':'--exact --delimiter : --nth 4.. --query=<C-r><C-w> +i'})<CR>
+if(has('nvim') || has('lua'))
+  luafile ~/.vim/nvim/lua/plug-telescope.lua
 endif
 
 

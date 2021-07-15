@@ -100,11 +100,6 @@ if !(has('gui_running') || has('nvim'))
 endif
 set t_Co=256
 
-"repare backspace: 
-"Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
-inoremap <C-Del> <BS>
-nnoremap <C-Del> <BS>
-
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 let &t_ti.="\e[1 q" " enter termcap mode
