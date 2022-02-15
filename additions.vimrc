@@ -53,7 +53,20 @@ endfunction
 
 command! -nargs=+ -complete=command MyExecInCmd call MyExecInCmd(<q-args>)
 
-function! CommandToTab(cmd)
+"----------------------------
+function! <SID>MySaveFileFormat(type)
+  let file = fnamemodify(bufname('%'),':t')
+  execute 'write ++fileformat='.a:type
+	echohl ModeMsg | echo '[vimplug.vimrc] '.file.' saved in '.a:type.' format.' | echohl None
+endfunction
+
+function! GetFileFormats(ArgLead, CmdLine, CursorPos)
+  return split('dos|unix|mac', '|')
+endfunction
+command! -nargs=1 -complete=customlist,GetFileFormats MySaveFileFormat call <SID>MySaveFileFormat(<q-args>)
+"----------------------------
+
+function! <SID>CommandToTab(cmd)
   redir => message
   silent execute a:cmd
   redir END
@@ -69,7 +82,7 @@ endfunction
 
 " Example :CommandToTab highlight
 " Example :CommandToTab verbose map
-command! -nargs=+ -complete=command MyCommandToTab call CommandToTab(<q-args>)
+command! -nargs=+ -complete=command MyCommandToTab call <SID>CommandToTab(<q-args>)
 
 " # Command Delview (and it's abbreviation 'delview')
 command! MyDelview call MyDeleteView()
