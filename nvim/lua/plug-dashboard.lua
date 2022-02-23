@@ -27,16 +27,17 @@ endfunction
 
 autocmd User dashboardReady call  MySetDashboardColor()
 ]], false)
-
 vim.g.dashboard_custom_section = {
-    a = {description = {'  Delphi                            '}, command = 'so ~/delphi-dev.vim | so ~/Session.vim'},
-    b = {description = {'  Reload Last Session            ,sl'}, command = 'SessionLoad'},
+    a = {description = {'  Delphi                            '}, command = 'so ~/delphi-dev.vim | so ~/Session.vim'},
+    b = {description = {'  Reload Last Session            ,sl'}, command = 'SessionLoad'},
     c = {description = {'  Recently Opened Files          ,fr'}, command = 'Telescope oldfiles'},
     --d = {description = {'  Open Project                      '}, command = 'Telescope ???'},
     e = {description = {'  Jump to Bookmark                  '}, command = 'Telescope marks'},
-    f = {description = {'  Find File                      ,ff'}, command = 'Telescope find_files'},
-    g = {description = {'  Find Word                      ,fa'}, command = 'Telescope live_grep'},
-    h = {description = {'  Open Neovim Configuration      ,vi'}, command = ':tabnew! ~/.vim/vimrc'}
+    f = {description = {'  Browse File                       '}, command = 'Telescope file_browser'},
+    g = {description = {'  Find File                      ,ff'}, command = 'Telescope find_files'},
+    h = {description = {'  Find Word                      ,fa'}, command = 'Telescope live_grep'},
+    i = {description = {'  Search Help                    ,fh'}, command = 'Telescope help_tags'},
+    j = {description = {'  Open Neovim Configuration      ,vi'}, command = ':tabnew! ~/.vim/vimrc'}
 }
 
 

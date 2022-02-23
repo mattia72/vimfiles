@@ -10,6 +10,7 @@
 "-------------------------------------------------------------------------------
 
 let s:fname = resolve(expand('<sfile>:t'))
+
 function! <SID>MyEchoMessage(msg)
     echohl StatusLineNC | echo s:fname.': '.a:msg | echohl None
 endfunction
@@ -47,7 +48,6 @@ nnoremap <leader>cf :let @+ = expand("%")<cr>:call <SID>MyEchoMessage('Name of c
 
 "got to dir of current file in current window only
 nnoremap <leader>cd <ESC>:lcd %:p:h <bar> pwd <CR>
-
 
 " simple buffer explorer, after :sb works tab completition 
 " sb tries to find buffer in opened windows and switches to it
