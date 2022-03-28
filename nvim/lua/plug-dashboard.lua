@@ -38,7 +38,8 @@ vim.g.dashboard_custom_section = {
     g = {description = {'  Find File                      ,ff'}, command = 'Telescope find_files'},
     h = {description = {'  Find Word                      ,fa'}, command = 'Telescope live_grep'},
     i = {description = {'  Search Help                    ,fh'}, command = 'Telescope help_tags'},
-    j = {description = {'  Open Neovim Configuration      ,vi'}, command = ':tabnew! ~/.vim/vimrc'}
+    j = {description = {'ﭻ  Key Mappings                   ,fp'}, command = 'Telescope keymaps'},
+    k = {description = {'  Open Neovim Configuration      ,vi'}, command = ':tabnew! ~/.vim/vimrc'}
 }
 
 

@@ -16,7 +16,8 @@ Plug 'junegunn/vim-plug'
 Plug 'folke/which-key.nvim'
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3') ) " && !has('nvim'))   a fast complete for lua supported vim
+"This is not needed in neovim ...
+"Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3') ) " && !has('nvim'))   a fast complete for lua supported vim
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
