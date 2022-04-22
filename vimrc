@@ -24,7 +24,7 @@ if has('vim_starting')
 endif
 
 if !exists('g:init_root_dir') 
-  let g:init_root_dir=getenv('XDG_CONFIG_HOME').'\nvim\'
+  let g:init_root_dir=getenv('XDG_CONFIG_HOME').'/nvim/'
 endif
 exec 'cd '.g:init_root_dir
 

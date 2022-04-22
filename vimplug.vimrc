@@ -16,7 +16,7 @@ Plug 'junegunn/vim-plug'
 Plug 'folke/which-key.nvim'
 Plug 'ryanoasis/vim-devicons'
 
-"This is not needed in neovim ...
+"This is deprecated, see Shugo/deoplete.vim instead...
 "Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3') ) " && !has('nvim'))   a fast complete for lua supported vim
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
@@ -209,7 +209,7 @@ hi link EasyMotionShade  Comment
 if(has('nvim') || has('lua')) && exists('g:loaded_neocomplete')
   " NeoComplete settings in separate file...
   if filereadable("neocomplete.vimrc")
-    source  neocomplete.vimrc
+    source neocomplete.vimrc
   endif
 else
   let g:neocomplete#enable_at_startup = 0
