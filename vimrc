@@ -7,8 +7,8 @@
 "=============================================================================
 
 " Hint: create ~/_vimrc with this content 'source <path_to_this_file>'
-"       create ~/.vim/nvim/init.vim with this content 'source <path_to_this_file>'
-"       create ~/.vim/nvim/ginit.vim with this content 'source <path to gui_settings.vimrc>'
+"       create $XDG_CONFIG_HOME/nvim/init.vim with this content 'source <path_to_this_file>'
+"       create $XDG_CONFIG_HOME/nvim/ginit.vim with this content 'source <path to gui_settings.vimrc>'
 
 "run this to avoid reload on save
 "let g:vimrc_auto_load_disabled = 1
@@ -23,42 +23,31 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
+if !exists('g:init_root_dir') 
+  let g:init_root_dir=getenv('XDG_CONFIG_HOME').'\nvim\'
+endif
+exec 'cd '.g:init_root_dir
+
 if exists('g:vscode') 
-  if filereadable("~/.vim/vscode.vimrc")
-    source ~/.vim/vscode.vimrc
+  if filereadable('vscode.vimrc')
+    source vscode.vimrc
   endif
   finish
 endif
 
-if filereadable(expand("~/.vim/settings.vimrc"))
-  source ~/.vim/settings.vimrc
-endif
-
-if filereadable(expand("~/.vim/mappings.vimrc"))
-  source ~/.vim/mappings.vimrc
-endif
-
-if filereadable(expand("~/.vim/autocmds.vimrc"))
-  source ~/.vim/autocmds.vimrc
-endif
-
-if filereadable(expand("~/.vim/vimplug.vimrc"))
-  source ~/.vim/vimplug.vimrc
-endif
-
-if filereadable(expand("~/.vim/colors.vimrc"))
-  source ~/.vim/colors.vimrc
-endif
+source settings.vimrc
+source mappings.vimrc
+source autocmds.vimrc
+source vimplug.vimrc
+source colors.vimrc
 
 " gui_running is 0 in neovim so we source gui settings from ginit.vim
-if has('gui_running') && !has('nvim') && filereadable(expand("~/.vim/gui_settings.vimrc"))
-  source ~/.vim/gui_settings.vimrc
+if has('gui_running') && !has('nvim') 
+  source gui_settings.vimrc
 endif
 
 " for vim syntax plugin development and view handling etc.
-if filereadable(expand("~/.vim/additions.vimrc"))
-  source ~/.vim/additions.vimrc
-endif
+source additions.vimrc
 
 set path+=~
 cd ~

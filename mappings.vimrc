@@ -104,7 +104,7 @@ nnoremap <leader>dj ]c
 nnoremap <leader>sp [s
 nnoremap <leader>sn ]s
 " Fast editing of the vimrc
-noremap <leader>vi :tabnew! ~/.vim/vimrc<cr>
+noremap <leader>vi :tabnew! $MYVIMRC<cr>
 " jump to tag
 nnoremap <leader>j <C-]>
 

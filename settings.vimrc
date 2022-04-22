@@ -53,7 +53,7 @@ set virtualedit=all
 set bufhidden=hide                      " This option specifies what happens when a buffer is no longer displayed in a window:
 set formatoptions=tcqronl
 set switchbuf=useopen,usetab
-set viewdir=$HOME\.vim\.view
+set viewdir=$XDG_CONFIG_HOME\nvim\.view
 set viewoptions=cursor,folds,slash,unix
 set history=50                          " keep 50 lines of command line history
 
@@ -86,8 +86,8 @@ set suffixesadd=.pm,.pl
 
 if has('win32')
   "own directory before the others...^= not +=
-  set runtimepath^=~\.vim
-  set runtimepath+=~\.vim\after
+  set runtimepath^=$XDG_CONFIG_HOME/nvim
+  set runtimepath^=$XDG_CONFIG_HOME/nvim/after
 endif
 
 " In many terminal emulators the mouse works just fine, thus enable it.
@@ -110,6 +110,12 @@ let &t_te.="\e[0 q" " out of termcap mode
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 
   syntax on
+endif
+
+if exists('g:fvim_loaded')
+    FVimCursorSmoothMove v:true
+    FVimCursorSmoothBlink v:true
+    FVimKeyAltGr v:true
 endif
 
 if has('gui_running') 

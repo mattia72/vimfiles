@@ -8,7 +8,7 @@ function! Cond(cond, ...)
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
 
-call plug#begin(expand('~/.vim/plugged/'))
+call plug#begin(expand('$XDG_CONFIG_HOME/nvim/plugged/'))
 
 " Run :PlugUpgrade for upgrade Plug itself
 Plug 'junegunn/vim-plug'
@@ -170,8 +170,8 @@ if exists('g:startify_session_sort')
 end
 
 if has('nvim') || has('lua') 
-  if filereadable(expand("~/.vim/nvim/lua/plug-dashboard.lua"))
-    source ~/.vim/nvim/lua/plug-dashboard.lua
+  if filereadable("./lua/plug-dashboard.lua")
+    source  ./lua/plug-dashboard.lua
   endif
   "it works also...
   "lua require('plug-dashboard')
@@ -208,8 +208,8 @@ hi link EasyMotionShade  Comment
 
 if(has('nvim') || has('lua')) && exists('g:loaded_neocomplete')
   " NeoComplete settings in separate file...
-  if filereadable(expand("~/.vim/neocomplete.vimrc"))
-    source ~/.vim/neocomplete.vimrc
+  if filereadable("neocomplete.vimrc")
+    source  neocomplete.vimrc
   endif
 else
   let g:neocomplete#enable_at_startup = 0
@@ -217,7 +217,7 @@ endif
 
 " NeoSnippets
 let g:snippet_author='Mattia72'
-let g:neosnippet#snippets_directory ='~/.vim/snippets'
+let g:neosnippet#snippets_directory ='snippets'
 "\.',~/.vim/neobundle/neosnippet-snippets/neosnippets'
 
 " Enable snipMate compatibility feature.
@@ -242,8 +242,8 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
-if filereadable(expand("~/.vim/lightline.vimrc"))
-  source ~/.vim/lightline.vimrc
+if filereadable("lightline.vimrc")
+  source  lightline.vimrc
 endif
 
 " --------------------------------------------
@@ -263,8 +263,8 @@ nnoremap <leader>bn :BF <cr>
 " Telescope 
 " --------------------------------------------
 if(has('nvim') || has('lua'))
-  if filereadable(expand("~/.vim/nvim/lua/plug-telescope.lua"))
-    luafile ~/.vim/nvim/lua/plug-telescope.lua
+  if filereadable("lua/plug-telescope.lua")
+    exec 'luafile '. "lua/plug-telescope.lua"
   endif
 endif
 

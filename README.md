@@ -9,8 +9,8 @@ Vim build may not include the Lua DLL. In that case, download [lua52.dll](http:/
 
 
 ## Usage
-1. Clone this repository to your .vim directory
-2. Create a _vimrc file in your home directory with this content: 
+1. Clone this repository to your .vim or `$XGD_CONFIG_HOME` directory
+2. Create a `_vimrc` or `init.vim` file in your home directory with this content: 
     `source ~/.vim/vimrc`
 3. Start vim
 4. Enjoy :)
@@ -69,8 +69,8 @@ Vim build may not include the Lua DLL. In that case, download [lua52.dll](http:/
 ### vimrc 
  This is the central vimrc file. It calls the other vimrc-s eg: 
 ```vim
-  if filereadable(expand("~/.vim/dein.vimrc"))
-    source ~/.vim/dein.vimrc
+  if filereadable(("dein.vimrc"))
+    source dein.vimrc
   endif
 ```
 It contains the settings of various plugins also.
