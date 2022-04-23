@@ -68,11 +68,16 @@ xnoremap <silent> <Space> :<C-u>call <SID>openWhichKeyInVisualMode()<CR>
 " Plugins ...
 "-------------------------------------------------------------------------------
 
+if !exists('g:init_root_dir') 
+  let g:init_root_dir=getenv('XDG_CONFIG_HOME').'/nvim/'
+endif
+exec 'cd '.g:init_root_dir
+
 if !exists('g:loaded_plug')
-  source ~/.vim/autoload/plug.vim
+  exec 'source '.expand('$XDG_CONFIG_HOME/nvim/autoload/plug.vim')
 endif
 
-call plug#begin(expand('~/.vim/plugged/'))
+call plug#begin(expand('$XDG_CONFIG_HOME/nvim/plugged/'))
 " Run :PlugUpgrade for upgrade Plug itself
 Plug 'junegunn/vim-plug'
 Plug 'tpope/vim-surround'
