@@ -13,7 +13,7 @@ require('telescope').setup{
       '--column',
       '--smart-case'
     },
-    prompt_prefix = "> ",
+    prompt_prefix = "(help:<c-h>)> ",
     selection_caret = "> ",
     entry_prefix = "  ",
     initial_mode = "insert",
@@ -43,21 +43,32 @@ require('telescope').setup{
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
 
     -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
+    mappings = {
+      n = {
+        ['<c-h>'] = "which_key",
+    	  ['<c-d>'] = require('telescope.actions').delete_buffer
+      }, -- n
+      i = {
+        ['<c-h>'] = "which_key",
+        ['<c-d>'] = require('telescope.actions').delete_buffer
+      } -- i
+    } -- mappings
   }
 }
 
 local wk = require("which-key")
 wk.register({ 
-  f = {  
+  t = {  
     name = "file", -- optional group name
     --a = { function() require('telescope.builtin').grep_string({use_regex=true}) end, "Telescope Grep String Under Cursor" , noremap=true } ,
     f = { "<cmd>Telescope find_files<cr>"                              , "Telescope Find File"        , noremap=true }        ,
     r = { "<cmd>Telescope oldfiles<cr>"                                , "Telescope Open Recent File" , noremap=true }        ,
-    b = { "<cmd>Telescope buffers<cr>"                                 , "Telescope Open Buffers"     , noremap=true }        ,
+    --b = { "<cmd>Telescope buffers<cr>"                                 , "Telescope Open Buffers"     , noremap=true }        ,
+    b = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true }        ,
     g = { function() require('telescope.builtin').live_grep({use_regex=true}) end, "Telescope Live Grep" , noremap=true } ,
     h = { "<cmd>Telescope help_tags<cr>"                               , "Telescope Help"             , noremap=true }        ,
-    p = { function() require('telescope.builtin').keymaps()        end , "Telescope Mappings"         , noremap=true }        ,
+    m = { function() require('telescope.builtin').keymaps()        end , "Telescope Mappings"         , noremap=true }        ,
     -- --n = { "New File" }, -- just a label. don't create any mapping 
     -- --e = "Edit File", -- same as above    
     -- --["1"] = "which_key_ignore",  -- special label to hide it in the popup

@@ -44,7 +44,7 @@ let g:mapleader = ","
 
 " Copy full path or file name to clipboard
 nnoremap <leader>cp :let @+ = expand("%:p")<cr>:call <SID>MyEchoMessage('Path of current file was copied to clipboard.')<CR>
-nnoremap <leader>cf :let @+ = expand("%")<cr>:call <SID>MyEchoMessage('Name of current file was copied to clipboard.')<CR>
+nnoremap <leader>cf :let @+ = expand("%:t")<cr>:call <SID>MyEchoMessage('Name of current file was copied to clipboard.')<CR>
 
 "got to dir of current file in current window only
 nnoremap <leader>cd <ESC>:lcd %:p:h <bar> pwd <CR>
