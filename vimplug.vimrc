@@ -137,37 +137,29 @@ call plug#end()
 nnoremap <leader>su :wa <bar> UnitTest<CR>
 nnoremap <F5> :wa <bar> UnitTest<CR>
 
-lua << EOF
-  require("which-key").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-EOF
-
 " Startify: start screen settings
-if exists('g:startify_session_sort')
-  let g:startify_session_sort = 1
-  let g:startify_fortune_use_unicode = 1
-  let g:startify_session_persistence = 1
-  let s:intro = split(execute('version'), '\(\n\|(\|)\)')
-  let s:end_index = has('nvim') ? 2 : 3
-  let g:startify_custom_header =
-        \ startify#pad(startify#fortune#boxed(s:intro[0:s:end_index]))
-  let g:startify_commands = [
-        \ ':ec "FAQ    " | help my-faq.txt',
-        \ ':ec "Delphi " | so ~\delphi-dev.vim | so ~\Session.vim ',
-        \ ':ec "vim-ripgrep" | so ~\dev\vim\vim-ripgrep\Session.vim',
-        \ ':ec "vim-delphi" | so ~\dev\vim\vim-delphi\Session.vim',
-        \ ]
-  let g:startify_lists = [
-        \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ { 'type': 'files',     'header': ['   MRU']            },
-        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-        \ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ ]
-end
+"if exists('g:startify_session_sort')
+  "let g:startify_session_sort = 1
+  "let g:startify_fortune_use_unicode = 1
+  "let g:startify_session_persistence = 1
+  "let s:intro = split(execute('version'), '\(\n\|(\|)\)')
+  "let s:end_index = has('nvim') ? 2 : 3
+  "let g:startify_custom_header =
+        "\ startify#pad(startify#fortune#boxed(s:intro[0:s:end_index]))
+  "let g:startify_commands = [
+        "\ ':ec "FAQ    " | help my-faq.txt',
+        "\ ':ec "Delphi " | so ~\delphi-dev.vim | so ~\Session.vim ',
+        "\ ':ec "vim-ripgrep" | so ~\dev\vim\vim-ripgrep\Session.vim',
+        "\ ':ec "vim-delphi" | so ~\dev\vim\vim-delphi\Session.vim',
+        "\ ]
+  "let g:startify_lists = [
+        "\ { 'type': 'commands',  'header': ['   Commands']       },
+        "\ { 'type': 'files',     'header': ['   MRU']            },
+        "\ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        "\ { 'type': 'sessions',  'header': ['   Sessions']       },
+        "\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        "\ ]
+"end
 
 if has('nvim') || has('lua') 
   if filereadable("./lua/plug-dashboard.lua")
@@ -268,4 +260,11 @@ if(has('nvim') || has('lua'))
   endif
 endif
 
+lua << EOF
+  require("which-key").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
 

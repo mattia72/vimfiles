@@ -31,14 +31,14 @@ vim.g.dashboard_custom_section = {
     a = {description = {'  New File                          '}, command = 'DashboardNewFile'},
     b = {description = {'  Delphi                            '}, command = 'so ~/delphi-dev.vim | so ~/Session.vim'},
     c = {description = {'  Reload Last Session            ,sl'}, command = 'SessionLoad'},
-    d = {description = {'  Recently Opened Files          ,fr'}, command = 'Telescope oldfiles'},
+    d = {description = {'  Recently Opened Files          ,tr'}, command = 'Telescope oldfiles'},
     --d = {description = {'  Open Project                      '}, command = 'Telescope ???'},
     e = {description = {'  Jump to Bookmark                  '}, command = 'Telescope marks'},
     f = {description = {'  Browse File                       '}, command = 'Telescope file_browser'},
-    g = {description = {'  Find File                      ,ff'}, command = 'Telescope find_files'},
-    h = {description = {'  Find Word                      ,fa'}, command = 'Telescope live_grep'},
-    i = {description = {'  Search Help                    ,fh'}, command = 'Telescope help_tags'},
-    j = {description = {'ﭻ  Key Mappings                   ,fp'}, command = 'Telescope keymaps'},
+    g = {description = {'  Find File                      ,tf'}, command = 'Telescope find_files'},
+    h = {description = {'  Find Word                      ,tg'}, command = 'Telescope live_grep'},
+    i = {description = {'  Search Help                    ,th'}, command = 'Telescope help_tags'},
+    j = {description = {'ﭻ  Key Mappings                   ,tm'}, command = 'Telescope keymaps'},
     k = {description = {'  Open Neovim Configuration      ,vi'}, command = ':tabnew! $MYVIMRC'}
 }
 
