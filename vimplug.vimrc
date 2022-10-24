@@ -24,7 +24,8 @@ Plug 'Shougo/neosnippet-snippets'
 "Plug 'vifm/vifm.vim'            " vifm in vim
 "
 if has('nvim') 
-  Plug 'glepnir/dashboard-nvim'  " startup screen
+  "Plug 'glepnir/dashboard-nvim'  " startup screen
+  Plug 'goolord/alpha-nvim'  " startup screen
 else
   Plug 'mhinz/vim-startify'       " startup screen
 endif
@@ -137,15 +138,9 @@ call plug#end()
 nnoremap <leader>su :wa <bar> UnitTest<CR>
 nnoremap <F5> :wa <bar> UnitTest<CR>
 
-lua << EOF
-  require("which-key").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-EOF
 
 " Startify: start screen settings
+"
 if exists('g:startify_session_sort')
   let g:startify_session_sort = 1
   let g:startify_fortune_use_unicode = 1
@@ -168,14 +163,6 @@ if exists('g:startify_session_sort')
         \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
         \ ]
 end
-
-if has('nvim') || has('lua') 
-  if filereadable("./lua/plug-dashboard.lua")
-    source  ./lua/plug-dashboard.lua
-  endif
-  "it works also...
-  "lua require('plug-dashboard')
-endif
 
 "switch off fugitive
 "let g:loaded_fugitive = 0
@@ -259,13 +246,41 @@ nnoremap <leader>bda :bufdo BD <cr>
 nnoremap <leader>bp :BB <cr>
 nnoremap <leader>bn :BF <cr>
 
-" --------------------------------------------
-" Telescope 
-" --------------------------------------------
-if(has('nvim') || has('lua'))
-  if filereadable("lua/plug-telescope.lua")
-    exec 'luafile '. "lua/plug-telescope.lua"
-  endif
+if !(has('nvim') || has('lua'))
+  finish
 endif
 
+" --------------------------------------------
+" Lua stuff 
+" --------------------------------------------
+
+lua <<EOF
+  require("which-key").setup {
+    -- your configuration comes here
+  }
+
+-- --------------------------------------------
+-- Telescope 
+-- --------------------------------------------
+  if vim.fn.filereadable('lua/plug-telescope.lua') == 1 then
+    require('plug-telescope')
+  end
+
+-- --------------------------------------------
+-- Dashboard
+-- --------------------------------------------
+  if vim.fn.filereadable('lua/plug-dashboard.lua') == 1 then
+  --  require('plug-dashboard')
+  end
+
+-- --------------------------------------------
+-- alpha
+-- --------------------------------------------
+  if vim.fn.filereadable('lua/plug-alpha.lua') == 1 then
+    require('plug-alpha')
+  end
+
+  -- EOF must NOT preceeded and ended with white space
+  -- after this line syntax highlight won't work :(
+EOF
 

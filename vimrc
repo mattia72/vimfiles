@@ -58,6 +58,8 @@ cd ~
 
 set path+=~/dev/vim/**
 
+echohl ModeMsg | echo '[vimrc] current directory:' . getcwd() | echohl None
+
 ":so Session.vim
 " Obsession takes care of Session update
 

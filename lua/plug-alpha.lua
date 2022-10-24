@@ -1,25 +1,25 @@
 --
--- lua config file for dashboard 
+-- lua config file for alpha 
 --
 
-----nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
-----vim.api.nvim_set_keymap('n', '<leader>ff', ':DashboardFindFile<CR>', { noremap = true, silent = true })
-----"nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-----"nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-----nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-----vim.api.nvim_set_keymap('n', '<leader>fa', ':DashboardFindWord<CR>', { noremap = true, silent = true })
-----"nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-----"nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
---vim.api.nvim_set_keymap('n', '<leader>ss', ':<C-u>SessionSave<CR>', { noremap = false, silent = true })
+local function footer()
+  --local total_plugins = #vim.tbl_keys(packer_plugins)
+  local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
+  local version = vim.version()
+  local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
+  --return datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
+  return datetime .. "   " ..  nvim_version_info
+end
 
-local db = require('dashboard')
+local db = require('alpha')
 local version = vim.version()
 local icon_color = "Function"
 
-vim.g.dashboard_session_directory = "~/.cache/session"
+local alpha = require("alpha")
+local dashboard = require("alpha.themes.dashboard")
 
-db.custom_header = {
+dashboard.section.header.val = {
 '                                                                                                                       ',
 '     ░▓▓▓            ▓▓▓                                                                                              ',
 '   ▒▓▓▓▓▓▓▒          ░▓▓▓▓                                                                                            ',
@@ -37,54 +37,46 @@ db.custom_header = {
 '  ░░░░░░         ▓▓▓▓▓▓▓▓▓▓                                                                                           ',
 '    ░░░░           ▓▓▓▓▓▓▓                                                                                            ',
 '      ░▒            ░▓▓▓                                                                                              ',
-"v" .. version.major .. "." .. version.minor,
 
 }
+--dashboard.section.header.opts.hl = 'PreProc'
+dashboard.section.header.opts.hl = 'Include'
+                                          
+dashboard.section.buttons.val = {
+                dashboard.button("<Leader>tf", "  Browse File               "),
+                dashboard.button("<Leader>tr", "  Recently Opened Files     "),
+                dashboard.button("<Leader>ta", "  Jump to Bookmark          "),
+                dashboard.button("<Leader>tw", "  Find Word                 "),
+                dashboard.button("<Leader>th", "  Search Help               "),
+                dashboard.button("<Leader>tm", "ﭻ  Key Mappings              "),
+                dashboard.button("<Leader>vi", "  Open Neovim Configuration "),
+                dashboard.button( "q        ", "  Quit                      ", ":qa<CR>"),
+              }
+dashboard.section.buttons.opts.hl = 'Title'
+--db.custom_center = {
+  --{icon_hl={link=icon_color}, icon="   ",desc="New File                  ", shortcut='n', action='DashboardNewFile' },
+  --{icon_hl={link=icon_color}, icon="   ",desc="Delphi                    ", shortcut='d', action='so ~/delphi-dev.vim | so ~/Session.vim' } ,
+  --{icon_hl={link=icon_color}, icon="   ",desc="Reload Last Session       ", shortcut='r', action='SessionLoad'},           
+  --{icon_hl={link=icon_color}, icon="   ",desc="Recently Opened Files     ", shortcut='o', action='Telescope oldfiles'},    
+  --{icon_hl={link=icon_color}, icon="   ",desc="Open Project              ", shortcut='p', action='Telescope ???'},         
+  --{icon_hl={link=icon_color}, icon="   ",desc="Jump to Bookmark          ", shortcut='m', action='Telescope marks'},       
+  --{icon_hl={link=icon_color}, icon="   ",desc="Browse File               ", shortcut='b', action='Telescope file_browser'},
+  --{icon_hl={link=icon_color}, icon="   ",desc="Find File                 ", shortcut='f', action='Telescope find_files'},  
+  --{icon_hl={link=icon_color}, icon="   ",desc="Find Word                 ", shortcut='w', action='Telescope live_grep'},   
+  --{icon_hl={link=icon_color}, icon="   ",desc="Search Help               ", shortcut='h', action='Telescope help_tags'},   
+  --{icon_hl={link=icon_color}, icon="ﭻ   ",desc="Key Mappings              ", shortcut='m', action='Telescope keymaps'},     
+  --{icon_hl={link=icon_color}, icon="   ",desc="Open Neovim Configuration ", shortcut='c', action='tabnew! $MYVIMRC'}      
+--}                                     
 
-db.custom_center = {
-  {icon_hl={link=icon_color}, icon="   ",desc="New File                  ", shortcut='n', action='DashboardNewFile' },
-  {icon_hl={link=icon_color}, icon="   ",desc="Delphi                    ", shortcut='d', action='so ~/delphi-dev.vim | so ~/Session.vim' } ,
-  {icon_hl={link=icon_color}, icon="   ",desc="Reload Last Session       ", shortcut='r', action='SessionLoad'},           
-  {icon_hl={link=icon_color}, icon="   ",desc="Recently Opened Files     ", shortcut='o', action='Telescope oldfiles'},    
-  {icon_hl={link=icon_color}, icon="   ",desc="Open Project              ", shortcut='p', action='Telescope ???'},         
-  {icon_hl={link=icon_color}, icon="   ",desc="Jump to Bookmark          ", shortcut='m', action='Telescope marks'},       
-  {icon_hl={link=icon_color}, icon="   ",desc="Browse File               ", shortcut='b', action='Telescope file_browser'},
-  {icon_hl={link=icon_color}, icon="   ",desc="Find File                 ", shortcut='f', action='Telescope find_files'},  
-  {icon_hl={link=icon_color}, icon="   ",desc="Find Word                 ", shortcut='w', action='Telescope live_grep'},   
-  {icon_hl={link=icon_color}, icon="   ",desc="Search Help               ", shortcut='h', action='Telescope help_tags'},   
-  {icon_hl={link=icon_color}, icon="ﭻ   ",desc="Key Mappings              ", shortcut='m', action='Telescope keymaps'},     
-  {icon_hl={link=icon_color}, icon="   ",desc="Open Neovim Configuration ", shortcut='c', action='tabnew! $MYVIMRC'}      
-}                                     
+dashboard.section.footer.val = footer()
+--dashboard.section.footer.opts.hl = "Constant"
+dashboard.section.footer.opts.hl = "Number"
 
-db.custom_footer = { "type  :help<Enter>  or  <F1>  for on-line help" }
+alpha.setup(dashboard.opts)
 
---db.preview_file_Path    -- string or function type that mean in function you can dynamic generate height width
---db.preview_file_height  -- number type
---db.preview_file_width   -- number type
---db.preview_command      -- string type (can be ueberzug which only work in linux)
---db.confirm_key          -- string type key that do confirm in center select
-db.hide_statusline=false      -- boolean default is true.it will hide statusline in dashboard buffer and auto open in other buffer
-db.hide_tabline=false         -- boolean default is true.it will hide tabline in dashboard buffer and auto open in other buffer
---db.hide_winbar          -- boolean default is true.it will hide the winbar in dashboard buffer and auto open in other buffer
---db.session_directory    -- string type the directory to store the session file
---db.header_pad           -- number type default is 1
---db.center_pad           -- number type default is 1
---db.footer_pad           -- number type default is 1
-
--- Highlight Group
---DashboardHeader DashboardCenter DashboardShortCut DashboardFooter
-vim.api.nvim_set_hl(0, 'DashboardHeader',    {fg='#0087d7'})
-vim.api.nvim_set_hl(0, 'DashboardCenter',    {fg='#ffaf00'})
---vim.api.nvim_set_hl(0, 'DashboardShortCut ', {fg='#ffaf00'})
-vim.api.nvim_set_hl(0, 'DashboardFooter',    {fg='#008f00'})
-
---vim.cmd('hi DashboardHeader guifg=#0087d7')
-
--- Command
-
---DashboardNewFile  -- if you like use `enew` to create file,Please use this command,it's wrap enew and restore the statsuline and tabline
---SessionSave,SessionLoad 
-
+vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
+--vim.cmd [[ echohl ModeMsg | echo '[plug-alpha] hallo' | echohl None ]]
+--
 --
 --'            ▓                 ▒                                                                                                                                 ',
 --'        ░▓▓░                ▓▓▓                                                                                                                                 ',
