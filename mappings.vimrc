@@ -231,3 +231,18 @@ iabbrev <expr> 2dd  strftime("%d.%m.%Y")
 iabbrev <expr> 2dm  strftime("%Y.%m.%d")
 
 
+lua <<EOF
+local wk = require("which-key")
+wk.register({ 
+  t = {  
+    name = "mappings.vimrc", -- optional group name
+    --f = { "<cmd>Telescope find_files<cr>"                              , "Telescope Find File"        , noremap=true }        ,
+    --b = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true }        ,
+    -- --n = { "New File" }, -- just a label. don't create any mapping 
+    -- --e = "Edit File", -- same as above    
+    -- --["1"] = "which_key_ignore",  -- special label to hide it in the popup
+    --b = { function() print("bar") end, "Foobar" } -- you can also pass functions!  
+  },
+}, { prefix = "<leader>" })
+EOF
+

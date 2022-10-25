@@ -36,9 +36,9 @@ if exists('g:vscode')
 endif
 
 source settings.vimrc
-source mappings.vimrc
 source autocmds.vimrc
 source vimplug.vimrc
+source mappings.vimrc
 source colors.vimrc
 
 " gui_running is 0 in neovim so we source gui settings from ginit.vim

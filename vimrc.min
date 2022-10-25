@@ -1,27 +1,17 @@
 
 if has('vim_starting')
   set nocompatible               " Be iMproved
-  set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim/
+  "set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim/
 endif
 
-if dein#load_state(expand('~/.vim/bundle/'))
-  call dein#begin(expand('~/.vim/bundle/'))
 
-  " Let dein manage dein?
-  " call dein#add('Shougo/dein.vim', {'rtp': ''})
-  " lazy load on command executed
-  call dein#add('scrooloose/nerdtree',
-        \{'on_cmd': 'NERDTreeToggle'})  
+call plug#begin(expand('$XDG_CONFIG_HOME/nvim/plugged/'))
 
-  call dein#add('xml.vim', 
-        \{'script_type': 'ftplugin', 'on_ft': ['xml', 'xsl']})
-  call dein#add('vim-scripts/perl-support.vim', 
-        \{ 'script_type': 'ftplugin', 'on_ft': ['pl', 'pm']}) 
+  Plug 'glepnir/dashboard-nvim'  " startup screen
 
+call plug#end()
 
-  call dein#end()
-  "call dein#save_state()
-endif
+hi link DashboardHeader Comment
 
 filetype plugin indent on         " Required!
 syntax enable                     " Required! 

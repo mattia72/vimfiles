@@ -24,8 +24,8 @@ Plug 'Shougo/neosnippet-snippets'
 "Plug 'vifm/vifm.vim'            " vifm in vim
 "
 if has('nvim') 
-  "Plug 'glepnir/dashboard-nvim'  " startup screen
-  Plug 'goolord/alpha-nvim'  " startup screen
+  Plug 'glepnir/dashboard-nvim'  " startup screen
+  "Plug 'goolord/alpha-nvim'  " startup screen
 else
   Plug 'mhinz/vim-startify'       " startup screen
 endif
@@ -270,14 +270,14 @@ lua <<EOF
 -- Dashboard
 -- --------------------------------------------
   if vim.fn.filereadable('lua/plug-dashboard.lua') == 1 then
-  --  require('plug-dashboard')
+    require('plug-dashboard')
   end
 
 -- --------------------------------------------
 -- alpha
 -- --------------------------------------------
   if vim.fn.filereadable('lua/plug-alpha.lua') == 1 then
-    require('plug-alpha')
+    --require('plug-alpha')
   end
 
   -- EOF must NOT preceeded and ended with white space

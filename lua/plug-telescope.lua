@@ -60,7 +60,7 @@ require('telescope').setup{
 local wk = require("which-key")
 wk.register({ 
   t = {  
-    name = "file", -- optional group name
+    name = "telescope mappings", -- optional group name
     --a = { function() require('telescope.builtin').grep_string({use_regex=true}) end, "Telescope Grep String Under Cursor" , noremap=true } ,
     f = { "<cmd>Telescope find_files<cr>"                              , "Telescope Find File"        , noremap=true }        ,
     r = { "<cmd>Telescope oldfiles<cr>"                                , "Telescope Open Recent File" , noremap=true }        ,

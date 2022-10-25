@@ -57,6 +57,9 @@ set viewdir=$XDG_CONFIG_HOME\nvim\.view
 set viewoptions=cursor,folds,slash,unix
 set history=50                          " keep 50 lines of command line history
 
+let g:vimsyn_embed = 'l'    " embed lua 
+let g:vimsyn_folding = 'f' " fold functions
+
 "-------------------------------------------------------------------------------
 " Completition
 "-------------------------------------------------------------------------------

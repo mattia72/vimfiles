@@ -40,41 +40,31 @@ dashboard.section.header.val = {
 
 }
 --dashboard.section.header.opts.hl = 'PreProc'
-dashboard.section.header.opts.hl = 'Include'
+dashboard.section.header.opts.hl = 'Comment'
                                           
 dashboard.section.buttons.val = {
-                dashboard.button("<Leader>tf", "  Browse File               "),
-                dashboard.button("<Leader>tr", "  Recently Opened Files     "),
-                dashboard.button("<Leader>ta", "  Jump to Bookmark          "),
-                dashboard.button("<Leader>tw", "  Find Word                 "),
-                dashboard.button("<Leader>th", "  Search Help               "),
-                dashboard.button("<Leader>tm", "ﭻ  Key Mappings              "),
-                dashboard.button("<Leader>vi", "  Open Neovim Configuration "),
-                dashboard.button( "q        ", "  Quit                      ", ":qa<CR>"),
-              }
-dashboard.section.buttons.opts.hl = 'Title'
---db.custom_center = {
-  --{icon_hl={link=icon_color}, icon="   ",desc="New File                  ", shortcut='n', action='DashboardNewFile' },
-  --{icon_hl={link=icon_color}, icon="   ",desc="Delphi                    ", shortcut='d', action='so ~/delphi-dev.vim | so ~/Session.vim' } ,
-  --{icon_hl={link=icon_color}, icon="   ",desc="Reload Last Session       ", shortcut='r', action='SessionLoad'},           
-  --{icon_hl={link=icon_color}, icon="   ",desc="Recently Opened Files     ", shortcut='o', action='Telescope oldfiles'},    
-  --{icon_hl={link=icon_color}, icon="   ",desc="Open Project              ", shortcut='p', action='Telescope ???'},         
-  --{icon_hl={link=icon_color}, icon="   ",desc="Jump to Bookmark          ", shortcut='m', action='Telescope marks'},       
-  --{icon_hl={link=icon_color}, icon="   ",desc="Browse File               ", shortcut='b', action='Telescope file_browser'},
-  --{icon_hl={link=icon_color}, icon="   ",desc="Find File                 ", shortcut='f', action='Telescope find_files'},  
-  --{icon_hl={link=icon_color}, icon="   ",desc="Find Word                 ", shortcut='w', action='Telescope live_grep'},   
-  --{icon_hl={link=icon_color}, icon="   ",desc="Search Help               ", shortcut='h', action='Telescope help_tags'},   
-  --{icon_hl={link=icon_color}, icon="ﭻ   ",desc="Key Mappings              ", shortcut='m', action='Telescope keymaps'},     
-  --{icon_hl={link=icon_color}, icon="   ",desc="Open Neovim Configuration ", shortcut='c', action='tabnew! $MYVIMRC'}      
---}                                     
+  --{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
+  --{ type = "padding", val = 1 },
+  dashboard.button("<Leader>tf", "  Browse File               "),
+  dashboard.button("<Leader>tr", "  Recently Opened Files     "),
+  dashboard.button("<Leader>ta", "  Jump to Bookmark          "),
+  dashboard.button("<Leader>tw", "  Find Word                 "),
+  dashboard.button("<Leader>th", "  Search Help               "),
+  dashboard.button("<Leader>tm", "ﭻ  Key Mappings              "),
+  dashboard.button("<Leader>vi", "  Open Neovim Configuration "),
+  dashboard.button( "q        ", "  Quit                      ", ":qa<CR>"),
+}
+dashboard.section.buttons.opts.hl_shortcut = 'Title'
 
 dashboard.section.footer.val = footer()
 --dashboard.section.footer.opts.hl = "Constant"
-dashboard.section.footer.opts.hl = "Number"
+dashboard.section.footer.opts.hl = "Comment"
 
 alpha.setup(dashboard.opts)
 
-vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
+vim.cmd([[ 
+autocmd FileType alpha setlocal nofoldenable nornu nonu 
+]])
 --vim.cmd [[ echohl ModeMsg | echo '[plug-alpha] hallo' | echohl None ]]
 --
 --
