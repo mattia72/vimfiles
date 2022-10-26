@@ -51,9 +51,9 @@ nnoremap <leader>cd <ESC>:lcd %:p:h <bar> pwd <CR>
 
 " simple buffer explorer, after :sb works tab completition 
 " sb tries to find buffer in opened windows and switches to it
-nnoremap <leader>sb :ls<cr>:sb<space>
+"nnoremap <leader>sb :ls<cr>:sb<space>
 " simple buffer explorer, after :b works tab completition 
-nnoremap <leader>b :ls<cr>:b<space>
+"nnoremap <leader>be :ls<cr>:b<space>
 
 " same as above with split, if not open
 nnoremap <leader>vb :ls<cr>:vertical sb<space>
@@ -151,8 +151,8 @@ nnoremap <leader>fs :call <SID>MyFoldSyntax()<cr>
 nnoremap <leader>xf Go<esc>:r ! xmllint --format %<cr>
 
 "open file under cursor in vsplit window
-nnoremap <leader>gf <C-W>vgf<C-W>L
-vnoremap <leader>gf <C-W>vgf<C-W>L
+"nnoremap <leader>gf <C-W>vgf<C-W>L
+"vnoremap <leader>gf <C-W>vgf<C-W>L
 
 function! <SID>MyFoldSyntax()
   set foldmethod=syntax
@@ -232,17 +232,13 @@ iabbrev <expr> 2dm  strftime("%Y.%m.%d")
 
 
 lua <<EOF
+
 local wk = require("which-key")
 wk.register({ 
-  t = {  
-    name = "mappings.vimrc", -- optional group name
-    --f = { "<cmd>Telescope find_files<cr>"                              , "Telescope Find File"        , noremap=true }        ,
-    --b = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true }        ,
-    -- --n = { "New File" }, -- just a label. don't create any mapping 
-    -- --e = "Edit File", -- same as above    
-    -- --["1"] = "which_key_ignore",  -- special label to hide it in the popup
-    --b = { function() print("bar") end, "Foobar" } -- you can also pass functions!  
-  },
-}, { prefix = "<leader>" })
+  ["<leader>g"]  = { name = "mappings.vimrc"}, -- optional group name
+  ["<leader>gf"] = { "<C-W>vgf<C-W>L"  , "🚀 Open selected file(path) in new split"        , {mode= n, noremap=true} },
+  ["<leader>gf"] = { "<C-W>vgf<C-W>L"  , "🚀 Open selected file(path) in new split"        , {mode= v, noremap=true} },
+})
+
 EOF
 

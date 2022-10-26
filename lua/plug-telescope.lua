@@ -59,22 +59,20 @@ require('telescope').setup{
 
 local wk = require("which-key")
 wk.register({ 
-  t = {  
-    name = "telescope mappings", -- optional group name
+    ["<leader>t"] = { name = "+telescope" }, -- optional group name
     --a = { function() require('telescope.builtin').grep_string({use_regex=true}) end, "Telescope Grep String Under Cursor" , noremap=true } ,
-    f = { "<cmd>Telescope find_files<cr>"                              , "Telescope Find File"        , noremap=true }        ,
-    r = { "<cmd>Telescope oldfiles<cr>"                                , "Telescope Open Recent File" , noremap=true }        ,
-    a = { "<cmd>Telescope marks<cr>"                                   , "Telescope Browse Bookmarks"     , noremap=true }        ,
-    b = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true }        ,
-    g = { function() require('telescope.builtin').live_grep({use_regex=true}) end, "Telescope Live Grep" , noremap=true } ,
-    h = { "<cmd>Telescope help_tags<cr>"                               , "Telescope Help"             , noremap=true }        ,
-    m = { function() require('telescope.builtin').keymaps()        end , "Telescope Mappings"         , noremap=true }        ,
+    ["<leader>tf"] = { "<cmd>Telescope find_files<cr>"                              , "Telescope Find File"        , noremap=true }        ,
+    ["<leader>tr"] = { "<cmd>Telescope oldfiles<cr>"                                , "Telescope Open Recent File" , noremap=true }        ,
+    ["<leader>ta"] = { "<cmd>Telescope marks<cr>"                                   , "Telescope Browse Bookmarks"     , noremap=true }        ,
+    ["<leader>tb"] = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true }        ,
+    ["<leader>tg"] = { function() require('telescope.builtin').live_grep({use_regex=true}) end, "Telescope Live Grep" , noremap=true } ,
+    ["<leader>th"] = { "<cmd>Telescope help_tags<cr>"                               , "Telescope Help"             , noremap=true }        ,
+    ["<leader>tm"] = { function() require('telescope.builtin').keymaps()        end , "Telescope Mappings"         , noremap=true }        ,
     -- --n = { "New File" }, -- just a label. don't create any mapping 
     -- --e = "Edit File", -- same as above    
     -- --["1"] = "which_key_ignore",  -- special label to hide it in the popup
     --b = { function() print("bar") end, "Foobar" } -- you can also pass functions!  
-  },
-}, { prefix = "<leader>" })
+})
 
 
  -- "nnoremap <leader>fg :Telescope live_grep prompt_prefix=🔍 <CR>

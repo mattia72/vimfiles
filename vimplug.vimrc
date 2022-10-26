@@ -230,21 +230,9 @@ if has('conceal')
 endif
 
 if filereadable("lightline.vimrc")
-  source  lightline.vimrc
+  source lightline.vimrc
 endif
 
-" --------------------------------------------
-" bufkill 
-" --------------------------------------------
-" close a buffer :h bufkill
-nnoremap <leader>bd :BD <cr>
-" delete buffer and close window
-nnoremap <leader>wd :bd <cr>
-" close all buffer
-nnoremap <leader>bda :bufdo BD <cr>
-" prev/next buffer  :h bufkill
-nnoremap <leader>bp :BB <cr>
-nnoremap <leader>bn :BF <cr>
 
 if !(has('nvim') || has('lua'))
   finish
@@ -255,9 +243,28 @@ endif
 " --------------------------------------------
 
 lua <<EOF
-  require("which-key").setup {
-    -- your configuration comes here
+
+-- more in mappings.vimrc
+  local wk = require("which-key")
+  wk.setup { 
+      icons = {
+        breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+        separator = "", -- symbol used between a key and it's label
+        group = "+", -- symbol prepended to a group
+      },
   }
+
+-- --------------------------------------------
+-- BufKill 
+-- --------------------------------------------
+  wk.register({ ["<leader>b"] = { name = "+buffkill" }, -- optional group name
+    ["<leader>bk"]  = { "<cmd>BD<cr>"           , "Delete Buffer"                  , noremap = true } ,
+    ["<leader>bka"] = { "<cmd>bufdo BD<cr>"     , "Delete All Buffer"              , noremap = true } ,
+    ["<leader>bp"]  = { "<cmd>BB<cr>"           , "Previous Buffer"                , noremap = true } ,
+    ["<leader>bn"]  = { "<cmd>BF<cr>"           , "Next Buffer"                    , noremap = true } ,
+    ["<leader>bc"]  = { "<cmd>ls<cr>:b<space>"  , "Buffer Change (with tab compl)" , noremap = true } ,
+    ["<leader>bs"]  = { "<cmd>ls<cr>:sb<space>" , "Buffer Split (with tab compl)"  , noremap = true } ,
+  })
 
 -- --------------------------------------------
 -- Telescope 

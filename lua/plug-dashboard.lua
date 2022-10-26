@@ -30,22 +30,22 @@ db.custom_header = {
 
 local icon_color = "Title"
 db.custom_center = {
-  {icon_hl={link=icon_color}, icon="  ", desc="New File                  ", shortcut='          ', action='DashboardNewFile' },
-  {icon_hl={link=icon_color}, icon="ﰁ  ", desc="Delphi                    ", shortcut='          ', action='so ~/delphi-dev.vim | so ~/Session.vim' } ,
+  {icon_hl={link=icon_color}, icon="  ", desc="New File                  ", shortcut='          ', action='DashboardNewFile' },
+  {icon_hl={link=icon_color}, icon="  ", desc="Delphi                    ", shortcut='          ', action='so ~/delphi-dev.vim | so ~/Session.vim' } ,
   {icon_hl={link=icon_color}, icon="  ", desc="Reload Last Session       ", shortcut='          ', action='SessionLoad'},           
   {icon_hl={link=icon_color}, icon="  ", desc="Recently Opened Files     ", shortcut='<leader>tr', action='Telescope oldfiles'},    
 --{icon_hl={link=icon_color}, icon="  ", desc="Open Project              ", shortcut='          ', action='Telescope ???'},         
   {icon_hl={link=icon_color}, icon="  ", desc="Jump to Bookmark          ", shortcut='<leader>ta', action='Telescope marks'},       
   {icon_hl={link=icon_color}, icon="  ", desc="Find File                 ", shortcut='<leader>tf', action='Telescope find_files'},  
   {icon_hl={link=icon_color}, icon="  ", desc="Find Word                 ", shortcut='<leader>tg', action='Telescope live_grep'},   
-  {icon_hl={link=icon_color}, icon="ﭻ  ", desc="Key Mappings              ", shortcut='<leader>tm', action='Telescope keymaps'},     
   {icon_hl={link=icon_color}, icon="  ", desc="Search Help               ", shortcut='<leader>th', action='Telescope help_tags'},   
-  {icon_hl={link=icon_color}, icon="  ", desc="Open Neovim Configuration ", shortcut='<leader>vi', action='tabnew! $MYVIMRC'}      
+  {icon_hl={link=icon_color}, icon="  ", desc="Open Neovim Configuration ", shortcut='<leader>vi', action='tabnew! $MYVIMRC'}, 
+  {icon_hl={link=icon_color}, icon="⏻  ", desc="Quit                      ", shortcut='          ', action='q'},      
 }                                     
 
 --local total_plugins = #vim.tbl_keys(packer_plugins)
 local total_plugins = vim.call('len', vim.g.plugs)
-db.custom_footer =  {"  " .. total_plugins .. " plugins loaded."}
+db.custom_footer =  {"  neovim loaded " .. total_plugins .. " plugins."}
 
 --db.preview_file_Path    -- string or function type that mean in function you can dynamic generate height width
 --db.preview_file_height  -- number type
