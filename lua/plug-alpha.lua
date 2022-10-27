@@ -4,15 +4,16 @@
 
 local function footer()
   --local total_plugins = #vim.tbl_keys(packer_plugins)
+  local total_plugins = vim.call('len', vim.g.plugs)
   local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
   local version = vim.version()
-  local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+  --local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+  local plugins  =  "  neovim loaded " .. total_plugins .. " plugins."
 
   --return datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
-  return datetime .. "   " ..  nvim_version_info
+  return datetime .. ' ' .. plugins
 end
 
-local db = require('alpha')
 local version = vim.version()
 local icon_color = "Function"
 
@@ -35,9 +36,8 @@ dashboard.section.header.val = {
 ' ░░░░░░░       ░░░░░░▓▓▓▓▓▓▓       ▓▓        ▓░     ▒▓▓▓▓▓▒      ░▒▓▓▓▓▒         ▒▒▒░      ▓▓▓▓  ▓▓▓▒     ▓▓▓▒    ▓▓▓▓',
 ' ░░░░░░░        ▓▒▒▒▒▓▓▓▓▓▓▓                                                                                          ',
 '  ░░░░░░         ▓▓▓▓▓▓▓▓▓▓                                                                                           ',
-'    ░░░░           ▓▓▓▓▓▓▓                                                                                            ',
+'    ░░░░           ▓▓▓▓▓▓▓         ' .. ' ' .. version.major .. '.' .. version.minor .. '-' .. version.patch          ,
 '      ░▒            ░▓▓▓                                                                                              ',
-
 }
 --dashboard.section.header.opts.hl = 'PreProc'
 dashboard.section.header.opts.hl = 'Comment'
@@ -45,15 +45,18 @@ dashboard.section.header.opts.hl = 'Comment'
 dashboard.section.buttons.val = {
   --{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
   --{ type = "padding", val = 1 },
-  dashboard.button("<Leader>tf", "  Browse File               "),
-  dashboard.button("<Leader>tr", "  Recently Opened Files     "),
-  dashboard.button("<Leader>ta", "  Jump to Bookmark          "),
-  dashboard.button("<Leader>tw", "  Find Word                 "),
-  dashboard.button("<Leader>th", "  Search Help               "),
-  dashboard.button("<Leader>tm", "ﭻ  Key Mappings              "),
-  dashboard.button("<Leader>vi", "  Open Neovim Configuration "),
-  dashboard.button( "q        ", "  Quit                      ", ":qa<CR>"),
-}
+  dashboard.button('e'          , "  New File                  " , ':ene <BAR> startinsert <CR>'                 )  ,                
+  dashboard.button('d'          , "  Delphi                    " , ':so ~/delphi-dev.vim | so ~/Session.vim<CR>' )  ,                
+  dashboard.button('r'          , "  Reload Last Session       " , ':RestoreSession<CR>'                         )  ,                
+  dashboard.button('<leader>tr' , "  Recently Opened Files     " , ':Telescope oldfiles<CR>'                     )  ,                
+  dashboard.button('o'          , "  Open Project              " , ':lua require("session-lens").search_session()<CR>' ),                
+  dashboard.button('<leader>ta' , "  Jump to Bookmark          " , ':Telescope marks<CR>'                        )  ,                
+  dashboard.button('<leader>tf' , "  Find File                 " , ':Telescope find_files<CR>'                   )  ,                
+  dashboard.button('<leader>tg' , "  Find Word                 " , ':Telescope live_grep<CR>'                    )  ,                
+  dashboard.button('<leader>th' , "  Search Help               " , ':Telescope help_tags<CR>'                    )  ,                
+  dashboard.button('<leader>vi' , "  Open Neovim Configuration " , ':tabnew! $MYVIMRC<CR>'                       )  ,                
+  dashboard.button('q'          , "⏻  Quit                      " , ':q<CR>'                                      )  ,                
+}                                                                                                                     
 dashboard.section.buttons.opts.hl_shortcut = 'Title'
 
 dashboard.section.footer.val = footer()

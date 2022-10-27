@@ -3,7 +3,7 @@
 " Description: Plugin handling section
 " Last Modified: 09.03.2019
 
-function! Cond(cond, ...)
+function! s:plug_condition(cond, ...)
   let opts = get(a:000, 0, {})
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
@@ -17,15 +17,15 @@ Plug 'folke/which-key.nvim'
 Plug 'ryanoasis/vim-devicons'
 
 "This is deprecated, see Shugo/deoplete.vim instead...
-"Plug 'Shougo/neocomplete.vim'     , Cond(!has('python3') ) " && !has('nvim'))   a fast complete for lua supported vim
+"Plug 'Shougo/neocomplete.vim'     , s:plug_condition(!has('python3') ) " && !has('nvim'))   a fast complete for lua supported vim
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
 "Plug 'vifm/vifm.vim'            " vifm in vim
 "
 if has('nvim') 
-  Plug 'glepnir/dashboard-nvim'  " startup screen
-  "Plug 'goolord/alpha-nvim'  " startup screen
+  "Plug 'glepnir/dashboard-nvim'  " startup screen
+  Plug 'goolord/alpha-nvim'  " startup screen
 else
   Plug 'mhinz/vim-startify'       " startup screen
 endif
@@ -68,8 +68,8 @@ Plug 'kopischke/vim-stay'        " automated view creation
 Plug 'Raimondi/delimitMate'      " this plugin provides automatic closing of quotes
 Plug 'tommcdo/vim-exchange'      " exchange text by operator cx
 
-" Plug 'ludovicchabant/vim-gutentags', Cond(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
-" Plug 'c0r73x/neotags.nvim', Cond(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
+" Plug 'ludovicchabant/vim-gutentags', s:plug_condition(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
+" Plug 'c0r73x/neotags.nvim', s:plug_condition(executable('ctags')) " Automated tag generation and syntax highlighting in Vim
 Plug 'jsfaint/gen_tags.vim'
 Plug 'vim-scripts/taglist.vim'   " TList browser
 
@@ -101,6 +101,11 @@ else
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'chengzeyi/fzf-preview.vim'
+endif
+
+if has('nvim')
+  " nvim Syntax lightligth
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 
 " TODO: jump between delphi functions
@@ -261,7 +266,16 @@ lua <<EOF
   require("auto-session").setup {
     log_level = "error",
     auto_session_suppress_dirs = {"/"},
+    auto_session_enabled=true, -- alpha/dashboard won't shown, if ~ has a session
+    auto_save_enabled=false,
+    auto_restore_enabled=true,
   }
+  -- command aliases for 
+  vim.cmd([[
+    command AutoSaveSession SaveSession  
+    command AutoRestoreSession RestoreSession 
+    command AutoDeleteSession DeleteSession 
+  ]])
 
 -- --------------------------------------------
 -- BufKill 
@@ -285,29 +299,54 @@ lua <<EOF
   wk.register({ 
     ["<leader>t"] = { name = "+telescope" }, -- optional group name
     --a = { function() require('telescope.builtin').grep_string({use_regex=true}) end, "Telescope Grep String Under Cursor" , noremap=true } ,
-    ["<leader>tf"] = { "<cmd>Telescope find_files<cr>"                              , "Telescope Find File"        , noremap=true }        ,
-    ["<leader>tr"] = { "<cmd>Telescope oldfiles<cr>"                                , "Telescope Open Recent File" , noremap=true }        ,
-    ["<leader>ta"] = { "<cmd>Telescope marks<cr>"                                   , "Telescope Browse Bookmarks"     , noremap=true }        ,
-    ["<leader>tb"] = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true }        ,
-    ["<leader>tg"] = { function() require('telescope.builtin').live_grep({use_regex=true}) end, "Telescope Live Grep" , noremap=true } ,
-    ["<leader>th"] = { "<cmd>Telescope help_tags<cr>"                               , "Telescope Help"             , noremap=true }        ,
-    ["<leader>tm"] = { function() require('telescope.builtin').keymaps()        end , "Telescope Mappings"         , noremap=true }        ,
-    ["<leader>ts"] = { function() require('session-lens').search_session()      end , "Telescope Sessions"         , noremap=true }        ,
+    ["<leader>tf"] = { "<cmd>Telescope find_files<cr>"                                         , "Telescope Find File"            , noremap=true }           ,
+    ["<leader>tr"] = { "<cmd>Telescope oldfiles<cr>"                                           , "Telescope Open Recent File"     , noremap=true }           ,
+    ["<leader>ta"] = { "<cmd>Telescope marks<cr>"                                              , "Telescope Browse Bookmarks"     , noremap=true }           ,
+    ["<leader>tb"] = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true } ,
+    ["<leader>tg"] = { function() require('telescope.builtin').live_grep({use_regex=true}) end , "Telescope Live Grep"            , noremap=true }           ,
+    ["<leader>th"] = { "<cmd>Telescope help_tags<cr>"                                          , "Telescope Help"                 , noremap=true }           ,
+    ["<leader>tm"] = { function() require('telescope.builtin').keymaps()        end            , "Telescope Mappings"             , noremap=true }           ,
+    ["<leader>ts"] = { function() require('session-lens').search_session()      end            , "Telescope Sessions"             , noremap=true }           ,
   })
 -- --------------------------------------------
 -- Dashboard
 -- --------------------------------------------
   if vim.fn.filereadable('lua/plug-dashboard.lua') == 1 then
-    require('plug-dashboard')
+    --require('plug-dashboard')
   end
 
 -- --------------------------------------------
 -- alpha
 -- --------------------------------------------
   if vim.fn.filereadable('lua/plug-alpha.lua') == 1 then
-    --require('plug-alpha')
+    require('plug-alpha')
   end
+  
+--  require('nvim-treesitter.parsers').filetype_to_parsername["delphi"]="pascal" 
+  require('nvim-treesitter.configs').setup {
+    ensure_installed = {"pascal"}, --, "c", "lua", "rust" }, -- A list of parser names, or "all"
+    sync_install = false, -- Install parsers synchronously (only applied to `ensure_installed`)
+    auto_install = false, -- Automatically install missing parsers when entering buffer -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+    ignore_install = {}, -- List of parsers to ignore installing (for "all")
+    highlight = {
+      enable = true, -- `false` will disable the whole extension
 
+      -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+      -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+      -- the name of the parser)
+      -- list of language that will be disabled
+      disable = { "c", "rust" },
+      -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+      -- disable = function(lang, buf)
+        --   local max_filesize = 100 * 1024 -- 100 KB
+        --   local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        --   if ok and stats and stats.size > max_filesize then
+        --     return true
+        --   end
+        --   end,
+      additional_vim_regex_highlighting = false,
+  },
+}
   -- EOF must NOT preceeded and ended with white space
   -- after this line syntax highlight won't work :(
 EOF
