@@ -35,7 +35,7 @@ if exists('g:vscode')
   finish
 endif
 
-source common.vimrc
+source common.vim
 source settings.vimrc
 source autocmds.vimrc
 source vimplug.vimrc
@@ -60,7 +60,7 @@ cd ~
 set path+=~/dev/vim/**
 
 "let fname = resolve(expand('<sfile>:t'))
-call g:MyEchoMessage('current directory:' . getcwd())
+EchoModeMsg vimrc 'current directory:' . getcwd()
 
 ":so Session.vim
 " Obsession takes care of Session update

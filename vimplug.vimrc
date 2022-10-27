@@ -94,13 +94,14 @@ if has('nvim')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'rmagatti/auto-session'
+  Plug 'rmagatti/session-lens'
 else
   " if Telescope breaks...
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'chengzeyi/fzf-preview.vim'
 endif
-
 
 " TODO: jump between delphi functions
 Plug 'inkarkat/vim-ingo-library'
@@ -253,6 +254,14 @@ lua <<EOF
         group = "+", -- symbol prepended to a group
       },
   }
+  
+-- --------------------------------------------
+-- Autosession 
+-- --------------------------------------------
+  require("auto-session").setup {
+    log_level = "error",
+    auto_session_suppress_dirs = {"/"},
+  }
 
 -- --------------------------------------------
 -- BufKill 
@@ -273,6 +282,18 @@ lua <<EOF
     require('plug-telescope')
   end
 
+  wk.register({ 
+    ["<leader>t"] = { name = "+telescope" }, -- optional group name
+    --a = { function() require('telescope.builtin').grep_string({use_regex=true}) end, "Telescope Grep String Under Cursor" , noremap=true } ,
+    ["<leader>tf"] = { "<cmd>Telescope find_files<cr>"                              , "Telescope Find File"        , noremap=true }        ,
+    ["<leader>tr"] = { "<cmd>Telescope oldfiles<cr>"                                , "Telescope Open Recent File" , noremap=true }        ,
+    ["<leader>ta"] = { "<cmd>Telescope marks<cr>"                                   , "Telescope Browse Bookmarks"     , noremap=true }        ,
+    ["<leader>tb"] = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true }        ,
+    ["<leader>tg"] = { function() require('telescope.builtin').live_grep({use_regex=true}) end, "Telescope Live Grep" , noremap=true } ,
+    ["<leader>th"] = { "<cmd>Telescope help_tags<cr>"                               , "Telescope Help"             , noremap=true }        ,
+    ["<leader>tm"] = { function() require('telescope.builtin').keymaps()        end , "Telescope Mappings"         , noremap=true }        ,
+    ["<leader>ts"] = { function() require('session-lens').search_session()      end , "Telescope Sessions"         , noremap=true }        ,
+  })
 -- --------------------------------------------
 -- Dashboard
 -- --------------------------------------------

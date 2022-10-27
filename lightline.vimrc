@@ -53,10 +53,9 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineFugitive()
-	if exists('*fugitive#head')
-		let branch = fugitive#head()
-		return branch !=# '' ? ''.branch : ''
-		"return branch !=# '' ? '⭠ '.branch : ''
+	if exists('*FugitiveHead') && FugitiveIsGitDir()
+		let branch = FugitiveHead()
+		return branch !=# '' ? ''.branch : ''
 	endif
 	return ''
 endfunction

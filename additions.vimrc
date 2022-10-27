@@ -4,15 +4,16 @@ function! g:VerboseEchoMsg(msg)
   if g:verbose | echom a:msg | endif
 endfunc
 
-"=====[ Highlight matches when jumping to next ]=============
+let s:fname = resolve(expand('<sfile>:t'))
 
+"=====[ Highlight matches when jumping to next ]=============
 " This rewires n and N to do the highlighing...
-nnoremap <silent> n   n:call HLNext(0.4)<cr>
-nnoremap <silent> N   N:call HLNext(0.4)<cr>
+nnoremap <silent> n   n:call <SID>HLNext(0.4)<cr>
+nnoremap <silent> N   N:call <SID>HLNext(0.4)<cr>
 
 
 " blink the line containing the match...
-function! HLNext (blinktime)
+function! <SID>HLNext (blinktime)
   set invcursorline
   redraw
   exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
@@ -21,14 +22,16 @@ function! HLNext (blinktime)
 endfunction
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
-function! SetWhiteSpacesVisible()
+function! <SID>SetWhiteSpacesVisible()
   set listchars=eol:¬,tab:» ,trail:~,extends:>,precedes:<,space:.
   set list
 endfunction
 
+command! -nargs=0 MySetWhiteSpaceVisible call <SID>SetWhiteSpacesVisible()
+
 "====[ Function to permanently delete views created by 'mkview' ]======
 
-function! MyDeleteView()
+function! <SID>MyDeleteView()
   let path = fnamemodify(bufname('%'),':p')
   " vim's odd =~ escaping for /
   let path = substitute(path, '=', '==', 'g')
@@ -46,8 +49,8 @@ endfunction
 function! g:MyExecInCmd(command, ...)
   let tmp=&shell
   set shell=cmd
-	echohl ModeMsg | echo '[vimplug.vimrc] Exceute in cmd shell: '.a:command.' '.join(a:000," ") | echohl None
-  execute a:command join(a:000," ")
+  call common#MyEchoModeMsg(s:fname, 'Exceute in cmd shell: '.a:command.' '.join(a:000))
+  execute '!'.a:command.' '.join(a:000)
   let &shell=tmp
 endfunction
 
@@ -57,12 +60,13 @@ command! -nargs=+ -complete=command MyExecInCmd call MyExecInCmd(<q-args>)
 function! <SID>MySaveFileFormat(type)
   let file = fnamemodify(bufname('%'),':t')
   execute 'write ++fileformat='.a:type
-	echohl ModeMsg | echo '[vimplug.vimrc] '.file.' saved in '.a:type.' format.' | echohl None
+  call common#MyEchoModeMsg(s:fname, file.' saved in '.a:type.' format.')
 endfunction
 
 function! GetFileFormats(ArgLead, CmdLine, CursorPos)
   return split('dos|unix|mac', '|')
 endfunction
+
 command! -nargs=1 -complete=customlist,GetFileFormats MySaveFileFormat call <SID>MySaveFileFormat(<q-args>)
 "----------------------------
 
@@ -85,9 +89,10 @@ endfunction
 command! -nargs=+ -complete=command MyCommandToTab call <SID>CommandToTab(<q-args>)
 
 " # Command Delview (and it's abbreviation 'delview')
-command! MyDelview call MyDeleteView()
+command! MyDelview call <SID>MyDeleteView()
 " Lower-case user commands: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
 cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'MyDelview' : 'delview')<CR>
+
 "-------------------------------------------------------------------------------
 " For syntax development
 "-------------------------------------------------------------------------------
@@ -107,24 +112,3 @@ function! <SID>SynStack()
 endfunc
 
 nnoremap <C-S-F12> :call <SID>SynStack()<CR>
-"-------------------------------------------------------------------------------
-" Session loading...
-"-------------------------------------------------------------------------------
-let g:my_vim_session = "~/Session.vim"
-
-fu! SaveSession()
-  execute 'mksession! ' . g:my_vim_session
-endfunction
-
-fu! RestoreSession()
-  let file = expand(g:my_vim_session)
-  if filereadable(file)
-    execute 'source ' . g:my_vim_session
-  endif
-endfunction
-
-" autocmd VimLeave * call SaveSess()
-" only restore the session if the user has -not- requested a specific filename
-" doesn't work with Obsession together :(
-" autocmd VimEnter * if !argc() | call RestoreSession() | endif
- 

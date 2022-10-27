@@ -5,6 +5,7 @@
 local db = require('dashboard')
 local version = vim.version()
 
+local fname = vim.fn.resolve(vim.fn.expand('<sfile>:t'))
 vim.g.dashboard_session_directory = "~/.cache/session"
 
 db.custom_header = {
@@ -32,7 +33,7 @@ local icon_color = "Title"
 db.custom_center = {
   {icon_hl={link=icon_color}, icon="  ", desc="New File                  ", shortcut='          ', action='DashboardNewFile' },
   {icon_hl={link=icon_color}, icon="  ", desc="Delphi                    ", shortcut='          ', action='so ~/delphi-dev.vim | so ~/Session.vim' } ,
-  {icon_hl={link=icon_color}, icon="  ", desc="Reload Last Session       ", shortcut='          ', action='SessionLoad'},           
+  {icon_hl={link=icon_color}, icon="  ", desc="Reload Last Session       ", shortcut='          ', action='RestoreSession'},           
   {icon_hl={link=icon_color}, icon="  ", desc="Recently Opened Files     ", shortcut='<leader>tr', action='Telescope oldfiles'},    
 --{icon_hl={link=icon_color}, icon="  ", desc="Open Project              ", shortcut='          ', action='Telescope ???'},         
   {icon_hl={link=icon_color}, icon="  ", desc="Jump to Bookmark          ", shortcut='<leader>ta', action='Telescope marks'},       

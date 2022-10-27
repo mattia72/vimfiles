@@ -11,12 +11,6 @@
 
 let s:fname = resolve(expand('<sfile>:t'))
 
-function! <SID>MyEchoMessage(msg)
-    echohl StatusLineNC | echo s:fname.': '.a:msg | echohl None
-endfunction
-
-"repare backspace: 
-"Why C-Del? Try this in command mode :verbose imap Ctr-V+BS
 inoremap <C-Del> <BS>
 nnoremap <C-Del> <BS>
 
@@ -43,8 +37,8 @@ let mapleader = ","
 let g:mapleader = ","
 
 " Copy full path or file name to clipboard
-nnoremap <leader>cp :let @+ = expand("%:p")<cr>:call <SID>MyEchoMessage('Path of current file was copied to clipboard.')<CR>
-nnoremap <leader>cf :let @+ = expand("%:t")<cr>:call <SID>MyEchoMessage('Name of current file was copied to clipboard.')<CR>
+nnoremap <leader>cp :let @+ = expand("%:p")<cr>:EchoModeMsg mappings Path of current file was copied to clipboard.<CR>
+nnoremap <leader>cf :let @+ = expand("%:t")<cr>:EchoModeMsg mappings Name of current file was copied to clipboard.<CR>
 
 "got to dir of current file in current window only
 nnoremap <leader>cd <ESC>:lcd %:p:h <bar> pwd <CR>
@@ -131,7 +125,7 @@ vnoremap <leader>sr y<ESC>:%s/<C-R>0//g<Left><Left><BackSpace>/
 vnoremap <leader>src y<ESC>:%s/\C<C-R>0//g<Left><Left><BackSpace>/
 
 " copy selected to clipboard
-vnoremap <leader>yy "+y:call <SID>MyEchoMessage('The selected text was copied to clipboard.')<CR>
+vnoremap <leader>yy "+y:EchoModeMsg mappings The selected text was copied to clipboard.<CR>
 " paste selected to clipboard
 nnoremap <leader>pp "+p
 
@@ -149,10 +143,6 @@ nnoremap <leader>fs :call <SID>MyFoldSyntax()<cr>
 "nnoremap <leader>xm :setfiletype xml<cr> :call <SID>MyFoldSyntax()<CR>ggVG=
 "xml formatting
 nnoremap <leader>xf Go<esc>:r ! xmllint --format %<cr>
-
-"open file under cursor in vsplit window
-"nnoremap <leader>gf <C-W>vgf<C-W>L
-"vnoremap <leader>gf <C-W>vgf<C-W>L
 
 function! <SID>MyFoldSyntax()
   set foldmethod=syntax
@@ -230,14 +220,17 @@ nnoremap <leader>ht :Helptags<CR>
 iabbrev <expr> 2dd  strftime("%d.%m.%Y")
 iabbrev <expr> 2dm  strftime("%Y.%m.%d")
 
+"open file under cursor in vsplit window
 
 lua <<EOF
 
 local wk = require("which-key")
 wk.register({ 
-  ["<leader>g"]  = { name = "mappings.vimrc"}, -- optional group name
-  ["<leader>gf"] = { "<C-W>vgf<C-W>L"  , "🚀 Open selected file(path) in new split"        , {mode= n, noremap=true} },
-  ["<leader>gf"] = { "<C-W>vgf<C-W>L"  , "🚀 Open selected file(path) in new split"        , {mode= v, noremap=true} },
+  ["<leader>g"]  = {name                = "mappings.vimrc"}                              , -- optional group name
+-- nnoremap <leader>gf <C-W>vgf<C-W>x
+  ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l" , "🚀 Open file under cursor in vsplit" , {mode                  = n, noremap = true} } ,
+-- vnoremap <leader>gf <C-W>vgf<C-W>x
+  ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l"    , "🚀 Open file under cursor in vsplit" , {mode                  = v, noremap = true} } ,
 })
 
 EOF

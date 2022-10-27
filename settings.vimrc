@@ -140,6 +140,8 @@ set sidescroll=1
 set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set number relativenumber
 
+let s:fname = resolve(expand('<sfile>:t'))
+
 function! g:MySetPowerShell()
   "let &shell = has('win32') ? 'powershell' : 'pwsh'
   let g:default_shell_options =[&shell, &shellquote, &shellpipe, &shellxquote, &shellcmdflag, &shellredir]
@@ -147,13 +149,13 @@ function! g:MySetPowerShell()
   set shellquote= shellpipe=\| shellxquote=
   set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
   set shellredir=\|\ Out-File\ -Encoding\ UTF8
-  echohl ModeMsg | echo 'PowerShell has been set. (You can restore orig with MyRestoreOrigShell)' | echohl None
+  call common#MyEchoModeMsg(s:fname, 'PowerShell has been set. (You can restore orig with MyRestoreOrigShell)')
 endfunction
 
 function! g:MySetDefaultShell()
   let g:default_shell_options =[&shell, &shellquote, &shellpipe, &shellxquote, &shellcmdflag, &shellredir]
-	set shellquote& | set shellpipe& | set shellxquote& | set shellcmdflag& | set shellredir& | set shell&
-  echohl ModeMsg | echo 'Default shell has been set. (You can restore orig with MyRestoreOrigShell)' | echohl None
+  set shellquote& | set shellpipe& | set shellxquote& | set shellcmdflag& | set shellredir& | set shell&
+  call common#MyEchoModeMsg(s:fname, 'Default shell has been set. (You can restore orig with MyRestoreOrigShell)')
 endfunction
 
 function! g:MyRestoreOrigShell()
@@ -163,7 +165,7 @@ function! g:MyRestoreOrigShell()
   let &shellxquote  = g:default_shell_options[3]
   let &shellcmdflag = g:default_shell_options[4]
   let &shellredir   = g:default_shell_options[5]
-  echohl ModeMsg | echo 'Orig shell has been restored.' | echohl None
+  call common#MyEchoModeMsg(s:fname, 'Orig shell has been restored.')
 endfunction
 
 command!  MySetDefaultShell call MySetDefaultShell()

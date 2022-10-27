@@ -46,6 +46,7 @@ function! g:MySetDefaultTermShell()
     augroup END
   endif
 endfunction
+
 "function! g:MyMakeView()
   "" Put these in an autocmd group, so that we can delete them easily.
   "augroup MyView
@@ -63,6 +64,8 @@ augroup reread_vimrc
   "autocmd FileType vim nnoremap <buffer> <F7> :w <bar> if expand('%:t') =~ '^t\(c\|est\)_' <bar> call unittest#run() <bar> else <bar> source % <bar> endif <cr>
   autocmd FileType vim nnoremap <buffer> <F7> :w <bar> source % <cr>
   autocmd FileType vim nnoremap <buffer> <F9> :w <bar> UnitTest <cr>
+  " remove space, to work gf on 'source filename.vim' also
+  autocmd FileType vim setlocal isfname-=32 
 augroup END
 
 augroup quickfix_autocmds
