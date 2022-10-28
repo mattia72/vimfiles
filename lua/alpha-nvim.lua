@@ -3,14 +3,21 @@
 --
 
 local function footer()
-  --local total_plugins = #vim.tbl_keys(packer_plugins)
-  local total_plugins = vim.call('len', vim.g.plugs)
+  local plugin_count = 0;
+
+  if packer_plugins ~= nil then
+    plugin_count = #vim.tbl_keys(packer_plugins)
+  else if  vim.g.plugs ~= nil then
+    --plugin_count = vim.call('len', vim.g.plugs)
+    plugin_count = #vim.g.plugs
+    end
+  end
   local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
   local version = vim.version()
   --local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
-  local plugins  =  "  neovim loaded " .. total_plugins .. " plugins."
+  local plugins  =  "  neovim loaded " .. plugin_count .. " plugins."
 
-  --return datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
+  --return datetime .. "   " .. plugin_count .. " plugins" .. nvim_version_info
   return datetime .. ' ' .. plugins
 end
 

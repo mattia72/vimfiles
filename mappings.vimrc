@@ -223,7 +223,7 @@ iabbrev <expr> 2dm  strftime("%Y.%m.%d")
 "open file under cursor in vsplit window
 
 lua <<EOF
-
+vim.cmd [[packadd which-key.nvim]]
 local wk = require("which-key")
 wk.register({ 
   ["<leader>g"]  = {name                = "mappings.vimrc"}                              , -- optional group name

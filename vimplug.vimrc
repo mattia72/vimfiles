@@ -13,7 +13,7 @@ call plug#begin(expand('$XDG_CONFIG_HOME/nvim/plugged/'))
 " Run :PlugUpgrade for upgrade Plug itself
 Plug 'junegunn/vim-plug'
 
-Plug 'folke/which-key.nvim'
+Plug 'folke/which-key.nvim'   "*
 Plug 'ryanoasis/vim-devicons'
 
 "This is deprecated, see Shugo/deoplete.vim instead...
@@ -292,8 +292,8 @@ lua <<EOF
 -- --------------------------------------------
 -- Telescope 
 -- --------------------------------------------
-  if vim.fn.filereadable('lua/plug-telescope.lua') == 1 then
-    require('plug-telescope')
+  if vim.fn.filereadable('lua/telescope-nvim.lua') == 1 then
+    require('telescope-nvim')
   end
 
   wk.register({ 
@@ -311,22 +311,22 @@ lua <<EOF
 -- --------------------------------------------
 -- Dashboard
 -- --------------------------------------------
-  if vim.fn.filereadable('lua/plug-dashboard.lua') == 1 then
-    --require('plug-dashboard')
+  if vim.fn.filereadable('lua/dashboard-nvim.lua') == 1 then
+    --require('dashboard-nvim')
   end
 
 -- --------------------------------------------
 -- alpha
 -- --------------------------------------------
-  if vim.fn.filereadable('lua/plug-alpha.lua') == 1 then
-    require('plug-alpha')
+  if vim.fn.filereadable('lua/alpha-nvim.lua') == 1 then
+    require('alpha-nvim')
   end
   
 --  require('nvim-treesitter.parsers').filetype_to_parsername["delphi"]="pascal" 
   require('nvim-treesitter.configs').setup {
     ensure_installed = {"pascal"}, --, "c", "lua", "rust" }, -- A list of parser names, or "all"
     sync_install = false, -- Install parsers synchronously (only applied to `ensure_installed`)
-    auto_install = false, -- Automatically install missing parsers when entering buffer -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+    auto_install = true, -- Automatically install missing parsers when entering buffer -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
     ignore_install = {}, -- List of parsers to ignore installing (for "all")
     highlight = {
       enable = true, -- `false` will disable the whole extension
