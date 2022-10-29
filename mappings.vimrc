@@ -69,9 +69,9 @@ if has('nvim')                 " tnoremap stands for terminal mode mappings in n
   tnoremap <A-j> <C-\><C-N><C-w>j
   tnoremap <A-k> <C-\><C-N><C-w>k
   tnoremap <A-l> <C-\><C-N><C-w>l
-  command! MyPwsh :call MySetPowerShell()|:term
+  command! -nargs=0 MyPwsh :call MySetPowerShell()|:term
   cabbrev pwsh MyPwsh
-  command! Cmd :call MySetDefaultShell()|:term
+  command! -nargs=0 MyCmd :call MySetDefaultShell()|:term
   cabbrev cmd MyCmd
   nnoremap <leader>tt :vsplit<CR><C-W>L:MyPwsh<CR>:MySetDefaultShell<CR>
   nnoremap <leader>tc :vsplit<CR><C-W>L:MyCmd<CR>
@@ -128,6 +128,7 @@ vnoremap <leader>src y<ESC>:%s/\C<C-R>0//g<Left><Left><BackSpace>/
 vnoremap <leader>yy "+y:EchoModeMsg mappings The selected text was copied to clipboard.<CR>
 " paste selected to clipboard
 nnoremap <leader>pp "+p
+vnoremap <leader>pp "+p
 
 " highlight selected
 vnoremap <leader>sh y<ESC>:match Error /<C-R>0/ 
@@ -165,13 +166,8 @@ function! <SID>MyShowFoldIndicatorColumn()
   endif
 endfunction
 
-" load all file from quickfix window
-nnoremap <leader>lq :cfirst <bar> while 1 <bar> cnext <bar> endwhile <cr>
-
 " close help window
 nnoremap <leader>hq :helpclose <cr>
-" close quickfix window
-nnoremap <leader>cq :cclose <cr>
 " close all, except current buffer
 nnoremap <leader>ba :w <bar> %bd <bar> e# <bar> bd# <CR>
 " Tab navigation like firefox
@@ -226,11 +222,17 @@ lua <<EOF
 vim.cmd [[packadd which-key.nvim]]
 local wk = require("which-key")
 wk.register({ 
-  ["<leader>g"]  = {name                = "mappings.vimrc"}                              , -- optional group name
+  ["<leader>g"]  = {name = "mappings.vimrc"} , -- optional group name
 -- nnoremap <leader>gf <C-W>vgf<C-W>x
-  ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l" , "🚀 Open file under cursor in vsplit" , {mode                  = n, noremap = true} } ,
+  ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l" , "🚀 Open file under cursor in vsplit" , {mode= n, noremap = true} } ,
 -- vnoremap <leader>gf <C-W>vgf<C-W>x
-  ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l"    , "🚀 Open file under cursor in vsplit" , {mode                  = v, noremap = true} } ,
+ ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l"    , "🚀 Open file under cursor in vsplit" , {mode                  = v, noremap = true} } ,
+})
+
+wk.register({ 
+  ["<leader>q"]  = {name = "mappings.vimrc +quickfix"}, -- optional group name
+  ["<leader>ql"] = {"<cmd>cfirst <bar> while 1 <bar> cnext <bar> endwhile <cr>" , "Load all file from quickfix window" , {mode = n, noremap = true} } ,
+  ["<leader>qc"] = {"<cmd>cclose<cr>" , "Close quickfix window" , {mode = n, noremap = true} } ,
 })
 
 EOF

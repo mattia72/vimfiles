@@ -2,11 +2,23 @@
 -- lua config file for alpha 
 --
 
+local function count_plugins(pt)
+  local count = 0
+  local count_loaded = 0
+  for key, val in pairs(pt) do  -- Table iteration.
+    if(val.loaded) then
+      count_loaded = count_loaded + 1
+    end
+    count = count + 1
+  end
+  return count_loaded..'/'..count
+end
+
 local function footer()
   local plugin_count = 0;
 
   if packer_plugins ~= nil then
-    plugin_count = #vim.tbl_keys(packer_plugins)
+    plugin_count = count_plugins(packer_plugins)
   else if  vim.g.plugs ~= nil then
     --plugin_count = vim.call('len', vim.g.plugs)
     plugin_count = #vim.g.plugs
@@ -15,7 +27,7 @@ local function footer()
   local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
   local version = vim.version()
   --local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
-  local plugins  =  "  neovim loaded " .. plugin_count .. " plugins."
+  local plugins  =  " neovim loaded " .. plugin_count .. " plugins."
 
   --return datetime .. "   " .. plugin_count .. " plugins" .. nvim_version_info
   return datetime .. ' ' .. plugins

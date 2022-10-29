@@ -38,7 +38,8 @@ endif
 source common.vim
 source settings.vimrc
 source autocmds.vimrc
-source vimplug.vimrc
+"source vimplug.vimrc
+lua require('packer-nvim')
 source mappings.vimrc
 source colors.vimrc
 

@@ -280,7 +280,7 @@ lua <<EOF
 -- --------------------------------------------
 -- BufKill 
 -- --------------------------------------------
-  wk.register({ ["<leader>b"] = { name = "+buffkill" }, -- optional group name
+  wk.register({ ["<leader>b"] = { name = "+bufkill" }, -- optional group name
     ["<leader>bk"]  = { "<cmd>BD<cr>"           , "Delete Buffer"                  , noremap = true } ,
     ["<leader>bka"] = { "<cmd>bufdo BD<cr>"     , "Delete All Buffer"              , noremap = true } ,
     ["<leader>bp"]  = { "<cmd>BB<cr>"           , "Previous Buffer"                , noremap = true } ,

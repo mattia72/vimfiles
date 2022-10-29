@@ -102,11 +102,18 @@ if !(has('gui_running') || has('nvim'))
   set term=xterm
 endif
 set t_Co=256
-
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
+" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   Ps = 1  -> blinking block (default).
+"   Ps = 2  -> steady block.
+"   Ps = 3  -> blinking underline.
+"   Ps = 4  -> steady underline.
+"   Ps = 5  -> blinking bar (xterm).
+"   Ps = 6  -> steady bar (xterm).
 let &t_ti.="\e[1 q" " enter termcap mode
-let &t_SI.="\e[1 q" " start insert mode
+let &t_SI.="\e[5 q" " start insert mode
 let &t_EI.="\e[4 q" " end insert mode
 let &t_te.="\e[0 q" " out of termcap mode
 
