@@ -2,23 +2,13 @@
 -- lua config file for alpha 
 --
 
-local function count_plugins(pt)
-  local count = 0
-  local count_loaded = 0
-  for key, val in pairs(pt) do  -- Table iteration.
-    if(val.loaded) then
-      count_loaded = count_loaded + 1
-    end
-    count = count + 1
-  end
-  return count_loaded..'/'..count
-end
-
 local function footer()
   local plugin_count = 0;
 
   if packer_plugins ~= nil then
-    plugin_count = count_plugins(packer_plugins)
+    local u = require('utils')
+    count, count_cond = u.table_count(packer_plugins, function(val) return val.loaded end)
+    plugin_count = count_cond..'/'..count
   else if  vim.g.plugs ~= nil then
     --plugin_count = vim.call('len', vim.g.plugs)
     plugin_count = #vim.g.plugs

@@ -13,7 +13,11 @@ require("lualine").setup({
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff" },
     lualine_c = {
-      "filename",
+      {
+        "filename",
+        path = 1, -- Relaitive path
+        shorting_target = 40,
+      },
       {
         ime_state,
         color = {fg = 'black', bg = '#f46868'}
@@ -55,7 +59,13 @@ require("lualine").setup({
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { "filename" },
+    lualine_c = { 
+      {
+        "filename",
+        path = 1, -- Relaitive path
+        shorting_target = 40,
+      },
+    },
     lualine_x = { "location" },
     lualine_y = {},
     lualine_z = {},

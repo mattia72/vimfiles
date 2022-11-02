@@ -25,6 +25,7 @@ hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
 hi CursorLine                    guibg=#293739
 hi CursorColumn                  guibg=#293739
 hi LineNr          guifg=#848483 guibg=#232526
+hi CursorLineNr    guifg=#848483 guibg=#232526
 hi NonText         guifg=#848483 guibg=#232526
 
 " Note: How it looks like, see ":h group-name"

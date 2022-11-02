@@ -14,8 +14,6 @@ local packer_bootstrap = ensure_packer()
 
 -- the plugin install follows from here
 
-local util = require('packer.util')
-
 require("packer").startup({
   function(use)
     -- speed up loading lua modules it is recommened to put impatient.nvim before any other plugins
@@ -30,23 +28,70 @@ require("packer").startup({
     use {'goolord/alpha-nvim', requires = {'kyazdani42/nvim-web-devicons'}, config = [[require('alpha-nvim')]] }
     use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}, config = [[require('telescope-nvim')]]}
 
-    use { "skywind3000/asyncrun.vim", opt = true, cmd = { "AsyncRun" }}
+    use { "skywind3000/asyncrun.vim", cmd = { "AsyncRun" }}
 
     -- Show undo history visually
-    use {'simnalamburt/vim-mundo', opt = true, cmd = {"MundoToggle", "MundoShow"}}
-    use {'qpkorr/vim-bufkill'    , opt = true, cmd = {'BD', 'BB', 'BF', 'BW '}}--delete buffer without closing window :BD, BW, BF, BB
+    use {'simnalamburt/vim-mundo', cmd = {"MundoToggle", "MundoShow"}}
+    use {'qpkorr/vim-bufkill'    , cmd = {'BD', 'BB', 'BF', 'BW '}}--delete buffer without closing window :BD, BW, BF, BB
 
     use {'rcarriga/nvim-notify'}
     -- auto-completion engine
-    use 'neovim/nvim-lspconfig'
-    use {"onsails/lspkind-nvim", event = "VimEnter"}
-    use {"hrsh7th/nvim-cmp", after ={"nvim-lspconfig", "lspkind-nvim"}, config = [[require('config.nvim-cmp')]]}
+    --use 'neovim/nvim-lspconfig'
+    --use {"onsails/lspkind-nvim", event = "VimEnter"}
+    --use {"hrsh7th/nvim-cmp", after ={"nvim-lspconfig", "lspkind-nvim"}, config = [[require('config.nvim-cmp')]]}
+    use {
+      "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
+      opt = true,
+      config = function()
+        require("config.nvim-cmp").setup()
+      end,
+      wants = { "LuaSnip" },
+      requires = {
+        'neovim/nvim-lspconfig', -- +
+        'onsails/lspkind-nvim', --+
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-nvim-lua',
+        'ray-x/cmp-treesitter',
+        --"hrsh7th/cmp-nvim-lsp",
+        'hrsh7th/cmp-cmdline',
+        'saadparwaiz1/cmp_luasnip',
+        'hrsh7th/cmp-calc',
+        'f3fora/cmp-spell',
+        'hrsh7th/cmp-emoji',
+        {
+          'L3MON4D3/LuaSnip',
+          wants = 'friendly-snippets',
+          config = function()
+            require('config.luasnip').setup()
+          end,
+        },
+        'rafamadriz/friendly-snippets',
+        disable = false,
+      },
+    }
+    use {
+      'ms-jpq/coq_nvim',
+      branch = 'coq',
+      event = 'InsertEnter',
+      opt = true,
+      run = ':COQdeps',
+      config = function()
+        require('config.coq').setup()
+      end,
+      requires = {
+        { 'ms-jpq/coq.artifacts', branch = "artifacts" },
+        { 'ms-jpq/coq.thirdparty', branch = "3p", module = "coq_3p" },
+      },
+      disable = false,
+    }
 
     -- nvim-cmp completion sources
-    use {"hrsh7th/cmp-nvim-lsp", after = "nvim-cmp"}
-    use {"hrsh7th/cmp-nvim-lua", after = "nvim-cmp"}
-    use {"hrsh7th/cmp-path", after = "nvim-cmp"}
-    use {"hrsh7th/cmp-buffer", after = "nvim-cmp"}
+    --use {"hrsh7th/cmp-nvim-lsp", after = "nvim-cmp"}
+    --use {"hrsh7th/cmp-nvim-lua", after = "nvim-cmp"}
+    --use {"hrsh7th/cmp-path", after = "nvim-cmp"}
+    --use {"hrsh7th/cmp-buffer", after = "nvim-cmp"}
 
     use {'nvim-lualine/lualine.nvim', event = 'VimEnter', config = [[require('config.lualine-nvim')]] }
     use {'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons'}, config = [[require('config.nvim-tree')]]} -- tag = 'nightly' -- optional, updated every week. (see issue #1193) }
@@ -70,7 +115,7 @@ require("packer").startup({
       config = function() require('session-lens').setup({path_display = {'shorten'}}) end }
 
     use {'tpope/vim-fugitive'}                     -- git wrapper
-    use {'mileszs/ack.vim', opt=true, cmd = 'Ack'} -- the better grep
+    use {'mileszs/ack.vim', cmd = 'Ack'} -- the better grep
 
     --
     -- Moving helpers with mappings
@@ -86,9 +131,9 @@ require("packer").startup({
     use {'tpope/vim-repeat'}                                 -- repeats eg. surround mappings
     use {'preservim/nerdcommenter'}                          -- ,c<space>
     use {'tpope/vim-surround'}                               -- s
-    use {'godlygeek/tabular', opt=true, cmd =  'Tabularize',
+    use {'godlygeek/tabular', cmd =  'Tabularize',
       run = ':cabbrev tabi Tabularize'}                      -- creating tables
-    use {'tpope/vim-abolish' , opt=true, cmd = 'S'}           -- :%S/facilit{y, ies}/building{, s}/g
+    use {'tpope/vim-abolish' , cmd = 'S'}           -- :%S/facilit{y, ies}/building{, s}/g
     use {'tommcdo/vim-exchange'}                              -- exchange word: cxiw <move> . line: cxx<move>.
 
     -- 
@@ -109,13 +154,13 @@ require("packer").startup({
     use {'~/dev/vim/vim-copy-as-rtf'}
 
     use {'vim-scripts/genutils', opt= true}
-    use {'albfan/vim-breakpts', opt= true, require = {'genutils'}, cmd = 'BreakPts' }
-    use {'h1mesuke/vim-unittest', opt=true, cmd= 'UnitTest',
+    use {'albfan/vim-breakpts', require = {'genutils'}, cmd = 'BreakPts' }
+    use {'h1mesuke/vim-unittest', cmd= 'UnitTest',
       run = function() vim.cmd([[
         nnoremap <leader>su :wa <bar> UnitTest<CR>
         nnoremap <F5> :wa <bar> UnitTest<CR>
         ]])end}
-    use {'vim-scripts/Decho'    , opt=true, cmd= 'Decho'}
+    use {'vim-scripts/Decho'    , cmd= 'Decho'}
 
     -- Automatically set up your confiration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -143,23 +188,24 @@ vim.cmd([[
 -- auto-session
 -- --------------------------------------------
 auto_session_run = function()
-    vim.cmd([[
-      command! AutoSaveSession SaveSession  
-      command! AutoRestoreSession RestoreSession 
-      command! AutoDeleteSession DeleteSession ]])     
-    vim.cmd [[packadd which-key.nvim]]
-    require("which-key").register({ 
-      ["<leader>a"] = { name = "+auto-session" }, 
-      ["<leader>as"] = { "<cmd>AutoSaveSession<cr>"    , "Autosession Save"    , noremap = true } ,
-      ["<leader>ar"] = { "<cmd>AutoRestoreSession<cr>" , "Autosession Restore" , noremap = true } ,
-      ["<leader>ad"] = { "<cmd>AutoDeleteSession<cr>"  , "Autosession Delete"  , noremap = true }  })
---    require('notify')(',a mapping was set','info')
-    end
+  local utils = require('utils')
+  utils.create_cmd({name='AutoSaveSession', cmd='SaveSession', notify_msg= 'Session saved'})
+  utils.create_cmd({name='AutoRestoreSession', cmd='RestoreSession', notify_msg= 'Session restored'})
+  utils.create_cmd({name='AutoDeleteSession', cmd='DeleteSession', notify_msg= 'Session delted'})
+
+  vim.cmd [[packadd which-key.nvim]]
+  require("which-key").register({ 
+    ["<leader>a"] = { name = "+auto-session" }, 
+    ["<leader>as"] = { "<cmd>AutoSaveSession<cr>"    , "Autosession Save"    , noremap = true } ,
+    ["<leader>ar"] = { "<cmd>AutoRestoreSession<cr>" , "Autosession Restore" , noremap = true } ,
+    ["<leader>ad"] = { "<cmd>AutoDeleteSession<cr>"  , "Autosession Delete"  , noremap = true }  })
+    --    require('notify')(',a mapping was set','info')
+end
 
 vim.cmd [[packadd which-key.nvim]]
 auto_session_run()
-local wk = require("which-key")
 
+local wk = require("which-key")
 ---- --------------------------------------------
 -- packer
 -- --------------------------------------------
