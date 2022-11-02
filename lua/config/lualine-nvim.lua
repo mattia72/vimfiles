@@ -1,3 +1,7 @@
+local function asyncrun_indicator()
+  return vim.g.asyncrun_status or ''
+end
+
 require("lualine").setup({
   options = {
     icons_enabled = true,
@@ -28,14 +32,11 @@ require("lualine").setup({
       },
     },
     lualine_x = {
+      asyncrun_indicator,
       "encoding",
       {
         "fileformat",
-        symbols = {
-          unix = "unix",
-          dos = "win",
-          mac = "mac",
-        },
+        symbols = { unix = "", dos = "", mac = "", },
       },
       "filetype",
     },

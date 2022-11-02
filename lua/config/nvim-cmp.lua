@@ -9,6 +9,9 @@ function M.setup()
   local luasnip = require "luasnip"
   local cmp = require "cmp"
 
+  --local select_opts = {behavior = cmp.SelectBehavior.Select}
+  local select_opts = {'i', 'c'}
+
   cmp.setup {
     completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
     experimental = { native_menu = false, ghost_text = false },
@@ -18,6 +21,7 @@ function M.setup()
       end,
     },
     formatting = {
+      fields = {'menu', 'abbr', 'kind'},
       format = function(entry, vim_item)
         local icons = {
           Text = "",
@@ -57,34 +61,43 @@ function M.setup()
         }
         vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
         vim_item.menu = ({
-          buffer = "[Buff]",
-          luasnip = "[Snip]",
-          nvim_lua = "[nLua]",
-          treesitter = "[TS]",
+          nvim_lsp = 'λ',
+          luasnip = '⋗',
+          buffer = 'Ω',
+          path = '🖫',
         })[entry.source.name]
         return vim_item
       end,
     },
     mapping = {
-      ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-      ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-      ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-e>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
-      ["<CR>"] = cmp.mapping {
-        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
-        c = function(fallback)
-          if cmp.visible() then
-            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
-          else
-            fallback()
-          end
-        end,
-      },
+      ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), select_opts),
+      ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), select_opts),
+      ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), select_opts),
+      ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), select_opts),
+
+      ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), select_opts),
+      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), select_opts),
+
+      ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), select_opts),
+      ["<C-e>"] = cmp.mapping.abort(),
+
+      ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
+ --     ['<Tab>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+
+      --["<CR>"] = cmp.mapping {
+        --i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+        --c = function(fallback)
+          --if cmp.visible() then
+            --cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+          --else
+            --fallback()
+          --end
+        --end,
+      --},
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          cmp.select_next_item()
+          --cmp.select_next_item()
+          cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
         elseif has_words_before() then
@@ -92,11 +105,8 @@ function M.setup()
         else
           fallback()
         end
-      end, {
-        "i",
-        "s",
-        "c",
-      }),
+      end, { "i", "s", }),
+
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
@@ -105,11 +115,7 @@ function M.setup()
         else
           fallback()
         end
-      end, {
-        "i",
-        "s",
-        "c",
-      }),
+      end, { "i", "s", }),
     },
     sources = {
       { name = "treesitter" },
@@ -132,7 +138,8 @@ function M.setup()
   }
 
   -- Use buffer source for `/`
-  cmp.setup.cmdline("/", {
+  cmp.setup.cmdline({"/", "?"}, {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = "buffer" },
     },
@@ -140,6 +147,7 @@ function M.setup()
 
   -- Use cmdline & path source for ':'
   cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = "path" },
     }, {

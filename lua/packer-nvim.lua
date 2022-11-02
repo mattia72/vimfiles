@@ -36,11 +36,8 @@ require("packer").startup({
 
     use {'rcarriga/nvim-notify'}
     -- auto-completion engine
-    --use 'neovim/nvim-lspconfig'
-    --use {"onsails/lspkind-nvim", event = "VimEnter"}
-    --use {"hrsh7th/nvim-cmp", after ={"nvim-lspconfig", "lspkind-nvim"}, config = [[require('config.nvim-cmp')]]}
     use {
-      "hrsh7th/nvim-cmp",
+      "hrsh7th/nvim-cmp",      -- scoop install python
       event = "InsertEnter",
       opt = true,
       config = function()
@@ -50,7 +47,7 @@ require("packer").startup({
       requires = {
         'neovim/nvim-lspconfig', -- +
         'onsails/lspkind-nvim', --+
-        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-buffer', -- nvim-cmp completion sources
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lua',
         'ray-x/cmp-treesitter',
@@ -88,17 +85,13 @@ require("packer").startup({
     }
 
     -- nvim-cmp completion sources
-    --use {"hrsh7th/cmp-nvim-lsp", after = "nvim-cmp"}
-    --use {"hrsh7th/cmp-nvim-lua", after = "nvim-cmp"}
-    --use {"hrsh7th/cmp-path", after = "nvim-cmp"}
-    --use {"hrsh7th/cmp-buffer", after = "nvim-cmp"}
 
     use {'nvim-lualine/lualine.nvim', event = 'VimEnter', config = [[require('config.lualine-nvim')]] }
     use {'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons'}, config = [[require('config.nvim-tree')]]} -- tag = 'nightly' -- optional, updated every week. (see issue #1193) }
     use {'chentoast/marks.nvim', config = [[require('config.marks-nvim')]]}
     use {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
 
-    use {'p00f/nvim-ts-rainbow', require={'nvim-treesitter'}}
+    use {'p00f/nvim-ts-rainbow', require={'nvim-treesitter'}} -- scoop install tree-sitter
     use {'nvim-treesitter/nvim-treesitter', event = 'BufEnter', run = ":TSUpdate", config = [[require('config.nvim-treesitter')]] }
 
     --
@@ -131,8 +124,7 @@ require("packer").startup({
     use {'tpope/vim-repeat'}                                 -- repeats eg. surround mappings
     use {'preservim/nerdcommenter'}                          -- ,c<space>
     use {'tpope/vim-surround'}                               -- s
-    use {'godlygeek/tabular', cmd =  'Tabularize',
-      run = ':cabbrev tabi Tabularize'}                      -- creating tables
+    use {'godlygeek/tabular', cmd =  'Tabularize', run = ':cabbrev tabi Tabularize'}                      -- creating tables
     use {'tpope/vim-abolish' , cmd = 'S'}           -- :%S/facilit{y, ies}/building{, s}/g
     use {'tommcdo/vim-exchange'}                              -- exchange word: cxiw <move> . line: cxx<move>.
 
@@ -149,9 +141,9 @@ require("packer").startup({
     -- My own plugins
     --
     --use  'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
-    use {'~/dev/vim/vim-delphi'     }
-    use {'~/dev/vim/vim-ripgrep'    }
-    use {'~/dev/vim/vim-copy-as-rtf'}
+    use {'~/dev/vim/vim-delphi'     , ft = {'delphi'}}
+    use {'~/dev/vim/vim-ripgrep'    , cmd = 'RipGrep'}
+    use {'~/dev/vim/vim-copy-as-rtf', cmd = 'CopyRTF'}
 
     use {'vim-scripts/genutils', opt= true}
     use {'albfan/vim-breakpts', require = {'genutils'}, cmd = 'BreakPts' }
@@ -219,7 +211,7 @@ wk.register({ ["<leader>p"] = { name = "+packer" }, -- optional group name
 -- nvim-tree
 -- --------------------------------------------
 wk.register({ ["<leader>n"] = { name = "+nvim-tree" }, -- optional group name
-  ["<leader>nt"]  = { "<cmd>NvimTreeToggle<cr>"      , "NvimTree Toggle"         , noremap = true } ,
+  ["<leader>nt"]  = { "<cmd>NvimTreeFindFileToggle!<cr>"   , "NvimTree Toggle"         , noremap = true } ,
 })
 -- --------------------------------------------
 -- bufkill 

@@ -45,7 +45,7 @@ dashboard.section.header.val = {
 ' ░░░░░░░       ░░░░░░▓▓▓▓▓▓▓       ▓▓        ▓░     ▒▓▓▓▓▓▒      ░▒▓▓▓▓▒         ▒▒▒░      ▓▓▓▓  ▓▓▓▒     ▓▓▓▒    ▓▓▓▓',
 ' ░░░░░░░        ▓▒▒▒▒▓▓▓▓▓▓▓                                                                                          ',
 '  ░░░░░░         ▓▓▓▓▓▓▓▓▓▓                                                                                           ',
-'    ░░░░           ▓▓▓▓▓▓▓         ' .. ' ' .. version.major .. '.' .. version.minor .. '-' .. version.patch          ,
+'    ░░░░           ▓▓▓▓▓▓▓         ' .. ' ' .. version.major .. '.' .. version.minor .. '-' .. version.patch          ,
 '      ░▒            ░▓▓▓                                                                                              ',
 }
 --dashboard.section.header.opts.hl = 'PreProc'
@@ -55,7 +55,7 @@ dashboard.section.buttons.val = {
   --{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
   --{ type = "padding", val = 1 },
   dashboard.button('e'          , "  New File                  " , ':ene <BAR> startinsert <CR>'                 )  ,                
-  dashboard.button('d'          , "  Delphi                    " , ':so ~/delphi-dev.vim | so ~/Session.vim<CR>' )  ,                
+  dashboard.button('d'          , "  Delphi                    " , ':so ~/delphi-dev.vim | RestoreSession <CR>' )  ,                
   dashboard.button('r'          , "  Reload Last Session       " , ':RestoreSession<CR>'                         )  ,                
   dashboard.button('<leader>tr' , "  Recently Opened Files     " , ':Telescope oldfiles<CR>'                     )  ,                
   dashboard.button('o'          , "  Open Project              " , ':lua require("session-lens").search_session()<CR>' ),                
