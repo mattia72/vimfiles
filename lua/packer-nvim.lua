@@ -97,15 +97,72 @@ require("packer").startup({
     --
     -- Sessions
     --
-    use {'rmagatti/auto-session', config = function() require("auto-session").setup {
-      log_level = "error",
-      auto_session_suppress_dirs = { "/" },
-      auto_session_enabled = true, -- alpha/dashboard won't shown, if ~ has a session
-      auto_save_enabled = false,
-      auto_restore_enabled = true }
-    end } --run = auto_session_run }
-    use {'rmagatti/session-lens', requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
-      config = function() require('session-lens').setup({path_display = {'shorten'}}) end }
+    use {
+      'jedrzejboczar/possession.nvim',
+      requires = { 'nvim-lua/plenary.nvim' },
+      config = function() 
+        require('possession').setup {
+          session_dir = vim.fn.stdpath('data')..'/possession',
+          silent = false,
+          load_silent = true,
+          debug = false,
+          prompt_no_cr = false,
+          autosave = {
+            current = true,  -- or fun(name): boolean
+            tmp = false,  -- or fun(): boolean
+            tmp_name = 'tmp_possession',
+            on_load = true,
+            on_quit = true,
+          },
+          commands = {
+            save = 'PossessionSave',
+            load = 'PossessionLoad',
+            close = 'PossessionClose',
+            delete = 'PossessionDelete',
+            show = 'PossessionShow',
+            list = 'PossessionList',
+            migrate = 'PossessionMigrate',
+          },
+          hooks = {
+            before_save = function(name) return {} end,
+            after_save = function(name, user_data, aborted) end,
+            before_load = function(name, user_data) return user_data end,
+            after_load = function(name, user_data) end,
+          },
+          plugins = {
+            close_windows = {
+              hooks = {'before_save', 'before_load'},
+              preserve_layout = true,  -- or fun(win): boolean
+              match = {
+                floating = true,
+                buftype = {},
+                filetype = {},
+                custom = false,  -- or fun(win): boolean
+              },
+            },
+            delete_hidden_buffers = {
+              hooks = {
+                'before_load',
+                vim.o.sessionoptions:match('buffer') and 'before_save',
+              },
+              force = false,  -- or fun(buf): boolean
+            },
+            nvim_tree = true,
+            tabby = true,
+            delete_buffers = false,
+          },
+        }
+      end
+    }
+    --use {'rmagatti/auto-session', config = function() require("auto-session").setup {
+      --log_level = "error",
+      --auto_session_suppress_dirs = { "/" },
+      --auto_session_enabled = true, -- alpha/dashboard won't shown, if ~ has a session
+      --auto_save_enabled = false,
+      --auto_restore_enabled = true }
+    --end } --run = auto_session_run }
+    --use {'rmagatti/session-lens', requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+      --config = function() require('session-lens').setup({path_display = {'shorten'}}) end }
 
     use {'tpope/vim-fugitive'}                     -- git wrapper
     use {'mileszs/ack.vim', cmd = 'Ack'} -- the better grep
