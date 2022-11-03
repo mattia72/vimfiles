@@ -59,8 +59,8 @@ endfunction
 " When vimrc is edited, reload it
 augroup reread_vimrc
   autocmd!
-  autocmd BufWritePost *vimrc source $MYVIMRC
-  autocmd BufWritePost *vimrc LightlineReload
+  "autocmd BufWritePost *vimrc source $MYVIMRC
+  "autocmd BufWritePost *vimrc LightlineReload
   "autocmd FileType vim nnoremap <buffer> <F7> :w <bar> if expand('%:t') =~ '^t\(c\|est\)_' <bar> call unittest#run() <bar> else <bar> source % <bar> endif <cr>
   autocmd FileType vim nnoremap <buffer> <F7> :w <bar> source % <cr>
   autocmd FileType vim nnoremap <buffer> <F9> :w <bar> UnitTest <cr>

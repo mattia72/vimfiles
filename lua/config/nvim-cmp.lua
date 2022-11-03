@@ -13,7 +13,7 @@ function M.setup()
   local select_opts = {'i', 'c'}
 
   cmp.setup {
-    completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
+    completion = { completeopt = "menu,menuone,noinsert,noselect", keyword_length = 2 },
     experimental = { native_menu = false, ghost_text = false },
     snippet = {
       expand = function(args)
@@ -81,8 +81,8 @@ function M.setup()
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), select_opts),
       ["<C-e>"] = cmp.mapping.abort(),
 
-      ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
- --     ['<Tab>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+      ['<C-CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
+      ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 
       --["<CR>"] = cmp.mapping {
         --i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
@@ -96,8 +96,7 @@ function M.setup()
       --},
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          --cmp.select_next_item()
-          cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+          cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
         elseif has_words_before() then
@@ -148,9 +147,11 @@ function M.setup()
   -- Use cmdline & path source for ':'
   cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
+    sources = cmp.config.sources(
+    {
       { name = "path" },
-    }, {
+    }, 
+    {
       { name = "cmdline" },
     }),
   })

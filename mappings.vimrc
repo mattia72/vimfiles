@@ -219,14 +219,31 @@ iabbrev <expr> 2dm  strftime("%Y.%m.%d")
 "open file under cursor in vsplit window
 
 lua <<EOF
+
+local function show_help()
+   local file_type = vim.bo.filetype
+   local file_loc = vim.fn.expand('%:p')
+--   print(string.format('%s %s', fileloc, filetype))
+   local file_dir = string.match(file_loc, "(.*[/\\])")
+   local config_dir = vim.fn.stdpath('config')
+   if file_type == 'vim'  or file_type == 'help' or (file_type =='lua' and string.sub(file_dir, 1, #config_dir) == config_dir ) then
+     vim.cmd('h '..vim.fn.expand('<cword>'))
+   end
+end
+
 vim.cmd [[packadd which-key.nvim]]
 local wk = require("which-key")
+
+wk.register({ 
+  ["K"]  = {show_help, "Show help on word", {mode = n , noremap = true}},
+})
+
 wk.register({ 
   ["<leader>g"]  = {name = "mappings.vimrc"} , -- optional group name
 -- nnoremap <leader>gf <C-W>vgf<C-W>x
-  ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l" , "🚀 Open file under cursor in vsplit" , {mode= n, noremap = true} } ,
+  ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l" , "🚀 Open file under cursor in vsplit" , {mode = n , noremap = true} } ,
 -- vnoremap <leader>gf <C-W>vgf<C-W>x
- ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l"    , "🚀 Open file under cursor in vsplit" , {mode                  = v, noremap = true} } ,
+ ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l"  , "🚀 Open file under cursor in vsplit" , {mode = v , noremap = true} } ,
 })
 
 wk.register({ 

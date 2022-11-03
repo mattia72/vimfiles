@@ -58,7 +58,7 @@ dashboard.section.buttons.val = {
   dashboard.button('d'          , "  Delphi                    " , ':so ~/delphi-dev.vim | PossessionLoad delphi-dev<CR>' )  ,                
   dashboard.button('r'          , "  Reload Last Session       " , ':PossessionLoad <CR>'                         )  ,                
   dashboard.button('<leader>tr' , "  Recently Opened Files     " , ':Telescope oldfiles<CR>'                     )  ,                
-  dashboard.button('o'          , "  Open Project              " , ':lua require("session-lens").search_session()<CR>' ),                
+  dashboard.button('o'          , "  Open Project              " , ':Telescope possession list<CR>' ),                
   dashboard.button('<leader>ta' , "  Jump to Bookmark          " , ':Telescope marks<CR>'                        )  ,                
   dashboard.button('<leader>tf' , "  Find File                 " , ':Telescope find_files<CR>'                   )  ,                
   dashboard.button('<leader>tg' , "  Find Word                 " , ':Telescope live_grep<CR>'                    )  ,                
