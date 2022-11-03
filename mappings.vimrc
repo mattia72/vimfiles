@@ -109,20 +109,6 @@ nnoremap <leader>fA <ESC>:RipGrep -w <C-R><C-W>
 vnoremap <leader>fa y<ESC>:RipGrep <C-R>0 %<Left><Left>
 vnoremap <leader>fA y<ESC>:RipGrep <C-R>0
 
-" search replace selected whole word
-nnoremap <leader>sR <ESC>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
-" search replace selected whole word case sensitive
-nnoremap <leader>sRC <ESC>:%s/\C\<<C-R><C-W>\>//g<Left><Left><BackSpace>/
-" search replace line containing selected word
-nnoremap <leader>srl <ESC>:%s/.*<C-R><C-W>.*//g<Left><Left><BackSpace>/
-" search replace selected word
-nnoremap <leader>sr <ESC>:%s/<C-R><C-W>//g<Left><Left><BackSpace>/
-" search replace selected word case sensitive
-nnoremap <leader>src <ESC>:%s/\C<C-R><C-W>//g<Left><Left><BackSpace>/
-" search replace selected
-vnoremap <leader>sr y<ESC>:%s/<C-R>0//g<Left><Left><BackSpace>/
-" search replace selected case sensitive
-vnoremap <leader>src y<ESC>:%s/\C<C-R>0//g<Left><Left><BackSpace>/
 
 " copy selected to clipboard
 vnoremap <leader>yy "+y:EchoModeMsg mappings The selected text was copied to clipboard.<CR>
@@ -239,18 +225,31 @@ wk.register({
 })
 
 wk.register({ 
-  ["<leader>g"]  = {name = "mappings.vimrc"} , -- optional group name
+  ["<leader>g"]  = {name = "+open file"} , 
 -- nnoremap <leader>gf <C-W>vgf<C-W>x
-  ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l" , "🚀 Open file under cursor in vsplit" , {mode = n , noremap = true} } ,
+  ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l" , "🚀 Open file under cursor in vsplit" , {mode = 'n' , noremap = true} } ,
+})
+wk.register({ 
+  ["<leader>g"]  = {name = "+open file"} , 
 -- vnoremap <leader>gf <C-W>vgf<C-W>x
- ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l"  , "🚀 Open file under cursor in vsplit" , {mode = v , noremap = true} } ,
+ ["<leader>gf"] = {"<C-W>vgf<C-W>x<C-W>l"  , "🚀 Open file under cursor in vsplit" , {mode = 'v' , noremap = true} } ,
 })
 
 wk.register({ 
-  ["<leader>q"]  = {name = "mappings.vimrc +quickfix"}, -- optional group name
-  ["<leader>ql"] = {"<cmd>cfirst <bar> while 1 <bar> cnext <bar> endwhile <cr>" , "Load all file from quickfix window" , {mode = n, noremap = true} } ,
-  ["<leader>qc"] = {"<cmd>cclose<cr>" , "Close quickfix window" , {mode = n, noremap = true} } ,
+  ["<leader>q"]  = {name = "+quickfix"}, 
+  ["<leader>ql"] = {"<cmd>cfirst <bar> while 1 <bar> cnext <bar> endwhile <cr>" , "Load all file from quickfix window" , {mode = 'n', noremap = true} } ,
+  ["<leader>qc"] = {"<cmd>cclose<cr>" , "Close quickfix window" , {mode = 'n', noremap = true} } ,
 })
+
+vim.keymap.set('n', '<leader>sr',[[<esc>:%s/<C-R><C-W>//g<Left><Left><BackSpace>/]], { desc = "Search & replace word under cursor"})
+vim.keymap.set('v', '<leader>sr',[[y<esc>:%s/<C-R>0//g<Left><Left><BackSpace>/]], { desc = "Search & replace selected"})
+vim.keymap.set('n', '<leader>sR',[[<esc>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/]], { desc = "Search & replace WORD under cursor"})
+vim.keymap.set('n', "<leader>sl", [[<esc>:%s/.*<C-R><C-W>.*//g<Left><Left><BackSpace>/]] ,{desc = "Search & replace line containing word under cursor"} )
+
+vim.keymap.set('n', "<leader>scR" , [[<esc>:%s/\C\<<C-R><C-W>\>//g<Left><Left><BackSpace>/]] ,{desc = "Search & replace WORD under cursor case sensitive"} )
+vim.keymap.set('n', "<leader>scr" , [[<esc>:%s/\C<C-R><C-W>//g<Left><Left><BackSpace>/]]     ,{desc = "Search & replace word under cursor case sensitive"}  )     
+vim.keymap.set('v', "<leader>scr" , [[y<esc>:%s/\C<C-R>0//g<Left><Left><BackSpace>/]]        ,{desc = "Search & replace selected case sensitive", })
+vim.keymap.set('n', "<leader>scl" , [[<esc>:%s/\C.*<C-R><C-W>.*//g<Left><Left><BackSpace>/]] ,{desc = "Search & replace line containing word under cursor case sensitive"}) 
 
 EOF
 
