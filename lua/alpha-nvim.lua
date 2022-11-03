@@ -23,6 +23,16 @@ local function footer()
   return datetime .. ' ' .. plugins
 end
 
+local function get_last_session()
+  local dir = require("possession.config").session_dir 
+  local session_name=''
+  -- how to get last???
+  for file in io.popen('dir '.. dir .. '\\*.json /b /od'):lines()  do 
+    session_name = string.gsub(file, '.json', '')
+  end
+  return session_name
+end
+
 local version = vim.version()
 local icon_color = "Function"
 
@@ -56,7 +66,7 @@ dashboard.section.buttons.val = {
   --{ type = "padding", val = 1 },
   dashboard.button('e'          , "  New File                  " , ':ene <BAR> startinsert <CR>'                 )  ,                
   dashboard.button('d'          , "  Delphi                    " , ':so ~/delphi-dev.vim | PossessionLoad delphi-dev<CR>' )  ,                
-  dashboard.button('r'          , "  Reload Last Session       " , ':PossessionLoad <CR>'                         )  ,                
+  dashboard.button('r'          , "  Reload Last Session       " , ':PossessionLoad '..get_last_session()..'<CR>')  ,                
   dashboard.button('<leader>tr' , "  Recently Opened Files     " , ':Telescope oldfiles<CR>'                     )  ,                
   dashboard.button('o'          , "  Open Project              " , ':Telescope possession list<CR>' ),                
   dashboard.button('<leader>ta' , "  Jump to Bookmark          " , ':Telescope marks<CR>'                        )  ,                

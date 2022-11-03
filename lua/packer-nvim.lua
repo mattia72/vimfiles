@@ -115,7 +115,6 @@ require("packer").startup({
     --
     -- Edit helpers with mappings
     --
-    use {'svermeulen/vim-subversive'}                        -- m move objects
     use {'tpope/vim-repeat'}                                 -- repeats eg. surround mappings
     use {'preservim/nerdcommenter'}                          -- ,c<space>
     use {'tpope/vim-surround'}                               -- s
@@ -189,13 +188,6 @@ auto_session_run()
 
 local wk = require("which-key")
 
----- --------------------------------------------
--- vim-subversive
--- --------------------------------------------
-wk.register({ ["<leader>s"] = { name = "+subversive" }, -- optional group name
-  ["<leader>s"] = { "<plug>(SubversiveSubstituteRange)" , "Subversive replace" , {mode = n, noremap = true} } ,
-  ["<leader>s"] = { "<plug>(SubversiveSubstituteRange)" , "Subversive replace" , {mode = x, noremap = true} } ,
-})
 ---- --------------------------------------------
 -- packer
 -- --------------------------------------------

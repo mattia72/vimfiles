@@ -1,6 +1,6 @@
 
 require('possession').setup {
-  session_dir = vim.fn.stdpath('data')..'/possession',
+  session_dir = vim.fn.stdpath('data')..'\\possession',
   silent = false,
   load_silent = true,
   debug = false,
@@ -40,8 +40,8 @@ require('possession').setup {
     },
     delete_hidden_buffers = {
       hooks = {
-        'before_load',
-        vim.o.sessionoptions:match('buffer') and 'before_save',
+        --'before_load',
+        --vim.o.sessionoptions:match('buffer') and 'before_save',
       },
       force = false,  -- or fun(buf): boolean
     },

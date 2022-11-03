@@ -1,5 +1,22 @@
 local function asyncrun_indicator()
-  return vim.g.asyncrun_status or ''
+  if vim.g.asyncrun_status == 'failure' then
+    return 'ﮙ'
+  elseif vim.g.asyncrun_status == 'success' then
+    return 'ﮚ'
+  elseif vim.g.asyncrun_status == 'running' then
+    return ''
+  else  
+    return ''
+  end
+end
+
+local function session_name()
+  local sn = require('possession.session').session_name or ''
+  if sn then
+    return ' '..sn
+  else
+    return ' no session'
+  end
 end
 
 require("lualine").setup({
@@ -33,6 +50,7 @@ require("lualine").setup({
     },
     lualine_x = {
       asyncrun_indicator,
+      session_name,
       "encoding",
       {
         "fileformat",
