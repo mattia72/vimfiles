@@ -32,7 +32,8 @@ require("packer").startup({
 
     -- Show undo history visually
     use {'simnalamburt/vim-mundo', cmd = {"MundoToggle", "MundoShow"}}
-    use {'qpkorr/vim-bufkill'    , cmd = {'BD', 'BB', 'BF', 'BW '}}--delete buffer without closing window :BD, BW, BF, BB
+    --delete buffer without closing window :BD, BW, BF, BB
+    use {'qpkorr/vim-bufkill'} --cmd = {'BD', 'BB', 'BF', 'BW '}} -- doesn't work properly if lazy loaded.
 
     use {'rcarriga/nvim-notify'}
     -- auto-completion engine
@@ -115,12 +116,13 @@ require("packer").startup({
     --
     -- Edit helpers with mappings
     --
-    use {'tpope/vim-repeat'}                                 -- repeats eg. surround mappings
-    use {'preservim/nerdcommenter'}                          -- ,c<space>
-    use {'tpope/vim-surround'}                               -- s
-    use {'godlygeek/tabular', cmd =  'Tabularize', run = ':cabbrev tabi Tabularize'}                      -- creating tables
-    use {'tpope/vim-abolish' , cmd = 'S'}           -- :%S/facilit{y, ies}/building{, s}/g
-    use {'tommcdo/vim-exchange'}                              -- exchange word: cxiw <move> . line: cxx<move>.
+    use {'tpope/vim-repeat'}                       -- repeats eg. surround mappings
+    use {'preservim/nerdcommenter'}                -- ,c<space>
+    use {'tpope/vim-surround'}                     -- s
+    use {'godlygeek/tabular', cmd =  'Tabularize'} -- creating tables
+    use {'tpope/vim-abolish' , cmd = 'S'}          -- :%S/facilit{y, ies}/building{, s}/g
+    use {'tommcdo/vim-exchange'}                   -- exchange word: cxiw <move> . line: cxx<move>.
+    use {'svermeulen/vim-cutlass'}                 -- delete doesn't affect yank
 
     -- 
     -- Filetype helpers
@@ -231,3 +233,13 @@ wk.register({
   ["<leader>tm"] = { function() require('telescope.builtin').keymaps()        end            , "Telescope Mappings"             , noremap=true }           ,
   ["<leader>ts"] = { "<cmd>Telescope possession list<cr>"                                    , "Telescope Sessions"             , noremap=true }           ,
 })
+
+-- --------------------------------------------
+-- vim-cutlass
+-- --------------------------------------------
+vim.keymap.set('n' , 'x'  , 'd'  , {desc= 'Move text to yank'})
+vim.keymap.set('x' , 'x'  , 'd'  , {desc= 'Move text to yank'}) 
+vim.keymap.set('n' , 'xx' , 'dd' , {desc= 'Move line to yank'})
+vim.keymap.set('n' , 'X'  , 'D'  , {desc= 'Move text until eol to yank'})
+
+

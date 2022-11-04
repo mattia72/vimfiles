@@ -1,11 +1,11 @@
 
 local _M = {}
 
-function _M.notify_info(msg, title)
+function _M.notify_info(title, msg)
   require('notify')(msg,'info', {timeout=2000, title=title})
 end
  
-function _M.create_cmd(args)
+function _M.create_cmd_with_notify(args)
   setmetatable(args,{__index={opts={nargs=0, bang=true}}})
   vim.api.nvim_create_user_command(args.name,
     function(opts)

@@ -94,9 +94,6 @@ nnoremap <leader>dt :diffthis<CR>:vnew<CR>
 " Diff jumps
 nnoremap <leader>dk [c
 nnoremap <leader>dj ]c
-" Spell jumps: next previous error
-nnoremap <leader>sp [s
-nnoremap <leader>sn ]s
 " Fast editing of the vimrc
 noremap <leader>vi :tabnew! $MYVIMRC<cr>
 " jump to tag
@@ -250,6 +247,9 @@ vim.keymap.set('n', "<leader>scR" , [[<esc>:%s/\C\<<C-R><C-W>\>//g<Left><Left><B
 vim.keymap.set('n', "<leader>scr" , [[<esc>:%s/\C<C-R><C-W>//g<Left><Left><BackSpace>/]]     ,{desc = "Search & replace word under cursor case sensitive"}  )     
 vim.keymap.set('v', "<leader>scr" , [[y<esc>:%s/\C<C-R>0//g<Left><Left><BackSpace>/]]        ,{desc = "Search & replace selected case sensitive", })
 vim.keymap.set('n', "<leader>scl" , [[<esc>:%s/\C.*<C-R><C-W>.*//g<Left><Left><BackSpace>/]] ,{desc = "Search & replace line containing word under cursor case sensitive"}) 
+
+vim.keymap.set('n','<leader>sp', '[s', {desc= 'Spell jump previous error'})
+vim.keymap.set('n','<leader>sn', ']s', {desc= 'Spell jump previous error'})
 
 EOF
 

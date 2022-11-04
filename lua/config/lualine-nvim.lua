@@ -15,7 +15,7 @@ local function session_name()
   if sn then
     return ' '..sn
   else
-    return ' no session'
+    return ' not in session'
   end
 end
 
@@ -25,8 +25,6 @@ require("lualine").setup({
     theme = "auto",
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    section_separators = "",
-    component_separators = "",
     disabled_filetypes = {},
     always_divide_middle = true,
   },
