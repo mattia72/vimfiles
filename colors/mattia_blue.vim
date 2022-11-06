@@ -131,7 +131,11 @@ hi FoldColumn      guifg=#588F7C guibg=#000000
 hi Folded          guifg=#588F7C guibg=#000000
 hi IncSearch       guifg=#F6DE89 guibg=#000000
 
-hi MatchParen      guifg=#000000 guibg=#FD971F gui=bold
+"hi clear MatchParen
+hi MatchParen      guifg=#000000 guibg=#f55385  
+"hi MatchParen      cterm=underline gui=underline
+hi MatchParenCur   guifg=#000000 guibg=#f55385  
+hi MatchWordCur    cterm=underline gui=underline
 hi ModeMsg         guifg=#E6DB74
 
 " complete menu
