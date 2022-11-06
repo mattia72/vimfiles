@@ -16,6 +16,14 @@ function _M.create_cmd_with_notify(args)
   )
 end
 
+function _M.get_last_modified_in_dir(dir, file_pattern)
+  local last_modified
+  for file in io.popen('dir '.. dir .. '\\'..file_pattern..' /b /od'):lines()  do 
+    last_modified  = file
+  end
+  return last_modified
+end
+
 function _M.table_count(tbl, cond)
   local count = 0
   local count_cond = 0

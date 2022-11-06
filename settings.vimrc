@@ -122,7 +122,9 @@ if &t_Co > 2
   syntax on
 endif
 
-if exists('g:fvim_loaded')
+let g:loaded_matchit = 1
+
+if exists('g:fvim_loaded') "Cross platform Neovim front-end UI
     FVimCursorSmoothMove v:true
     FVimCursorSmoothBlink v:true
     FVimKeyAltGr v:true

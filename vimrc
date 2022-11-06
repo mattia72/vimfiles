@@ -38,8 +38,11 @@ endif
 source common.vim
 source settings.vimrc
 source autocmds.vimrc
-"source vimplug.vimrc
-lua require('packer-nvim')
+if has('nvim') 
+  lua require('packer-nvim')
+else
+  source vimplug.vimrc
+endif
 source mappings.vimrc
 source colors.vimrc
 

@@ -183,14 +183,6 @@ nnoremap <C-x> <C-x>
 "handled by mswin.vim
 "nnoremap <C-A> ggVG 
 "
-" autocomplete parenthesis, (brackets) and braces
-"inoremap  (  ()<Left>
-"inoremap  [  []<Left>
-"inoremap  {  {}<Left>
-" surround selected text
-vnoremap  (  s()<Esc>P<Right>%
-vnoremap  [  s[]<Esc>P<Right>%
-vnoremap  {  s{}<Esc>P<Right>%
 
 " Helptags should be rebuild if doc changed
 nnoremap <leader>ht :Helptags<CR>
@@ -250,6 +242,15 @@ vim.keymap.set('n', "<leader>scl" , [[<esc>:%s/\C.*<C-R><C-W>.*//g<Left><Left><B
 
 vim.keymap.set('n','<leader>sp', '[s', {desc= 'Spell jump previous error'})
 vim.keymap.set('n','<leader>sn', ']s', {desc= 'Spell jump previous error'})
+
+-- autocomplete parenthesis, (brackets) and braces
+--inoremap  (  ()<Left>
+--inoremap  [  []<Left>
+--inoremap  {  {}<Left>
+-- surround selected text
+vim.keymap.set('v' , '(' , 's()<Esc>P<Right>%' , {desc = 'Surround selected text'})
+vim.keymap.set('v' , '[' , 's[]<Esc>P<Right>%' , {desc = 'Surround selected text'})
+vim.keymap.set('v' , '{' , 's{}<Esc>P<Right>%' , {desc = 'Surround selected text'})
 
 EOF
 

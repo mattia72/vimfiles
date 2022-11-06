@@ -2,6 +2,8 @@
 -- lua config file for telescope 
 --
 
+local fb_actions = require 'telescope'.extensions.file_browser.actions
+
 require('telescope').setup{
   defaults = {
     vimgrep_arguments = {
@@ -13,13 +15,13 @@ require('telescope').setup{
       '--column',
       '--smart-case'
     },
-    prompt_prefix = "(help:<c-h>)> ",
-    selection_caret = "> ",
-    entry_prefix = "  ",
-    initial_mode = "insert",
-    selection_strategy = "closest", --"reset",
-    sorting_strategy = "descending",
-    layout_strategy = "horizontal",
+    prompt_prefix = '(help:<c-h>)> ',
+    selection_caret = '> ',
+    entry_prefix = '  ',
+    initial_mode = 'insert',
+    selection_strategy = 'closest', --"reset",
+    sorting_strategy = 'descending',
+    layout_strategy = 'horizontal',
     layout_config = {
       horizontal = {
         mirror = false,
@@ -46,15 +48,32 @@ require('telescope').setup{
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
     mappings = {
       n = {
-        ['<c-h>'] = "which_key",
-    	  ['<c-d>'] = require('telescope.actions').delete_buffer
+        ['<c-h>'] = 'which_key',
+    	  ['<c-d>'] = require('telescope.actions').delete_buffer,
       }, -- n
       i = {
-        ['<c-h>'] = "which_key",
-        ['<c-d>'] = require('telescope.actions').delete_buffer
+        ['<c-h>'] = 'which_key',
+        ['<c-d>'] = require('telescope.actions').delete_buffer,
       } -- i
-    } -- mappings
-  }
+    }, -- mappings
+  },
+  extensions = {
+    file_browser = {
+      theme = "ivy",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+          -- your custom insert mode mappings
+        n = {
+          ['<c-h>'] = 'which_key',
+        },
+        i = {
+          ['<c-h>'] = 'which_key',
+          ['<leader>h>'] = fb_actions.goto_home_dir,
+        },
+      },
+    },
+  },
 }
 
  -- "nnoremap <leader>fg :Telescope live_grep prompt_prefix=🔍 <CR>

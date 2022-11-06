@@ -14,37 +14,38 @@ local packer_bootstrap = ensure_packer()
 
 -- the plugin install follows from here
 
-require("packer").startup({
+require('packer').startup({
   function(use)
-    -- speed up loading lua modules it is recommened to put impatient.nvim before any other plugins
+    -- speed up loading lua modules 
+    -- put impatient.nvim before any other plugins
     use {'lewis6991/impatient.nvim', config = [[require('impatient')]]}
+
     use({"wbthomason/packer.nvim", opt = true})
-    -- showing keybindings
-    use {"folke/which-key.nvim", event = "VimEnter", 
-    config = function() vim.defer_fn(function() require('config.which-key') end, 2000) end }
-    -- icons for several plugins
-    use {'kyazdani42/nvim-web-devicons', event = 'VimEnter'}
     -- startup screen
     use {'goolord/alpha-nvim', requires = {'kyazdani42/nvim-web-devicons'}, config = [[require('alpha-nvim')]] }
-    use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}, config = [[require('telescope-nvim')]]}
 
-    use { "skywind3000/asyncrun.vim", cmd = { "AsyncRun" }}
+    --
+    -- Telescope
+    --
+    use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}, 
+      config = function() require('telescope-nvim') end,
+    }
+    use {'nvim-telescope/telescope-project.nvim',  requires = {'nvim-telescope/telescope.nvim'},}
+    use {'nvim-telescope/telescope-file-browser.nvim', requires = {'nvim-telescope/telescope.nvim'},}
 
-    -- Show undo history visually
-    use {'simnalamburt/vim-mundo', cmd = {"MundoToggle", "MundoShow"}}
-    --delete buffer without closing window :BD, BW, BF, BB
-    use {'qpkorr/vim-bufkill'} --cmd = {'BD', 'BB', 'BF', 'BW '}} -- doesn't work properly if lazy loaded.
-
-    use {'rcarriga/nvim-notify'}
+    --
     -- auto-completion engine
+    --
+    use {'p00f/nvim-ts-rainbow', require={'nvim-treesitter'}} -- scoop install tree-sitter
+    use {'nvim-treesitter/nvim-treesitter', event = 'BufEnter', run = ":TSUpdate", config = [[require('config.nvim-treesitter')]] }
     use {
-      "hrsh7th/nvim-cmp",      -- scoop install python
-      event = "InsertEnter",
+      'hrsh7th/nvim-cmp',      -- scoop install python
+      event = 'InsertEnter',
       opt = true,
       config = function()
-        require("config.nvim-cmp").setup()
+        require('config.nvim-cmp').setup()
       end,
-      wants = { "LuaSnip" },
+      wants = { 'LuaSnip' },
       requires = {
         'neovim/nvim-lspconfig', -- +
         'onsails/lspkind-nvim', --+
@@ -85,32 +86,40 @@ require("packer").startup({
       disable = false,
     }
 
-    -- nvim-cmp completion sources
-
+    --
+    -- Gui
+    --
+    use {"folke/which-key.nvim", event = "VimEnter", -- showing keybindings
+      config = function() vim.defer_fn(function() require('config.which-key') end, 2000) end 
+    }
+    use {'kyazdani42/nvim-web-devicons', event = 'VimEnter'} -- eg. :stew: icons for several plugins
     use {'nvim-lualine/lualine.nvim', event = 'VimEnter', config = [[require('config.lualine-nvim')]] }
     use {'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons'}, config = [[require('config.nvim-tree')]]} -- tag = 'nightly' -- optional, updated every week. (see issue #1193) }
     use {'chentoast/marks.nvim', config = [[require('config.marks-nvim')]]}
-    use {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
-
-    use {'p00f/nvim-ts-rainbow', require={'nvim-treesitter'}} -- scoop install tree-sitter
-    use {'nvim-treesitter/nvim-treesitter', event = 'BufEnter', run = ":TSUpdate", config = [[require('config.nvim-treesitter')]] }
+    use {'rcarriga/nvim-notify'}
 
     --
-    -- Sessions
+    -- Sessions, views
     --
     use {'jedrzejboczar/possession.nvim', requires = { 'nvim-lua/plenary.nvim' },
       config = function() require("config.possession") end
     }
+    use {'Shatur/neovim-session-manager', requires = { 'nvim-lua/plenary.nvim' },
+      config = function() require("config.neovim-session-manager") end
+    }
+    use {'zhimsel/vim-stay'} --auto view creation
 
-    use {'tpope/vim-fugitive'}                     -- git wrapper
-    use {'mileszs/ack.vim', cmd = 'Ack'} -- the better grep
+    --
+    -- Git
+    --
+    use {'tpope/vim-fugitive', cmd={'G'}} -- git wrapper
 
     --
     -- Moving helpers with mappings
     --
     use {'Lokaltog/vim-easymotion'} -- ,,w
     use {'justinmk/vim-sneak'}      -- s<char><char> than ; or s to the next
-    use {'andymass/vim-matchup'}    -- modern matchit and matchparen replacement, even better % navigate and highlight matching words
+    use {'andymass/vim-matchup'}    -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
     use {'yssl/QFEnter'}            -- QFEnter allows you to open items from quickfix or location list wherever you wish.
 
     --
@@ -119,10 +128,16 @@ require("packer").startup({
     use {'tpope/vim-repeat'}                       -- repeats eg. surround mappings
     use {'preservim/nerdcommenter'}                -- ,c<space>
     use {'tpope/vim-surround'}                     -- s
-    use {'godlygeek/tabular', cmd =  'Tabularize'} -- creating tables
-    use {'tpope/vim-abolish' , cmd = 'S'}          -- :%S/facilit{y, ies}/building{, s}/g
+    use {'godlygeek/tabular', cmd ={'Tabularize'}} -- creating tables
     use {'tommcdo/vim-exchange'}                   -- exchange word: cxiw <move> . line: cxx<move>.
-    use {'svermeulen/vim-cutlass'}                 -- delete doesn't affect yank
+    use {'svermeulen/vim-cutlass'}                 -- x remapped!!!, d doesn't affect yank
+    use {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
+
+    -- 
+    -- Search / replace
+    --
+    use {'mileszs/ack.vim'   , cmd = { 'Ack'}} -- the better grep
+    use {'tpope/vim-abolish' , cmd = { 'S'}}   -- :%S/facilit{y , ies}/building{ , s}/g
 
     -- 
     -- Filetype helpers
@@ -132,23 +147,31 @@ require("packer").startup({
     use {'kchmck/vim-coffee-script'     , ft = {'coffe'}}
     --use {'zigford/vim-powershell'       , ft = {'ps1', 'psm1'}}
     use {'PProvost/vim-ps1'             , ft = {'ps1', 'psm1'}}
+    use {'euclidianAce/BetterLua.vim'   , ft = {'lua'}}
     
+    --
+    -- Command helpers
+    --
+    use { 'skywind3000/asyncrun.vim', cmd = { 'AsyncRun' }}
+    use {'simnalamburt/vim-mundo', cmd = {'MundoToggle', 'MundoShow'}} -- Show undo history visually
+    use {'qpkorr/vim-bufkill'} --cmd = {'BD', 'BB', 'BF', 'BW '}} -- buffer without closing window :BD, BW, BF, BB doesn't work properly if lazy loaded.
+
     --
     -- My own plugins
     --
     --use  'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
     use {'~/dev/vim/vim-delphi'     , ft = {'delphi'}}
-    use {'~/dev/vim/vim-ripgrep'    , cmd = 'RipGrep'}
-    use {'~/dev/vim/vim-copy-as-rtf', cmd = 'CopyRTF'}
+    use {'~/dev/vim/vim-ripgrep'    , cmd ={ 'RipGrep'}}
+    use {'~/dev/vim/vim-copy-as-rtf', cmd ={ 'CopyRTF'}}
 
     use {'vim-scripts/genutils', opt= true}
-    use {'albfan/vim-breakpts', require = {'genutils'}, cmd = 'BreakPts' }
-    use {'h1mesuke/vim-unittest', cmd= 'UnitTest',
+    use {'albfan/vim-breakpts', require = {'genutils'}, cmd = {'BreakPts' }}
+    use {'h1mesuke/vim-unittest', cmd={ 'UnitTest'},
       run = function() vim.cmd([[
         nnoremap <leader>su :wa <bar> UnitTest<CR>
         nnoremap <F5> :wa <bar> UnitTest<CR>
         ]])end}
-    use {'vim-scripts/Decho'    , cmd= 'Decho'}
+    use {'vim-scripts/Decho'    , cmd={ 'Decho'}}
 
     -- Automatically set up your confiration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -205,6 +228,7 @@ wk.register({ ["<leader>p"] = { name = "+packer" }, -- optional group name
 wk.register({ ["<leader>n"] = { name = "+nvim-tree" }, -- optional group name
   ["<leader>nt"]  = { "<cmd>NvimTreeFindFileToggle!<cr>"   , "NvimTree Toggle"   , noremap = true } ,
 })
+
 -- --------------------------------------------
 -- bufkill 
 -- --------------------------------------------
@@ -220,18 +244,22 @@ wk.register({ ["<leader>b"] = { name = "+bufkill" }, -- optional group name
 -- --------------------------------------------
 -- Telescope
 -- --------------------------------------------
-require('telescope').load_extension('possession')
+local telescope = require('telescope')
+telescope.load_extension('possession')
+telescope.load_extension "file_browser"
 wk.register({ 
   ["<leader>t"] = { name = "+telescope" }, -- optional group name
   --a = { function() require('telescope.builtin').grep_string({use_regex=true}) end, "Telescope Grep String Under Cursor" , noremap=true } ,
-  ["<leader>tf"] = { "<cmd>Telescope find_files<cr>"                                         , "Telescope Find File"            , noremap=true }           ,
-  ["<leader>tr"] = { "<cmd>Telescope oldfiles<cr>"                                           , "Telescope Open Recent File"     , noremap=true }           ,
   ["<leader>ta"] = { "<cmd>Telescope marks<cr>"                                              , "Telescope Browse Bookmarks"     , noremap=true }           ,
   ["<leader>tb"] = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true } ,
+  ["<leader>tf"] = { "<cmd>Telescope find_files<cr>"                                         , "Telescope Find File"            , noremap=true }           ,
   ["<leader>tg"] = { function() require('telescope.builtin').live_grep({use_regex=true}) end , "Telescope Live Grep"            , noremap=true }           ,
   ["<leader>th"] = { "<cmd>Telescope help_tags<cr>"                                          , "Telescope Help"                 , noremap=true }           ,
   ["<leader>tm"] = { function() require('telescope.builtin').keymaps()        end            , "Telescope Mappings"             , noremap=true }           ,
+  ["<leader>tp"] = { function() require('telescope').extensions.project.project{} end        , "Telescope Projects"             , noremap=true }           ,
+  ["<leader>tr"] = { "<cmd>Telescope oldfiles<cr>"                                           , "Telescope Open Recent File"     , noremap=true }           ,
   ["<leader>ts"] = { "<cmd>Telescope possession list<cr>"                                    , "Telescope Sessions"             , noremap=true }           ,
+  ["<leader>tl"] = { "<cmd>Telescope file_browser<cr>"                                    , "Telescope Sessions"             , noremap=true }           ,
 })
 
 -- --------------------------------------------
@@ -241,5 +269,11 @@ vim.keymap.set('n' , 'x'  , 'd'  , {desc= 'Move text to yank'})
 vim.keymap.set('x' , 'x'  , 'd'  , {desc= 'Move text to yank'}) 
 vim.keymap.set('n' , 'xx' , 'dd' , {desc= 'Move line to yank'})
 vim.keymap.set('n' , 'X'  , 'D'  , {desc= 'Move text until eol to yank'})
+
+-- --------------------------------------------
+-- vim-matchup
+-- --------------------------------------------
+vim.keymap.set('n' , '<leader>m'  , '<plug>(matchup-hi-surround)', {desc= 'Highlight surrounding'})
+vim.g.matchup_matchparen_deferred = 1
 
 

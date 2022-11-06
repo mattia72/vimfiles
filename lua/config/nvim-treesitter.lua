@@ -32,6 +32,11 @@ require('nvim-treesitter.configs').setup {
       -- colors = {}, -- table of hex strings
       -- termcolors = {} -- table of colour name strings
     }
-  }
+  },
+  matchup = {
+    enable = true,              -- mandatory, false will disable the whole extension
+    -- disable = { "c", "ruby" },  -- optional, list of language that will be disabled
+    include_match_words = true,
+  },
 }
 require 'nvim-treesitter.install'.compilers = { "gcc"} --,  "clang" }

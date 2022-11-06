@@ -25,12 +25,8 @@ end
 
 local function get_last_session()
   local dir = require("possession.config").session_dir 
-  local session_name=''
-  -- how to get last???
-  for file in io.popen('dir '.. dir .. '\\*.json /b /od'):lines()  do 
-    session_name = string.gsub(file, '.json', '')
-  end
-  return session_name
+  local file = require('utils').get_last_modified_in_dir(dir, '*.json')
+  return string.gsub(file, '.json', '')
 end
 
 local version = vim.version()
