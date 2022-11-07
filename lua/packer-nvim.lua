@@ -53,7 +53,7 @@ require('packer').startup({
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lua',
         'ray-x/cmp-treesitter',
-        --"hrsh7th/cmp-nvim-lsp",
+        'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-cmdline',
         'saadparwaiz1/cmp_luasnip',
         'hrsh7th/cmp-calc',
@@ -72,6 +72,7 @@ require('packer').startup({
     }
     use {
       'ms-jpq/coq_nvim',
+      commit = '84ec5fa', --last working commit: https://github.com/ms-jpq/coq_nvim/issues/522
       branch = 'coq',
       event = 'InsertEnter',
       opt = true,
