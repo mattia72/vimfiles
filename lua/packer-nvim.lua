@@ -38,8 +38,7 @@ require('packer').startup({
     --
     use {'p00f/nvim-ts-rainbow', require={'nvim-treesitter'}} -- scoop install tree-sitter
     use {'nvim-treesitter/nvim-treesitter', event = 'BufEnter', run = ":TSUpdate", config = [[require('config.nvim-treesitter')]] }
-    use {
-      'hrsh7th/nvim-cmp',      -- scoop install python
+    use {'hrsh7th/nvim-cmp',      -- scoop install python
       event = 'InsertEnter',
       opt = true,
       config = function()
@@ -47,9 +46,9 @@ require('packer').startup({
       end,
       wants = { 'LuaSnip' },
       requires = {
-        'neovim/nvim-lspconfig', -- +
-        'onsails/lspkind-nvim', --+
-        'hrsh7th/cmp-buffer', -- nvim-cmp completion sources
+        'neovim/nvim-lspconfig',
+        'onsails/lspkind-nvim',
+        'hrsh7th/cmp-buffer',    -- nvim-cmp completion sources
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lua',
         'ray-x/cmp-treesitter',
@@ -189,92 +188,163 @@ require('packer').startup({
   --  },
 })
 
+local function key_mappings()
+  vim.cmd [[packadd which-key.nvim]]
+
+  local wk = require("which-key")
+
+-- --------------------------------------------
+-- possession
+-- --------------------------------------------
+  require("which-key").register({ 
+    ["<leader>a"] = { name = "+possession" }, 
+    ["<leader>as"] = { "<cmd>PossessionSave!<cr>" , "Possession Save"    , noremap = true } ,
+    ["<leader>ar"] = { "<cmd>PossessionLoad<cr>"  , "Possession Restore" , noremap = true } ,
+  })
+
+-- --------------------------------------------
+-- packer
+-- --------------------------------------------
+  wk.register({ ["<leader>p"] = { name = "+packer" }, -- optional group name
+    ["<leader>pi"] = { "<cmd>PackerInstall<cr>" , "Packer Install" , noremap = true } ,
+    ["<leader>pc"] = { "<cmd>PackerCompile<cr>" , "Packer Compile" , noremap = true } ,
+    ["<leader>ps"] = { "<cmd>PackerStatus<cr>"  , "Packer Status"  , noremap = true } ,
+    ["<leader>pu"] = { "<cmd>PackerUpdate<cr>"  , "Packer Update"  , noremap = true } ,
+  })
+
+-- --------------------------------------------
+-- nvim-tree
+-- --------------------------------------------
+  wk.register({ ["<leader>n"] = { name = "+nvim-tree" }, -- optional group name
+    ["<leader>nt"]  = { "<cmd>NvimTreeFindFileToggle!<cr>"   , "NvimTree Toggle"   , noremap = true } ,
+  })
+
+-- --------------------------------------------
+-- bufkill 
+-- --------------------------------------------
+  wk.register({ ["<leader>b"] = { name = "+bufkill" }, -- optional group name
+    ["<leader>bk"]  = { "<cmd>BD<cr>"           , "Delete Buffer"                  , noremap = true } ,
+    ["<leader>bka"] = { "<cmd>bufdo BD<cr>"     , "Delete All Buffer"              , noremap = true } ,
+    ["<leader>bp"]  = { "<cmd>BB<cr>"           , "Previous Buffer"                , noremap = true } ,
+    ["<leader>bn"]  = { "<cmd>BF<cr>"           , "Next Buffer"                    , noremap = true } ,
+    ["<leader>bc"]  = { "<cmd>ls<cr>:b<space>"  , "Buffer Change (with tab compl)" , noremap = true } ,
+    ["<leader>bs"]  = { "<cmd>ls<cr>:sb<space>" , "Buffer Split (with tab compl)"  , noremap = true } ,
+  })
+
+  -- --------------------------------------------
+  -- Telescope
+  -- --------------------------------------------
+  local telescope = require('telescope')
+  telescope.load_extension('possession')
+  telescope.load_extension "file_browser"
+  wk.register({ 
+    ["<leader>t"] = { name = "+telescope" }, -- optional group name
+    --a = { function() require('telescope.builtin').grep_string({use_regex=true}) end, "Telescope Grep String Under Cursor" , noremap=true } ,
+    ["<leader>ta"] = { "<cmd>Telescope marks<cr>"                                              , "Telescope Browse Bookmarks"     , noremap=true }           ,
+    ["<leader>tb"] = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true } ,
+    ["<leader>tf"] = { "<cmd>Telescope find_files<cr>"                                         , "Telescope Find File"            , noremap=true }           ,
+    ["<leader>tg"] = { function() require('telescope.builtin').live_grep({use_regex=true}) end , "Telescope Live Grep"            , noremap=true }           ,
+    ["<leader>th"] = { "<cmd>Telescope help_tags<cr>"                                          , "Telescope Help"                 , noremap=true }           ,
+    ["<leader>tm"] = { function() require('telescope.builtin').keymaps()        end            , "Telescope Mappings"             , noremap=true }           ,
+    ["<leader>tp"] = { function() require('telescope').extensions.project.project{} end        , "Telescope Projects"             , noremap=true }           ,
+    ["<leader>tr"] = { "<cmd>Telescope oldfiles<cr>"                                           , "Telescope Open Recent File"     , noremap=true }           ,
+    ["<leader>ts"] = { "<cmd>Telescope possession list<cr>"                                    , "Telescope Sessions"             , noremap=true }           ,
+    ["<leader>tl"] = { "<cmd>Telescope file_browser<cr>"                                    , "Telescope Sessions"             , noremap=true }           ,
+  })
+
+  -- --------------------------------------------
+  -- vim-cutlass
+  -- --------------------------------------------
+  vim.keymap.set('n' , 'x'  , 'd'  , {desc= 'Move text to yank'})
+  vim.keymap.set('x' , 'x'  , 'd'  , {desc= 'Move text to yank'}) 
+  vim.keymap.set('n' , 'xx' , 'dd' , {desc= 'Move line to yank'})
+  vim.keymap.set('n' , 'X'  , 'D'  , {desc= 'Move text until eol to yank'})
+
+  -- --------------------------------------------
+  -- vim-matchup
+  -- --------------------------------------------
+  vim.keymap.set('n' , '<leader>m'  , '<plug>(matchup-hi-surround)', {desc= 'Highlight surrounding'})
+  vim.g.matchup_matchparen_deferred = 1
+  
+  -- --------------------------------------------
+  -- nvim-lspconfig  https://github.com/neovim/nvim-lspconfig/blob/master/test/minimal_init.lua#L36
+  -- --------------------------------------------
+  -- Mappings.
+  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+  local opts = { noremap=true, silent=true }
+  vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+  -- Use an on_attach function to only map the following keys
+  -- after the language server attaches to the current buffer
+  local on_attach = function(client, bufnr)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  end
+
+  local lsp_flags = {
+    debounce_text_changes = 150, -- This is the default in Nvim 0.7+
+  }
+
+  vim.cmd [[packadd nvim-lspconfig]]
+  require('lspconfig')['sumneko_lua'].setup{  -- scoop install lua-language-server
+    on_attach = on_attach,
+    flags = lsp_flags,
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  }
+
+end --function key_mappings  
+
+
+local packer_group = vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.cmd([[
   augroup packer_user_config
   autocmd!
   autocmd BufWritePost packer-nvim.lua source <afile> | PackerCompile
   augroup end
   ]])
+--vim.api.nvim_create_autocmd('User', { pattern = 'PackerComplete', callback = key_mappings, group = packer_group, once = true })
 
--- --------------------------------------------
--- auto-session
--- --------------------------------------------
-auto_session_run = function()
-  local utils = require('utils')
-  vim.cmd [[packadd which-key.nvim]]
-  require("which-key").register({ 
-    ["<leader>a"] = { name = "+possession" }, 
-    ["<leader>as"] = { "<cmd>PossessionSave!<cr>" , "Possession Save"    , noremap = true } ,
-    ["<leader>ar"] = { "<cmd>PossessionLoad<cr>"  , "Possession Restore" , noremap = true } ,
-  })
-end
-
-vim.cmd [[packadd which-key.nvim]]
-auto_session_run()
-
-local wk = require("which-key")
-
----- --------------------------------------------
--- packer
--- --------------------------------------------
-wk.register({ ["<leader>p"] = { name = "+packer" }, -- optional group name
-  ["<leader>pi"] = { "<cmd>PackerInstall<cr>" , "Packer Install" , noremap = true } ,
-  ["<leader>pc"] = { "<cmd>PackerCompile<cr>" , "Packer Compile" , noremap = true } ,
-  ["<leader>ps"] = { "<cmd>PackerStatus<cr>"  , "Packer Status"  , noremap = true } ,
-  ["<leader>pu"] = { "<cmd>PackerUpdate<cr>"  , "Packer Update"  , noremap = true } ,
-})
--- --------------------------------------------
--- nvim-tree
--- --------------------------------------------
-wk.register({ ["<leader>n"] = { name = "+nvim-tree" }, -- optional group name
-  ["<leader>nt"]  = { "<cmd>NvimTreeFindFileToggle!<cr>"   , "NvimTree Toggle"   , noremap = true } ,
-})
-
--- --------------------------------------------
--- bufkill 
--- --------------------------------------------
-wk.register({ ["<leader>b"] = { name = "+bufkill" }, -- optional group name
-  ["<leader>bk"]  = { "<cmd>BD<cr>"           , "Delete Buffer"                  , noremap = true } ,
-  ["<leader>bka"] = { "<cmd>bufdo BD<cr>"     , "Delete All Buffer"              , noremap = true } ,
-  ["<leader>bp"]  = { "<cmd>BB<cr>"           , "Previous Buffer"                , noremap = true } ,
-  ["<leader>bn"]  = { "<cmd>BF<cr>"           , "Next Buffer"                    , noremap = true } ,
-  ["<leader>bc"]  = { "<cmd>ls<cr>:b<space>"  , "Buffer Change (with tab compl)" , noremap = true } ,
-  ["<leader>bs"]  = { "<cmd>ls<cr>:sb<space>" , "Buffer Split (with tab compl)"  , noremap = true } ,
-  })
-
--- --------------------------------------------
--- Telescope
--- --------------------------------------------
-local telescope = require('telescope')
-telescope.load_extension('possession')
-telescope.load_extension "file_browser"
-wk.register({ 
-  ["<leader>t"] = { name = "+telescope" }, -- optional group name
-  --a = { function() require('telescope.builtin').grep_string({use_regex=true}) end, "Telescope Grep String Under Cursor" , noremap=true } ,
-  ["<leader>ta"] = { "<cmd>Telescope marks<cr>"                                              , "Telescope Browse Bookmarks"     , noremap=true }           ,
-  ["<leader>tb"] = { function() require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true}) end , "Telescope Open Buffers" , noremap=true } ,
-  ["<leader>tf"] = { "<cmd>Telescope find_files<cr>"                                         , "Telescope Find File"            , noremap=true }           ,
-  ["<leader>tg"] = { function() require('telescope.builtin').live_grep({use_regex=true}) end , "Telescope Live Grep"            , noremap=true }           ,
-  ["<leader>th"] = { "<cmd>Telescope help_tags<cr>"                                          , "Telescope Help"                 , noremap=true }           ,
-  ["<leader>tm"] = { function() require('telescope.builtin').keymaps()        end            , "Telescope Mappings"             , noremap=true }           ,
-  ["<leader>tp"] = { function() require('telescope').extensions.project.project{} end        , "Telescope Projects"             , noremap=true }           ,
-  ["<leader>tr"] = { "<cmd>Telescope oldfiles<cr>"                                           , "Telescope Open Recent File"     , noremap=true }           ,
-  ["<leader>ts"] = { "<cmd>Telescope possession list<cr>"                                    , "Telescope Sessions"             , noremap=true }           ,
-  ["<leader>tl"] = { "<cmd>Telescope file_browser<cr>"                                    , "Telescope Sessions"             , noremap=true }           ,
-})
-
--- --------------------------------------------
--- vim-cutlass
--- --------------------------------------------
-vim.keymap.set('n' , 'x'  , 'd'  , {desc= 'Move text to yank'})
-vim.keymap.set('x' , 'x'  , 'd'  , {desc= 'Move text to yank'}) 
-vim.keymap.set('n' , 'xx' , 'dd' , {desc= 'Move line to yank'})
-vim.keymap.set('n' , 'X'  , 'D'  , {desc= 'Move text until eol to yank'})
-
--- --------------------------------------------
--- vim-matchup
--- --------------------------------------------
-vim.keymap.set('n' , '<leader>m'  , '<plug>(matchup-hi-surround)', {desc= 'Highlight surrounding'})
-vim.g.matchup_matchparen_deferred = 1
+key_mappings()
 
 
