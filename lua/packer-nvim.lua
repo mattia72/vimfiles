@@ -27,7 +27,7 @@ require('packer').startup({
     --
     -- Telescope
     --
-    use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}, 
+    use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'},
       config = function() require('telescope-nvim') end,
     }
     use {'nvim-telescope/telescope-project.nvim',  requires = {'nvim-telescope/telescope.nvim'},}
@@ -148,7 +148,7 @@ require('packer').startup({
     --use {'zigford/vim-powershell'       , ft = {'ps1', 'psm1'}}
     use {'PProvost/vim-ps1'             , ft = {'ps1', 'psm1'}}
     use {'euclidianAce/BetterLua.vim'   , ft = {'lua'}}
-    
+
     --
     -- Command helpers
     --
