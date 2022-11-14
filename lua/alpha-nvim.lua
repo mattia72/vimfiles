@@ -3,19 +3,18 @@
 --
 
 local function footer()
-  local plugin_count = 0;
+  local plugin_count = '';
 
   if packer_plugins ~= nil then
     local u = require('utils')
-    count, count_cond = u.table_count(packer_plugins, function(val) return val.loaded end)
+    local count, count_cond = u.table_count(packer_plugins, function(val) return val.loaded end)
     plugin_count = count_cond..'/'..count
   else if  vim.g.plugs ~= nil then
     --plugin_count = vim.call('len', vim.g.plugs)
-    plugin_count = #vim.g.plugs
+    plugin_count = ''..#vim.g.plugs
     end
   end
   local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
-  local version = vim.version()
   --local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
   local plugins  =  " neovim loaded " .. plugin_count .. " plugins."
 
@@ -24,13 +23,12 @@ local function footer()
 end
 
 local function get_last_session()
-  local dir = require("possession.config").session_dir 
+  local dir = require("possession.config").session_dir
   local file = require('utils').get_last_modified_in_dir(dir, '*.json')
   return string.gsub(file, '.json', '')
 end
 
 local version = vim.version()
-local icon_color = "Function"
 
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
@@ -56,22 +54,21 @@ dashboard.section.header.val = {
 }
 --dashboard.section.header.opts.hl = 'PreProc'
 dashboard.section.header.opts.hl = 'Comment'
-                                          
 dashboard.section.buttons.val = {
   --{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
   --{ type = "padding", val = 1 },
-  dashboard.button('e'          , "  New File                  " , ':ene <BAR> startinsert <CR>'                 )  ,                
-  dashboard.button('d'          , "  Delphi                    " , ':so ~/delphi-dev.vim | PossessionLoad delphi-dev<CR>' )  ,                
-  dashboard.button('r'          , "  Reload Last Session       " , ':PossessionLoad '..get_last_session()..'<CR>')  ,                
-  dashboard.button('<leader>tr' , "  Recently Opened Files     " , ':Telescope oldfiles<CR>'                     )  ,                
-  dashboard.button('o'          , "  Open Project              " , ':Telescope possession list<CR>' ),                
-  dashboard.button('<leader>ta' , "  Jump to Bookmark          " , ':Telescope marks<CR>'                        )  ,                
-  dashboard.button('<leader>tf' , "  Find File                 " , ':Telescope find_files<CR>'                   )  ,                
-  dashboard.button('<leader>tg' , "  Find Word                 " , ':Telescope live_grep<CR>'                    )  ,                
-  dashboard.button('<leader>th' , "  Search Help               " , ':Telescope help_tags<CR>'                    )  ,                
-  dashboard.button('<leader>vi' , "  Open Neovim Configuration " , ':tabnew! $MYVIMRC<CR>'                       )  ,                
-  dashboard.button('q'          , "⏻  Quit                      " , ':q<CR>'                                      )  ,                
-}                                                                                                                     
+  dashboard.button('e'          , "  New File                  " , ':ene <BAR> startinsert <CR>'                 )  ,
+  dashboard.button('d'          , "  Delphi                    " , ':so ~/delphi-dev.vim | PossessionLoad delphi-dev<CR>' ) ,
+  dashboard.button('r'          , "  Reload Last Session       " , ':PossessionLoad '..get_last_session()..'<CR>')  ,
+  dashboard.button('<leader>tr' , "  Recently Opened Files     " , ':Telescope oldfiles<CR>'                     )  ,
+  dashboard.button('o'          , "  Open Project              " , ':Telescope possession list<CR>'              )  ,
+  dashboard.button('<leader>ta' , "  Jump to Bookmark          " , ':Telescope marks<CR>'                        )  ,
+  dashboard.button('<leader>tf' , "  Find File                 " , ':Telescope find_files<CR>'                   )  ,
+  dashboard.button('<leader>tg' , "  Find Word                 " , ':Telescope live_grep<CR>'                    )  ,
+  dashboard.button('<leader>th' , "  Search Help               " , ':Telescope help_tags<CR>'                    )  ,
+  dashboard.button('<leader>vi' , "  Open Neovim Configuration " , ':tabnew! $MYVIMRC<CR>'                       )  ,
+  dashboard.button('q'          , "⏻  Quit                      " , ':q<CR>'                                      )  ,
+}
 dashboard.section.buttons.opts.hl_shortcut = 'Title'
 
 dashboard.section.footer.val = footer()

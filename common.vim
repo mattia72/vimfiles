@@ -17,17 +17,11 @@ endfunction
 
 function! g:common#MyEchoStatus(...)
   let msg = join(a:000[1:]) " slice first 
-  "echom 'cnt: '.a:0
-  "echom 'pre: '.a:1
-  "echom 'msg: '.msg
   call common#MyEchoHlMessage('StatusLineNC', a:1, msg)
 endfunction
 
 function! g:common#MyEchoModeMsg(...)
   let msg = join(a:000[1:]) " slice first 
-  "echom 'cnt: '.a:0
-  "echom 'pre: '.a:1
-  "echom 'msg: '.msg
   call common#MyEchoHlMessage('ModeMsg', a:1, msg)
 endfunction
 

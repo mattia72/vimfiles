@@ -1,0 +1,29 @@
+{
+  "languageserver" : {
+    "vimls": {
+      "command": "vim-language-server",
+      "args": ["--stdio"],
+      "initializationOptions": {
+        "isNeovim": true,
+        "iskeyword": "@,48-57,_,192-255,-#", 
+        "vimruntime": "C:\\home\\mata\\scoop\\apps\\neovim\\current\\share\\nvim\\runtime",
+        "runtimepath": "",
+        "diagnostic": {
+          "enable": true
+        },
+        "indexes": {
+          "runtimepath": true,
+          "gap": 100,
+          "count": 3, 
+          "projectRootPatterns" : [] 
+        },
+        "suggest": {
+          "fromVimruntime": true,   
+          "fromRuntimepath": false  
+        }
+      },
+      "filetypes": [ "vim" ] 
+    }
+  }
+}
+

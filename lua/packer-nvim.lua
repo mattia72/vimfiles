@@ -34,11 +34,12 @@ require('packer').startup({
     use {'nvim-telescope/telescope-file-browser.nvim', requires = {'nvim-telescope/telescope.nvim'},}
 
     --
-    -- auto-completion engine
+    -- auto-completion engines
     --
-    use {'p00f/nvim-ts-rainbow', require={'nvim-treesitter'}} -- scoop install tree-sitter
+    use {'neoclide/coc.nvim', branch = 'release'}               -- scoop install nodejs | CocInstall coc-vimlsp
+    use {'p00f/nvim-ts-rainbow', require={'nvim-treesitter'}}   -- scoop install tree-sitter
     use {'nvim-treesitter/nvim-treesitter', event = 'BufEnter', run = ":TSUpdate", config = [[require('config.nvim-treesitter')]] }
-    use {'hrsh7th/nvim-cmp',      -- scoop install python
+    use {'hrsh7th/nvim-cmp',                                    -- scoop install python
       event = 'InsertEnter',
       opt = true,
       config = function()
@@ -90,7 +91,7 @@ require('packer').startup({
     -- Gui
     --
     use {"folke/which-key.nvim", event = "VimEnter", -- showing keybindings
-      config = function() vim.defer_fn(function() require('config.which-key') end, 2000) end 
+      config = function() vim.defer_fn(function() require('config.which-key') end, 2000) end
     }
     use {'kyazdani42/nvim-web-devicons', event = 'VimEnter'} -- eg. :stew: icons for several plugins
     use {'nvim-lualine/lualine.nvim', event = 'VimEnter', config = [[require('config.lualine-nvim')]] }
@@ -196,8 +197,8 @@ local function key_mappings()
 -- --------------------------------------------
 -- possession
 -- --------------------------------------------
-  require("which-key").register({ 
-    ["<leader>a"] = { name = "+possession" }, 
+  require("which-key").register({
+    ["<leader>a"] = { name = "+possession" },
     ["<leader>as"] = { "<cmd>PossessionSave!<cr>" , "Possession Save"    , noremap = true } ,
     ["<leader>ar"] = { "<cmd>PossessionLoad<cr>"  , "Possession Restore" , noremap = true } ,
   })
@@ -237,7 +238,7 @@ local function key_mappings()
   local telescope = require('telescope')
   telescope.load_extension('possession')
   telescope.load_extension "file_browser"
-  wk.register({ 
+  wk.register({
     ["<leader>t"] = { name = "+telescope" }, -- optional group name
     --a = { function() require('telescope.builtin').grep_string({use_regex=true}) end, "Telescope Grep String Under Cursor" , noremap=true } ,
     ["<leader>ta"] = { "<cmd>Telescope marks<cr>"                                              , "Telescope Browse Bookmarks"     , noremap=true }           ,
@@ -256,7 +257,7 @@ local function key_mappings()
   -- vim-cutlass
   -- --------------------------------------------
   vim.keymap.set('n' , 'x'  , 'd'  , {desc= 'Move text to yank'})
-  vim.keymap.set('x' , 'x'  , 'd'  , {desc= 'Move text to yank'}) 
+  vim.keymap.set('x' , 'x'  , 'd'  , {desc= 'Move text to yank'})
   vim.keymap.set('n' , 'xx' , 'dd' , {desc= 'Move line to yank'})
   vim.keymap.set('n' , 'X'  , 'D'  , {desc= 'Move text until eol to yank'})
 
@@ -265,17 +266,23 @@ local function key_mappings()
   -- --------------------------------------------
   vim.keymap.set('n' , '<leader>m'  , '<plug>(matchup-hi-surround)', {desc= 'Highlight surrounding'})
   vim.g.matchup_matchparen_deferred = 1
-  
+
   -- --------------------------------------------
   -- nvim-lspconfig  https://github.com/neovim/nvim-lspconfig/blob/master/test/minimal_init.lua#L36
   -- --------------------------------------------
   -- Mappings.
   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+  local function opts_desc(opts, desc)
+    opts.desc = desc
+    return  opts
+  end
+
   local opts = { noremap=true, silent=true }
-  vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+  vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float, opts_desc(opts, 'Open floating window'))
+  vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, opts_desc(opts, 'Previous diagnostic msg'))
+  vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, opts_desc(opts, 'Next diagnostic msg'))
+  vim.keymap.set('n', '<leader>da', vim.diagnostic.setloclist, opts_desc(opts, 'Diagnostic location list'))
 
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
@@ -286,21 +293,21 @@ local function key_mappings()
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts_desc(bufopts,'Goto declaration'))
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts_desc(bufopts,'Goto definition'))
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts_desc(bufopts,'Goto definition'))
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts_desc(bufopts,'Goto definition'))
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts_desc(bufopts,'Sinature help'))
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts_desc(bufopts,'Goto definition'))
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts_desc(bufopts,'Goto definition'))
     vim.keymap.set('n', '<space>wl', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+    end, opts_desc(bufopts,'Goto definition'))
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts_desc(bufopts,'Type definition'))
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts_desc(bufopts,'Rename'))
+    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts_desc(bufopts,'Code action'))
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts_desc(bufopts,'References'))
+    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, opts_desc(bufopts,'Format '))
   end
 
   local lsp_flags = {
@@ -336,14 +343,14 @@ local function key_mappings()
 end --function key_mappings  
 
 
-local packer_group = vim.api.nvim_create_augroup('packer_user_config', { clear = true })
+--local packer_group = vim.api.nvim_create_augroup('packer_user_config', { clear = true })
+--vim.api.nvim_create_autocmd('User', { pattern = 'PackerComplete', callback = key_mappings, group = packer_group, once = true })
 vim.cmd([[
   augroup packer_user_config
   autocmd!
   autocmd BufWritePost packer-nvim.lua source <afile> | PackerCompile
   augroup end
   ]])
---vim.api.nvim_create_autocmd('User', { pattern = 'PackerComplete', callback = key_mappings, group = packer_group, once = true })
 
 key_mappings()
 

@@ -92,12 +92,15 @@ nnoremap <leader>ds :vertical diffsplit
 " Diff this with other 
 nnoremap <leader>dt :diffthis<CR>:vnew<CR>
 " Diff jumps
-nnoremap <leader>dk [c
-nnoremap <leader>dj ]c
+if &diff
+  nnoremap <leader>dk [c
+  nnoremap <leader>dj ]c
+endif
 " Fast editing of the vimrc
 noremap <leader>vi :tabnew! $MYVIMRC<cr>
+
 " jump to tag
-nnoremap <leader>j <C-]>
+nnoremap <leader>jt <C-]>
 
 " find all word under cursor in the current directory
 nnoremap <leader>fa <ESC>:RipGrep -w <C-R><C-W> %<Left><Left>
