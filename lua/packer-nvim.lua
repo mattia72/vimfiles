@@ -153,7 +153,7 @@ require('packer').startup({
     --
     -- Command helpers
     --
-    use { 'skywind3000/asyncrun.vim', cmd = { 'AsyncRun' }}
+    use { 'skywind3000/asyncrun.vim'} --, cmd = { 'AsyncRun' }}
     use {'simnalamburt/vim-mundo', cmd = {'MundoToggle', 'MundoShow'}} -- Show undo history visually
     use {'qpkorr/vim-bufkill'} --cmd = {'BD', 'BB', 'BF', 'BW '}} -- buffer without closing window :BD, BW, BF, BB doesn't work properly if lazy loaded.
 
@@ -162,7 +162,7 @@ require('packer').startup({
     --
     --use  'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
     use {'~/dev/vim/vim-delphi'     , ft = {'delphi'}}
-    use {'~/dev/vim/vim-ripgrep'    , cmd ={ 'RipGrep'}}
+    use {'~/dev/vim/vim-ripgrep'} --    , cmd ={ 'RipGrep'}}
     use {'~/dev/vim/vim-copy-as-rtf', cmd ={ 'CopyRTF'}}
 
     use {'vim-scripts/genutils', opt= true}
