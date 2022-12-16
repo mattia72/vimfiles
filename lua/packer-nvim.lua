@@ -133,6 +133,7 @@ require('packer').startup({
     use {'tommcdo/vim-exchange'}                   -- exchange word: cxiw <move> . line: cxx<move>.
     use {'svermeulen/vim-cutlass'}                 -- x remapped!!!, d doesn't affect yank
     use {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
+    use { 'wellle/targets.vim' }                   -- more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
 
     -- 
     -- Search / replace
