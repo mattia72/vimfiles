@@ -72,7 +72,7 @@ require('packer').startup({
     }
     use {
       'ms-jpq/coq_nvim',
-      commit = '84ec5fa', --last working commit: https://github.com/ms-jpq/coq_nvim/issues/522
+      --commit = '84ec5fa', --last working commit: https://github.com/ms-jpq/coq_nvim/issues/522
       branch = 'coq',
       event = 'InsertEnter',
       opt = true,
@@ -118,8 +118,11 @@ require('packer').startup({
     --
     -- Moving helpers with mappings
     --
-    use {'Lokaltog/vim-easymotion'} -- ,,w
-    use {'justinmk/vim-sneak'}      -- s<char><char> than ; or s to the next
+    --use {'Lokaltog/vim-easymotion'} -- ,,w
+    --use {'justinmk/vim-sneak'}      -- s<char><char> than ; or s to the next
+
+    use {'ggandor/lightspeed.nvim'} --  s<char><char> or s<char><space>... 
+
     use {'andymass/vim-matchup'}    -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
     use {'yssl/QFEnter'}            -- QFEnter allows you to open items from quickfix or location list wherever you wish.
 
@@ -139,6 +142,7 @@ require('packer').startup({
     --
     use {'mileszs/ack.vim'   , cmd = { 'Ack'}} -- the better grep
     use {'tpope/vim-abolish' , cmd = { 'S'}}   -- :%S/facilit{y , ies}/building{ , s}/g
+    use {'nvim-pack/nvim-spectre'}
 
     -- 
     -- Filetype helpers
@@ -230,6 +234,13 @@ local function key_mappings()
     ["<leader>bn"]  = { "<cmd>BF<cr>"           , "Next Buffer"                    , noremap = true } ,
     ["<leader>bc"]  = { "<cmd>ls<cr>:b<space>"  , "Buffer Change (with tab compl)" , noremap = true } ,
     ["<leader>bs"]  = { "<cmd>ls<cr>:sb<space>" , "Buffer Split (with tab compl)"  , noremap = true } ,
+  })
+
+-- --------------------------------------------
+-- spectre 
+-- --------------------------------------------
+  wk.register({ ["<leader>S"] = { name = "+spectre" }, -- optional group name
+    ["<leader>Sw"]  = { function() require('spectre').open_visual({open_cmd = 'new', select_word=true}) end , "Search & Replace Word under cursor with spectre" , noremap = true } ,
   })
 
   -- --------------------------------------------
