@@ -1,6 +1,6 @@
 
 --  my vim-delphi syntax is better?
-require('nvim-treesitter.parsers').filetype_to_parsername["delphi"]="pascal" 
+require('nvim-treesitter.parsers').filetype_to_parsername["delphi"]="pascal"
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = {"vim", "lua"}, --, "c", "lua", "rust" }, -- A list of parser names, or "all"
