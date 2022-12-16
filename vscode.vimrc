@@ -77,22 +77,38 @@ if !exists('g:loaded_plug')
   exec 'source '.expand('$XDG_CONFIG_HOME/nvim/autoload/plug.vim')
 endif
 
-call plug#begin(expand('$XDG_CONFIG_HOME/nvim/plugged/'))
-" Run :PlugUpgrade for upgrade Plug itself
-Plug 'junegunn/vim-plug'
-Plug 'tpope/vim-surround'
-Plug 'asvetliakov/vim-easymotion'
-Plug 'godlygeek/tabular'          , { 'on' : 'Tabularize' } " creating tables
-Plug 'justinmk/vim-sneak'         " s<char><char> than ; or s to the next
-Plug 'wellle/targets.vim'         " more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
+lua << EOF
+require('packer').startup({
+  function(use)
 
-" languages?
-Plug 'vim-scripts/xml.vim'          , {'for': ['xml']}
-Plug 'vim-scripts/perl-support.vim' , {'for': ['perl']}
-"Plug 'kchmck/vim-coffee-script'    , {'for': ['coffe']}
-"Plug 'zigford/vim-powershell'       , {'for': ['ps1', 'psm1']}
-Plug 'PProvost/vim-ps1'             , {'for': ['ps1', 'psm1']}
-" Plug 'vim-scripts/MatchTag'       , {'for': ['html']}                " highlight html tag pairs
-" Plug  '~\dev\vim\vim-ripgrep'
+    use {'tpope/vim-surround'}                     -- s
+    use {'Lokaltog/vim-easymotion'} -- ,,w
+    use {'justinmk/vim-sneak'}      -- s<char><char> than ; or s to the next
+    use {'andymass/vim-matchup'}    -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
 
-call plug#end()
+    use {'godlygeek/tabular', cmd ={'Tabularize'}} -- creating tables
+    use { 'wellle/targets.vim' }                   -- more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
+
+    use {'vim-scripts/xml.vim'          , ft = {'xml'}}
+    use {'vim-scripts/perl-support.vim' , ft = {'perl'}}
+    use {'kchmck/vim-coffee-script'     , ft = {'coffe'}}
+    --use {'zigford/vim-powershell'       , ft = {'ps1', 'psm1'}}
+    use {'PProvost/vim-ps1'             , ft = {'ps1', 'psm1'}}
+    use {'euclidianAce/BetterLua.vim'   , ft = {'lua'}}
+
+    use {'~/dev/vim/vim-ripgrep'} --    , cmd ={ 'RipGrep'}}
+
+    -- Automatically set up your confiration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if packer_bootstrap then
+      require('packer').sync()
+    end
+  end--,
+})
+
+  vim.keymap.set('n' , 'x'  , 'd'  , {desc= 'Move text to yank'})
+  vim.keymap.set('x' , 'x'  , 'd'  , {desc= 'Move text to yank'})
+  vim.keymap.set('n' , 'xx' , 'dd' , {desc= 'Move line to yank'})
+  vim.keymap.set('n' , 'X'  , 'D'  , {desc= 'Move text until eol to yank'})
+
+EOF
