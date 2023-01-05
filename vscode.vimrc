@@ -81,21 +81,36 @@ lua << EOF
 require('packer').startup({
   function(use)
 
-    use {'tpope/vim-surround'}                     -- s
-    use {'Lokaltog/vim-easymotion'} -- ,,w
-    use {'justinmk/vim-sneak'}      -- s<char><char> than ; or s to the next
+    --
+    -- Moving helpers with mappings
+    --
+    use {'ggandor/lightspeed.nvim'} --  s<char><char> or s<char><space>... 
     use {'andymass/vim-matchup'}    -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
 
+    --
+    -- Edit helpers with mappings
+    --
+    use {'tpope/vim-repeat'}                       -- repeats eg. surround mappings
+    use {'preservim/nerdcommenter'}                -- ,c<space>
+    use {'tpope/vim-surround'}                     -- s
     use {'godlygeek/tabular', cmd ={'Tabularize'}} -- creating tables
+    use {'tommcdo/vim-exchange'}                   -- exchange word: cxiw <move> . line: cxx<move>.
+    use {'svermeulen/vim-cutlass'}                 -- x remapped!!!, d doesn't affect yank
+    use {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
     use { 'wellle/targets.vim' }                   -- more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
 
+    -- 
+    -- Filetype helpers
+    --
     use {'vim-scripts/xml.vim'          , ft = {'xml'}}
     use {'vim-scripts/perl-support.vim' , ft = {'perl'}}
     use {'kchmck/vim-coffee-script'     , ft = {'coffe'}}
-    --use {'zigford/vim-powershell'       , ft = {'ps1', 'psm1'}}
     use {'PProvost/vim-ps1'             , ft = {'ps1', 'psm1'}}
     use {'euclidianAce/BetterLua.vim'   , ft = {'lua'}}
 
+    -- 
+    -- Search / replace
+    --
     use {'~/dev/vim/vim-ripgrep'} --    , cmd ={ 'RipGrep'}}
 
     -- Automatically set up your confiration after cloning packer.nvim

@@ -23,7 +23,41 @@
         }
       },
       "filetypes": [ "vim" ] 
-    }
+    },
+
+    "lsp-ahk2": {
+			"module": "C:\\home\\mata\\scoop\\persist\\vscode\\data\\extensions\\thqby.vscode-autohotkey2-lsp-1.8.3\\server\\dist\\server.js",
+			"filetypes": ["autohotkey"],
+			"args": ["--node-ipc"],
+			"initializationOptions": {
+        "locale": "en-us", 
+				"AutoLibInclude": "Disabled", // or "Local" or "User and Standard" or "All"
+				"CommentTags": "^;;\\s*(?<tag>.+)",
+				"CompleteFunctionParens": false,
+				"Diagnostics": {
+					"ClassStaticMemberCheck": true,
+					"ParamsCheck": true
+				},
+				"ActionWhenV1IsDetected": "Continue",
+				"FormatOptions": {
+					"break_chained_methods": false,
+					"ignore_comment": false,
+					"indent_string": "\t",
+					"keep_array_indentation": true,
+					"max_preserve_newlines": 2,
+					"one_true_brace": "1", // or "0" or "-1"
+					"preserve_newlines": true,
+					"space_before_conditional": true,
+					"space_in_empty_paren": false,
+					"space_in_other": true,
+					"space_in_paren": false,
+					"wrap_line_length": 0
+				},
+				"InterpreterPath": "c:\\home\\mata\\apps\\autohotkey\\current\\v2\\AutoHotkey64.exe",
+				"WorkingDirs": [],
+				"SymbolFoldingFromOpenBrace": false
+			}
+		}    
   }
 }
 

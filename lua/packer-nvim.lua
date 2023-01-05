@@ -20,8 +20,98 @@ require('packer').startup({
     -- put impatient.nvim before any other plugins
     use {'lewis6991/impatient.nvim', config = [[require('impatient')]]}
 
-    use({"wbthomason/packer.nvim", opt = true})
+    use {"wbthomason/packer.nvim", opt = true}
+
+    --
+    -- LSP Configuration & Plugins-
+    --
+
+    use {'neovim/nvim-lspconfig',
+    requires = {
+      -- Automatically install LSPs to stdpath for neovim
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP
+      'j-hui/fidget.nvim',
+
+      -- Additional lua configuration, makes nvim stuff amazing
+      'folke/neodev.nvim',
+      }
+    }
+
+    --
+    -- Autocompletion
+    --
+    use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' } }
+    --
+    -- Highlight, edit, and navigate code
+    --
+    use { 'nvim-treesitter/nvim-treesitter',
+    run = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
+    }
+    --
+    -- Additional text objects via treesitter
+    --
+    use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter'}
+    --
+    -- auto-completion engines
+    --
+    --use {'neoclide/coc.nvim', branch = 'release'}               -- scoop install nodejs | CocInstall coc-vimlsp
+    ----use {'p00f/nvim-ts-rainbow', require={'nvim-treesitter'}}   -- scoop install tree-sitter
+    --use {'nvim-treesitter/nvim-treesitter', event = 'BufEnter', run = ":TSUpdate", config = [[require('config.nvim-treesitter')]] }
+    --use {'hrsh7th/nvim-cmp',                                    -- scoop install python
+      --event = 'InsertEnter',
+      --opt = true,
+      --config = function()
+        --require('config.nvim-cmp').setup()
+      --end,
+      --wants = { 'LuaSnip' },
+      --requires = {
+        --'onsails/lspkind-nvim',
+        --'hrsh7th/cmp-buffer',    -- nvim-cmp completion sources
+        --'hrsh7th/cmp-path',
+        --'hrsh7th/cmp-nvim-lua',
+        --'ray-x/cmp-treesitter',
+        --'hrsh7th/cmp-nvim-lsp',
+        --'hrsh7th/cmp-cmdline',
+        --'saadparwaiz1/cmp_luasnip',
+        --'hrsh7th/cmp-calc',
+        --'f3fora/cmp-spell',
+        --'hrsh7th/cmp-emoji',
+        --{
+          --'L3MON4D3/LuaSnip',
+          --wants = 'friendly-snippets',
+          --config = function()
+            --require('config.luasnip').setup()
+          --end,
+        --},
+        --'rafamadriz/friendly-snippets',
+        --disable = false,
+      --},
+    --}
+    --use {
+      --'ms-jpq/coq_nvim',
+      ----commit = '84ec5fa', --last working commit: https://github.com/ms-jpq/coq_nvim/issues/522
+      --branch = 'coq',
+      --event = 'InsertEnter',
+      --opt = true,
+      --run = ':COQdeps',
+      --config = function()
+        --require('config.coq').setup()
+      --end,
+      --requires = {
+        --{ 'ms-jpq/coq.artifacts', branch = "artifacts" },
+        --{ 'ms-jpq/coq.thirdparty', branch = "3p", module = "coq_3p" },
+      --},
+      --disable = false,
+    --}
+
+    --
     -- startup screen
+    --
     use {'goolord/alpha-nvim', requires = {'kyazdani42/nvim-web-devicons'}, config = [[require('alpha-nvim')]] }
 
     --
@@ -32,60 +122,6 @@ require('packer').startup({
     }
     use {'nvim-telescope/telescope-project.nvim',  requires = {'nvim-telescope/telescope.nvim'},}
     use {'nvim-telescope/telescope-file-browser.nvim', requires = {'nvim-telescope/telescope.nvim'},}
-
-    --
-    -- auto-completion engines
-    --
-    use {'neoclide/coc.nvim', branch = 'release'}               -- scoop install nodejs | CocInstall coc-vimlsp
-    use {'p00f/nvim-ts-rainbow', require={'nvim-treesitter'}}   -- scoop install tree-sitter
-    use {'nvim-treesitter/nvim-treesitter', event = 'BufEnter', run = ":TSUpdate", config = [[require('config.nvim-treesitter')]] }
-    use {'hrsh7th/nvim-cmp',                                    -- scoop install python
-      event = 'InsertEnter',
-      opt = true,
-      config = function()
-        require('config.nvim-cmp').setup()
-      end,
-      wants = { 'LuaSnip' },
-      requires = {
-        'neovim/nvim-lspconfig',
-        'onsails/lspkind-nvim',
-        'hrsh7th/cmp-buffer',    -- nvim-cmp completion sources
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-nvim-lua',
-        'ray-x/cmp-treesitter',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-cmdline',
-        'saadparwaiz1/cmp_luasnip',
-        'hrsh7th/cmp-calc',
-        'f3fora/cmp-spell',
-        'hrsh7th/cmp-emoji',
-        {
-          'L3MON4D3/LuaSnip',
-          wants = 'friendly-snippets',
-          config = function()
-            require('config.luasnip').setup()
-          end,
-        },
-        'rafamadriz/friendly-snippets',
-        disable = false,
-      },
-    }
-    use {
-      'ms-jpq/coq_nvim',
-      --commit = '84ec5fa', --last working commit: https://github.com/ms-jpq/coq_nvim/issues/522
-      branch = 'coq',
-      event = 'InsertEnter',
-      opt = true,
-      run = ':COQdeps',
-      config = function()
-        require('config.coq').setup()
-      end,
-      requires = {
-        { 'ms-jpq/coq.artifacts', branch = "artifacts" },
-        { 'ms-jpq/coq.thirdparty', branch = "3p", module = "coq_3p" },
-      },
-      disable = false,
-    }
 
     --
     -- Gui
@@ -120,7 +156,6 @@ require('packer').startup({
     --
     --use {'Lokaltog/vim-easymotion'} -- ,,w
     --use {'justinmk/vim-sneak'}      -- s<char><char> than ; or s to the next
-
     use {'ggandor/lightspeed.nvim'} --  s<char><char> or s<char><space>... 
 
     use {'andymass/vim-matchup'}    -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
@@ -322,35 +357,35 @@ local function key_mappings()
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, opts_desc(bufopts,'Format '))
   end
 
-  local lsp_flags = {
-    debounce_text_changes = 150, -- This is the default in Nvim 0.7+
-  }
+  --local lsp_flags = {
+    --debounce_text_changes = 150, -- This is the default in Nvim 0.7+
+  --}
 
-  vim.cmd [[packadd nvim-lspconfig]]
-  require('lspconfig')['sumneko_lua'].setup{  -- scoop install lua-language-server
-    on_attach = on_attach,
-    flags = lsp_flags,
-    settings = {
-      Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          version = 'LuaJIT',
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {'vim'},
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file("", true),
-        },
-        -- Do not send telemetry data containing a randomized but unique identifier
-        telemetry = {
-          enable = false,
-        },
-      },
-    },
-  }
+  --vim.cmd [[packadd nvim-lspconfig]]
+  --require('lspconfig')['sumneko_lua'].setup{  -- scoop install lua-language-server
+    --on_attach = on_attach,
+    --flags = lsp_flags,
+    --settings = {
+      --Lua = {
+        --runtime = {
+          ---- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          --version = 'LuaJIT',
+        --},
+        --diagnostics = {
+          ---- Get the language server to recognize the `vim` global
+          --globals = {'vim'},
+        --},
+        --workspace = {
+          ---- Make the server aware of Neovim runtime files
+          --library = vim.api.nvim_get_runtime_file("", true),
+        --},
+        ---- Do not send telemetry data containing a randomized but unique identifier
+        --telemetry = {
+          --enable = false,
+        --},
+      --},
+    --},
+  --}
 
 end --function key_mappings  
 
@@ -365,5 +400,55 @@ vim.cmd([[
   ]])
 
 key_mappings()
+
+    --
+    -- LSP Configuration & Plugins-
+    --
+--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+--  Add any additional override configuration in the following tables. They will be passed to
+--  the `settings` field of the server config. You must look up that documentation yourself.
+local servers = {
+  -- clangd = {},
+  -- gopls = {},
+  -- pyright = {},
+  -- rust_analyzer = {},
+  -- tsserver = {},
+
+  sumneko_lua = {
+    Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+    },
+  },
+}
+-- Setup neovim lua configuration
+require('neodev').setup()
+--
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+-- Setup mason so it can manage external tooling
+require('mason').setup()
+
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
+
+mason_lspconfig.setup {
+  ensure_installed = vim.tbl_keys(servers),
+}
+
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require('lspconfig')[server_name].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = servers[server_name],
+    }
+  end,
+}
+
+-- Turn on lsp status information
+require('fidget').setup()
 
 
