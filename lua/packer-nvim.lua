@@ -389,6 +389,58 @@ local function key_mappings()
 
 end --function key_mappings  
 
+--
+-- LSP Configuration & Plugins-
+--
+local function lsp_setup()
+  --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+  --  Add any additional override configuration in the following tables. They will be passed to
+  --  the `settings` field of the server config. You must look up that documentation yourself.
+  local servers = {
+    -- clangd = {},
+    -- gopls = {},
+    -- pyright = {},
+    -- rust_analyzer = {},
+    -- tsserver = {},
+
+    sumneko_lua = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
+      },
+    },
+  }
+  -- Setup neovim lua configuration
+  require('neodev').setup()
+  --
+  -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+  -- Setup mason so it can manage external tooling
+  require('mason').setup()
+
+  -- Ensure the servers above are installed
+  local mason_lspconfig = require 'mason-lspconfig'
+
+  mason_lspconfig.setup {
+    ensure_installed = vim.tbl_keys(servers),
+  }
+
+  mason_lspconfig.setup_handlers {
+    function(server_name)
+      require('lspconfig')[server_name].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = servers[server_name],
+      }
+    end,
+  }
+
+  -- Turn on lsp status information
+  require('fidget').setup()
+end
+
 
 --local packer_group = vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 --vim.api.nvim_create_autocmd('User', { pattern = 'PackerComplete', callback = key_mappings, group = packer_group, once = true })
@@ -401,54 +453,6 @@ vim.cmd([[
 
 key_mappings()
 
-    --
-    -- LSP Configuration & Plugins-
-    --
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
-local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-
-  sumneko_lua = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
-}
--- Setup neovim lua configuration
-require('neodev').setup()
---
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Setup mason so it can manage external tooling
-require('mason').setup()
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
-  end,
-}
-
--- Turn on lsp status information
-require('fidget').setup()
+lsp_setup()
 
 
