@@ -23,7 +23,8 @@
 "colors wombat256i
 
 if has("gui_running") " in nvim it should be placed in ginit.vim
-  colors mattia_blue
+  colors onedark
+  "colors mattia_blue
   "colors mattia
   "colors codedark
 else

@@ -44,12 +44,13 @@ else
   source vimplug.vimrc
 endif
 source mappings.vimrc
-source colors.vimrc
 
 " gui_running is 0 in neovim so we source gui settings from ginit.vim
 if has('gui_running') && !has('nvim') 
   source gui_settings.vimrc
 endif
+
+source colors.vimrc
 
 " for vim syntax plugin development and view handling etc.
 source additions.vimrc

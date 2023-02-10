@@ -29,7 +29,7 @@ require('packer').startup({
     use {'neovim/nvim-lspconfig',
     requires = {
       -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
+      'williamboman/mason.nvim',   -- needs wget, curl and others check :checkhealt mason
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
@@ -43,7 +43,8 @@ require('packer').startup({
     --
     -- Autocompletion
     --
-    use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' } }
+    use { 'hrsh7th/nvim-cmp', 
+      requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' } }
     --
     -- Highlight, edit, and navigate code
     --
@@ -134,7 +135,10 @@ require('packer').startup({
     use {'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons'}, config = [[require('config.nvim-tree')]]} -- tag = 'nightly' -- optional, updated every week. (see issue #1193) }
     use {'chentoast/marks.nvim', config = [[require('config.marks-nvim')]]}
     use {'rcarriga/nvim-notify'}
-
+    --
+    -- Colorscheme
+    --
+    use 'navarasu/onedark.nvim' -- Theme inspired by Atom
     --
     -- Sessions, views
     --

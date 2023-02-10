@@ -34,10 +34,8 @@ endif
 
 set listchars=eol:¬,tab:-»,trail:˙,extends:⮁,precedes:⮃,space:˙
 
-"colors codedark
-colors mattia_blue
-"colors mattia
-"colors molokai
+"source colors.vimrc
+colors onedark
 
 "autocmd ColorScheme * call g:MySetGuiCursorColor()
 "autocmd WinEnter * call g:MySetGuiCursorColor()
