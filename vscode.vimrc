@@ -52,11 +52,12 @@ nmap <leader>cc <Plug>VSCodeCommentaryLine
 " find word under cursor
 nnoremap <leader>fa :<C-u>call VSCodeNotify('actions.find', { 'query': expand('<cword>')})<CR>
 "nnoremap <leader>sr :<C-u>call VSCodeNotify('actions.find', { 'query': expand('<cword>')})<CR>
-xnoremap <leader>sr :<C-u>call <SID>showQuickReplace()<CR>  
+"xnoremap <leader>sr :<C-u>call <SID>showQuickReplace()<CR> " doesn't work 
 "nnoremap <leader>sr :<C-u>call VSCodeNotify('editor.action.startFindReplaceAction', { 'query': expand('<cword>')})<CR>
+"
 " find word under cursor in files
 nnoremap <leader>fA :<C-u>call VSCodeNotify('workbench.action.findInFiles',{ 'query': expand('<cword>')})<CR>
-nnoremap <leader>sR :<C-u>call VSCodeNotify('workbench.action.ReplaceInFiles')<CR>
+"nnoremap <leader>sR :<C-u>call VSCodeNotify('workbench.action.ReplaceInFiles')<CR> " doesn't work 
 " close active editor
 nnoremap <leader>wq :<C-u>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
 
@@ -97,7 +98,7 @@ require('packer').startup({
     use {'tommcdo/vim-exchange'}                   -- exchange word: cxiw <move> . line: cxx<move>.
     use {'svermeulen/vim-cutlass'}                 -- x remapped!!!, d doesn't affect yank
     use {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
-    use { 'wellle/targets.vim' }                   -- more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
+    use {'wellle/targets.vim' }                    -- more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
 
     -- 
     -- Filetype helpers
@@ -111,7 +112,7 @@ require('packer').startup({
     -- 
     -- Search / replace
     --
-    use {'~/dev/vim/vim-ripgrep'} --    , cmd ={ 'RipGrep'}}
+    -- use {'~/dev/vim/vim-ripgrep'} --    , cmd ={ 'RipGrep'}}
 
     -- Automatically set up your confiration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -121,9 +122,17 @@ require('packer').startup({
   end--,
 })
 
-  vim.keymap.set('n' , 'x'  , 'd'  , {desc= 'Move text to yank'})
-  vim.keymap.set('x' , 'x'  , 'd'  , {desc= 'Move text to yank'})
-  vim.keymap.set('n' , 'xx' , 'dd' , {desc= 'Move line to yank'})
-  vim.keymap.set('n' , 'X'  , 'D'  , {desc= 'Move text until eol to yank'})
+-- cutlass corrections
+vim.keymap.set('n' , 'x'  , 'd'  , {desc= 'Move text to yank'})
+vim.keymap.set('x' , 'x'  , 'd'  , {desc= 'Move text to yank'})
+vim.keymap.set('n' , 'xx' , 'dd' , {desc= 'Move line to yank'})
+vim.keymap.set('n' , 'X'  , 'D'  , {desc= 'Move text until eol to yank'})
+
+-- copy to clipboard
+vim.keymap.set('v' , '<leader>y' , "\"+y<cmd>lua require('utils').notify_info('Mappings', 'The selected text was copied to the clipboard')<cr>" , {desc = 'Copy selected text to the clipboard'})
+vim.keymap.set('n' , '<leader>Y' , "\"+yy<cmd>lua require('utils').notify_info('Mappings', 'The active line was copied to the clipboard')<cr>" , {desc = 'Copy selected text to the clipboard'})
+
+vim.keymap.set('n' , '<leader>p' , '"+p' , {desc = 'Paste text from the clipboard'})
+vim.keymap.set('v' , '<leader>p' , '"+p' , {desc = 'Paste text from the clipboard'})
 
 EOF
