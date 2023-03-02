@@ -139,6 +139,7 @@ require('packer').startup({
     -- Colorscheme
     --
     use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+    use 'morhetz/gruvbox'       -- Gruvbox is heavily inspired by badwolf, jellybeans and solarized.
     --
     -- Sessions, views
     --
