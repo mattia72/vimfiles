@@ -22,7 +22,7 @@ require('possession').setup {
     migrate = 'PossessionMigrate',
   },
   hooks = {
-    before_save = function(name) return {} end,
+    before_save = function(_) return {} end,
     after_save = function(name, user_data, aborted) require('utils').notify_info( 'Possession', 'Session '..name .. ' saved.') end,
     before_load = function(name, user_data) return user_data end,
     after_load = function(name, user_data) end,

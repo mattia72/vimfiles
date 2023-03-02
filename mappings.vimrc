@@ -109,13 +109,6 @@ nnoremap <leader>fA <ESC>:RipGrep -w <C-R><C-W>
 vnoremap <leader>fa y<ESC>:RipGrep <C-R>0 %<Left><Left>
 vnoremap <leader>fA y<ESC>:RipGrep <C-R>0
 
-
-" copy selected to clipboard
-vnoremap <leader>yy "+y:EchoModeMsg mappings The selected text was copied to clipboard.<CR>
-" paste selected to clipboard
-nnoremap <leader>pp "+p
-vnoremap <leader>pp "+p
-
 " highlight selected
 vnoremap <leader>sh y<ESC>:match Error /<C-R>0/ 
 "reload syntax
@@ -247,13 +240,25 @@ vim.keymap.set('n','<leader>sp', '[s', {desc= 'Spell jump previous error'})
 vim.keymap.set('n','<leader>sn', ']s', {desc= 'Spell jump previous error'})
 
 -- autocomplete parenthesis, (brackets) and braces
---inoremap  (  ()<Left>
---inoremap  [  []<Left>
---inoremap  {  {}<Left>
--- surround selected text
 vim.keymap.set('v' , '(' , 's()<Esc>P<Right>%' , {desc = 'Surround selected text'})
 vim.keymap.set('v' , '[' , 's[]<Esc>P<Right>%' , {desc = 'Surround selected text'})
 vim.keymap.set('v' , '{' , 's{}<Esc>P<Right>%' , {desc = 'Surround selected text'})
 
+-- copy to clipboard
+vim.keymap.set('v' , '<leader>y' , "\"+y<cmd>lua require('utils').notify_info('Mappings', 'The selected text was copied to the clipboard')<cr>" , {desc = 'Copy selected text to the clipboard'})
+vim.keymap.set('n' , '<leader>Y' , "\"+yy<cmd>lua require('utils').notify_info('Mappings', 'The active line was copied to the clipboard')<cr>" , {desc = 'Copy selected text to the clipboard'})
+
+vim.keymap.set('n' , '<leader>p' , '"+p' , {desc = 'Paste text from the clipboard'})
+vim.keymap.set('v' , '<leader>p' , '"+p' , {desc = 'Paste text from the clipboard'})
+
 EOF
+
+
+
+
+
+
+
+
+
 
