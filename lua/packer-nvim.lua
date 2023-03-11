@@ -43,7 +43,7 @@ require('packer').startup({
     --
     -- Autocompletion
     --
-    use { 'hrsh7th/nvim-cmp', 
+    use { 'hrsh7th/nvim-cmp',
       requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' } }
     --
     -- Highlight, edit, and navigate code
@@ -128,7 +128,7 @@ require('packer').startup({
     -- Gui
     --
     use {"folke/which-key.nvim", event = "VimEnter", -- showing keybindings
-      config = function() vim.defer_fn(function() require('config.which-key') end, 2000) end
+      config = function() vim.defer_fn(function() require('config.which-key') end, 2000.0) end
     }
     use {'kyazdani42/nvim-web-devicons', event = 'VimEnter'} -- eg. :stew: icons for several plugins
     use {'nvim-lualine/lualine.nvim', event = 'VimEnter', config = [[require('config.lualine-nvim')]] }
@@ -319,32 +319,52 @@ local function key_mappings()
   vim.keymap.set('n' , '<leader>m'  , '<plug>(matchup-hi-surround)', {desc= 'Highlight surrounding'})
   vim.g.matchup_matchparen_deferred = 1
 
-  -- --------------------------------------------
-  -- nvim-lspconfig  https://github.com/neovim/nvim-lspconfig/blob/master/test/minimal_init.lua#L36
-  -- --------------------------------------------
-  -- Mappings.
-  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-  local function opts_desc(opts, desc)
+end --function key_mappings  
+
+--
+-- LSP Configuration & Plugins-
+--
+local function lsp_setup()
+  --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+  --  Add any additional override configuration in the following tables. They will be passed to
+  --  the `settings` field of the server config. You must look up that documentation yourself.
+  local servers = {
+    -- clangd = {},
+    -- gopls = {},
+    -- pyright = {},
+    -- rust_analyzer = {},
+    -- tsserver = {},
+
+    lua_ls = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
+      },
+    },
+  }
+
+ local function opts_desc(opts, desc)
     opts.desc = desc
     return  opts
   end
 
   local opts = { noremap=true, silent=true }
 
-  vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float, opts_desc(opts, 'Open floating window'))
-  vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, opts_desc(opts, 'Previous diagnostic msg'))
-  vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, opts_desc(opts, 'Next diagnostic msg'))
-  vim.keymap.set('n', '<leader>da', vim.diagnostic.setloclist, opts_desc(opts, 'Diagnostic location list'))
 
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
-  local on_attach = function(client, bufnr)
+  local on_attach = function(_--[[client]], bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float, opts_desc(opts, 'Open floating window'))
+    vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, opts_desc(opts, 'Previous diagnostic msg'))
+    vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, opts_desc(opts, 'Next diagnostic msg'))
+    vim.keymap.set('n', '<leader>da', vim.diagnostic.setloclist, opts_desc(opts, 'Diagnostic location list'))
+
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts_desc(bufopts,'Goto declaration'))
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts_desc(bufopts,'Goto definition'))
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts_desc(bufopts,'Goto definition'))
@@ -365,56 +385,6 @@ local function key_mappings()
   --local lsp_flags = {
     --debounce_text_changes = 150, -- This is the default in Nvim 0.7+
   --}
-
-  --vim.cmd [[packadd nvim-lspconfig]]
-  --require('lspconfig')['sumneko_lua'].setup{  -- scoop install lua-language-server
-    --on_attach = on_attach,
-    --flags = lsp_flags,
-    --settings = {
-      --Lua = {
-        --runtime = {
-          ---- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          --version = 'LuaJIT',
-        --},
-        --diagnostics = {
-          ---- Get the language server to recognize the `vim` global
-          --globals = {'vim'},
-        --},
-        --workspace = {
-          ---- Make the server aware of Neovim runtime files
-          --library = vim.api.nvim_get_runtime_file("", true),
-        --},
-        ---- Do not send telemetry data containing a randomized but unique identifier
-        --telemetry = {
-          --enable = false,
-        --},
-      --},
-    --},
-  --}
-
-end --function key_mappings  
-
---
--- LSP Configuration & Plugins-
---
-local function lsp_setup()
-  --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-  --  Add any additional override configuration in the following tables. They will be passed to
-  --  the `settings` field of the server config. You must look up that documentation yourself.
-  local servers = {
-    -- clangd = {},
-    -- gopls = {},
-    -- pyright = {},
-    -- rust_analyzer = {},
-    -- tsserver = {},
-
-    sumneko_lua = {
-      Lua = {
-        workspace = { checkThirdParty = false },
-        telemetry = { enable = false },
-      },
-    },
-  }
   -- Setup neovim lua configuration
   require('neodev').setup()
   --
