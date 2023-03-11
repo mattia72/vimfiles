@@ -74,10 +74,6 @@ if !exists('g:init_root_dir')
 endif
 exec 'cd '.g:init_root_dir
 
-if !exists('g:loaded_plug')
-  exec 'source '.expand('$XDG_CONFIG_HOME/nvim/autoload/plug.vim')
-endif
-
 lua << EOF
 require('packer').startup({
   function(use)
