@@ -65,6 +65,10 @@ xnoremap <silent> <C-P> <Cmd>call <SID>showCommands()<CR>
 
 nnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
 xnoremap <silent> <Space> :<C-u>call <SID>openWhichKeyInVisualMode()<CR>
+
+" Keep undo/redo lists in sync with VSCode
+nnoremap <silent> u <Cmd>call VSCodeNotify('undo')<CR>
+nnoremap <silent> <C-r> <Cmd>call VSCodeNotify('redo')<CR>
 "-------------------------------------------------------------------------------
 " Plugins ...
 "-------------------------------------------------------------------------------
@@ -99,11 +103,11 @@ require('packer').startup({
     -- 
     -- Filetype helpers
     --
-    use {'vim-scripts/xml.vim'          , ft = {'xml'}}
-    use {'vim-scripts/perl-support.vim' , ft = {'perl'}}
-    use {'kchmck/vim-coffee-script'     , ft = {'coffe'}}
-    use {'PProvost/vim-ps1'             , ft = {'ps1', 'psm1'}}
-    use {'euclidianAce/BetterLua.vim'   , ft = {'lua'}}
+    --use {'vim-scripts/xml.vim'          , ft = {'xml'}}
+    --use {'vim-scripts/perl-support.vim' , ft = {'perl'}}
+    --use {'kchmck/vim-coffee-script'     , ft = {'coffe'}}
+    --use {'PProvost/vim-ps1'             , ft = {'ps1', 'psm1'}}
+    --use {'euclidianAce/BetterLua.vim'   , ft = {'lua'}}
 
     -- 
     -- Search / replace
