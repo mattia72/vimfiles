@@ -1,3 +1,9 @@
+local util = require('utils')
+
+local packer_compile_path = util.join_paths(vim.fn.stdpath('config'),
+  'lua', --not 'plugin', so not loaded automatically
+  'packer_compiled.lua')
+
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -9,11 +15,17 @@ local ensure_packer = function()
   return false
 end
 
+
 local packer_bootstrap = ensure_packer()
 
 -- the plugin install follows from here
 
-require('packer').startup({
+local packer = require('packer')
+packer.init ({
+  compile_path = packer_compile_path
+})
+
+packer.startup({
   function(use)
     -- speed up loading lua modules
     -- put impatient.nvim before any other plugins
@@ -58,7 +70,7 @@ require('packer').startup({
     --
     -- startup screen
     --
-    use { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, config = [[require('alpha-nvim')]] }
+    use {'goolord/alpha-nvim', requires = {'jedrzejboczar/possession.nvim', 'kyazdani42/nvim-web-devicons', 'wbthomason/packer.nvim'}, config = [[require('alpha-nvim')]] }
 
     --
     -- Telescope
@@ -285,4 +297,10 @@ vim.cmd([[
 
 key_mappings()
 
-require('config.lsp')
+lsp_setup()
+
+if util.ispath(packer_compile_path) then
+  require('packer_compiled')
+end
+
+
