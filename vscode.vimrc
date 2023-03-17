@@ -6,6 +6,10 @@
 " Created:       21 okt. 2015
 "=============================================================================
 
+let s:minimal = 1  
+if exists('s:minimal') 
+  finish
+endif
 "-------------------------------------------------------------------------------
 " Mappings ...
 "-------------------------------------------------------------------------------
@@ -79,26 +83,34 @@ endif
 exec 'cd '.g:init_root_dir
 
 lua << EOF
-require('packer').startup({
+local packer = require('packer')
+local util = require('utils')
+local packer_compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'packer_compiled_for_vscode.lua')
+
+packer.init ({
+  compile_path = packer_compile_path
+})
+
+packer.startup({
   function(use)
 
     --
     -- Moving helpers with mappings
     --
-    use {'ggandor/lightspeed.nvim'} --  s<char><char> or s<char><space>... 
-    use {'andymass/vim-matchup'}    -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
+    --use {'ggandor/lightspeed.nvim'} --  s<char><char> or s<char><space>... 
+    --use {'andymass/vim-matchup'}    -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
 
     --
     -- Edit helpers with mappings
     --
-    use {'tpope/vim-repeat'}                       -- repeats eg. surround mappings
-    use {'preservim/nerdcommenter'}                -- ,c<space>
-    use {'tpope/vim-surround'}                     -- s
-    use {'godlygeek/tabular', cmd ={'Tabularize'}} -- creating tables
-    use {'tommcdo/vim-exchange'}                   -- exchange word: cxiw <move> . line: cxx<move>.
-    use {'svermeulen/vim-cutlass'}                 -- x remapped!!!, d doesn't affect yank
-    use {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
-    use {'wellle/targets.vim' }                    -- more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
+    --use {'tpope/vim-repeat'}                       -- repeats eg. surround mappings
+    --use {'preservim/nerdcommenter'}                -- ,c<space>
+    --use {'tpope/vim-surround'}                     -- s
+    --use {'godlygeek/tabular', cmd ={'Tabularize'}} -- creating tables
+    --use {'tommcdo/vim-exchange'}                   -- exchange word: cxiw <move> . line: cxx<move>.
+    --use {'svermeulen/vim-cutlass'}                 -- x remapped!!!, d doesn't affect yank
+    --use {'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
+    --use {'wellle/targets.vim' }                    -- more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
 
     -- 
     -- Filetype helpers
@@ -134,5 +146,9 @@ vim.keymap.set('n' , '<leader>Y' , "\"+yy<cmd>lua require('utils').notify_info('
 
 vim.keymap.set('n' , '<leader>p' , '"+p' , {desc = 'Paste text from the clipboard'})
 vim.keymap.set('v' , '<leader>p' , '"+p' , {desc = 'Paste text from the clipboard'})
+
+if util.ispath(packer_compile_path) then
+  require('packer_compiled_for_vscode')
+end
 
 EOF

@@ -33,6 +33,8 @@ local version = vim.version()
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
+local last_session = get_last_session()
+last_session = (last_session ~=  nil and "" or last_session)
 dashboard.section.header.val = {
 '                                                                                                          ',
 '     ░▓▓▓            ▓▓▓                                                                                  ',
@@ -59,7 +61,7 @@ dashboard.section.buttons.val = {
   --{ type = "padding", val = 1 },
   dashboard.button('e'          , "  New File                  " , ':ene <BAR> startinsert <CR>'                 )  ,
   dashboard.button('d'          , "  Delphi                    " , ':so ~/delphi-dev.vim | PossessionLoad delphi-dev<CR>' ) ,
-  dashboard.button('r'          , "  Reload Last Session       " , ':PossessionLoad '..get_last_session()..'<CR>')  ,
+  dashboard.button('r'          , "  Reload Last Session       " , ':PossessionLoad '..last_session..'<CR>')  ,
   dashboard.button('<leader>tr' , "  Recently Opened Files     " , ':Telescope oldfiles<CR>'                     )  ,
   dashboard.button('o'          , "  Open Project              " , ':Telescope possession list<CR>'              )  ,
   dashboard.button('<leader>ta' , "  Jump to Bookmark          " , ':Telescope marks<CR>'                        )  ,
