@@ -89,8 +89,7 @@ packer.startup({
     }
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter' }                                                             -- eg. :stew: icons for several plugins
     use { 'nvim-lualine/lualine.nvim', event = 'VimEnter', config = [[require('config.lualine-nvim')]] }
-    use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' }, config =
-    [[require('config.nvim-tree')]] }                                                                                      -- tag = 'nightly' -- optional, updated every week. (see issue #1193) }
+    use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' }, config = [[require('config.nvim-tree')]] } -- tag = 'nightly' -- optional, updated every week. (see issue #1193) }
     use { 'chentoast/marks.nvim', config = [[require('config.marks-nvim')]] }
     use { 'rcarriga/nvim-notify' }
     --
@@ -155,9 +154,8 @@ packer.startup({
     --
     -- Command helpers
     --
-    use { 'skywind3000/asyncrun.vim' }                                 --, cmd = { 'AsyncRun' }}
-    use { 'simnalamburt/vim-mundo', cmd = { 'MundoToggle', 'MundoShow' } } -- Show undo history visually
-    use { 'qpkorr/vim-bufkill' }                                       --cmd = {'BD', 'BB', 'BF', 'BW '}} -- buffer without closing window :BD, BW, BF, BB doesn't work properly if lazy loaded.
+    use { 'skywind3000/asyncrun.vim' }         --, cmd = { 'AsyncRun' }}
+    use { 'qpkorr/vim-bufkill' }               --cmd = {'BD', 'BB', 'BF', 'BW '}} -- buffer without closing window :BD, BW, BF, BB doesn't work properly if lazy loaded.
 
     --
     -- My own plugins
@@ -171,10 +169,8 @@ packer.startup({
     use { 'albfan/vim-breakpts', require = { 'genutils' }, cmd = { 'BreakPts' } }
     use { 'h1mesuke/vim-unittest', cmd = { 'UnitTest' },
       run = function()
-        vim.cmd([[
-        nnoremap <leader>su :wa <bar> UnitTest<CR>
-        nnoremap <F5> :wa <bar> UnitTest<CR>
-        ]])
+        vim.keymap.set('n', '<leader>su', '<cmd>wa <bar> UnitTest<cr>', { desc = 'Save and start unittest' })
+        vim.keymap.set('n', '<F5>', '<cmd>wa <bar> UnitTest<cr>', { desc = 'Save and start unittest' })
       end }
     use { 'vim-scripts/Decho', cmd = { 'Decho' } }
 
@@ -297,7 +293,7 @@ vim.cmd([[
 
 key_mappings()
 
-lsp_setup()
+require('config.lsp')
 
 if util.ispath(packer_compile_path) then
   require('packer_compiled')
