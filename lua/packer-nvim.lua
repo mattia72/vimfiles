@@ -1,28 +1,14 @@
-local util = require('utils')
-
-local packer_compile_path = util.join_paths(vim.fn.stdpath('config'),
-  'lua', --not 'plugin', so not loaded automatically
-  'packer_compiled.lua')
-
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
-end
+local utils = require('utils')
 
 
-local packer_bootstrap = ensure_packer()
+local epacker = require('ensure-packer')
+local packer_bootstrap = epacker.ensure_packer()
 
 -- the plugin install follows from here
 
 local packer = require('packer')
 packer.init ({
-  compile_path = packer_compile_path
+  compile_path = epacker.packer_compiled_path
 })
 
 packer.startup({
@@ -296,8 +282,8 @@ key_mappings()
 
 require('config.lsp')
 
-if util.ispath(packer_compile_path) then
-  require('packer_compiled')
+if utils.ispath(epacker.packer_compiled_path) then
+  require(epacker.packer_compiled_file_name)
 end
 
 
