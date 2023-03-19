@@ -1,13 +1,13 @@
 --
 -- lua config file for alpha 
 --
+utils = require('utils')
 
 local function footer()
   local plugin_count = '';
 
   if packer_plugins ~= nil then
-    local u = require('utils')
-    local count, count_cond = u.table_count(packer_plugins, function(val) return val.loaded end)
+    local count, count_cond = utils.table_count(packer_plugins, function(val) return val.loaded end)
     plugin_count = count_cond..'/'..count
   else if  vim.g.plugs ~= nil then
     --plugin_count = vim.call('len', vim.g.plugs)
@@ -24,7 +24,8 @@ end
 
 local function get_last_session()
   local dir = require("possession.config").session_dir
-  local file = require('utils').get_last_modified_in_dir(dir, '*.json')
+  local file = utils.get_last_modified_in_dir(dir, '*.json')
+  --utils.notify_info('Session scan', dir..' scanned for sessions.\n'..file..' found')
   return string.gsub(file, '.json', '')
 end
 
@@ -34,7 +35,7 @@ local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
 local last_session = get_last_session()
-last_session = (last_session ~=  nil and "" or last_session)
+last_session = (last_session ~=  nil and last_session or "")
 dashboard.section.header.val = {
 '                                                                                                          ',
 '     ░▓▓▓            ▓▓▓                                                                                  ',
