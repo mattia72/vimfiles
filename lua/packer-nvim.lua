@@ -67,10 +67,17 @@ packer.startup({
     -- Additional text objects via treesitter
     --
     use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
+
     --
     -- startup screen
     --
-    use {'goolord/alpha-nvim', requires = {'jedrzejboczar/possession.nvim', 'kyazdani42/nvim-web-devicons', 'wbthomason/packer.nvim'}, config = [[require('alpha-nvim')]] }
+    use {'goolord/alpha-nvim', requires = {
+        'kyazdani42/nvim-web-devicons',
+        'jedrzejboczar/possession.nvim',
+        'wbthomason/packer.nvim'
+      },
+      config = function() require('config.alpha-nvim') end,
+    }
 
     --
     -- Telescope
@@ -103,10 +110,11 @@ packer.startup({
     use { 'jedrzejboczar/possession.nvim', requires = { 'nvim-lua/plenary.nvim' },
       config = function() require("config.possession") end
     }
-    use { 'Shatur/neovim-session-manager', requires = { 'nvim-lua/plenary.nvim' },
-      config = function() require("config.neovim-session-manager") end
-    }
-    use { 'zhimsel/vim-stay' } --auto view creation
+    -- vscode doesn't like it
+    --use { 'Shatur/neovim-session-manager', cond = {utils.no_vscode}, requires = { 'nvim-lua/plenary.nvim' }, 
+      --config = function() require("config.neovim-session-manager") end
+    --}
+    --use { 'zhimsel/vim-stay' } --auto view creation
 
     --
     -- Git
@@ -179,14 +187,7 @@ packer.startup({
     if packer_bootstrap then
       require('packer').sync()
     end
-  end --,
-  --  config = {
-  --    max_jobs = 16,
-  --    compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua'),
-  --    git = {
-  --      default_url_format = plug_url_format,
-  --    },
-  --  },
+  end
 })
 
 local function key_mappings()
