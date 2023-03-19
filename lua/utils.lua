@@ -40,7 +40,7 @@ function _M.join_paths(...)
   local path_sep = on_windows and '\\' or '/'
   local result = table.concat({ ... }, path_sep)
   return result
-end--
+end
 
 function _M.get_last_modified_in_dir(dir, file_pattern)
   local last_modified
@@ -62,5 +62,10 @@ function _M.table_count(tbl, cond)
   end
   return count, count_cond
 end
+
+function _M.no_vscode()
+  return vim.fn.exists('g:vscode') == 0
+end
+
 
 return _M
