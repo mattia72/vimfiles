@@ -60,7 +60,8 @@ packer.startup({
     use {'goolord/alpha-nvim', requires = {
         'kyazdani42/nvim-web-devicons',
         'jedrzejboczar/possession.nvim',
-        'wbthomason/packer.nvim'
+        'wbthomason/packer.nvim',
+         'nvim-lua/plenary.nvim' -- in config.alpha-nvim
       },
       config = function() require('config.alpha-nvim') end,
     }

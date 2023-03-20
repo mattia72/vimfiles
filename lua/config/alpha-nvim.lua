@@ -1,7 +1,7 @@
 --
 -- lua config file for alpha 
 --
-utils = require('utils')
+local utils = require('utils')
 
 local function footer()
   local plugin_count = '';
@@ -24,7 +24,8 @@ end
 
 local function get_last_session()
   local dir = require("possession.config").session_dir
-  local file = utils.get_last_modified_in_dir(dir, '*.json')
+  local path_exists = require('plenary.path').new(dir):is_dir()
+  local file = path_exists and utils.get_last_modified_in_dir(dir, '*.json') or ''
   --utils.notify_info('Session scan', dir..' scanned for sessions.\n'..file..' found')
   return string.gsub(file, '.json', '')
 end
