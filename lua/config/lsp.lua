@@ -48,8 +48,8 @@ local on_attach = function(_ --[[client]], bufnr)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts_desc(bufopts, 'List all implemetation in qf'))
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts_desc(bufopts, 'List all references'))
 
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts_desc(bufopts, 'Show hover info'))
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts_desc(bufopts, 'Signature help'))
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.hover, opts_desc(bufopts, 'Show hover info'))
+  --vim.keymap.set('n', 'K', vim.lsp.buf.signature_help, opts_desc(bufopts, 'Signature help'))
 
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts_desc(bufopts, 'Add workspace folder'))
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts_desc(bufopts, 'Remove workspace folder'))
