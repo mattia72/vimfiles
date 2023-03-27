@@ -15,19 +15,21 @@ local function footer()
     end
   end
   local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
-  --local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
   local plugins  =  " neovim loaded " .. plugin_count .. " plugins."
-
-  --return datetime .. "   " .. plugin_count .. " plugins" .. nvim_version_info
   return datetime .. ' ' .. plugins
 end
 
 local function get_last_session()
-  local dir = require("possession.config").session_dir
-  local path_exists = require('plenary.path').new(dir):is_dir()
-  local file = path_exists and utils.get_last_modified_in_dir(dir, '*.json') or ''
-  --utils.notify_info('Session scan', dir..' scanned for sessions.\n'..file..' found')
-  return string.gsub(file, '.json', '')
+  local status, pconfig = pcall( require, "possession.config" )
+  local file = ''
+  if not status then
+    vim.cmd [[packadd possession]]
+    status, pconfig = pcall( require, "possession.config" )
+  end
+  local path_exists = require('plenary.path').new(pconfig.session_dir):is_dir()
+  file = path_exists and utils.get_last_modified_in_dir(pconfig.session_dir, '*.json') or ''
+  --vim.api.nvim_echo({{'call possession: '.. (status and file or 'failed'), 'None'}}, true, {})
+  return  status, string.gsub(file, '.json', '')
 end
 
 local version = vim.version()
@@ -35,8 +37,9 @@ local version = vim.version()
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
-local last_session = get_last_session()
-last_session = (last_session ~=  nil and last_session or "")
+local status, last_session = get_last_session()
+last_session = (status and last_session or "")
+--vim.api.nvim_echo({{'call possession: '.. (status and last_session or 'failed'), 'None'}}, true, {})
 dashboard.section.header.val = {
 '                                                                                                          ',
 '     ░▓▓▓            ▓▓▓                                                                                  ',
@@ -65,7 +68,7 @@ dashboard.section.buttons.val = {
   dashboard.button('d'          , "  Delphi                    " , ':so ~/delphi-dev.vim | PossessionLoad delphi-dev<CR>' ) ,
   dashboard.button('r'          , "  Reload Last Session       " , ':PossessionLoad '..last_session..'<CR>')  ,
   dashboard.button('<leader>tr' , "  Recently Opened Files     " , ':Telescope oldfiles<CR>'                     )  ,
-  dashboard.button('o'          , "  Open Project              " , ':Telescope possession list<CR>'              )  ,
+  dashboard.button('o'          , "  Open Session              " , ':Telescope possession list<CR>'              )  ,
   dashboard.button('<leader>ta' , "  Jump to Bookmark          " , ':Telescope marks<CR>'                        )  ,
   dashboard.button('<leader>tf' , "  Find File                 " , ':Telescope find_files<CR>'                   )  ,
   dashboard.button('<leader>tg' , "  Find Word                 " , ':Telescope live_grep<CR>'                    )  ,

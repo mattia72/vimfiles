@@ -1,4 +1,6 @@
 
+vim.cmd [[packadd telescope.nvim]]
+
 local wk = require('which-key')
 wk.register({
   ["<leader>t"] = { name = "+telescope" }, -- optional group name

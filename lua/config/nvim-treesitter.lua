@@ -1,5 +1,7 @@
 
 --  my vim-delphi syntax is better?
+vim.cmd [[nvim-treesitter]]
+
 require('nvim-treesitter.parsers').filetype_to_parsername["delphi"]="pascal"
 
 require('nvim-treesitter.configs').setup {

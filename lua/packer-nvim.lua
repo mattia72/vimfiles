@@ -45,14 +45,6 @@ packer.startup({
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' } 
     }
 
-    --use { 'hrsh7th/cmp-nvim-lsp', cond = {utils.no_vscode}}
-    --use { 'L3MON4D3/LuaSnip', cond = {utils.no_vscode} }    
-    --use { 'saadparwaiz1/cmp_luasnip', cond = {utils.no_vscode}}
-    --use { 'hrsh7th/nvim-cmp',
-      --after = { 'cmp-nvim-lsp', 'LuaSnip', 'cmp_luasnip' },
-      --cond = {utils.no_vscode}
-    --}
-
     --
     -- Highlight, edit, and navigate code
     --
@@ -60,13 +52,18 @@ packer.startup({
       run = function()
         pcall(require('nvim-treesitter.install').update { with_sync = true })
       end,
-      cond = {utils.no_vscode}
+      --cond = {utils.no_vscode} so doesn't work
     }
 
     --
     -- Additional text objects via treesitter
     --
-    use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter', cond = {utils.no_vscode} }
+    use { 'nvim-treesitter/nvim-treesitter-textobjects', 
+      after = 'nvim-treesitter',
+      requires = "nvim-treesitter/nvim-treesitter" ,
+      --config = function() vim.cmd [[packadd nvim-treesitter]] end,
+      --cond = {utils.no_vscode}  so doesn't work
+    }
 
     --
     -- startup screen
@@ -83,33 +80,33 @@ packer.startup({
     }
 
     --
-    -- Telescope
-    --
-    use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' },
-      config = function() require('config.telescope-nvim') end,
-      run = function() require('config.telescope-which-key') end,
-    }
-    use { 'nvim-telescope/telescope-project.nvim',
-      requires = { 'nvim-telescope/telescope.nvim' },
-      run= function() require('telescope').load_extension('possession') end,
-      cond = {utils.no_vscode}
-    }
-    use { 'nvim-telescope/telescope-file-browser.nvim',
-      requires = { 'nvim-telescope/telescope.nvim' },
-      run= function() require('telescope').load_extension('file_browser') end,
-    }
-
-    --
     -- Gui
     --
     use { "folke/which-key.nvim", event = "VimEnter", cond = {utils.no_vscode}, -- showing keybindings
-      config = function() vim.defer_fn(function() require('config.which-key') end, 2000.0) end
+      config = function() vim.defer_fn(function() require('config.which-key') end, 2000.0) end,
     }
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', cond = {utils.no_vscode}}                                                             -- eg. :stew: icons for several plugins
     use { 'nvim-lualine/lualine.nvim', event = 'VimEnter', config = [[require('config.lualine-nvim')]], cond = {utils.no_vscode} }
     use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' }, config = [[require('config.nvim-tree')]], cond = {utils.no_vscode} } -- tag = 'nightly' -- optional, updated every week. (see issue #1193) }
     use { 'chentoast/marks.nvim', config = [[require('config.marks-nvim')]], cond = {utils.no_vscode}}
     use { 'rcarriga/nvim-notify', cond = {utils.no_vscode}}
+
+    --
+    -- Telescope
+    --
+    use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' },
+      after = {"which-key.nvim"},
+      config = function() require('config.telescope-nvim') end,
+      cond = {utils.no_vscode}
+    }
+    use { 'nvim-telescope/telescope-project.nvim', requires = { 'nvim-telescope/telescope.nvim' },
+      config = function() vim.cmd [[packadd telescope.nvim]] require('telescope').load_extension('possession') end,
+      cond = {utils.no_vscode}
+    }
+    use { 'nvim-telescope/telescope-file-browser.nvim', requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+      config = function() vim.cmd [[packadd telescope.nvim]] require('telescope').load_extension('file_browser') end,
+      cond = {utils.no_vscode}
+    }
 
     --
     -- Colorscheme
@@ -141,8 +138,8 @@ packer.startup({
     --use {'justinmk/vim-sneak'}      -- s<char><char> than ; or s to the next
     use { 'ggandor/lightspeed.nvim', keys={ 's', 'S' } } --  s<char><char> or s<char><space>...
 
-    use { 'andymass/vim-matchup' }  -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
-    use { 'yssl/QFEnter', cond={utils.no_vscode}}          -- QFEnter allows you to open items from quickfix or location list wherever you wish.
+    use { 'andymass/vim-matchup', event = 'VimEnter *'}  -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
+    use { 'yssl/QFEnter', event = 'QuickFixCmdPre', cond={utils.no_vscode}}          -- QFEnter allows you to open items from quickfix or location list wherever you wish.
 
     --
     -- Edit helpers with mappings
