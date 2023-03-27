@@ -2,6 +2,7 @@
 -- lua config file for telescope 
 --
 
+vim.cmd [[packadd telescope-file-browser.nvim]]
 local fb_actions = require 'telescope'.extensions.file_browser.actions
 
 require('telescope').setup{
