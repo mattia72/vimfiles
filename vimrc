@@ -37,7 +37,11 @@ endif
 
 source common.vim
 source settings.vimrc
-source autocmds.vimrc
+
+if !exists('g:vscode') 
+  source autocmds.vimrc
+endif
+
 if has('nvim') 
   lua require('packer-nvim')
 else
@@ -52,8 +56,10 @@ endif
 
 source colors.vimrc
 
+if !exists('g:vscode') 
 " for vim syntax plugin development and view handling etc.
-source additions.vimrc
+  source additions.vimrc
+endif
 
 set path+=~
 cd ~

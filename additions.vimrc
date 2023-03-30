@@ -6,21 +6,6 @@ endfunc
 
 let s:fname = resolve(expand('<sfile>:t'))
 
-"=====[ Highlight matches when jumping to next ]=============
-" This rewires n and N to do the highlighing...
-nnoremap <silent> n   n:call <SID>HLNext(0.4)<cr>
-nnoremap <silent> N   N:call <SID>HLNext(0.4)<cr>
-
-
-" blink the line containing the match...
-function! <SID>HLNext (blinktime)
-  set invcursorline
-  redraw
-  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-  set invcursorline
-  redraw
-endfunction
-
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 function! <SID>SetWhiteSpacesVisible()
   set listchars=eol:¬,tab:» ,trail:~,extends:>,precedes:<,space:.
@@ -28,23 +13,6 @@ function! <SID>SetWhiteSpacesVisible()
 endfunction
 
 command! -nargs=0 MySetWhiteSpaceVisible call <SID>SetWhiteSpacesVisible()
-
-"====[ Function to permanently delete views created by 'mkview' ]======
-
-function! <SID>MyDeleteView()
-  let path = fnamemodify(bufname('%'),':p')
-  " vim's odd =~ escaping for /
-  let path = substitute(path, '=', '==', 'g')
-  if empty($HOME)
-  else
-    let path = substitute(path, '^'.$HOME, '\~', '')
-  endif
-  let path = substitute(path, '/', '=+', 'g') . '='
-  " view directory
-  let path = &viewdir.'/'.path
-  call delete(path)
-  echo "Deleted: ".path
-endfunction
 
 function! g:MyExecInCmd(command, ...)
   let tmp=&shell
@@ -87,11 +55,6 @@ endfunction
 " Example :CommandToTab highlight
 " Example :CommandToTab verbose map
 command! -nargs=+ -complete=command MyCommandToTab call <SID>CommandToTab(<q-args>)
-
-" # Command Delview (and it's abbreviation 'delview')
-command! MyDelview call <SID>MyDeleteView()
-" Lower-case user commands: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
-cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'MyDelview' : 'delview')<CR>
 
 "-------------------------------------------------------------------------------
 " For syntax development
