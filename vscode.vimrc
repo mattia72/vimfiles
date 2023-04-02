@@ -82,7 +82,7 @@ endif
 lua << EOF
 local packer = require('packer')
 local util = require('utils')
-local packer_compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua')
+local packer_compile_path = util.join_path(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua')
 
 packer.init ({
   compile_path = packer_compile_path

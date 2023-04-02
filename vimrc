@@ -10,9 +10,15 @@
 "       create $XDG_CONFIG_HOME/nvim/init.vim with this content 'source <path_to_this_file>'
 "       create $XDG_CONFIG_HOME/nvim/ginit.vim with this content 'source <path to gui_settings.vimrc>'
 
-"run this to avoid reload on save
+" avoid reload on save
 "let g:vimrc_auto_load_disabled = 1
 if exists("g:vimrc_auto_load_disabled")
+  finish
+endif
+
+let g:load_init_lua_only = 1
+if exists("g:load_init_lua_only")
+  lua require('init_vim')
   finish
 endif
 
@@ -37,6 +43,7 @@ endif
 
 source common.vim
 source settings.vimrc
+source shell.vim
 
 if !exists('g:vscode') 
   source autocmds.vimrc

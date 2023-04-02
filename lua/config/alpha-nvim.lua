@@ -23,7 +23,7 @@ local function get_last_session()
   local status, pconfig = pcall( require, "possession.config" )
   local file = ''
   if not status then
-    vim.cmd [[packadd possession]]
+    vim.cmd [[packadd possession.nvim]]
     status, pconfig = pcall( require, "possession.config" )
   end
   local path_exists = require('plenary.path').new(pconfig.session_dir):is_dir()

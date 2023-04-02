@@ -66,20 +66,6 @@ packer.startup({
     }
 
     --
-    -- startup screen
-    --
-    use {'goolord/alpha-nvim',
-      requires = {
-        'kyazdani42/nvim-web-devicons',
-        'jedrzejboczar/possession.nvim',
-        'wbthomason/packer.nvim',
-         'nvim-lua/plenary.nvim' -- in config.alpha-nvim
-      },
-      config = function() require('config.alpha-nvim') end,
-      cond = {utils.no_vscode}
-    }
-
-    --
     -- Gui
     --
     use { "folke/which-key.nvim", event = "VimEnter", cond = {utils.no_vscode}, -- showing keybindings
@@ -92,6 +78,13 @@ packer.startup({
     use { 'rcarriga/nvim-notify', cond = {utils.no_vscode}}
 
     --
+    -- Sessions, views
+    --
+    use { 'jedrzejboczar/possession.nvim', requires = { 'nvim-lua/plenary.nvim' },
+      config = function() require("config.possession") end, cond = {utils.no_vscode}
+    }
+
+    --
     -- Telescope
     --
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' },
@@ -100,7 +93,12 @@ packer.startup({
       cond = {utils.no_vscode}
     }
     use { 'nvim-telescope/telescope-project.nvim', requires = { 'nvim-telescope/telescope.nvim' },
-      config = function() vim.cmd [[packadd telescope.nvim]] require('telescope').load_extension('possession') end,
+      config = function()
+        vim.cmd [[
+        packadd telescope.nvim
+        packadd possession.nvim
+        ]]
+        require('telescope').load_extension('possession') end,
       cond = {utils.no_vscode}
     }
     use { 'nvim-telescope/telescope-file-browser.nvim', requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
@@ -113,13 +111,6 @@ packer.startup({
     --
     use {'navarasu/onedark.nvim', cond = {utils.no_vscode}} -- Theme inspired by Atom
     use {'morhetz/gruvbox'      , cond = {utils.no_vscode}} -- Gruvbox is heavily inspired by badwolf, jellybeans and solarized.
-
-    --
-    -- Sessions, views
-    --
-    use { 'jedrzejboczar/possession.nvim', requires = { 'nvim-lua/plenary.nvim' },
-      config = function() require("config.possession") end, cond = {utils.no_vscode}
-    }
 
     -- vscode doesn't like it
     --use { 'Shatur/neovim-session-manager', cond = {utils.no_vscode}, requires = { 'nvim-lua/plenary.nvim' }, 
@@ -148,6 +139,12 @@ packer.startup({
     use { 'preservim/nerdcommenter' }              -- ,c<space>
     use { 'tpope/vim-surround' }                   -- s
     use { 'godlygeek/tabular', cmd = { 'Tabularize' } } -- creating tables
+    use { 'junegunn/vim-easy-align', config = {
+      function()
+        local m = require('mapper')
+        m.xmap('ga', '<Plug>(EasyAlign)')
+        m.nmap('ga', '<Plug>(EasyAlign)')
+      end}}
     use { 'tommcdo/vim-exchange' }                 -- exchange word: cxiw <move> . line: cxx<move>.
     use { 'svermeulen/vim-cutlass', after = {'lightspeed.nvim'}, opt = true }      -- x remapped!!!, d doesn't affect yank !!!breaks if not opt!!!
     use { 'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
@@ -161,6 +158,20 @@ packer.startup({
     --use { 'nvim-pack/nvim-spectre', cmd = {'Spectre'}} -- Search replace 
 
     --
+    -- startup screen
+    --
+    use {'goolord/alpha-nvim',
+      requires = {
+        'kyazdani42/nvim-web-devicons',
+        'jedrzejboczar/possession.nvim',
+        'wbthomason/packer.nvim',
+         'nvim-lua/plenary.nvim' -- in config.alpha-nvim
+      },
+      config = function() require('config.alpha-nvim') end,
+      cond = {utils.no_vscode}
+    }
+
+    --
     -- Filetype helpers
     --
     use { 'vim-scripts/xml.vim', ft = { 'xml' } }
@@ -169,7 +180,7 @@ packer.startup({
     --use {'zigford/vim-powershell'       , ft = {'ps1', 'psm1'}}
     use { 'PProvost/vim-ps1', ft = { 'ps1', 'psm1' } }
     use { 'euclidianAce/BetterLua.vim', ft = { 'lua' } }
-
+    use {'sam4llis/nvim-lua-gf', ft = {'lua','vim'}}
     --
     -- Command helpers
     --

@@ -66,20 +66,6 @@
 
   require('config.telescope-which-key')
 
-  -- --------------------------------------------
-  -- vim-cutlass
-  -- --------------------------------------------
-  vim.keymap.set('n', 'x', 'd', { desc = 'Move text to yank' })
-  vim.keymap.set('x', 'x', 'd', { desc = 'Move text to yank' })
-  vim.keymap.set('n', 'xx', 'dd', { desc = 'Move line to yank' })
-  vim.keymap.set('n', 'X', 'D', { desc = 'Move text until eol to yank' })
-
-  vim.keymap.set('n' , '<A-j>' , '<cmd>m .+1<CR>=='        , {desc="Move line up"})
-  vim.keymap.set('n' , '<A-k>' , '<cmd>m .-2<CR>=='        , {desc="Move line down"})
-  vim.keymap.set('i' , '<A-j>' , '<esc><cmd>m .+1<CR>==gi' , {desc="Move line up"})
-  vim.keymap.set('i' , '<A-k>' , '<esc><cmd>m .-2<CR>==gi' , {desc="Move line down"})
-  vim.keymap.set('v' , '<A-j>' , ":m '>+1<CR>gv=gv"        , {desc="Move line up"})
-  vim.keymap.set('v' , '<A-k>' , ":m '<-2<CR>gv=gv"        , {desc="Move line down"})
 
   -- --------------------------------------------
   -- vim-matchup
