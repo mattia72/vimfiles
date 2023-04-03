@@ -68,5 +68,12 @@ function _M.no_vscode()
   return vim.fn.exists('g:vscode') == 0
 end
 
+function _M.echom(text)
+  vim.api.nvim_echo({{text, 'None'}}, true, {})
+end
+
+function _M.echo(text)
+  vim.api.nvim_echo({{text, 'None'}}, false, {})
+end
 
 return _M
