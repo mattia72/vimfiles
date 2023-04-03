@@ -1,4 +1,3 @@
-
 "=============================================================================
 " File:          vscode.vimrc
 " Author:        Mattia72 
@@ -7,9 +6,6 @@
 "=============================================================================
 
 " let s:minimal = 1  
-"-------------------------------------------------------------------------------
-" Mappings ...
-"-------------------------------------------------------------------------------
 
 " With a noremap leader it's possible to do extra key combinations
 let mapleader = ","
@@ -86,7 +82,7 @@ endif
 lua << EOF
 local packer = require('packer')
 local util = require('utils')
-local packer_compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua')
+local packer_compile_path = util.join_path(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua')
 
 packer.init ({
   compile_path = packer_compile_path

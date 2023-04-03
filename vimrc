@@ -10,9 +10,15 @@
 "       create $XDG_CONFIG_HOME/nvim/init.vim with this content 'source <path_to_this_file>'
 "       create $XDG_CONFIG_HOME/nvim/ginit.vim with this content 'source <path to gui_settings.vimrc>'
 
-"run this to avoid reload on save
+" avoid reload on save
 "let g:vimrc_auto_load_disabled = 1
 if exists("g:vimrc_auto_load_disabled")
+  finish
+endif
+
+let g:load_init_lua_only = 1
+if exists("g:load_init_lua_only")
+  lua require('init_vim')
   finish
 endif
 
@@ -37,7 +43,12 @@ endif
 
 source common.vim
 source settings.vimrc
-source autocmds.vimrc
+source shell.vim
+
+if !exists('g:vscode') 
+  source autocmds.vimrc
+endif
+
 if has('nvim') 
   lua require('packer-nvim')
 else
@@ -52,8 +63,10 @@ endif
 
 source colors.vimrc
 
+if !exists('g:vscode') 
 " for vim syntax plugin development and view handling etc.
-source additions.vimrc
+  source additions.vimrc
+endif
 
 set path+=~
 cd ~

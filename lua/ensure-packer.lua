@@ -3,7 +3,7 @@ local utils=require('utils')
 
 _M.packer_compiled_file_name = 'packer_compiled'
 
-_M.packer_compiled_path = utils.join_paths(vim.fn.stdpath('config'),
+_M.packer_compiled_path = utils.join_path(vim.fn.stdpath('config'),
   'lua', --not in 'plugin', so not loaded automatically
   _M.packer_compiled_file_name..'.lua')
 
