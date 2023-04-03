@@ -2,7 +2,7 @@
 local m = require('mapper')
 
 m.nmap('<leader>ve', '<cmd>tabnew! $MYVIMRC<cr>', { desc = 'Fast editing of vimrc' })
-m.nmap('<leader>vi', '<cmd>tabnew! '..vim.g.init_root_dir..'init_vim.lua<cr>', { desc = 'Fast editing of init.lua' })
+m.nmap('<leader>vi', '<cmd>tabnew! '..vim.g.init_root_dir..'/lua/init_vim.lua<cr>', { desc = 'Fast editing of init.lua' })
 
 -- Select all and increment numbers
 m.nmap('<C-kPlus>',  '<C-a>', {remap = false, desc = 'Increment num under cursor'})
@@ -139,25 +139,23 @@ m.nmap('<leader>Y' , "\"+yy<cmd>lua require('utils').notify_info('Mappings', 'Th
 m.nmap('<leader>p' , '"+p' , {desc = 'Paste text from the clipboard'})
 m.vmap('<leader>p' , '"+p' , {desc = 'Paste text from the clipboard'})
 
-m.nmap('<leader>om', ':CommandToTab message<cr>', {desc = ''})
+m.nmap('<leader>ct',      '<cmd>CommandToTab message<cr>',             {desc = 'Command to tab'})
 -- jump to tag
-m.nmap('<leader>jt', '<C-]>', {desc = ''})
+m.nmap('<leader>jt',      '<C-]>',                                     {desc = 'Jump to tag'})
 
 -- find all word under cursor in the current directory
-m.nmap('<leader>fa', '<ESC>:RipGrep -w <C-R><C-W> %<Left><Left>', {desc = ''})
-m.nmap('<leader>fA', '<ESC>:RipGrep -w <C-R><C-W> ', {desc = ''})
+m.nmap('<leader>fa',      '<ESC>:RipGrep -w <C-R><C-W> %<Left><Left>', {desc = ''})
+m.nmap('<leader>fA',      '<ESC>:RipGrep -w <C-R><C-W> ',              {desc = ''})
 -- find all selected
-m.vmap('<leader>fa', '<ESC>:RipGrep <C-R>0 %<Left><Left>', {desc = ''})
-m.vmap('<leader>fA', '<ESC>:RipGrep <C-R>0', {desc = ''})
+m.vmap('<leader>fa',      '<ESC>:RipGrep <C-R>0 %<Left><Left>',        {desc = ''})
+m.vmap('<leader>fA',      '<ESC>:RipGrep <C-R>0',                      {desc = ''})
 
 -- highlight selected
-m.vmap('<leader>sh', '<ESC>:match Error /<C-R>0/ ', {desc = ''})
+m.vmap('<leader>sh',      '<ESC>:match Error /<C-R>0/ ',               {desc = 'Highlight selected'})
 --reload syntax
-m.nmap('<leader>sy', ':syn off<CR>:syn on<CR>', {desc = ''})
--- habit: edit for other editors
-m.nmap('<leader>eo', ':set tw=0 wrap linebreak', {desc = ''})
+m.nmap('<leader>sy',      ':syn off<CR>:syn on<CR>',                   {desc = 'Reload syntax'})
 -- Clear search highlight
-m.nmap('<leader><space>', ':noh<cr>', {desc = ''})
+m.nmap('<leader><space>', ':noh<cr>',                                  {desc = 'Clear highlight'})
 
 -- Folding...
 --

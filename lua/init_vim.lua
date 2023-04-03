@@ -1,7 +1,12 @@
 -- this file will be renamed to init.lua 
 --
 
+local function get_file_name(file)
+  return file:match("[^/]*.lua$")
+end
 
+local info = debug.getinfo(1,'S');
+local startTime = os.clock()
 vim.g.HOME = os.getenv("HOME")
 
 local utils = require('utils')
@@ -10,11 +15,9 @@ vim.g.init_root_dir=utils.join_path(os.getenv('XDG_CONFIG_HOME'), 'nvim\\')
 vim.g.mapleader = ','
 vim.g.maplocalleader = '\\'
 
--- Plugins
-require('packer-nvim')
-
+require('packer-nvim') -- Plugins
 require('settings')
 require('mappings')
 
-print('init.lua loaded')
+print(get_file_name(info.source)..' loaded in '..os.clock()-startTime)
 

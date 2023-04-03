@@ -9,12 +9,6 @@ vim.opt.shiftround = true     -- round to 'shiftwidth' for <<  and  >>
 vim.opt.softtabstop=2
 vim.opt.tabstop=2
 vim.opt.expandtab = true      -- expand <Tab> to spaces in Insert mode (local to buffer)
--- vim.opt.cindent                                                        -- enable specific indenting for C code (local to buffer)
--- vim.opt.cinoptions=                                                    -- options for C-indenting (local to buffer)
--- vim.opt.cinkeys=0{,0},0),:,0#,!^F,o,O,e                                -- keys that trigger C-indenting in Insert mode (local to buffer)
--- vim.opt.cinwords=if,else,while,do,for,switch                           -- list of words that cause more C-indent (local to buffer)
--- vim.opt.indentexpr=GetVimIndent()                                      -- expression used to obtain the indent of a line (local to buffer)
--- vim.opt.indentkeys=0{,0},:,0#,!^F,o,O,e,=end,=else,=cat,=fina,=END,0\\ -- keys that trigger indenting with 'indentexpr' in Insert mode (local to buffer)
 
 ---------------------------------------------------------------------------------
 -- Searching
@@ -83,10 +77,6 @@ else
   vim.opt.cursorline  = false --Highlight only the screen column of the cursor
 end
 
-vim.cmd [[
-  let &guioptions = substitute(&guioptions, "t", "", "g") "For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-  set guioptions+=bh " horizontal scrollbar
-  ]]
 vim.opt.wrap= false
 vim.opt.ruler=true          -- show the cursor position all the time
 vim.opt.showcmd=true        -- display incomplete commands
@@ -98,6 +88,7 @@ vim.opt.sidescroll=1
 vim.o.sessionoptions='blank,buffers,curdir,folds,help,tabpages,winsize'
 vim.opt.number=true 
 vim.opt.relativenumber=true
+
 
 
 
