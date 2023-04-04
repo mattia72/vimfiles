@@ -6,10 +6,10 @@ if has('nvim')
 endif
 
 " set cursor color and blink
-function! g:MySetGuiCursorColor()
-  hi Cursor guifg=black guibg=white
-  hi iCursor guifg=black guibg=green
-endfunction
+"function! g:MySetGuiCursorColor()
+  "hi Cursor guifg=black guibg=white
+  "hi iCursor guifg=black guibg=green
+"endfunction
 
 set winaltkeys=menu " alt jumps to menu
 set lines=45 columns=180 " set window size
@@ -22,7 +22,7 @@ set guicursor=n-v-c:block,
 \sm:block-blinkwait175-blinkon200-blinkoff200
 
 syntax on
-call g:MySetGuiCursorColor()
+"call g:MySetGuiCursorColor()
 
 if has('nvim')
   "GuiFont! Ubuntu\ Mono\ for\ Powerline:h12:cEASTEUROPE

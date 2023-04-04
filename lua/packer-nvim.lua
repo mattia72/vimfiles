@@ -35,7 +35,7 @@ packer.startup({
       'folke/neodev.nvim',
     },
     --cond = {utils.no_vscode},
-    config = function() require('config.lsp') end
+    config = function() require('config/lsp') end
     }
 
     --
@@ -69,19 +69,19 @@ packer.startup({
     -- Gui
     --
     use { "folke/which-key.nvim", event = "VimEnter", cond = {utils.no_vscode}, -- showing keybindings
-      config = function() vim.defer_fn(function() require('config.which-key') end, 2000.0) end,
+      config = function() vim.defer_fn(function() require('config/which-key') end, 2000.0) end,
     }
     use { 'kyazdani42/nvim-web-devicons', event = 'VimEnter', cond = {utils.no_vscode}}                                                             -- eg. :stew: icons for several plugins
-    use { 'nvim-lualine/lualine.nvim', event = 'VimEnter', config = [[require('config.lualine-nvim')]], cond = {utils.no_vscode} }
-    use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' }, config = [[require('config.nvim-tree')]], cond = {utils.no_vscode} } -- tag = 'nightly' -- optional, updated every week. (see issue #1193) }
-    use { 'chentoast/marks.nvim', config = [[require('config.marks-nvim')]], cond = {utils.no_vscode}}
+    use { 'nvim-lualine/lualine.nvim', event = 'VimEnter', config = [[require('config/lualine-nvim')]], cond = {utils.no_vscode} }
+    use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' }, config = [[require('config/nvim-tree')]], cond = {utils.no_vscode} } -- tag = 'nightly' -- optional, updated every week. (see issue #1193) }
+    use { 'chentoast/marks.nvim', config = [[require('config/marks-nvim')]], cond = {utils.no_vscode}}
     use { 'rcarriga/nvim-notify', cond = {utils.no_vscode}}
 
     --
     -- Sessions, views
     --
     use { 'jedrzejboczar/possession.nvim', requires = { 'nvim-lua/plenary.nvim' },
-      config = function() require("config.possession") end, cond = {utils.no_vscode}
+      config = function() require("config/possession") end, cond = {utils.no_vscode}
     }
 
     --
@@ -89,7 +89,7 @@ packer.startup({
     --
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' },
       after = {"which-key.nvim"},
-      config = function() require('config.telescope-nvim') end,
+      config = function() require('config/telescope-nvim') end,
       cond = {utils.no_vscode}
     }
     use { 'nvim-telescope/telescope-project.nvim', requires = { 'nvim-telescope/telescope.nvim' },
@@ -114,7 +114,7 @@ packer.startup({
 
     -- vscode doesn't like it
     --use { 'Shatur/neovim-session-manager', cond = {utils.no_vscode}, requires = { 'nvim-lua/plenary.nvim' }, 
-      --config = function() require("config.neovim-session-manager") end
+      --config = function() require("config/neovim-session-manager") end
     --}
     --use { 'zhimsel/vim-stay' } --auto view creation
 
@@ -167,7 +167,7 @@ packer.startup({
         'wbthomason/packer.nvim',
          'nvim-lua/plenary.nvim' -- in config.alpha-nvim
       },
-      config = function() require('config.alpha-nvim') end,
+      config = function() require('config/alpha-nvim') end,
       cond = {utils.no_vscode}
     }
 
@@ -180,7 +180,7 @@ packer.startup({
     --use {'zigford/vim-powershell'       , ft = {'ps1', 'psm1'}}
     use { 'PProvost/vim-ps1', ft = { 'ps1', 'psm1' } }
     use { 'euclidianAce/BetterLua.vim', ft = { 'lua' } }
-    use {'sam4llis/nvim-lua-gf', ft = {'lua','vim'}}
+    --use {'sam4llis/nvim-lua-gf', ft = {'lua'}}
     --
     -- Command helpers
     --
