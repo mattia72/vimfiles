@@ -19,5 +19,6 @@ require('packer-nvim') -- Plugins
 require('settings')
 require('mappings')
 
-print(get_file_name(info.source)..' loaded in '..os.clock()-startTime)
+utils.echom(get_file_name(info.source)..' loaded in '..os.clock()-startTime)
 
+--vim.cmd "EchoModeMsg vimrc 'current directory:' . getcwd()"

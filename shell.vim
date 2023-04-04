@@ -1,6 +1,8 @@
 
 let s:fname = resolve(expand('<sfile>:t'))
 
+source common.vim
+
 function! g:MySetPowerShell()
   "let &shell = has('win32') ? 'powershell' : 'pwsh'
   let g:default_shell_options =[&shell, &shellquote, &shellpipe, &shellxquote, &shellcmdflag, &shellredir]
