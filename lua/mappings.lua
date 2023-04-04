@@ -45,16 +45,19 @@ m.xmap('x', 'd', { desc = 'Move text to yank' })
 m.nmap('xx', 'dd', { desc = 'Move line to yank' })
 m.nmap('X', 'D', { desc = 'Move text until eol to yank' })
 
-m.nmap('<C-S-j>' , '<cmd>m .+1<CR>=='        , {desc="Move line up"})
-m.nmap('<C-S-k>' , '<cmd>m .-2<CR>=='        , {desc="Move line down"})
-m.imap('<C-S-j>' , '<esc><cmd>m .+1<CR>==gi' , {desc="Move line up"})
-m.imap('<C-S-k>' , '<esc><cmd>m .-2<CR>==gi' , {desc="Move line down"})
-m.vmap('<C-S-j>' , "<cmd>m '>+1<CR>gv=gv"    , {desc="Move line up"})
-m.vmap('<C-S-k>' , "<cmd>m '<-2<CR>gv=gv"    , {desc="Move line down"})
+m.nmap('<A-PageDown>', '<cmd>m .+1<CR>==',        {desc="Move line down"})
+m.nmap('<A-PageUp>',   '<cmd>m .-2<CR>==',        {desc="Move line up"})
+m.imap('<A-PageDown>', '<esc><cmd>m .+1<CR>==gi', {desc="Move line down"})
+m.imap('<A-PageUp>',   '<esc><cmd>m .-2<CR>==gi', {desc="Move line up"})
+m.vmap('<A-PageDown>', ":m '>+1<CR>gv=gv",        {desc="Move selection down"})
+m.vmap('<A-PageUp>',   ":m '<-2<CR>gv=gv",        {desc="Move selection up"})
 
 m.nmap('<leader>hq', '<cmd>helpclose <cr>',                      {desc = 'Close help window'})
 m.nmap('<leader>ba', '<cmd>w <bar> %bd <bar> e# <bar> bd# <CR>', {desc = 'Close all, except current buffer'})
+
+--
 -- Tab navigation like firefox
+--
 m.nmap('<C-S-tab>',  '<cmd>tabprevious<CR>',       {desc = 'Go to prev tab'})
 m.nmap('<C-tab>',    '<cmd>tabnext<CR>',           {desc = 'Go to next tab'})
 m.nmap('<C-S-tab>',  '<cmd>tabprevious<CR>',       {desc = 'Go to prev tab'})
@@ -128,8 +131,8 @@ m.nmap('<leader>sn', ']s', {desc= 'Spell jump previous error'})
 m.vmap('(' , 's()<Esc>P<Right>%' , {desc = 'Surround selected text'})
 m.vmap('[' , 's[]<Esc>P<Right>%' , {desc = 'Surround selected text'})
 m.vmap('{' , 's{}<Esc>P<Right>%' , {desc = 'Surround selected text'})
-m.vmap("'" , "s''<Esc>P<Right>%" , {desc = 'Surround selected text'})
-m.vmap('"' , 's""<Esc>P<Right>%' , {desc = 'Surround selected text'})
+--m.vmap("'" , "s''<Esc>P<Right>%" , {desc = 'Surround selected text'})
+--m.vmap('"' , 's""<Esc>P<Right>%' , {desc = 'Surround selected text'})
 m.vmap('<' , 's<><Esc>P<Right>%' , {desc = 'Surround selected text'})
 
 -- copy to clipboard
