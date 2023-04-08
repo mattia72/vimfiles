@@ -29,19 +29,19 @@ vim.cmd [[
   ]]
 
 m.nmap('<leader>tt', '<cmd>vsplit<CR><C-W>L<cmd>MyPwsh<CR><cmd>MySetDefaultShell<CR>', {desc = 'Open pwsh in vsplit'})
-m.nmap('<leader>tc', '<cmd>vsplit<CR><C-W>L<cmd>MyCmd<CR>', {desc = 'Open cmd in vsplit'})
+m.nmap('<leader>tc', '<cmd>vsplit<CR><C-W>L<cmd>MyCmd<CR>',                            {desc = 'Open cmd in vsplit'})
 
-m.imap('<A-h>', '<C-\\><C-N><C-w>h', {desc = ''})
-m.imap('<A-j>', '<C-\\><C-N><C-w>j', {desc = ''})
-m.imap('<A-k>', '<C-\\><C-N><C-w>k', {desc = ''})
-m.imap('<A-l>', '<C-\\><C-N><C-w>l', {desc = ''})
-m.nmap('<A-h>', '<C-w>h'          , {desc = ''})
-m.nmap('<A-j>', '<C-w>j'          , {desc = ''})
-m.nmap('<A-k>', '<C-w>k'          , {desc = ''})
-m.nmap('<A-l>', '<C-w>l'          , {desc = ''})
+m.imap('<A-h>', '<C-\\><C-N><C-w>h', {desc = 'Got to the left window' })
+m.imap('<A-j>', '<C-\\><C-N><C-w>j', {desc = 'Got to the down window' })
+m.imap('<A-k>', '<C-\\><C-N><C-w>k', {desc = 'Got to the upper window'})
+m.imap('<A-l>', '<C-\\><C-N><C-w>l', {desc = 'Got to the right window'})
+m.nmap('<A-h>', '<C-w>h',            {desc = 'Got to the left window' })
+m.nmap('<A-j>', '<C-w>j',            {desc = 'Got to the down window' })
+m.nmap('<A-k>', '<C-w>k',            {desc = 'Got to the upper window'})
+m.nmap('<A-l>', '<C-w>l',            {desc = 'Got to the right window'})
 
-m.nmap('x', 'd', { desc = 'Move text to yank' })
 m.xmap('x', 'd', { desc = 'Move text to yank' })
+m.nmap('x', 'd', { desc = 'Move text to yank' })
 m.nmap('xx', 'dd', { desc = 'Move line to yank' })
 m.nmap('X', 'D', { desc = 'Move text until eol to yank' })
 
@@ -114,25 +114,23 @@ wk.register({
   ["<leader>qc"] = {"<cmd>cclose<cr>" , "Close quickfix window" , {mode = 'n', noremap = true} } ,
 })
 
-m.nmap('<leader>sr',[[<esc>:%s/<C-R><C-W>//g<Left><Left><BackSpace>/]], { desc = "Search & replace word under cursor"})
-m.vmap('<leader>sr',[[y<esc>:%s/<C-R>0//g<Left><Left><BackSpace>/]], { desc = "Search & replace selected"})
-m.nmap('<leader>sR',[[<esc>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/]], { desc = "Search & replace WORD under cursor"})
-m.nmap("<leader>sl", [[<esc>:%s/.*<C-R><C-W>.*//g<Left><Left><BackSpace>/]] ,{desc = "Search & replace line containing word under cursor"} )
+m.nmap('<leader>sr',  [[<esc>:%s/<C-R><C-W>//g<Left><Left><BackSpace>/]],       {desc = "Search & replace word under cursor"})
+m.vmap('<leader>sr',  [[y<esc>:%s/<C-R>0//g<Left><Left><BackSpace>/]],          {desc = "Search & replace selected"})
+m.nmap('<leader>sR',  [[<esc>:%s/\<<C-R><C-W>\>//g<Left><Left><BackSpace>/]],   {desc = "Search & replace WORD under cursor"})
+m.nmap("<leader>sl",  [[<esc>:%s/.*<C-R><C-W>.*//g<Left><Left><BackSpace>/]],   {desc = "Search & replace line containing word under cursor"} )
 
-m.nmap("<leader>scR" , [[<esc>:%s/\C\<<C-R><C-W>\>//g<Left><Left><BackSpace>/]] ,{desc = "Search & replace WORD under cursor case sensitive"} )
-m.nmap("<leader>scr" , [[<esc>:%s/\C<C-R><C-W>//g<Left><Left><BackSpace>/]]     ,{desc = "Search & replace word under cursor case sensitive"}  )
-m.vmap("<leader>scr" , [[y<esc>:%s/\C<C-R>0//g<Left><Left><BackSpace>/]]        ,{desc = "Search & replace selected case sensitive", })
-m.nmap("<leader>scl" , [[<esc>:%s/\C.*<C-R><C-W>.*//g<Left><Left><BackSpace>/]] ,{desc = "Search & replace line containing word under cursor case sensitive"})
+m.nmap("<leader>scR", [[<esc>:%s/\C\<<C-R><C-W>\>//g<Left><Left><BackSpace>/]], {desc = "Search & replace WORD under cursor case sensitive"} )
+m.nmap("<leader>scr", [[<esc>:%s/\C<C-R><C-W>//g<Left><Left><BackSpace>/]],     {desc = "Search & replace word under cursor case sensitive"}  )
+m.vmap("<leader>scr", [[y<esc>:%s/\C<C-R>0//g<Left><Left><BackSpace>/]],        {desc = "Search & replace selected case sensitive", })
+m.nmap("<leader>scl", [[<esc>:%s/\C.*<C-R><C-W>.*//g<Left><Left><BackSpace>/]], {desc = "Search & replace line containing word under cursor case sensitive"})
 
-m.nmap('<leader>sp', '[s', {desc= 'Spell jump previous error'})
-m.nmap('<leader>sn', ']s', {desc= 'Spell jump previous error'})
+m.nmap('<leader>sp',  '[s',                                                     {desc= 'Spell jump previous error'})
+m.nmap('<leader>sn',  ']s',                                                     {desc= 'Spell jump previous error'})
 
 -- autocomplete parenthesis, (brackets) and braces
 m.vmap('(' , 's()<Esc>P<Right>%' , {desc = 'Surround selected text'})
 m.vmap('[' , 's[]<Esc>P<Right>%' , {desc = 'Surround selected text'})
 m.vmap('{' , 's{}<Esc>P<Right>%' , {desc = 'Surround selected text'})
---m.vmap("'" , "s''<Esc>P<Right>%" , {desc = 'Surround selected text'})
---m.vmap('"' , 's""<Esc>P<Right>%' , {desc = 'Surround selected text'})
 m.vmap('<' , 's<><Esc>P<Right>%' , {desc = 'Surround selected text'})
 
 -- copy to clipboard
@@ -147,11 +145,11 @@ m.nmap('<leader>ct',      '<cmd>CommandToTab message<cr>',             {desc = '
 m.nmap('<leader>jt',      '<C-]>',                                     {desc = 'Jump to tag'})
 
 -- find all word under cursor in the current directory
-m.nmap('<leader>fa',      '<ESC>:RipGrep -w <C-R><C-W> %<Left><Left>', {desc = ''})
-m.nmap('<leader>fA',      '<ESC>:RipGrep -w <C-R><C-W> ',              {desc = ''})
+m.nmap('<leader>fa',      '<ESC>:RipGrep -w <C-R><C-W> %<Left><Left>', {desc = 'RipGrep word under cursor in actual file'})
+m.nmap('<leader>fA',      '<ESC>:RipGrep -w <C-R><C-W> ',              {desc = 'RipGrep word under cursor in current dir'})
 -- find all selected
-m.vmap('<leader>fa',      '<ESC>:RipGrep <C-R>0 %<Left><Left>',        {desc = ''})
-m.vmap('<leader>fA',      '<ESC>:RipGrep <C-R>0',                      {desc = ''})
+m.vmap('<leader>fa',      '<ESC>:RipGrep <C-R>0 %<Left><Left>',        {desc = 'RipGrep selected in actual file'})
+m.vmap('<leader>fA',      '<ESC>:RipGrep <C-R>0',                      {desc = 'RipGrep selected in current dir'})
 
 -- highlight selected
 m.vmap('<leader>sh',      '<ESC>:match Error /<C-R>0/ ',               {desc = 'Highlight selected'})

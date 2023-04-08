@@ -137,14 +137,31 @@ packer.startup({
     --
     use { 'tpope/vim-repeat' }                     -- repeats eg. surround mappings
     use { 'preservim/nerdcommenter' }              -- ,c<space>
-    use { 'tpope/vim-surround' }                   -- s
+    use { 'tpope/vim-surround', config = {
+      function()
+        vim.g.surround_no_mappings = 1
+        local mapper = require('mapper')
+        mapper.nmap ( 'cs',  '<Plug>Csurround',  { desc = 'Change surrounding #1 by #2' } )
+        mapper.nmap ( 'ds',  '<Plug>Dsurround',  { desc = 'Delete surrounding #1' } )
+        mapper.nmap ( 'cS',  '<Plug>CSurround',  { desc = 'Change surrounding #1 by #2 + new line' } )
+        mapper.nmap ( 'ys',  '<Plug>Ysurround',  { desc = 'Surround #1 in #2' } )
+        mapper.nmap ( 'yS',  '<Plug>YSurround',  { desc = 'Surround #1 in #2 + new line' } )
+        mapper.nmap ( 'yss', '<Plug>Yssurround', { desc = 'Surround line in #1' } )
+        mapper.nmap ( 'ySs', '<Plug>YSsurround', { desc = 'Surround line in #1 + new line' } )
+        mapper.nmap ( 'ySS', '<Plug>YSsurround', { desc = 'Surround line in #1 + new line' } )
+        mapper.xmap ( 'gs',  '<Plug>VSurround',  { desc = 'Surround visual selection in #1' } )
+        mapper.xmap ( 'gS',  '<Plug>VgSurround', { desc = 'Surround visual selection in #1 + new line' } )
+      end
+    }}
+
     use { 'godlygeek/tabular', cmd = { 'Tabularize' } } -- creating tables
     use { 'junegunn/vim-easy-align', config = {
       function()
-        local m = require('mapper')
-        m.xmap('ga', '<Plug>(EasyAlign)')
-        m.nmap('ga', '<Plug>(EasyAlign)')
+        local mapper = require('mapper')
+        mapper.xmap('ga', '<Plug>(EasyAlign)',{ desc = "Align selected at ..." })
+        mapper.nmap('ga', '<Plug>(EasyAlign)',{ desc = "Align line at ..." })
       end}}
+
     use { 'tommcdo/vim-exchange' }                 -- exchange word: cxiw <move> . line: cxx<move>.
     use { 'svermeulen/vim-cutlass', after = {'lightspeed.nvim'}, opt = true }      -- x remapped!!!, d doesn't affect yank !!!breaks if not opt!!!
     use { 'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
