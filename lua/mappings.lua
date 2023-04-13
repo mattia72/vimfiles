@@ -40,11 +40,6 @@ m.nmap('<A-j>', '<C-w>j',            {desc = 'Got to the down window' })
 m.nmap('<A-k>', '<C-w>k',            {desc = 'Got to the upper window'})
 m.nmap('<A-l>', '<C-w>l',            {desc = 'Got to the right window'})
 
-m.xmap('x', 'd', { desc = 'Move text to yank' })
-m.nmap('x', 'd', { desc = 'Move text to yank' })
-m.nmap('xx', 'dd', { desc = 'Move line to yank' })
-m.nmap('X', 'D', { desc = 'Move text until eol to yank' })
-
 m.nmap('<A-PageDown>', '<cmd>m .+1<CR>==',        {desc="Move line down"})
 m.nmap('<A-PageUp>',   '<cmd>m .-2<CR>==',        {desc="Move line up"})
 m.imap('<A-PageDown>', '<esc><cmd>m .+1<CR>==gi', {desc="Move line down"})

@@ -127,7 +127,7 @@ packer.startup({
     --
     --use {'Lokaltog/vim-easymotion'} -- ,,w
     --use {'justinmk/vim-sneak'}      -- s<char><char> than ; or s to the next
-    use { 'ggandor/lightspeed.nvim', keys={ 's', 'S' } } --  s<char><char> or s<char><space>...
+    use { 'ggandor/lightspeed.nvim' } --  s<char><char> or s<char><space>...
 
     use { 'andymass/vim-matchup', event = 'VimEnter *'}  -- di% --modern matchit and matchparen replacement, even better % navigate and highlight matching words
     use { 'yssl/QFEnter', event = 'QuickFixCmdPre', cond={utils.no_vscode}}          -- QFEnter allows you to open items from quickfix or location list wherever you wish.
@@ -155,15 +155,25 @@ packer.startup({
     }}
 
     use { 'godlygeek/tabular', cmd = { 'Tabularize' } } -- creating tables
-    use { 'junegunn/vim-easy-align', config = {
-      function()
+    use { 'junegunn/vim-easy-align', 
+        config =
+        function()
+          local mapper = require('mapper')
+          mapper.xmap('ga', '<Plug>(EasyAlign)',{ desc = "Align selected at ..." })
+          mapper.nmap('ga', '<Plug>(EasyAlign)',{ desc = "Align line at ..." })
+        end
+      }
+  use { 'tommcdo/vim-exchange' }                 -- exchange word: cxiw <move> . line: cxx<move>.
+  use { 'svermeulen/vim-cutlass', after = {'lightspeed.nvim'},
+      -- s starts lightspeed, d, c, doesn't affect yank, x remapped here:
+      config= function()
         local mapper = require('mapper')
-        mapper.xmap('ga', '<Plug>(EasyAlign)',{ desc = "Align selected at ..." })
-        mapper.nmap('ga', '<Plug>(EasyAlign)',{ desc = "Align line at ..." })
-      end}}
-
-    use { 'tommcdo/vim-exchange' }                 -- exchange word: cxiw <move> . line: cxx<move>.
-    use { 'svermeulen/vim-cutlass', after = {'lightspeed.nvim'}, opt = true }      -- x remapped!!!, d doesn't affect yank !!!breaks if not opt!!!
+        mapper.xmap('x',  'd',  { desc = 'Move text to yank' })
+        mapper.nmap('x',  'd',  { desc = 'Move text to yank' })
+        mapper.nmap('xx', 'dd', { desc = 'Move line to yank' })
+        mapper.nmap('X',  'D',  { desc = 'Move text until eol to yank' })
+      end
+    }
     use { 'windwp/nvim-autopairs', config = function() require("nvim-autopairs").setup {} end }
     use { 'wellle/targets.vim' }                   -- more text objects https://github.com/wellle/targets.vim/blob/master/cheatsheet.md)
 
@@ -191,26 +201,26 @@ packer.startup({
     --
     -- Filetype helpers
     --
-    use { 'vim-scripts/xml.vim', ft = { 'xml' } }
+    use { 'vim-scripts/xml.vim',          ft = { 'xml' } }
     use { 'vim-scripts/perl-support.vim', ft = { 'perl' } }
-    use { 'kchmck/vim-coffee-script', ft = { 'coffe' } }
-    --use {'zigford/vim-powershell'       , ft = {'ps1', 'psm1'}}
-    use { 'PProvost/vim-ps1', ft = { 'ps1', 'psm1' } }
-    use { 'euclidianAce/BetterLua.vim', ft = { 'lua' } }
-    --use {'sam4llis/nvim-lua-gf', ft = {'lua'}}
+    use { 'kchmck/vim-coffee-script',     ft = { 'coffe' } }
+    --use {'zigford/vim-powershell' ,     ft = {'ps1', 'psm1'}}
+    use { 'PProvost/vim-ps1',             ft = { 'ps1', 'psm1' } }
+    use { 'euclidianAce/BetterLua.vim',   ft = { 'lua' } }
+    --use {'sam4llis/nvim-lua-gf',        ft = {'lua'}}
     --
     -- Command helpers
     --
-    use { 'skywind3000/asyncrun.vim' , cond = {utils.no_vscode}}         --, cmd = { 'AsyncRun' }}
-    use { 'qpkorr/vim-bufkill' , cond = {utils.no_vscode}}               --cmd = {'BD', 'BB', 'BF', 'BW '}} -- buffer without closing window :BD, BW, BF, BB doesn't work properly if lazy loaded.
+    use { 'skywind3000/asyncrun.vim',     cond = {utils.no_vscode}} --, cmd = { 'AsyncRun' }}
+    use { 'qpkorr/vim-bufkill',           cond = {utils.no_vscode}} --cmd = {'BD', 'BB', 'BF', 'BW '}} -- buffer without closing window :BD, BW, BF, BB doesn't work properly if lazy loaded.
 
     --
     -- My own plugins
     --
     --use  'mattia72/vim-abinitio' , { 'for': ['abinitio' ] }
-    use { '~/dev/vim/vim-delphi', ft = { 'delphi' } }
-    use { '~/dev/vim/vim-ripgrep', cmd ={ 'RipGrep'}}
-    use { '~/dev/vim/vim-copy-as-rtf', cmd = { 'CopyRTF' } }
+    use { '~/dev/vim/vim-delphi',      ft = { 'delphi' }}
+    use { '~/dev/vim/vim-ripgrep',     cmd = { 'RipGrep'}}
+    use { '~/dev/vim/vim-copy-as-rtf', cmd = { 'CopyRTF' }}
 
     use { 'vim-scripts/genutils', opt = true }
     use { 'albfan/vim-breakpts', require = { 'genutils' }, cmd = { 'BreakPts' } }
